@@ -1,2 +1,2 @@
 # PythonCanSteering
-PyQt Can Middleware for steering Elmo Cello driven BLDC drives with openpnp
+PyQt Can Middleware for steering Elmo Motion Cello driven BLDC drives with openpnp
