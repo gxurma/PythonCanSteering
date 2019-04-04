@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'Gui.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
+# PyGui middleware
+# this standing in the middle between the machine and Openpnp
+# it can home the axes one by one
+# interprete the g-code commands comming from openpnp,
+# decide if the X2 axis has to be moved to reach to the other side of the table,
+# and send the CAN bus commands to the appropriate drives
 
 from PyQt4 import QtCore, QtGui
 import sys
@@ -23,7 +23,7 @@ idX = 0x16
 idY = 0x1c
 idZ = 0x39
 idC = 0x18
-idX2 = 78
+idX2 = 0x4e
 
 idTx = 0x300
 idRx = 0x280
@@ -80,26 +80,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		super(self.__class__, self).__init__()
 		self.setupUi(self)  # This is defined in design.py file automatically
 		self.actionAbout.triggered.connect(self.aboutBox)
-#		self.SliderPosX.valueChanged.connect(self.goXYZNow)
-#		self.SliderPosY.valueChanged.connect(self.goXYZNow)
-#		self.SliderPosZ.valueChanged.connect(self.goXYZNow)
-#		self.SliderMaxAcc.valueChanged.connect(self.AccChange)
-#		self.SliderMaxVel.valueChanged.connect(self.VelChange)
 		self.pushButtonGoX0Y0.clicked.connect(self.goX0Y0)
 		self.pushButtonGoZmax.clicked.connect(self.goZmax)
-#		self.pushButtonGoXmaxYmax.clicked.connect(self.goXmaxYmax)
-#		self.pushButtonGoX0Ymax.clicked.connect(self.goX0Ymax)
-#		self.pushButtonGoXmaxY0.clicked.connect(self.goXmaxY0)
-#		self.pushButtonGoXYZ.clicked.connect(self.goXYZNow)
 		self.pushButtonGoC0.clicked.connect(self.goC0)
 		self.pushButtonGoX20.clicked.connect(self.goX20)
-
-#		self.pushButtonSendXParams.clicked.connect(self.SendXParams)
-#		self.pushButtonSendYParams.clicked.connect(self.SendYParams)
-#		self.pushButtonSendZParams.clicked.connect(self.SendZParams)
-#		self.pushButtonXReglerAnAus.clicked.connect(self.XReglerAnAus)
-#		self.pushButtonYReglerAnAus.clicked.connect(self.YReglerAnAus)
-#		self.pushButtonZReglerAnAus.clicked.connect(self.ZReglerAnAus)
 
 		self.pushButtonMotorXAus.clicked.connect(lambda: self.MotorAus(idX, self.pushButtonMotorXAus.isChecked()))
 		self.pushButtonMotorX2Aus.clicked.connect(lambda: self.MotorAus(idX2, self.pushButtonMotorX2Aus.isChecked()))
@@ -130,7 +114,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.oldPosRandZ = 0
 		self.PosX = 0
 		self.PosY = 0
-#		self.PosZ = 100000
+		self.PosZ = 100000
 
 		# init status machine
 #		self.Status=dict(x='Stop',y='Stop',z='Stop')

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>817</width>
-    <height>556</height>
+    <width>812</width>
+    <height>506</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,9 +16,12 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
-      <item>
-       <widget class="QLCDNumber" name="lcdNumberDROPosX">
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="1" column="0">
+       <widget class="QLCDNumber" name="lcdNumberDROPosX1">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -39,73 +42,7 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLCDNumber" name="lcdNumberDROPosX2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLCDNumber" name="lcdNumberDROPosY">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLCDNumber" name="lcdNumberDROPosZ">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
+      <item row="1" column="4">
        <widget class="QLCDNumber" name="lcdNumberDROPosC">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -127,7 +64,108 @@
         </property>
        </widget>
       </item>
-      <item>
+      <item row="1" column="3">
+       <widget class="QLCDNumber" name="lcdNumberDROPosZ">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="numDigits">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Filled</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLCDNumber" name="lcdNumberDROPosY">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="numDigits">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Filled</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLCDNumber" name="lcdNumberDROPosX2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="numDigits">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Filled</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>X1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>X2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Y</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Z</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>C</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5" rowspan="3">
        <widget class="QPushButton" name="pushButtonNotStop">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -140,552 +178,48 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="1">
+       <widget class="QLCDNumber" name="lcdNumberDROPosX">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="numDigits">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Filled</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Tab 1</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="2" column="3">
-         <widget class="QPushButton" name="pushButtonGoXYZ">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>GoXYZ</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1" rowspan="2">
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QSlider" name="SliderMaxVel">
-            <property name="maximum">
-             <number>250000</number>
-            </property>
-            <property name="pageStep">
-             <number>100</number>
-            </property>
-            <property name="value">
-             <number>20000</number>
-            </property>
-            <property name="tracking">
-             <bool>false</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="invertedAppearance">
-             <bool>false</bool>
-            </property>
-            <property name="invertedControls">
-             <bool>false</bool>
-            </property>
-            <property name="tickPosition">
-             <enum>QSlider::TicksBothSides</enum>
-            </property>
-            <property name="tickInterval">
-             <number>10000</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="spinBoxMaxVel">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="maximum">
-             <number>250000</number>
-            </property>
-            <property name="value">
-             <number>20000</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>MaxVel</string>
-            </property>
-            <property name="buddy">
-             <cstring>SliderPosZ</cstring>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="3" column="3">
-         <widget class="QPushButton" name="pushButtonImmediate">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Immediate</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2" rowspan="2">
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <widget class="QSlider" name="SliderPosZ">
-            <property name="maximum">
-             <number>100000</number>
-            </property>
-            <property name="pageStep">
-             <number>1000</number>
-            </property>
-            <property name="value">
-             <number>100000</number>
-            </property>
-            <property name="tracking">
-             <bool>false</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="invertedAppearance">
-             <bool>false</bool>
-            </property>
-            <property name="invertedControls">
-             <bool>false</bool>
-            </property>
-            <property name="tickPosition">
-             <enum>QSlider::TicksBothSides</enum>
-            </property>
-            <property name="tickInterval">
-             <number>10000</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="spinBoxPosZ">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="maximum">
-             <number>100000</number>
-            </property>
-            <property name="value">
-             <number>100000</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Pos Z</string>
-            </property>
-            <property name="buddy">
-             <cstring>SliderPosZ</cstring>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0" colspan="4">
-         <layout class="QHBoxLayout" name="horizontalLayout_17">
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Pos Y</string>
-            </property>
-            <property name="buddy">
-             <cstring>SliderPosX</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="SliderPosY">
-            <property name="maximum">
-             <number>41330</number>
-            </property>
-            <property name="pageStep">
-             <number>1000</number>
-            </property>
-            <property name="tracking">
-             <bool>false</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="invertedAppearance">
-             <bool>true</bool>
-            </property>
-            <property name="tickPosition">
-             <enum>QSlider::TicksBothSides</enum>
-            </property>
-            <property name="tickInterval">
-             <number>1000</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="spinBoxPosY">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="maximum">
-             <number>41330</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="2" column="0" rowspan="2">
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QSlider" name="SliderMaxAcc">
-            <property name="maximum">
-             <number>20000</number>
-            </property>
-            <property name="pageStep">
-             <number>100</number>
-            </property>
-            <property name="value">
-             <number>1000</number>
-            </property>
-            <property name="tracking">
-             <bool>false</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="invertedAppearance">
-             <bool>false</bool>
-            </property>
-            <property name="invertedControls">
-             <bool>false</bool>
-            </property>
-            <property name="tickPosition">
-             <enum>QSlider::TicksBothSides</enum>
-            </property>
-            <property name="tickInterval">
-             <number>1000</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="spinBoxMaxAcc">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="maximum">
-             <number>20000</number>
-            </property>
-            <property name="value">
-             <number>1000</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>MaxAcc</string>
-            </property>
-            <property name="buddy">
-             <cstring>SliderPosZ</cstring>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="0" column="0" colspan="4">
-         <layout class="QHBoxLayout" name="horizontalLayout_16">
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Pos X</string>
-            </property>
-            <property name="buddy">
-             <cstring>SliderPosX</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSlider" name="SliderPosX">
-            <property name="maximum">
-             <number>32768</number>
-            </property>
-            <property name="singleStep">
-             <number>1</number>
-            </property>
-            <property name="pageStep">
-             <number>1000</number>
-            </property>
-            <property name="tracking">
-             <bool>false</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="invertedAppearance">
-             <bool>true</bool>
-            </property>
-            <property name="tickPosition">
-             <enum>QSlider::TicksBothSides</enum>
-            </property>
-            <property name="tickInterval">
-             <number>1000</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="spinBoxPosX">
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="maximum">
-             <number>32768</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
         <string>Tab 2</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
-        <item row="0" column="4">
-         <widget class="QPushButton" name="pushButtonInitX2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Init X2 Regler</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="4">
-         <widget class="QPushButton" name="pushButtonHomeX2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Home X2</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="6">
-         <widget class="QPushButton" name="pushButtonHomeZ">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Home Z</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QPushButton" name="pushButtonInitX">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Init X Regler</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="6">
-         <widget class="QPushButton" name="pushButtonInitZ">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Init Z Regler</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="5">
-         <widget class="QPushButton" name="pushButtonInitY">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Init Y Regler</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="QPushButton" name="pushButtonHomeX">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Home X</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="5">
-         <widget class="QPushButton" name="pushButtonHomeY">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Home Y</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QPushButton" name="pushButtonJoysticMode">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Joystic mode</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="pushButtonReadPos">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Read Positions</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="3">
-         <widget class="QPushButton" name="pushButtonMotorXAus">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Motor X an</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="5">
-         <widget class="QPushButton" name="pushButtonMotorYAus">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Motor Y an</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="6">
+       <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0">
+        <item row="4" column="7">
          <widget class="QPushButton" name="pushButtonMotorZAus">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -707,8 +241,8 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="pushButtonGoX0Ymax">
+        <item row="0" column="5">
+         <widget class="QPushButton" name="pushButtonInitX2">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -716,15 +250,15 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Go X0 Ymax</string>
+           <string>Init X2 Regler</string>
           </property>
           <property name="checkable">
            <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
-         <widget class="QPushButton" name="pushButtonGoXmaxYmax">
+        <item row="2" column="5">
+         <widget class="QPushButton" name="pushButtonHomeX2">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -732,15 +266,15 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Go Xmax Ymax</string>
+           <string>Home X2</string>
           </property>
           <property name="checkable">
            <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item row="4" column="2">
-         <widget class="QPushButton" name="pushButtonGoXmaxY0">
+        <item row="2" column="7">
+         <widget class="QPushButton" name="pushButtonHomeZ">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -748,15 +282,15 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Go Xmax Y0</string>
+           <string>Home Z</string>
           </property>
           <property name="checkable">
            <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item row="9" column="0">
-         <widget class="QPushButton" name="pushButtonGoX0Y0">
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButtonInitX">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -764,7 +298,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Go X0 Y0</string>
+           <string>Init X Regler</string>
           </property>
           <property name="checkable">
            <bool>false</bool>
@@ -772,6 +306,114 @@
          </widget>
         </item>
         <item row="0" column="7">
+         <widget class="QPushButton" name="pushButtonInitZ">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Init Z Regler</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6">
+         <widget class="QPushButton" name="pushButtonInitY">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Init Y Regler</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QPushButton" name="pushButtonHomeX">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Home X</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="6">
+         <widget class="QPushButton" name="pushButtonHomeY">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Home Y</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="4">
+         <widget class="QPushButton" name="pushButtonMotorXAus">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Motor X an</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="6">
+         <widget class="QPushButton" name="pushButtonMotorYAus">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Motor Y an</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="8">
          <widget class="QPushButton" name="pushButtonInitC">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -787,7 +429,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="7">
+        <item row="2" column="8">
          <widget class="QPushButton" name="pushButtonHomeC">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -803,7 +445,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="7">
+        <item row="4" column="8">
          <widget class="QPushButton" name="pushButtonMotorCAus">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -825,7 +467,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="4">
+        <item row="4" column="5">
          <widget class="QPushButton" name="pushButtonMotorX2Aus">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -847,52 +489,8 @@
           </property>
          </widget>
         </item>
-        <item row="9" column="6" colspan="2">
-         <widget class="QGroupBox" name="groupBox">
-          <property name="title">
-           <string>GroupBox</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="HomingX">
-             <property name="text">
-              <string>HomingX</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QCheckBox" name="HomingY">
-             <property name="text">
-              <string>HomingY</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QCheckBox" name="HomingZ">
-             <property name="text">
-              <string>HomingZ</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QCheckBox" name="HomingC">
-             <property name="text">
-              <string>HomingC</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QCheckBox" name="HomingX2">
-             <property name="text">
-              <string>HomingX2</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="9" column="4">
-         <widget class="QPushButton" name="pushButtonGoC0">
+        <item row="0" column="3">
+         <widget class="QPushButton" name="pushButtonJoysticMode">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -900,15 +498,21 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Go C 0 </string>
+           <string>Joystic mode</string>
           </property>
           <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
            <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item row="9" column="3">
-         <widget class="QPushButton" name="pushButtonGoZmax">
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButtonGoX0Y0">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -916,14 +520,36 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Go Z max</string>
+           <string>Go X0 Y0</string>
           </property>
           <property name="checkable">
            <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item row="9" column="2">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButtonReadPos">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Read Positions</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
          <widget class="QPushButton" name="pushButtonGoX20">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -939,1532 +565,36 @@
           </property>
          </widget>
         </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_7">
-       <attribute name="title">
-        <string>Kreis</string>
-       </attribute>
-       <widget class="QPushButton" name="pushButtonKreis">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>20</y>
-          <width>101</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Zeichne Kreis</string>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderRadius">
-        <property name="geometry">
-         <rect>
-          <x>240</x>
-          <y>30</y>
-          <width>451</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>5000</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>1000</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>100</number>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxRadius">
-        <property name="geometry">
-         <rect>
-          <x>710</x>
-          <y>30</y>
-          <width>91</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>5000</number>
-        </property>
-        <property name="value">
-         <number>1000</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_11">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>30</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Radius</string>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderJPosX">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>220</y>
-          <width>621</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>32768</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>20000</number>
-        </property>
-        <property name="tracking">
-         <bool>true</bool>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="invertedAppearance">
-         <bool>true</bool>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>1000</number>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButtonPIDReglerMitJoystick">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>120</y>
-          <width>121</width>
-          <height>61</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PID Regler mit Joystik</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_12">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>190</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>JPosX</string>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxJPosX">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>220</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>32768</number>
-        </property>
-        <property name="value">
-         <number>20000</number>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxJPosY">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>280</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>41330</number>
-        </property>
-        <property name="value">
-         <number>20000</number>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderJPosY">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>280</y>
-          <width>621</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>41330</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>20000</number>
-        </property>
-        <property name="tracking">
-         <bool>true</bool>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="invertedAppearance">
-         <bool>true</bool>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>1000</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_13">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>250</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>JPosY</string>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxJPosZ">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>340</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>100000</number>
-        </property>
-        <property name="value">
-         <number>70000</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_14">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>310</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>JPosZ</string>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderJPosZ">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>340</y>
-          <width>621</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>100000</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>70000</number>
-        </property>
-        <property name="tracking">
-         <bool>true</bool>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="invertedAppearance">
-         <bool>true</bool>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>10000</number>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderKPv">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>400</y>
-          <width>621</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>55</number>
-        </property>
-        <property name="tracking">
-         <bool>true</bool>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>100</number>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxKPv">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>400</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
-        </property>
-        <property name="value">
-         <number>55</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_15">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>380</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>KPv</string>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxKIv">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>460</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
-        </property>
-        <property name="value">
-         <number>3</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_26">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>440</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>KIv</string>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderKIv">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>460</y>
-          <width>621</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>3</number>
-        </property>
-        <property name="tracking">
-         <bool>true</bool>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>100</number>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderKDv">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>510</y>
-          <width>621</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="tracking">
-         <bool>true</bool>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>100</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_27">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>490</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Kdv</string>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxKDv">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>510</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>1000</number>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderJGoalX">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>80</y>
-          <width>551</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>32768</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>20000</number>
-        </property>
-        <property name="tracking">
-         <bool>true</bool>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="invertedAppearance">
-         <bool>true</bool>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>1000</number>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderJGoalY">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>120</y>
-          <width>551</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>41330</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>20000</number>
-        </property>
-        <property name="tracking">
-         <bool>true</bool>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="invertedAppearance">
-         <bool>true</bool>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>1000</number>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSliderJGoalZ">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>160</y>
-          <width>551</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>100000</number>
-        </property>
-        <property name="pageStep">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>70000</number>
-        </property>
-        <property name="tracking">
-         <bool>true</bool>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="invertedAppearance">
-         <bool>true</bool>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksBothSides</enum>
-        </property>
-        <property name="tickInterval">
-         <number>10000</number>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxJGoalX">
-        <property name="geometry">
-         <rect>
-          <x>710</x>
-          <y>80</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>32768</number>
-        </property>
-        <property name="value">
-         <number>20000</number>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxJGoalY">
-        <property name="geometry">
-         <rect>
-          <x>710</x>
-          <y>120</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>41330</number>
-        </property>
-        <property name="value">
-         <number>20000</number>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="spinBoxJGoalZ">
-        <property name="geometry">
-         <rect>
-          <x>710</x>
-          <y>160</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximum">
-         <number>100000</number>
-        </property>
-        <property name="value">
-         <number>70000</number>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButtonLinie">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>70</y>
-          <width>101</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Zeichne Linie</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_3">
-       <attribute name="title">
-        <string>PID params</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="1">
-         <widget class="QTabWidget" name="tabWidget_2">
-          <property name="currentIndex">
-           <number>0</number>
+        <item row="2" column="3">
+         <widget class="QPushButton" name="pushButtonGoZmax">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <widget class="QWidget" name="tab_4">
-           <attribute name="title">
-            <string>X PID</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_25">
-              <item>
-               <widget class="QPushButton" name="pushButtonSendXParams">
-                <property name="text">
-                 <string>Send X Params</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonXReglerAnAus">
-                <property name="text">
-                 <string>Regler An/Aus</string>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-               <widget class="QLabel" name="label_6">
-                <property name="text">
-                 <string>XKp</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderXKp</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderXKp">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>200</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxXKp">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>200</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-               <widget class="QLabel" name="label_7">
-                <property name="text">
-                 <string>XKi</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderXKi</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderXKi">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>200</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxXKi">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>200</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
-              <item>
-               <widget class="QLabel" name="label_8">
-                <property name="text">
-                 <string>XKd</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderXKd</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderXKd">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>500</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxXKd">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>500</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_4">
-              <item>
-               <widget class="QLabel" name="label_9">
-                <property name="text">
-                 <string>Xkvff</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderXKvff</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderXKvff">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>2000</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxXKvff">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>2000</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_5">
-              <item>
-               <widget class="QLabel" name="label_10">
-                <property name="text">
-                 <string>Xkbias</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderXKbias</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderXKbias">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxXKbias">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="tab_5">
-           <attribute name="title">
-            <string>Y PID</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_24">
-              <item>
-               <widget class="QPushButton" name="pushButtonSendYParams">
-                <property name="text">
-                 <string>Send Y Params</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonYReglerAnAus">
-                <property name="text">
-                 <string>Regler An/Aus</string>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_12">
-              <item>
-               <widget class="QLabel" name="label_17">
-                <property name="text">
-                 <string>YKp</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderYKp</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderYKp">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>200</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxYKp">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>200</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_14">
-              <item>
-               <widget class="QLabel" name="label_19">
-                <property name="text">
-                 <string>YKi</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderYKi</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderYKi">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>200</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxYKi">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>200</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_15">
-              <item>
-               <widget class="QLabel" name="label_20">
-                <property name="text">
-                 <string>YKd</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderYKd</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderYKd">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>500</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxYKd">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>500</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_11">
-              <item>
-               <widget class="QLabel" name="label_16">
-                <property name="text">
-                 <string>Ykvff</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderYKvff</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderYKvff">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>15000</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxYKvff">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>15000</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_13">
-              <item>
-               <widget class="QLabel" name="label_18">
-                <property name="text">
-                 <string>Ykbias</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderYKbias</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderYKbias">
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxYKbias">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="tab_6">
-           <attribute name="title">
-            <string>Z PID</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_7">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_23">
-              <item>
-               <widget class="QPushButton" name="pushButtonSendZParams">
-                <property name="text">
-                 <string>Send Z Params</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonZReglerAnAus">
-                <property name="text">
-                 <string>Regler An/Aus</string>
-                </property>
-                <property name="checkable">
-                 <bool>true</bool>
-                </property>
-                <property name="checked">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_22">
-              <item>
-               <widget class="QLabel" name="label_25">
-                <property name="text">
-                 <string>ZKp</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderZKp</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderZKp">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxZKp">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_19">
-              <item>
-               <widget class="QLabel" name="label_22">
-                <property name="text">
-                 <string>ZKi</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderZKi</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderZKi">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxZKi">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_20">
-              <item>
-               <widget class="QLabel" name="label_23">
-                <property name="text">
-                 <string>ZKd</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderZKd</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderZKd">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>2000</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxZKd">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>2000</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_21">
-              <item>
-               <widget class="QLabel" name="label_24">
-                <property name="text">
-                 <string>Zkvff</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderZKvff</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderZKvff">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>5000</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxZKvff">
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>5000</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_18">
-              <item>
-               <widget class="QLabel" name="label_21">
-                <property name="text">
-                 <string>Zkbias</string>
-                </property>
-                <property name="buddy">
-                 <cstring>horizontalSliderZKbias</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSlider" name="horizontalSliderZKbias">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="pageStep">
-                 <number>100</number>
-                </property>
-                <property name="value">
-                 <number>8000</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TicksBothSides</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxZKbias">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="frame">
-                 <bool>true</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>8000</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
+          <property name="text">
+           <string>Go Z max</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QPushButton" name="pushButtonGoC0">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go C 0 </string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -2478,8 +608,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>817</width>
-     <height>22</height>
+     <width>812</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2523,61 +653,12 @@
  </widget>
  <tabstops>
   <tabstop>tabWidget</tabstop>
-  <tabstop>SliderPosX</tabstop>
-  <tabstop>spinBoxPosX</tabstop>
-  <tabstop>SliderPosY</tabstop>
-  <tabstop>spinBoxPosY</tabstop>
-  <tabstop>SliderMaxAcc</tabstop>
-  <tabstop>spinBoxMaxAcc</tabstop>
-  <tabstop>SliderMaxVel</tabstop>
-  <tabstop>spinBoxMaxVel</tabstop>
-  <tabstop>SliderPosZ</tabstop>
-  <tabstop>spinBoxPosZ</tabstop>
-  <tabstop>pushButtonGoXYZ</tabstop>
-  <tabstop>pushButtonImmediate</tabstop>
   <tabstop>pushButtonInitX</tabstop>
   <tabstop>pushButtonInitY</tabstop>
   <tabstop>pushButtonInitZ</tabstop>
   <tabstop>pushButtonHomeX</tabstop>
   <tabstop>pushButtonHomeY</tabstop>
   <tabstop>pushButtonHomeZ</tabstop>
-  <tabstop>tabWidget_2</tabstop>
-  <tabstop>pushButtonSendYParams</tabstop>
-  <tabstop>pushButtonYReglerAnAus</tabstop>
-  <tabstop>horizontalSliderYKp</tabstop>
-  <tabstop>spinBoxYKp</tabstop>
-  <tabstop>horizontalSliderYKi</tabstop>
-  <tabstop>spinBoxYKi</tabstop>
-  <tabstop>horizontalSliderYKd</tabstop>
-  <tabstop>spinBoxYKd</tabstop>
-  <tabstop>horizontalSliderYKvff</tabstop>
-  <tabstop>spinBoxYKvff</tabstop>
-  <tabstop>horizontalSliderYKbias</tabstop>
-  <tabstop>spinBoxYKbias</tabstop>
-  <tabstop>pushButtonSendXParams</tabstop>
-  <tabstop>pushButtonXReglerAnAus</tabstop>
-  <tabstop>horizontalSliderXKp</tabstop>
-  <tabstop>spinBoxXKp</tabstop>
-  <tabstop>horizontalSliderXKi</tabstop>
-  <tabstop>spinBoxXKi</tabstop>
-  <tabstop>horizontalSliderXKd</tabstop>
-  <tabstop>spinBoxXKd</tabstop>
-  <tabstop>horizontalSliderXKvff</tabstop>
-  <tabstop>spinBoxXKvff</tabstop>
-  <tabstop>horizontalSliderXKbias</tabstop>
-  <tabstop>spinBoxXKbias</tabstop>
-  <tabstop>pushButtonSendZParams</tabstop>
-  <tabstop>pushButtonZReglerAnAus</tabstop>
-  <tabstop>horizontalSliderZKp</tabstop>
-  <tabstop>spinBoxZKp</tabstop>
-  <tabstop>horizontalSliderZKi</tabstop>
-  <tabstop>spinBoxZKi</tabstop>
-  <tabstop>horizontalSliderZKd</tabstop>
-  <tabstop>spinBoxZKd</tabstop>
-  <tabstop>horizontalSliderZKvff</tabstop>
-  <tabstop>spinBoxZKvff</tabstop>
-  <tabstop>horizontalSliderZKbias</tabstop>
-  <tabstop>spinBoxZKbias</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -2594,966 +675,6 @@
     <hint type="destinationlabel">
      <x>369</x>
      <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxPosX</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>SliderPosX</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>773</x>
-     <y>130</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>69</x>
-     <y>123</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxPosZ</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>SliderPosZ</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>432</x>
-     <y>626</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>432</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>SliderPosY</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxPosY</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>69</x>
-     <y>170</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>773</x>
-     <y>177</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>SliderPosZ</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxPosZ</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>432</x>
-     <y>217</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>432</x>
-     <y>626</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>SliderPosX</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxPosX</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>69</x>
-     <y>123</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>773</x>
-     <y>130</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxPosY</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>SliderPosY</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>773</x>
-     <y>177</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>69</x>
-     <y>170</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>SliderMaxAcc</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxMaxAcc</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>34</x>
-     <y>217</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>34</x>
-     <y>626</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>SliderMaxVel</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxMaxVel</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>233</x>
-     <y>217</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>233</x>
-     <y>626</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxMaxAcc</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>SliderMaxAcc</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>34</x>
-     <y>626</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>34</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxMaxVel</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>SliderMaxVel</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>233</x>
-     <y>626</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>233</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderXKp</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxXKp</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>73</x>
-     <y>263</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>767</x>
-     <y>271</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxXKp</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderXKp</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>767</x>
-     <y>271</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>73</x>
-     <y>263</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderXKi</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxXKi</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>69</x>
-     <y>348</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>771</x>
-     <y>355</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxXKi</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderXKi</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>771</x>
-     <y>355</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>69</x>
-     <y>348</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderZKp</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxZKp</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>72</x>
-     <y>164</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>164</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderXKd</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxXKd</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>73</x>
-     <y>432</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>767</x>
-     <y>440</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxXKd</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderXKd</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>767</x>
-     <y>440</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>73</x>
-     <y>432</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderXKvff</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxXKvff</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>79</x>
-     <y>517</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>762</x>
-     <y>524</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxXKvff</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderXKvff</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>762</x>
-     <y>524</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>79</x>
-     <y>517</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderXKbias</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxXKbias</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>85</x>
-     <y>601</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>762</x>
-     <y>609</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxXKbias</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderXKbias</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>762</x>
-     <y>609</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>85</x>
-     <y>601</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderYKp</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxYKp</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>72</x>
-     <y>164</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>164</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxYKp</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderYKp</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>164</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>72</x>
-     <y>164</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderYKi</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxYKi</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>69</x>
-     <y>167</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>167</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxYKi</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderYKi</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>167</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>69</x>
-     <y>167</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderYKd</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxYKd</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>72</x>
-     <y>171</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>171</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxYKd</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderYKd</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>171</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>72</x>
-     <y>171</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderYKvff</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxYKvff</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>78</x>
-     <y>174</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>174</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxYKvff</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderYKvff</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>174</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>78</x>
-     <y>174</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderYKbias</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxYKbias</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>78</x>
-     <y>178</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>178</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxYKbias</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderYKbias</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>178</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>78</x>
-     <y>178</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxZKp</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderZKp</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>164</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>72</x>
-     <y>164</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderZKi</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxZKi</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>68</x>
-     <y>167</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>167</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxZKi</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderZKi</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>167</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>68</x>
-     <y>167</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderZKd</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxZKd</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>72</x>
-     <y>171</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>171</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxZKd</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderZKd</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>171</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>72</x>
-     <y>171</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderZKvff</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxZKvff</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>78</x>
-     <y>174</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>174</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxZKvff</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderZKvff</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>174</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>78</x>
-     <y>174</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderZKbias</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxZKbias</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>78</x>
-     <y>178</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>111</x>
-     <y>178</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxZKbias</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderZKbias</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>111</x>
-     <y>178</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>78</x>
-     <y>178</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderRadius</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxRadius</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>701</x>
-     <y>158</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>730</x>
-     <y>148</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxRadius</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderRadius</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>754</x>
-     <y>165</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>701</x>
-     <y>170</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderJPosX</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxJPosX</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>649</x>
-     <y>338</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>699</x>
-     <y>337</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxJPosX</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderJPosX</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>703</x>
-     <y>350</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>659</x>
-     <y>355</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderJPosY</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxJPosY</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>660</x>
-     <y>403</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>708</x>
-     <y>395</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxJPosY</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderJPosY</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>707</x>
-     <y>412</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>665</x>
-     <y>418</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderJPosZ</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxJPosZ</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>667</x>
-     <y>464</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>701</x>
-     <y>461</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxJPosZ</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderJPosZ</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>707</x>
-     <y>482</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>663</x>
-     <y>479</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderKPv</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxKPv</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>668</x>
-     <y>517</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>703</x>
-     <y>517</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxKPv</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderKPv</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>722</x>
-     <y>533</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>663</x>
-     <y>539</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderKIv</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxKIv</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>666</x>
-     <y>586</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>695</x>
-     <y>579</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxKIv</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderKIv</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>697</x>
-     <y>590</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>665</x>
-     <y>596</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderKDv</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxKDv</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>666</x>
-     <y>631</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>699</x>
-     <y>630</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxKDv</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderKDv</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>697</x>
-     <y>646</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>669</x>
-     <y>645</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderJGoalX</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxJGoalX</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>706</x>
-     <y>196</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>732</x>
-     <y>196</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxJGoalX</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderJGoalX</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>723</x>
-     <y>212</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>681</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderJGoalY</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxJGoalY</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>703</x>
-     <y>244</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>732</x>
-     <y>236</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxJGoalY</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderJGoalY</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>736</x>
-     <y>258</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>697</x>
-     <y>258</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSliderJGoalZ</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBoxJGoalZ</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>705</x>
-     <y>277</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>734</x>
-     <y>279</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxJGoalZ</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSliderJGoalZ</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>729</x>
-     <y>295</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>699</x>
-     <y>297</y>
     </hint>
    </hints>
   </connection>
