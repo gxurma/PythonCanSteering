@@ -62,6 +62,12 @@ moving = 2
 def cmp(a,b):
 	return (a>b)-(a<b)
 
+
+def v( a, n):
+    a1=(a>>(8*n))&255
+    return a1
+
+
 class canMsg():
 	def __init__(self,id, msg, dlc, flg, timestamp):
 		self.id = id
@@ -161,17 +167,23 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 
 	def MotorAus(self, axe, isChecked):
-		self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, isChecked,0,0,0  )) #mo = 0 motor off
+		# self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, isChecked,0,0,0  )) #mo = 0 motor off
+		self.sendElmoMsgLong(axe, "MO",0, isChecked) #mo = 0 motor off
 
 
 
 	def NotStop(self):
-		msg = (0x4d,0x4f,0,0, 0,0,0,0  )  # mo = 0 motor off
-		self.sendMsg(idTx+idX, msg )
-		self.sendMsg(idTx+idX2, msg )
-		self.sendMsg(idTx+idY, msg )
-		self.sendMsg(idTx+idZ, msg )
-		self.sendMsg(idTx+idC, msg )
+		# msg = (0x4d,0x4f,0,0, 0,0,0,0  )  # mo = 0 motor off
+		# self.sendMsg(idTx+idX, msg )
+		# self.sendMsg(idTx+idX2, msg )
+		# self.sendMsg(idTx+idY, msg )
+		# self.sendMsg(idTx+idZ, msg )
+		# self.sendMsg(idTx+idC, msg )
+		self.sendElmoMsgLong(idX, "MO",0,0 ) # mo = 0 motor off
+		self.sendElmoMsgLong(idX2,"MO",0,0 )
+		self.sendElmoMsgLong(idY, "MO",0,0 )
+		self.sendElmoMsgLong(idZ, "MO",0,0 )
+		self.sendElmoMsgLong(idC, "MO",0,0 )
 
 	def initJoysticHW(self):
 		#Iterate over the joystick devices.
@@ -374,12 +386,17 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def readPos(self) :
 		while self.pushButtonReadPos.isChecked()	:
-			msg = (0x50, 0x58, 0, 0) # PX
-			self.sendMsg(idTx+idX, msg)# get pos
-			self.sendMsg(idTx+idX2, msg)# get pos
-			self.sendMsg(idTx+idY, msg)# get pos
-			self.sendMsg(idTx+idZ, msg)# get pos
-			self.sendMsg(idTx+idC, msg)# get pos
+			# msg = (0x50, 0x58, 0, 0) # PX
+			# self.sendMsg(idTx+idX, msg)# get pos
+			# self.sendMsg(idTx+idX2, msg)# get pos
+			# self.sendMsg(idTx+idY, msg)# get pos
+			# self.sendMsg(idTx+idZ, msg)# get pos
+			# self.sendMsg(idTx+idC, msg)# get pos
+			self.sendElmoMsgShort(idX, "PX",0)# get pos
+			self.sendElmoMsgShort(idX2,"PX",0)# get pos
+			self.sendElmoMsgShort(idY, "PX",0)# get pos
+			self.sendElmoMsgShort(idZ, "PX",0)# get pos
+			self.sendElmoMsgShort(idC, "PX",0)# get pos
 			time.sleep(0.2)
 
 
@@ -438,10 +455,14 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def Init(self,axe):
 
-		self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, 0,0,0,0  )) #mo = 0 motor off
-		self.sendMsg(idTx+axe, (0x50,0x58,0,0, 0,0,0,0  )) #px = 0 set PX
-		self.sendMsg(idTx+axe, (0x50,0x59,0,0, 0,0,0,0  )) #py = 0 set aux position
-		self.sendMsg(idTx+axe, (0x55,0x4d,0,0, 5,0,0,0  )) #um = 5 (position mode)
+		# self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, 0,0,0,0  )) #mo = 0 motor off
+		# self.sendMsg(idTx+axe, (0x50,0x58,0,0, 0,0,0,0  )) #px = 0 set PX
+		# self.sendMsg(idTx+axe, (0x50,0x59,0,0, 0,0,0,0  )) #py = 0 set aux position
+		# self.sendMsg(idTx+axe, (0x55,0x4d,0,0, 5,0,0,0  )) #um = 5 (position mode)
+		self.sendElmoMsgLong(axe, "MO",0,0 ) #mo = 0 motor off
+		self.sendElmoMsgLong(axe, "PX",0,0 ) #px = 0 set PX
+		self.sendElmoMsgLong(axe, "PY",0,0 ) #py = 0 set aux position
+		self.sendElmoMsgLong(axe, "UM",0,5 ) #um = 5 (position mode)
 		#self.Home(axe)
 
 	def HomeX2(self, axe):
@@ -586,27 +607,45 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 
 	def goX0Y0(self):
-		self.sendMsg(idTx+idX, (0x50,0x41,0,0, 0,0,0,0  )) #pa = 0 set position goal to 0
-		self.sendMsg(idTx+idY, (0x50,0x41,0,0, 0,0,0,0  )) #pa = 0 set position goal to 0
-		self.sendMsg(idTx+idX, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
-		self.sendMsg(idTx+idY, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
-		self.sendMsg(idTx+idX, (0x42,0x47,0,0 )) #BeGin
-		self.sendMsg(idTx+idY, (0x42,0x47,0,0 )) #BeGin
+		# self.sendMsg(idTx+idX, (0x50,0x41,0,0, 0,0,0,0  )) #pa = 0 set position goal to 0
+		# self.sendMsg(idTx+idY, (0x50,0x41,0,0, 0,0,0,0  )) #pa = 0 set position goal to 0
+		# self.sendMsg(idTx+idX, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
+		# self.sendMsg(idTx+idY, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
+		# self.sendMsg(idTx+idX, (0x42,0x47,0,0 )) #BeGin
+		# self.sendMsg(idTx+idY, (0x42,0x47,0,0 )) #BeGin
+		self.sendElmoMsgLong(idX, "PA",0,0) #pa = 0 set position goal to 0
+		self.sendElmoMsgLong(idY, "PA",0,0) #pa = 0 set position goal to 0
+		self.sendElmoMsgLong(idX, "SP",0,8192) #sp = 8096 set speed
+		self.sendElmoMsgLong(idY, "SP",0,8192) #sp = 8096 set speed
+		self.sendElmoMsgShort(idX, "BG",0 ) #BeGin
+		self.sendElmoMsgShort(idY, "BG",0 ) #BeGin
 
 	def goZmax(self):
-		self.sendMsg(idTx+idZ, (0x50,0x41,0,0, 0xA0,0x86,0x01,0x00  )) #pa = 0 set position goal to 100000
-		self.sendMsg(idTx+idZ, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
-		self.sendMsg(idTx+idZ, (0x42,0x47,0,0 )) #BeGin
+		# self.sendMsg(idTx+idZ, (0x50,0x41,0,0, 0xA0,0x86,0x01,0x00  )) #pa = 0 set position goal to 100000
+		# self.sendMsg(idTx+idZ, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
+		# self.sendMsg(idTx+idZ, (0x42,0x47,0,0 )) #BeGin
+		self.sendElmoMsgLong(idZ, "PA",0,100000) #pa = 0 set position goal to 100000
+		self.sendElmoMsgLong(idZ, "SP",0,8192 ) #sp = 8096 set speed
+		self.sendElmoMsgShort(idZ, "BG",0 ) #BeGin
 
 	def goC0(self):
-		self.sendMsg(idTx+idC, (0x50,0x41,0,0, 0x0,0x0,0x0,0x0  )) #pa = 0 set position goal to 00000
-		self.sendMsg(idTx+idC, (0x53,0x50,0,0, 0x00,0x10,0,0  )) #sp = 4096 set speed
-		self.sendMsg(idTx+idC, (0x42,0x47,0,0 )) #BeGin
+		# self.sendMsg(idTx+idC, (0x50,0x41,0,0, 0x0,0x0,0x0,0x0  )) #pa = 0 set position goal to 00000
+		# self.sendMsg(idTx+idC, (0x53,0x50,0,0, 0x00,0x10,0,0  )) #sp = 4096 set speed
+		# self.sendMsg(idTx+idC, (0x42,0x47,0,0 )) #BeGin
+		self.sendElmoMsgLong(idC, "PA",0,0) #pa = 0 set position goal to 00000
+		self.sendElmoMsgLong(idC, "SP",0,4096) #sp = 4096 set speed
+		self.sendElmoMsgShort(idC, "BG",0) #BeGin
 
 	def goX20(self):
-		self.sendMsg(idTx+idX2, (0x50,0x41,0,0, 0x4c,0x1d,0x0,0x0  )) #pa = 0 set position goal to 7500
-		self.sendMsg(idTx+idX2, (0x53,0x50,0,0, 0x00,0x10,0,0  )) #sp = 4096 set speed
-		self.sendMsg(idTx+idX2, (0x42,0x47,0,0 )) #BeGin
+		# self.sendMsg(idTx+idX2, (0x50,0x41,0,0, 0x4c,0x1d,0x0,0x0  )) #pa = 0 set position goal to 7500
+		# self.sendMsg(idTx+idX2, (0x53,0x50,0,0, 0x00,0x10,0,0  )) #sp = 4096 set speed
+		# self.sendMsg(idTx+idX2, (0x42,0x47,0,0 )) #BeGin
+
+		self.sendElmoMsgLong(idX2, "PA",0, 7500) #pa = 0 set position goal to 7500
+		self.sendElmoMsgLong(idX2, "SP",0, 4096) #sp = 4096 set speed
+		self.sendElmoMsgShort(idX2, "BG",0) #BeGin
+
+
 
 	def aboutBox(self):
 		QtGui.QMessageBox.about(self,"Über dieses Programm", "Dies ist ein Programm zum Testen und benutzen von einer CNC Maschine mit Elmo Motion Cello Controllern. Die Maschine besteht aus X, X2, Y, Z, und C Achsen, und sollte eigentlich mit Openpnp zusammenarbeiten ")
@@ -619,8 +658,18 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.handle1.write(msgid, msg)
 		time.sleep(0.05)
 
-	def sendElmoMsg(self, axeId, command, index, value)
-		self.sendMsg(idTx+axeId, (0x50,0x41,0,0, 0x4c,0x1d,0x0,0x0  ))
+	def sendElmoMsgShort(self, axeId, command, index):
+	    # print ("%x %s %d" % (axeId, command, index))
+	    b=bytearray(command,"ascii")
+	    # print ("%x   %x %x %02x %02x" % (idTx+axeId, b[0],b[1], index, 0))
+	    self.sendMsg (idTx+axeId,( b[0],b[1], index, 0))
+
+	def sendElmoMsgLong(self, axeId, command, index, value):
+	    # print ("%x %s %d %d" % (axeId, command, index, value))
+	    b=bytearray(command,"ascii")
+	    # print ("%x   %x %x %02x %02x %02x %02x %02x %02x" % (idTx+axeId, b[0],b[1], index, 0, v(value,0), v(value,1), v(value,2), v(value,3)))
+	    self.sendMsg (idTx+axeId,( b[0],b[1], index, 0, v(value,0), v(value,1), v(value,2), v(value,3)))
+
 
 	def initCAN(self):
 

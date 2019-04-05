@@ -212,7 +212,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -558,7 +558,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Go X2 0 </string>
+           <string>Go X2 7500</string>
           </property>
           <property name="checkable">
            <bool>false</bool>
@@ -574,7 +574,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Go Z max</string>
+           <string>Go Z 100000</string>
           </property>
           <property name="checkable">
            <bool>false</bool>

@@ -15,16 +15,17 @@ def v(a,n):
 def sendElmoMsg(axeId, command, index, value):
     print ("%x %s %d %d" % (axeId, command, index, value))
     b=bytearray(command,"ascii")
-    print ("%x %x%x %d %02x %02x %02x %02x" % (idTx+axeId, b[0],b[1], index, v(value,0), v(value,1), v(value,2), v(value,3)))
+    print ("%x %x %x %02x %02x %02x %02x %02x %02x" % (idTx+axeId, b[0],b[1], index, 0, v(value,0), v(value,1), v(value,2), v(value,3)))
 
 
 def main():
 
   sendElmoMsg(idX2, "PA",1,1000)
   sendElmoMsg(idX, "PA",1,-1000)
-  sendElmoMsg(idY, "PA",1,-4095)
-  sendElmoMsg(idZ, "PA",1,1000)
-  sendElmoMsg(idX2, "PA",1,1000)
+  sendElmoMsg(idY, "PA",1,-4096)
+  sendElmoMsg(idZ, "PA",1,256)
+  sendElmoMsg(idX2, "PX",1,100000)
+  sendElmoMsg(idX2, "BG",0,00000)
 
 
 
