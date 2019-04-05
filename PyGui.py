@@ -619,6 +619,9 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.handle1.write(msgid, msg)
 		time.sleep(0.05)
 
+	def sendElmoMsg(self, axeId, command, index, value)
+		self.sendMsg(idTx+axeId, (0x50,0x41,0,0, 0x4c,0x1d,0x0,0x0  ))
+
 	def initCAN(self):
 
 		self.cl = canlib.canlib()
