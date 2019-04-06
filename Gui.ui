@@ -212,7 +212,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1091,12 +1091,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>642</x>
+     <x>583</x>
      <y>219</y>
     </hint>
     <hint type="destinationlabel">
-     <x>609</x>
-     <y>309</y>
+     <x>550</x>
+     <y>303</y>
     </hint>
    </hints>
   </connection>
@@ -1107,11 +1107,11 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>609</x>
-     <y>309</y>
+     <x>550</x>
+     <y>303</y>
     </hint>
     <hint type="destinationlabel">
-     <x>642</x>
+     <x>583</x>
      <y>219</y>
     </hint>
    </hints>
@@ -1123,12 +1123,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>579</x>
+     <x>520</x>
      <y>219</y>
     </hint>
     <hint type="destinationlabel">
-     <x>548</x>
-     <y>309</y>
+     <x>489</x>
+     <y>303</y>
     </hint>
    </hints>
   </connection>
@@ -1139,11 +1139,11 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>548</x>
-     <y>309</y>
+     <x>489</x>
+     <y>303</y>
     </hint>
     <hint type="destinationlabel">
-     <x>579</x>
+     <x>520</x>
      <y>219</y>
     </hint>
    </hints>
@@ -1156,11 +1156,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>78</x>
-     <y>426</y>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
      <x>192</x>
-     <y>428</y>
+     <y>339</y>
     </hint>
    </hints>
   </connection>
@@ -1172,11 +1172,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>192</x>
-     <y>428</y>
+     <y>339</y>
     </hint>
     <hint type="destinationlabel">
      <x>92</x>
-     <y>426</y>
+     <y>337</y>
     </hint>
    </hints>
   </connection>
@@ -1188,11 +1188,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>92</x>
-     <y>456</y>
+     <y>367</y>
     </hint>
     <hint type="destinationlabel">
      <x>188</x>
-     <y>458</y>
+     <y>369</y>
     </hint>
    </hints>
   </connection>
@@ -1204,11 +1204,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>192</x>
-     <y>458</y>
+     <y>369</y>
     </hint>
     <hint type="destinationlabel">
      <x>92</x>
-     <y>456</y>
+     <y>367</y>
     </hint>
    </hints>
   </connection>
@@ -1219,12 +1219,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>94</x>
-     <y>228</y>
+     <x>237</x>
+     <y>321</y>
     </hint>
     <hint type="destinationlabel">
-     <x>190</x>
-     <y>253</y>
+     <x>76</x>
+     <y>399</y>
     </hint>
    </hints>
   </connection>
@@ -1235,12 +1235,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>100</x>
-     <y>286</y>
+     <x>528</x>
+     <y>321</y>
     </hint>
     <hint type="destinationlabel">
-     <x>520</x>
-     <y>324</y>
+     <x>415</x>
+     <y>399</y>
     </hint>
    </hints>
   </connection>
@@ -1252,11 +1252,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>69</x>
-     <y>468</y>
+     <y>379</y>
     </hint>
     <hint type="destinationlabel">
      <x>122</x>
-     <y>477</y>
+     <y>388</y>
     </hint>
    </hints>
   </connection>
@@ -1268,11 +1268,91 @@
    <hints>
     <hint type="sourcelabel">
      <x>192</x>
-     <y>480</y>
+     <y>391</y>
     </hint>
     <hint type="destinationlabel">
      <x>87</x>
-     <y>480</y>
+     <y>391</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorXAus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>530</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>356</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorX2Aus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>563</x>
+     <y>117</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>309</x>
+     <y>381</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorYAus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>582</x>
+     <y>117</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>395</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorZAus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>594</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>482</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonNotStop</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>pushButtonMotorCAus</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>554</x>
+     <y>48</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>558</x>
+     <y>363</y>
     </hint>
    </hints>
   </connection>
