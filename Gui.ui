@@ -212,7 +212,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -874,7 +874,7 @@
            <string>Send Msg</string>
           </property>
           <property name="checkable">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="checked">
            <bool>false</bool>
@@ -885,7 +885,7 @@
          </widget>
         </item>
         <item row="1" column="0" colspan="2">
-         <widget class="QPlainTextEdit" name="plainTextEdit"/>
+         <widget class="QPlainTextEdit" name="plainTextEditSendMsg"/>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_13">
@@ -969,7 +969,7 @@
          <widget class="QPlainTextEdit" name="plainTextEditCanLog"/>
         </item>
         <item row="4" column="2" colspan="2">
-         <widget class="QPlainTextEdit" name="plainTextEditCanLog_2"/>
+         <widget class="QPlainTextEdit" name="plainTextEditSocketLog"/>
         </item>
        </layout>
       </widget>
@@ -1231,7 +1231,7 @@
   <connection>
    <sender>pushButtonClearSocketlog</sender>
    <signal>clicked()</signal>
-   <receiver>plainTextEditCanLog_2</receiver>
+   <receiver>plainTextEditSocketLog</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
