@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>812</width>
-    <height>538</height>
+    <width>606</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -604,163 +604,7 @@
         <string>Pos Testing</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="3" column="3">
-         <widget class="QSlider" name="X1set">
-          <property name="minimum">
-           <number>-20000</number>
-          </property>
-          <property name="maximum">
-           <number>20000</number>
-          </property>
-          <property name="pageStep">
-           <number>100</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksAbove</enum>
-          </property>
-          <property name="tickInterval">
-           <number>1000</number>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="6">
-         <widget class="QSpinBox" name="spinBox_4">
-          <property name="maximum">
-           <number>105000</number>
-          </property>
-          <property name="value">
-           <number>100000</number>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>X1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="5">
-         <widget class="QSpinBox" name="spinBox_3">
-          <property name="minimum">
-           <number>-20000</number>
-          </property>
-          <property name="maximum">
-           <number>20000</number>
-          </property>
-          <property name="singleStep">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <widget class="QSpinBox" name="spinBox">
-          <property name="minimum">
-           <number>-20000</number>
-          </property>
-          <property name="maximum">
-           <number>20000</number>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>C</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>X2</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="6" rowspan="2">
-         <widget class="QSlider" name="Zset">
-          <property name="maximum">
-           <number>105000</number>
-          </property>
-          <property name="pageStep">
-           <number>100</number>
-          </property>
-          <property name="value">
-           <number>100000</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksBelow</enum>
-          </property>
-          <property name="tickInterval">
-           <number>10000</number>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="6">
-         <widget class="QLabel" name="label_11">
-          <property name="text">
-           <string>Z</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="5">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Y</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3" rowspan="2">
-         <widget class="QDial" name="Cset">
-          <property name="maximum">
-           <number>4000</number>
-          </property>
-          <property name="pageStep">
-           <number>50</number>
-          </property>
-          <property name="sliderPosition">
-           <number>0</number>
-          </property>
-          <property name="wrapping">
-           <bool>true</bool>
-          </property>
-          <property name="notchTarget">
-           <double>10.000000000000000</double>
-          </property>
-          <property name="notchesVisible">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="3">
-         <widget class="QSlider" name="X2set">
-          <property name="minimum">
-           <number>-20000</number>
-          </property>
-          <property name="maximum">
-           <number>20000</number>
-          </property>
-          <property name="pageStep">
-           <number>100</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksAbove</enum>
-          </property>
-          <property name="tickInterval">
-           <number>1000</number>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="5" rowspan="2">
+        <item row="2" column="4">
          <widget class="QSlider" name="Yset">
           <property name="minimum">
            <number>-20000</number>
@@ -782,8 +626,37 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="2">
-         <widget class="QSpinBox" name="spinBox_2">
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>X2</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QSlider" name="X2set">
+          <property name="minimum">
+           <number>-20000</number>
+          </property>
+          <property name="maximum">
+           <number>20000</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1" colspan="2">
+         <widget class="QSpinBox" name="spinBox">
           <property name="minimum">
            <number>-20000</number>
           </property>
@@ -792,114 +665,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QSpinBox" name="Csetspin">
-          <property name="maximum">
-           <number>4000</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab_3">
-       <attribute name="title">
-        <string>Speed and Log</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0">
-         <widget class="QPushButton" name="pushButtonCanlog">
-          <property name="text">
-           <string>Canlog</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>CAN
-log</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3" rowspan="5">
-         <widget class="QPlainTextEdit" name="plainTextEditCanLog"/>
-        </item>
-        <item row="0" column="4">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>Socket 
- Log </string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="5" rowspan="5">
-         <widget class="QPlainTextEdit" name="plainTextEditCanLog_2"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="pushButtonClearCanlog">
-          <property name="text">
-           <string>ClearCanlog</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="pushButtonSocketlog">
-          <property name="text">
-           <string>Socketlog</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0" colspan="2">
-         <widget class="QPushButton" name="pushButtonClearSocketlog">
-          <property name="text">
-           <string>ClearSocketlog</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_12">
-          <property name="text">
-           <string>Vmax</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
+        <item row="7" column="2">
          <widget class="QSpinBox" name="spinBox_5">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -908,17 +674,24 @@ log</string>
            </sizepolicy>
           </property>
           <property name="maximum">
-           <number>5000</number>
+           <number>10000</number>
           </property>
           <property name="value">
            <number>4000</number>
           </property>
          </widget>
         </item>
-        <item row="5" column="3" colspan="3">
+        <item row="0" column="5">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Z</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="3">
          <widget class="QSlider" name="horizontalSlider">
           <property name="maximum">
-           <number>5000</number>
+           <number>10000</number>
           </property>
           <property name="value">
            <number>4000</number>
@@ -934,6 +707,270 @@ log</string>
           </property>
          </widget>
         </item>
+        <item row="4" column="1" rowspan="2" colspan="2">
+         <widget class="QSpinBox" name="spinBox_2">
+          <property name="minimum">
+           <number>-20000</number>
+          </property>
+          <property name="maximum">
+           <number>20000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Vmax</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>C</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QSpinBox" name="Csetspin">
+          <property name="maximum">
+           <number>4000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>X1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <widget class="QSpinBox" name="spinBox_3">
+          <property name="minimum">
+           <number>-20000</number>
+          </property>
+          <property name="maximum">
+           <number>20000</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="QSlider" name="Zset">
+          <property name="maximum">
+           <number>105000</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>100000</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBelow</enum>
+          </property>
+          <property name="tickInterval">
+           <number>10000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Y</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="QSpinBox" name="spinBox_4">
+          <property name="maximum">
+           <number>105000</number>
+          </property>
+          <property name="value">
+           <number>100000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3" rowspan="3">
+         <widget class="QDial" name="Cset">
+          <property name="maximum">
+           <number>4000</number>
+          </property>
+          <property name="pageStep">
+           <number>50</number>
+          </property>
+          <property name="sliderPosition">
+           <number>0</number>
+          </property>
+          <property name="wrapping">
+           <bool>true</bool>
+          </property>
+          <property name="notchTarget">
+           <double>10.000000000000000</double>
+          </property>
+          <property name="notchesVisible">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3" rowspan="2">
+         <widget class="QSlider" name="X1set">
+          <property name="minimum">
+           <number>-20000</number>
+          </property>
+          <property name="maximum">
+           <number>20000</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4" rowspan="5" colspan="2">
+         <widget class="QPushButton" name="pushButtonGo">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Log</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Send Msg</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButtonSendMsg">
+          <property name="text">
+           <string>Send Msg</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QPlainTextEdit" name="plainTextEdit"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>CANlog</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Socket Log </string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="pushButtonCanlog">
+          <property name="text">
+           <string>Canlog</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="pushButtonClearCanlog">
+          <property name="text">
+           <string>ClearCanlog</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QPushButton" name="pushButtonSocketlog">
+          <property name="text">
+           <string>Socketlog</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QPushButton" name="pushButtonClearSocketlog">
+          <property name="text">
+           <string>ClearSocketlog</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QPlainTextEdit" name="plainTextEditCanLog"/>
+        </item>
+        <item row="4" column="2" colspan="2">
+         <widget class="QPlainTextEdit" name="plainTextEditCanLog_2"/>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -945,8 +982,8 @@ log</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>812</width>
-     <height>25</height>
+     <width>606</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1022,12 +1059,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>392</x>
-     <y>300</y>
+     <x>208</x>
+     <y>273</y>
     </hint>
     <hint type="destinationlabel">
-     <x>72</x>
-     <y>205</y>
+     <x>96</x>
+     <y>193</y>
     </hint>
    </hints>
   </connection>
@@ -1038,11 +1075,11 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>102</x>
-     <y>205</y>
+     <x>96</x>
+     <y>193</y>
     </hint>
     <hint type="destinationlabel">
-     <x>259</x>
+     <x>208</x>
      <y>251</y>
     </hint>
    </hints>
@@ -1054,12 +1091,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>747</x>
-     <y>202</y>
+     <x>642</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
-     <x>733</x>
-     <y>280</y>
+     <x>609</x>
+     <y>309</y>
     </hint>
    </hints>
   </connection>
@@ -1070,12 +1107,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>727</x>
-     <y>343</y>
+     <x>609</x>
+     <y>309</y>
     </hint>
     <hint type="destinationlabel">
-     <x>729</x>
-     <y>204</y>
+     <x>642</x>
+     <y>219</y>
     </hint>
    </hints>
   </connection>
@@ -1086,12 +1123,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>661</x>
-     <y>202</y>
+     <x>579</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
-     <x>645</x>
-     <y>265</y>
+     <x>548</x>
+     <y>309</y>
     </hint>
    </hints>
   </connection>
@@ -1102,12 +1139,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>640</x>
-     <y>315</y>
+     <x>548</x>
+     <y>309</y>
     </hint>
     <hint type="destinationlabel">
-     <x>678</x>
-     <y>213</y>
+     <x>579</x>
+     <y>219</y>
     </hint>
    </hints>
   </connection>
@@ -1118,12 +1155,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>67</x>
-     <y>445</y>
+     <x>78</x>
+     <y>426</y>
     </hint>
     <hint type="destinationlabel">
-     <x>172</x>
-     <y>447</y>
+     <x>192</x>
+     <y>428</y>
     </hint>
    </hints>
   </connection>
@@ -1134,12 +1171,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>138</x>
-     <y>433</y>
+     <x>192</x>
+     <y>428</y>
     </hint>
     <hint type="destinationlabel">
-     <x>100</x>
-     <y>440</y>
+     <x>92</x>
+     <y>426</y>
     </hint>
    </hints>
   </connection>
@@ -1150,12 +1187,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>81</x>
-     <y>480</y>
+     <x>92</x>
+     <y>456</y>
     </hint>
     <hint type="destinationlabel">
-     <x>129</x>
-     <y>479</y>
+     <x>188</x>
+     <y>458</y>
     </hint>
    </hints>
   </connection>
@@ -1166,12 +1203,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>216</x>
-     <y>480</y>
+     <x>192</x>
+     <y>458</y>
     </hint>
     <hint type="destinationlabel">
-     <x>88</x>
-     <y>484</y>
+     <x>92</x>
+     <y>456</y>
     </hint>
    </hints>
   </connection>
@@ -1182,8 +1219,8 @@ log</string>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>99</x>
-     <y>244</y>
+     <x>94</x>
+     <y>228</y>
     </hint>
     <hint type="destinationlabel">
      <x>190</x>
@@ -1198,8 +1235,8 @@ log</string>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>128</x>
-     <y>310</y>
+     <x>100</x>
+     <y>286</y>
     </hint>
     <hint type="destinationlabel">
      <x>520</x>
@@ -1214,12 +1251,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>110</x>
-     <y>479</y>
+     <x>69</x>
+     <y>468</y>
     </hint>
     <hint type="destinationlabel">
-     <x>202</x>
-     <y>484</y>
+     <x>122</x>
+     <y>477</y>
     </hint>
    </hints>
   </connection>
@@ -1230,12 +1267,12 @@ log</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>184</x>
-     <y>471</y>
+     <x>192</x>
+     <y>480</y>
     </hint>
     <hint type="destinationlabel">
-     <x>111</x>
-     <y>473</y>
+     <x>87</x>
+     <y>480</y>
     </hint>
    </hints>
   </connection>
