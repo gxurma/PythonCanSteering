@@ -466,7 +466,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			ts = time.time()
 			self.VelErr = 0
 
-			while (time.time()-ts) < 1 :
+			while (time.time()-ts) < 10 :
 				self.sendElmoMsgShort(axe, "VE",0 ) #VE = ?
 				# self.sendMsg(idTx+axe, (0x56,0x45,0,0 )) #VE = ?
 				print ("velocity error :", abs(self.VelErr), end="   ")
@@ -481,7 +481,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 		ts = time.time()
 		self.StatusReg = 0xffffffff # muß sein, damit ich auf Antworten warte
-		while (time.time()-ts) < 1 :
+		while (time.time()-ts) < 10 :
 			self.sendElmoMsgShort(axe,"SR", 0 ) #SR = ?
 			print ("status: ", (self.StatusReg & (1<<11))>>11, end="  ")
 			if not(self.StatusReg & (1<<11)) : #checking if homing ready
