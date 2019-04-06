@@ -25,7 +25,8 @@ def main():
   sendElmoMsg(idY, "PA",1,-4096)
   sendElmoMsg(idZ, "PA",1,256)
   sendElmoMsg(idX2, "PX",1,100000)
-  sendElmoMsg(idX2, "BG",0,00000)
+  sendElmoMsg(idX2, "BG",0,-(2048-256))
+  sendElmoMsg(idX2, "BG",0,-900)
 
 
 

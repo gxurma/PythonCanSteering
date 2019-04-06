@@ -106,21 +106,22 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.pushButtonNotStop.clicked.connect(self.NotStop)
 		self.initCAN()
 		self.startCANComm()
-		self.vMaxX = vMaxX
-		self.aMaxX = aMaxX
-		self.vMaxY = vMaxY
-		self.aMaxY = aMaxY
-		self.vMaxZ = vMaxZ
-		self.aMaxZ = aMaxZ
-		self.vMax = vMax
-		self.aMax = aMax
-		#self.AccOrVelChange()
-		self.oldPosRandX = 0
-		self.oldPosRandY = 0
-		self.oldPosRandZ = 0
-		self.PosX = 0
-		self.PosY = 0
-		self.PosZ = 100000
+
+		# self.vMaxX = vMaxX
+		# self.aMaxX = aMaxX
+		# self.vMaxY = vMaxY
+		# self.aMaxY = aMaxY
+		# self.vMaxZ = vMaxZ
+		# self.aMaxZ = aMaxZ
+		# self.vMax = vMax
+		# self.aMax = aMax
+		# #self.AccOrVelChange()
+		# self.oldPosRandX = 0
+		# self.oldPosRandY = 0
+		# self.oldPosRandZ = 0
+		# self.PosX = 0
+		# self.PosY = 0
+		# self.PosZ = 100000
 
 		# init status machine
 #		self.Status=dict(x='Stop',y='Stop',z='Stop')
@@ -132,16 +133,16 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.readThread.start()
 		# Eigener pos lese Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
 		self.readPosThread = GenericThread(self.readPos)
-		self.readPosThread.start()
-		self.pushButtonReadPos.clicked.connect(self.readPosThread.start)
+		self.readPosThread.start()  # starte thread um Positionen zu lesen
+		self.pushButtonReadPos.clicked.connect(self.readPosThread.start) #jedes mal wenn angeklickt wird, starte pos Thread
 
-
+#													HomeX2(axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed):
 		#homing thread
-		self.homeXThread = GenericThread(lambda:self.HomeX2(idX))
-		self.homeX2Thread = GenericThread(lambda:self.HomeX2(idX2))
-		self.homeYThread = GenericThread(lambda:self.HomeX2(idY))
-		self.homeZThread = GenericThread(lambda:self.Home(idZ))
-		self.homeCThread = GenericThread(lambda:self.Home(idC))
+		self.homeXThread	= GenericThread(lambda:self.HomeX2(idX,	1,		0,	4096,	-4096,		0,8192))
+		self.homeX2Thread	= GenericThread(lambda:self.HomeX2(idX2,1,	-4000, -1792,	512,		0,8192))
+		self.homeYThread	= GenericThread(lambda:self.HomeX2(idY,	1,		0,	4096,	-4096,		0,8192))
+		self.homeZThread	= GenericThread(lambda:self.HomeX2(idZ,	0, 100000,	4096,	-4096,	100000,8192))
+		self.homeCThread	= GenericThread(lambda:self.HomeX2(idC,	0,		0,	0,		-4096,		0,8192))
 		self.pushButtonHomeX.clicked.connect(self.homeXThread.start)
 		self.pushButtonHomeX2.clicked.connect(self.homeX2Thread.start)
 		self.pushButtonHomeY.clicked.connect(self.homeYThread.start)
@@ -157,28 +158,21 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 #		self.pushButtonJoysticMode.clicked.connect(self.joysticModeThread.start)
 
 
-		self.status = [ready,ready,ready]
-		self.axisSpeed = [0,0,0]
-		self.axisOldSpeed = [0,0,0]
-
-		self.currentPos=[0,0,0,0,0]
-		self.StatusReg = 0
-		self.VelErr = 0
+		# self.status = [ready,ready,ready]
+		# self.axisSpeed = [0,0,0]
+		# self.axisOldSpeed = [0,0,0]
+		#
+		# self.currentPos=[0,0,0,0,0]
+		# self.StatusReg = 0
+		# self.VelErr = 0
 
 
 	def MotorAus(self, axe, isChecked):
-		# self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, isChecked,0,0,0  )) #mo = 0 motor off
 		self.sendElmoMsgLong(axe, "MO",0, isChecked) #mo = 0 motor off
 
 
 
 	def NotStop(self):
-		# msg = (0x4d,0x4f,0,0, 0,0,0,0  )  # mo = 0 motor off
-		# self.sendMsg(idTx+idX, msg )
-		# self.sendMsg(idTx+idX2, msg )
-		# self.sendMsg(idTx+idY, msg )
-		# self.sendMsg(idTx+idZ, msg )
-		# self.sendMsg(idTx+idC, msg )
 		self.sendElmoMsgLong(idX, "MO",0,0 ) # mo = 0 motor off
 		self.sendElmoMsgLong(idX2,"MO",0,0 )
 		self.sendElmoMsgLong(idY, "MO",0,0 )
@@ -386,12 +380,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def readPos(self) :
 		while self.pushButtonReadPos.isChecked()	:
-			# msg = (0x50, 0x58, 0, 0) # PX
-			# self.sendMsg(idTx+idX, msg)# get pos
-			# self.sendMsg(idTx+idX2, msg)# get pos
-			# self.sendMsg(idTx+idY, msg)# get pos
-			# self.sendMsg(idTx+idZ, msg)# get pos
-			# self.sendMsg(idTx+idC, msg)# get pos
 			self.sendElmoMsgShort(idX, "PX",0)# get pos
 			self.sendElmoMsgShort(idX2,"PX",0)# get pos
 			self.sendElmoMsgShort(idY, "PX",0)# get pos
@@ -454,83 +442,100 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 
 	def Init(self,axe):
-
-		# self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, 0,0,0,0  )) #mo = 0 motor off
-		# self.sendMsg(idTx+axe, (0x50,0x58,0,0, 0,0,0,0  )) #px = 0 set PX
-		# self.sendMsg(idTx+axe, (0x50,0x59,0,0, 0,0,0,0  )) #py = 0 set aux position
-		# self.sendMsg(idTx+axe, (0x55,0x4d,0,0, 5,0,0,0  )) #um = 5 (position mode)
 		self.sendElmoMsgLong(axe, "MO",0,0 ) #mo = 0 motor off
 		self.sendElmoMsgLong(axe, "PX",0,0 ) #px = 0 set PX
 		self.sendElmoMsgLong(axe, "PY",0,0 ) #py = 0 set aux position
 		self.sendElmoMsgLong(axe, "UM",0,5 ) #um = 5 (position mode)
-		#self.Home(axe)
 
-	def HomeX2(self, axe):
-		self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, 0,0,0,0  )) #mo = 0 motor off
-		self.sendMsg(idTx+axe, (0x55,0x4d,0,0, 2,0,0,0  )) #um = 2 (velocity mode)
-		self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, 1,0,0,0  )) #mo = 1 motor on
+	def HomeX2(self, axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed):
+		if velMode :
+			self.sendElmoMsgLong(axe, "MO",0,0) #mo = 0 motor off
+			self.sendElmoMsgLong(axe, "UM",0,2) #um = 2 (velocity mode)
 
-		if axe==idZ :
-			self.sendMsg(idTx+axe, (0x48,0x4d,2,0, 0xA0,0x86,0x01,0x00  )) #hm[2] = 0x186A0 home position will be 100000
-		elif axe==idX2 :
-			self.sendMsg(idTx+axe, (0x48,0x4d,2,0, 0x60,0xf0,0xff,0xff  )) #hm[2] = 0x186A0 home position will be -4000
-		else :
-			self.sendMsg(idTx+axe, (0x48,0x4d,2,0, 0,0,0,0  )) #hm[2] = 0 home position will be 0
-		# self.sendMsg(idTx+axe, (0x48,0x4d,2,0, 0x60,0xf0,0xff,0xff  )) #hm[2] = 0x186A0 home position will be -4000
+		self.sendElmoMsgLong(axe, "MO",0,1) #mo = 1 motor on
 
-		self.sendMsg(idTx+axe, (0x48,0x4d,3,0, 3,0,0,0  )) #hm[3] = 3 Configures the homing function to be triggered by the Index.
-		self.sendMsg(idTx+axe, (0x48,0x4d,5,0, 0,0,0,0  )) #hm[5] = 0 The PX counter will be set to a predefined constant number HM[2]
-		self.sendMsg(idTx+axe, (0x48,0x4d,4,0, 0,0,0,0  )) #HM[4] = 0 Stop motion after homing.
+		self.sendElmoMsgLong(axe, "HM", 2, homePosition)
 
-		if axe==idX2 :
-			self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0xf9,0xff,0xff  )) #JV = -2049 Jog speed
-			# self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0xfd,0xff,0xff  )) #JV = -512 Jog speed
-		else:
-			self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0x10,0x00,0x00  )) #JV = 4096 Jog speed
+		# if axe==idZ :
+		# 	self.sendMsg(idTx+axe, (0x48,0x4d,2,0, 0xA0,0x86,0x01,0x00  )) #hm[2] = 0x186A0 home position will be 100000
+		# elif axe==idX2 :
+		# 	self.sendMsg(idTx+axe, (0x48,0x4d,2,0, 0x60,0xf0,0xff,0xff  )) #hm[2] = 0x186A0 home position will be -4000
+		# else :
+		# 	self.sendMsg(idTx+axe, (0x48,0x4d,2,0, 0,0,0,0  )) #hm[2] = 0 home position will be 0
 
-		self.sendMsg(idTx+axe, (0x42,0x47,0,0 )) #BeGin
-		ts = time.time()
-		self.VelErr = 0
+		self.sendElmoMsgLong(axe, "HM", 3, 3)#hm[3] = 3 Configures the homing function to be triggered by the Index.
+		self.sendElmoMsgLong(axe, "HM", 5, 0)#hm[5] = 0 The PX counter will be set to a predefined constant number HM[2]
+		self.sendElmoMsgLong(axe, "HM", 4, 0)#HM[4] = 0 Stop motion after homing.
 
-		#time.sleep(3)
-		while (time.time()-ts) < 10 :
-			self.sendMsg(idTx+axe, (0x56,0x45,0,0 )) #VE = ?
-			print (abs(self.VelErr))
-			if abs(self.VelErr) >= 1000 :
-				break
+		# self.sendMsg(idTx+axe, (0x48,0x4d,3,0, 3,0,0,0  )) #hm[3] = 3 Configures the homing function to be triggered by the Index.
+		# self.sendMsg(idTx+axe, (0x48,0x4d,5,0, 0,0,0,0  )) #hm[5] = 0 The PX counter will be set to a predefined constant number HM[2]
+		# self.sendMsg(idTx+axe, (0x48,0x4d,4,0, 0,0,0,0  )) #HM[4] = 0 Stop motion after homing.
 
-		self.sendMsg(idTx+axe, (0x53,0x54,0,0 )) #STop
+		if jogSpeed != 0:
+			self.sendElmoMsgLong(axe, "JV", 0, jogSpeed)
 
-		self.sendMsg(idTx+axe, (0x48,0x4d,1,0, 1,0,0,0  )) #HM[1] = 1: arm homing
+			# if axe==idX2 :
+			# 	self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0xf9,0xff,0xff  )) #JV = -1792 Jog speed
+			#
+			# else:
+			# 	self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0x10,0x00,0x00  )) #JV = 4096 Jog speed
 
-		if axe==idX2 :
-			self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0x2,0x00,0x00  )) #JV = 512 Jog speed
-			# self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0x1,0x00,0x00  )) #JV = 256 Jog speed
-		else:
-			self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0xf0,0xff,0xff  )) #JV = -4096 Jog speed
+			self.sendElmoMsgShort(axe,"BG",0)
+			# self.sendMsg(idTx+axe, (0x42,0x47,0,0 )) #BeGin
 
-		self.sendMsg(idTx+axe, (0x42,0x47,0,0 )) #BeGin
+			ts = time.time()
+			self.VelErr = 0
+
+			while (time.time()-ts) < 1 :
+				self.sendElmoMsgShort(axe, "VE",0 ) #VE = ?
+				# self.sendMsg(idTx+axe, (0x56,0x45,0,0 )) #VE = ?
+				print ("velocity error :", abs(self.VelErr), end="   ")
+				if abs(self.VelErr) >= 1000 :
+					break
+
+			self.sendElmoMsgShort(axe, "ST",0 ) #STop
+			# self.sendMsg(idTx+axe, (0x53,0x54,0,0 )) #STop
+
+		self.sendElmoMsgLong(axe, "HM",1,1 ) #HM[1] = 1: arm homing
+		# self.sendMsg(idTx+axe, (0x48,0x4d,1,0, 1,0,0,0  )) #HM[1] = 1: arm homing
+
+		self.sendElmoMsgLong(axe, "JV", 0, searchSpeed)
+		# if axe==idX2 :
+		# 	self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0x2,0x00,0x00  )) #JV = 512 Jog speed
+		# 	# self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0x1,0x00,0x00  )) #JV = 256 Jog speed
+		# else:
+		# 	self.sendMsg(idTx+axe, (0x4A,0x56,0,0, 0x00,0xf0,0xff,0xff  )) #JV = -4096 Jog speed
+
+		self.sendElmoMsgShort(axe,"BG",0)
+		# self.sendMsg(idTx+axe, (0x42,0x47,0,0 )) #BeGin
 		ts = time.time()
 		self.StatusReg = 0xffffffff # muß sein, damit ich auf Antworten warte
-		while (time.time()-ts) < 10 :
-			self.sendMsg(idTx+axe, (0x53,0x52,0,0 )) #SR = ?
-			print (self.StatusReg & (1<<11))
-			if not(self.StatusReg & (1<<11)) :
+		while (time.time()-ts) < 1 :
+			self.sendElmoMsgShort(axe,"SR",0 ) #SR = ?
+			# self.sendMsg(idTx+axe, (0x53,0x52,0,0 )) #SR = ?
+			print ("status: ", (self.StatusReg & (1<<11))>>11, end="  ")
+			if not(self.StatusReg & (1<<11)) : #checking if homing ready
 				break
 
-		self.sendMsg(idTx+axe, (0x53,0x54,0,0 )) #STop
+		self.sendElmoMsgShort(axe, "ST",0 ) #STop
+		# self.sendMsg(idTx+axe, (0x53,0x54,0,0 )) #STop
 
-		self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, 0,0,0,0  )) #mo = 0 motor off
-		self.sendMsg(idTx+axe, (0x55,0x4d,0,0, 5,0,0,0  )) #um = 5 (position mode)
-		self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, 1,0,0,0  )) #mo = 1 motor on
+		if velMode :
+			self.sendElmoMsgLong(axe, "MO",0,0) #mo = 0 motor off
+			self.sendElmoMsgLong(axe, "UM",0,5) #um = 5 (position mode)
+			self.sendElmoMsgLong(axe, "MO",0,1) #mo = 1 motor on
+			# self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, 0,0,0,0  )) #mo = 0 motor off
+			# self.sendMsg(idTx+axe, (0x55,0x4d,0,0, 5,0,0,0  )) #um = 5 (position mode)
+			# self.sendMsg(idTx+axe, (0x4d,0x4f,0,0, 1,0,0,0  )) #mo = 1 motor on
 
-		if axe==idZ :
-			self.sendMsg(idTx+axe, (0x50,0x41,0,0, 0xA0,0x86,0x01,0x00  )) #pa = 0 set position goal to 100000
-		else:
-			self.sendMsg(idTx+axe, (0x50,0x41,0,0, 0,0,0,0  )) #pa = 0 set position goal to 0
-		self.sendMsg(idTx+axe, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
-
-		self.sendMsg(idTx+axe, (0x42,0x47,0,0 )) #BeGin
+		self.go(axe, targetPos, targetSpeed)
+		# if axe==idZ :
+		# 	self.sendMsg(idTx+axe, (0x50,0x41,0,0, 0xA0,0x86,0x01,0x00  )) #pa = 0 set position goal to 100000
+		# else:
+		# 	self.sendMsg(idTx+axe, (0x50,0x41,0,0, 0,0,0,0  )) #pa = 0 set position goal to 0
+		# self.sendMsg(idTx+axe, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
+		#
+		# self.sendMsg(idTx+axe, (0x42,0x47,0,0 )) #BeGin
 
 
 	def Home(self, axe):
@@ -603,52 +608,31 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 		self.sendMsg(idTx+axe, (0x42,0x47,0,0 )) #BeGin
 
+	def go(self, axe, target, speed):
+		self.sendElmoMsgLong(axe, "PA",0,target) #pa = target set position goal to target
+		self.sendElmoMsgLong(axe, "SP",0,speed ) #sp = speed set speed
+		self.sendElmoMsgShort(axe, "BG",0 ) #BeGin
 
 
 
 	def goX0Y0(self):
-		# self.sendMsg(idTx+idX, (0x50,0x41,0,0, 0,0,0,0  )) #pa = 0 set position goal to 0
-		# self.sendMsg(idTx+idY, (0x50,0x41,0,0, 0,0,0,0  )) #pa = 0 set position goal to 0
-		# self.sendMsg(idTx+idX, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
-		# self.sendMsg(idTx+idY, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
-		# self.sendMsg(idTx+idX, (0x42,0x47,0,0 )) #BeGin
-		# self.sendMsg(idTx+idY, (0x42,0x47,0,0 )) #BeGin
-		self.sendElmoMsgLong(idX, "PA",0,0) #pa = 0 set position goal to 0
-		self.sendElmoMsgLong(idY, "PA",0,0) #pa = 0 set position goal to 0
-		self.sendElmoMsgLong(idX, "SP",0,8192) #sp = 8096 set speed
-		self.sendElmoMsgLong(idY, "SP",0,8192) #sp = 8096 set speed
-		self.sendElmoMsgShort(idX, "BG",0 ) #BeGin
-		self.sendElmoMsgShort(idY, "BG",0 ) #BeGin
+		self.go(idX, 0, 8192)
+		self.go(idY, 0, 8192)
 
 	def goZmax(self):
-		# self.sendMsg(idTx+idZ, (0x50,0x41,0,0, 0xA0,0x86,0x01,0x00  )) #pa = 0 set position goal to 100000
-		# self.sendMsg(idTx+idZ, (0x53,0x50,0,0, 0x00,0x20,0,0  )) #sp = 8096 set speed
-		# self.sendMsg(idTx+idZ, (0x42,0x47,0,0 )) #BeGin
-		self.sendElmoMsgLong(idZ, "PA",0,100000) #pa = 0 set position goal to 100000
-		self.sendElmoMsgLong(idZ, "SP",0,8192 ) #sp = 8096 set speed
-		self.sendElmoMsgShort(idZ, "BG",0 ) #BeGin
+		self.go(idZ, 100000, 8192) # go to 100000 with speed 8192
 
 	def goC0(self):
-		# self.sendMsg(idTx+idC, (0x50,0x41,0,0, 0x0,0x0,0x0,0x0  )) #pa = 0 set position goal to 00000
-		# self.sendMsg(idTx+idC, (0x53,0x50,0,0, 0x00,0x10,0,0  )) #sp = 4096 set speed
-		# self.sendMsg(idTx+idC, (0x42,0x47,0,0 )) #BeGin
-		self.sendElmoMsgLong(idC, "PA",0,0) #pa = 0 set position goal to 00000
-		self.sendElmoMsgLong(idC, "SP",0,4096) #sp = 4096 set speed
-		self.sendElmoMsgShort(idC, "BG",0) #BeGin
+		self.go(idC, 0, 4096) # go to 0 with speed 4096
 
 	def goX20(self):
-		# self.sendMsg(idTx+idX2, (0x50,0x41,0,0, 0x4c,0x1d,0x0,0x0  )) #pa = 0 set position goal to 7500
-		# self.sendMsg(idTx+idX2, (0x53,0x50,0,0, 0x00,0x10,0,0  )) #sp = 4096 set speed
-		# self.sendMsg(idTx+idX2, (0x42,0x47,0,0 )) #BeGin
-
-		self.sendElmoMsgLong(idX2, "PA",0, 7500) #pa = 0 set position goal to 7500
-		self.sendElmoMsgLong(idX2, "SP",0, 4096) #sp = 4096 set speed
-		self.sendElmoMsgShort(idX2, "BG",0) #BeGin
-
-
+		self.go(idX2, 7500, 4096) # go to 7500 with speed 4096
 
 	def aboutBox(self):
-		QtGui.QMessageBox.about(self,"Über dieses Programm", "Dies ist ein Programm zum Testen und benutzen von einer CNC Maschine mit Elmo Motion Cello Controllern. Die Maschine besteht aus X, X2, Y, Z, und C Achsen, und sollte eigentlich mit Openpnp zusammenarbeiten ")
+		QtGui.QMessageBox.about(self,"Über dieses Programm", '''
+Dies ist ein Programm zum Testen und benutzen einer CNC Maschine
+mit Elmo Motion Cello Controllern. Die Maschine besteht aus X, X2, Y, Z, und C Achsen,
+und sollte eigentlich mit Openpnp zusammenarbeiten. ''')
 
 	def sendMsg(self, msgid, msg):
 		print( "%03x :" %(msgid), end="")

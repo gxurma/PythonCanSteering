@@ -1,1 +1,1 @@
-/usr/sbin/virtualcan.sh start
+sudo /usr/sbin/virtualcan.sh start
