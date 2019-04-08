@@ -460,15 +460,15 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgLong(axe, "UM", 0, 5 ) #um = 5 (position mode)
 
 	def whichAxe(self,axe):
-		if axe = idX:
+		if axe == idX:
 			return 0
-		if axe = idY:
+		if axe == idY:
 			return 1
-		if axe = idZ:
+		if axe == idZ:
 			return 2
-		if axe = idC:
+		if axe == idC:
 			return 3
-		if axe = idX2:
+		if axe == idX2:
 			return 4
 
 
@@ -489,13 +489,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			self.sendElmoMsgShort(axe,"BG", 0)
 
 			ts = time.time()
-			self.VelErr[whichAxe(axe)] = 0
+			self.VelErr[self.whichAxe(axe)] = 0
 
 			while (time.time()-ts) < 10 :
 				self.sendElmoMsgShort(axe, "VE",0 ) #VE = ?
 				# self.sendMsg(idTx+axe, (0x56,0x45,0,0 )) #VE = ?
-				print ("velocity error :", abs(self.VelErr[whichAxe(axe)]), end="   ")
-				if abs(self.VelErr[whichAxe(axe)]) >= 1000 :
+				print ("velocity error :", abs(self.VelErr[self.whichAxe(axe)]), end="   ")
+				if abs(self.VelErr[self.whichAxe(axe)]) >= 1000 :
 					break
 
 			self.sendElmoMsgShort(axe, "ST",0 ) #STop
@@ -505,11 +505,11 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgShort(axe,"BG", 0)
 
 		ts = time.time()
-		self.StatusReg[whichAxe(axe)] = 0xffffffff # muß sein, damit ich auf Antworten warte
+		self.StatusReg[self.whichAxe(axe)] = 0xffffffff # muß sein, damit ich auf Antworten warte
 		while (time.time()-ts) < 10 :
 			self.sendElmoMsgShort(axe,"SR", 0 ) #SR = ?
-			print ("status: ", (self.StatusReg[whichAxe(axe)] & (1<<11))>>11, end="  ")
-			if not(self.StatusReg[whichAxe(axe)] & (1<<11)) : #checking if homing ready
+			print ("status: ", (self.StatusReg[self.whichAxe(axe)] & (1<<11))>>11, end="  ")
+			if not(self.StatusReg[self.whichAxe(axe)] & (1<<11)) : #checking if homing ready
 				break
 
 		self.sendElmoMsgShort(axe, "ST", 0 ) #STop
