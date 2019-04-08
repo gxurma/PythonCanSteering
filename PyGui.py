@@ -19,6 +19,7 @@ import os, struct, array
 from fcntl import ioctl
 
 #ids:
+
 idX = 0x16
 idY = 0x1c
 idZ = 0x39
@@ -162,15 +163,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		# self.axisSpeed = [0,0,0]
 		# self.axisOldSpeed = [0,0,0]
 		#
-		# self.currentPos=[0,0,0,0,0]
-		# self.StatusReg = 0
-		# self.VelErr = 0
-
+		self.currentPos=[0,0,0,0,0]
+		self.StatusReg =[0,0,0,0,0]
+		self.VelErr = [0,0,0,0,0]
 
 	def MotorAus(self, axe, isChecked):
 		self.sendElmoMsgLong(axe, "MO",0, isChecked) #mo = 0 motor off
-
-
 
 	def NotStop(self):
 		self.sendElmoMsgLong(idX, "MO",0,0 ) # mo = 0 motor off
@@ -308,8 +306,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		print ('%d axes found: %s' % (self.num_axes, ', '.join(self.axis_map)))
 		print ('%d buttons found: %s' % (self.num_buttons, ', '.join(self.button_map)))
 
-
-
 	# Main Joystic event loop
 	def handleJoystic(self):
 		while self.pushButtonJoysticMode.isChecked():
@@ -335,7 +331,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					self.axis_states[axis] = fvalue #store value state
 					#print("%s : %.6f" % (axis, fvalue))
 		print("Jostic mode off 1")
-
 
 	def joysticMode(self):
 		self.NotStop() #stop everything first.
@@ -387,7 +382,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			self.sendElmoMsgShort(idC, "PX",0)# get pos
 			time.sleep(0.2)
 
-
 	def analyseCANMsg(self,msg):
 		displayText = "%03x %02x %01d   :" % (msg.id, msg.flg, msg.dlc)
 		for j in range(0,msg.dlc) :
@@ -403,10 +397,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				#print("posX :", pos)
 				self.lcdNumberDROPosX.display(pos)
 				self.currentPos[0] = pos
-			if msg.id == idRx+idX2 :
-				#print("posX :", pos)
-				self.lcdNumberDROPosX2.display(pos)
-				self.currentPos[4] = pos
 			if msg.id == idRx+idY :
 				#print("posY :", pos)
 				self.lcdNumberDROPosY.display(pos)
@@ -419,14 +409,38 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				#print("posC :", pos)
 				self.lcdNumberDROPosC.display(pos)
 				self.currentPos[3] = pos
-		if (msg.msg[0] == 0x56) and (msg.msg[1] == 0x45) : # VE = for homing
-			self.VelErr = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
-			if (self.VelErr & 0x80000000) :
-				self.VelErr = -(0x100000000 - self.VelErr)  # wir sind negative Zahl!
-			print("velocity error: ", self.VelErr)
-		if (msg.msg[0] == 0x53) and (msg.msg[1] == 0x52) : # SR = for homing
-			self.StatusReg = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
-			print("Status Register: " , bin(self.StatusReg))
+			if msg.id == idRx+idX2 :
+				#print("posX :", pos)
+				self.lcdNumberDROPosX2.display(pos)
+				self.currentPos[4] = pos
+		if (msg.msg[0] == 0x56) and (msg.msg[1] == 0x45) : # VE = velocity error for boundary homing
+			VelErr = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
+			if (VelErr & 0x80000000) :  # 64 bit negative numbers conversion to 32 bit
+				VelErr = -(0x100000000 - VelErr)  # wir sind negative Zahl!
+			print("velocity error: ", VelErr)
+			if msg.id == idRx+idX :
+				self.VelErr[0] = VelErr
+			if msg.id == idRx+idY :
+				self.VelErr[1] = VelErr
+			if msg.id == idRx+idZ :
+				self.VelErr[2] = VelErr
+			if msg.id == idRx+idC :
+				self.VelErr[3] = VelErr
+			if msg.id == idRx+idX2 :
+				self.VelErr[4] = VelErr
+		if (msg.msg[0] == 0x53) and (msg.msg[1] == 0x52) : # SR = Status register for homing
+			StatusReg = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
+			print("Status Register: " , bin(StatusReg))
+			if msg.id == idRx+idX :
+				self.StatusReg[0] = StatusReg
+			if msg.id == idRx+idY :
+				self.StatusReg[1] = StatusReg
+			if msg.id == idRx+idZ :
+				self.StatusReg[2] = StatusReg
+			if msg.id == idRx+idC :
+				self.StatusReg[3] = StatusReg
+			if msg.id == idRx+idX2 :
+				self.StatusReg[4] = StatusReg
 
 	def readMsg(self):
 		while True:
@@ -439,13 +453,24 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			except (canlib.canError) as ex:
 				print (ex)
 
-
-
 	def Init(self,axe):
 		self.sendElmoMsgLong(axe, "MO", 0, 0 ) #mo = 0 motor off
 		self.sendElmoMsgLong(axe, "PX", 0, 0 ) #px = 0 set PX
 		self.sendElmoMsgLong(axe, "PY", 0, 0 ) #py = 0 set aux position
 		self.sendElmoMsgLong(axe, "UM", 0, 5 ) #um = 5 (position mode)
+
+	def whichAxe(self,axe):
+		if axe = idX:
+			return 0
+		if axe = idY:
+			return 1
+		if axe = idZ:
+			return 2
+		if axe = idC:
+			return 3
+		if axe = idX2:
+			return 4
+
 
 	def Home(self, axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed):
 		if velMode :
@@ -464,13 +489,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			self.sendElmoMsgShort(axe,"BG", 0)
 
 			ts = time.time()
-			self.VelErr = 0
+			self.VelErr[whichAxe(axe)] = 0
 
 			while (time.time()-ts) < 10 :
 				self.sendElmoMsgShort(axe, "VE",0 ) #VE = ?
 				# self.sendMsg(idTx+axe, (0x56,0x45,0,0 )) #VE = ?
-				print ("velocity error :", abs(self.VelErr), end="   ")
-				if abs(self.VelErr) >= 1000 :
+				print ("velocity error :", abs(self.VelErr[whichAxe(axe)]), end="   ")
+				if abs(self.VelErr[whichAxe(axe)]) >= 1000 :
 					break
 
 			self.sendElmoMsgShort(axe, "ST",0 ) #STop
@@ -480,11 +505,11 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgShort(axe,"BG", 0)
 
 		ts = time.time()
-		self.StatusReg = 0xffffffff # muß sein, damit ich auf Antworten warte
+		self.StatusReg[whichAxe(axe)] = 0xffffffff # muß sein, damit ich auf Antworten warte
 		while (time.time()-ts) < 10 :
 			self.sendElmoMsgShort(axe,"SR", 0 ) #SR = ?
-			print ("status: ", (self.StatusReg & (1<<11))>>11, end="  ")
-			if not(self.StatusReg & (1<<11)) : #checking if homing ready
+			print ("status: ", (self.StatusReg[whichAxe(axe)] & (1<<11))>>11, end="  ")
+			if not(self.StatusReg[whichAxe(axe)] & (1<<11)) : #checking if homing ready
 				break
 
 		self.sendElmoMsgShort(axe, "ST", 0 ) #STop
@@ -529,7 +554,7 @@ und sollte eigentlich mit Openpnp zusammenarbeiten. ''')
 			print( " %02x" % ( msg[j] ), end="")
 		print( ". ")
 		self.handle1.write(msgid, msg)
-		time.sleep(0.05)
+		time.sleep(0.01)
 
 	def sendElmoMsgShort(self, axeId, command, index):
 	    # print ("%x %s %d" % (axeId, command, index))
