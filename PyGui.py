@@ -29,21 +29,26 @@ idX2 = 0x4e
 idTx = 0x300
 idRx = 0x280
 
-max=[0,0,0,0,0]
+maximum=[0,0,0,0,0]
+minimum=[0,0,0,0,0]
 # X: 200 count / mm
-max[0] = 32768
-
+maximum[0] = 16680
+minimum[0] = -16380
 # Y: 200 count / mm
-max[1] = 41330
+maximum[1] = 22100
+minimum[1] = -19270
 
 # Z: 2000 count /mm
-max[2] = 100000
+maximum[2] = 104000
+minimum[2] = 0
 
 # C: 2000 count / round
-max[3] = 100000
+maximum[3] = 100000
+minimum[3] = -10000
 
 # X2: 200 count / round
-max[4] = 10000
+maximum[4] = 7520
+minimum[4] = -4640
 
 
 # sample time = 4*135 = 540µs
@@ -91,6 +96,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.pushButtonGoZmax.clicked.connect(self.goZmax)
 		self.pushButtonGoC0.clicked.connect(self.goC0)
 		self.pushButtonGoX20.clicked.connect(self.goX20)
+		self.pushButtonGo.clicked.connect(self.goTo)
 
 		self.pushButtonMotorXAus.clicked.connect(lambda: self.MotorAus(idX, self.pushButtonMotorXAus.isChecked()))
 		self.pushButtonMotorX2Aus.clicked.connect(lambda: self.MotorAus(idX2, self.pushButtonMotorX2Aus.isChecked()))
@@ -458,6 +464,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgLong(axe, "PX", 0, 0 ) #px = 0 set PX
 		self.sendElmoMsgLong(axe, "PY", 0, 0 ) #py = 0 set aux position
 		self.sendElmoMsgLong(axe, "UM", 0, 5 ) #um = 5 (position mode)
+		time.sleep(0.05)
+
 
 	def whichAxe(self,axe):
 		if axe == idX:
@@ -476,8 +484,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		if velMode :
 			self.sendElmoMsgLong(axe, "MO", 0, 0) #mo = 0 motor off
 			self.sendElmoMsgLong(axe, "UM", 0, 2) #um = 2 (velocity mode)
+		time.sleep(0.05)
 
 		self.sendElmoMsgLong(axe, "MO", 0, 1) #mo = 1 motor on
+		time.sleep(0.05)
 
 		self.sendElmoMsgLong(axe, "HM", 2, homePosition)
 		self.sendElmoMsgLong(axe, "HM", 3, 3)#hm[3] = 3 Configures the homing function to be triggered by the Index.
@@ -499,6 +509,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					break
 
 			self.sendElmoMsgShort(axe, "ST",0 ) #STop
+		time.sleep(0.05)
 
 		self.sendElmoMsgLong(axe, "HM", 1,1 ) #HM[1] = 1: arm homing
 		self.sendElmoMsgLong(axe, "JV", 0, searchSpeed)
@@ -513,11 +524,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				break
 
 		self.sendElmoMsgShort(axe, "ST", 0 ) #STop
+		time.sleep(0.05)
 
 		if velMode :  #switch back to position mode
 			self.sendElmoMsgLong(axe, "MO",0,0) #mo = 0 motor off
 			self.sendElmoMsgLong(axe, "UM",0,5) #um = 5 (position mode)
 			self.sendElmoMsgLong(axe, "MO",0,1) #mo = 1 motor on
+		time.sleep(0.05)
 
 		self.go(axe, targetPos, targetSpeed)
 
@@ -541,7 +554,23 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def goX20(self):
 		self.go(idX2, 7500, 4096) # go to 7500 with speed 4096
+	
+	def goTo(self):
+		x = self.X1set.value()
+		y = self.Yset.value()
+		z = self.Zset.value()
+		c = self.Cset.value()
+		x2 = self.X2set.value()
+		vmax = self.Vmaxset.value()
+		print( x,y,z,c,x2,vmax)
 
+		self.go(idX, x, vmax)
+		self.go(idY, y, vmax)
+		self.go(idZ, z, vmax)
+		self.go(idC, c, vmax)
+		self.go(idX2, x2, vmax)
+		
+	
 	def aboutBox(self):
 		QtGui.QMessageBox.about(self,"Über dieses Programm", '''
 Dies ist ein Programm zum Testen und benutzen einer CNC Maschine

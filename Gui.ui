@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>606</width>
-    <height>442</height>
+    <width>681</width>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,28 +20,6 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <item row="1" column="0">
-       <widget class="QLCDNumber" name="lcdNumberDROPosX1">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="4">
        <widget class="QLCDNumber" name="lcdNumberDROPosC">
         <property name="sizePolicy">
@@ -130,13 +108,6 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>X1</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_2">
         <property name="text">
@@ -178,7 +149,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="1" column="0">
        <widget class="QLCDNumber" name="lcdNumberDROPosX">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -200,7 +171,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="0" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
          <string>X</string>
@@ -212,7 +183,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -607,10 +578,10 @@
         <item row="2" column="4">
          <widget class="QSlider" name="Yset">
           <property name="minimum">
-           <number>-20000</number>
+           <number>-19270</number>
           </property>
           <property name="maximum">
-           <number>20000</number>
+           <number>22100</number>
           </property>
           <property name="pageStep">
            <number>100</number>
@@ -636,16 +607,19 @@
         <item row="6" column="3">
          <widget class="QSlider" name="X2set">
           <property name="minimum">
-           <number>-20000</number>
+           <number>-4640</number>
           </property>
           <property name="maximum">
-           <number>20000</number>
+           <number>7520</number>
           </property>
           <property name="pageStep">
            <number>100</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="invertedAppearance">
+           <bool>true</bool>
           </property>
           <property name="tickPosition">
            <enum>QSlider::TicksAbove</enum>
@@ -656,7 +630,7 @@
          </widget>
         </item>
         <item row="6" column="1" colspan="2">
-         <widget class="QSpinBox" name="spinBox">
+         <widget class="QSpinBox" name="spinBoxX2">
           <property name="minimum">
            <number>-20000</number>
           </property>
@@ -666,7 +640,7 @@
          </widget>
         </item>
         <item row="7" column="2">
-         <widget class="QSpinBox" name="spinBox_5">
+         <widget class="QSpinBox" name="spinBoxVmax">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -689,7 +663,7 @@
          </widget>
         </item>
         <item row="7" column="3">
-         <widget class="QSlider" name="horizontalSlider">
+         <widget class="QSlider" name="Vmaxset">
           <property name="maximum">
            <number>10000</number>
           </property>
@@ -708,7 +682,7 @@
          </widget>
         </item>
         <item row="4" column="1" rowspan="2" colspan="2">
-         <widget class="QSpinBox" name="spinBox_2">
+         <widget class="QSpinBox" name="spinBoxX">
           <property name="minimum">
            <number>-20000</number>
           </property>
@@ -732,7 +706,7 @@
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="QSpinBox" name="Csetspin">
+         <widget class="QSpinBox" name="spinBoxC">
           <property name="maximum">
            <number>4000</number>
           </property>
@@ -746,7 +720,7 @@
          </widget>
         </item>
         <item row="1" column="4">
-         <widget class="QSpinBox" name="spinBox_3">
+         <widget class="QSpinBox" name="spinBoxY">
           <property name="minimum">
            <number>-20000</number>
           </property>
@@ -761,7 +735,7 @@
         <item row="2" column="5">
          <widget class="QSlider" name="Zset">
           <property name="maximum">
-           <number>105000</number>
+           <number>104000</number>
           </property>
           <property name="pageStep">
            <number>100</number>
@@ -788,7 +762,7 @@
          </widget>
         </item>
         <item row="1" column="5">
-         <widget class="QSpinBox" name="spinBox_4">
+         <widget class="QSpinBox" name="spinBoxZ">
           <property name="maximum">
            <number>105000</number>
           </property>
@@ -808,6 +782,9 @@
           <property name="sliderPosition">
            <number>0</number>
           </property>
+          <property name="invertedAppearance">
+           <bool>true</bool>
+          </property>
           <property name="wrapping">
            <bool>true</bool>
           </property>
@@ -822,10 +799,10 @@
         <item row="4" column="3" rowspan="2">
          <widget class="QSlider" name="X1set">
           <property name="minimum">
-           <number>-20000</number>
+           <number>-16380</number>
           </property>
           <property name="maximum">
-           <number>20000</number>
+           <number>16680</number>
           </property>
           <property name="pageStep">
            <number>100</number>
@@ -982,8 +959,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>606</width>
-     <height>21</height>
+     <width>681</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1055,7 +1032,7 @@
   <connection>
    <sender>Cset</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Csetspin</receiver>
+   <receiver>spinBoxC</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1069,7 +1046,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>Csetspin</sender>
+   <sender>spinBoxC</sender>
    <signal>valueChanged(int)</signal>
    <receiver>Cset</receiver>
    <slot>setValue(int)</slot>
@@ -1085,7 +1062,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_4</sender>
+   <sender>spinBoxZ</sender>
    <signal>valueChanged(int)</signal>
    <receiver>Zset</receiver>
    <slot>setValue(int)</slot>
@@ -1103,7 +1080,7 @@
   <connection>
    <sender>Zset</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBox_4</receiver>
+   <receiver>spinBoxZ</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1117,7 +1094,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_3</sender>
+   <sender>spinBoxY</sender>
    <signal>valueChanged(int)</signal>
    <receiver>Yset</receiver>
    <slot>setValue(int)</slot>
@@ -1135,7 +1112,7 @@
   <connection>
    <sender>Yset</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBox_3</receiver>
+   <receiver>spinBoxY</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1149,7 +1126,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_2</sender>
+   <sender>spinBoxX</sender>
    <signal>valueChanged(int)</signal>
    <receiver>X1set</receiver>
    <slot>setValue(int)</slot>
@@ -1167,7 +1144,7 @@
   <connection>
    <sender>X1set</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBox_2</receiver>
+   <receiver>spinBoxX</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1181,7 +1158,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBox</sender>
+   <sender>spinBoxX2</sender>
    <signal>valueChanged(int)</signal>
    <receiver>X2set</receiver>
    <slot>setValue(int)</slot>
@@ -1199,7 +1176,7 @@
   <connection>
    <sender>X2set</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBox</receiver>
+   <receiver>spinBoxX2</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1245,9 +1222,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_5</sender>
+   <sender>spinBoxVmax</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>horizontalSlider</receiver>
+   <receiver>Vmaxset</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1261,9 +1238,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>horizontalSlider</sender>
+   <sender>Vmaxset</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBox_5</receiver>
+   <receiver>spinBoxVmax</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
