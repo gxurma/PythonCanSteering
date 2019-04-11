@@ -365,7 +365,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			time.sleep(0.2)
 
 	def analyseCANMsg(self,msg):
-		if self.pushButtonCanlog.pressed() :
+		if self.pushButtonCanlog.isChecked() :
 			displayText = "%03x %02x %01d   :" % (msg.id, msg.flg, msg.dlc)
 			for j in range(0,msg.dlc) :
 				displayText = displayText + " %02x" % ( msg.msg[j] )
