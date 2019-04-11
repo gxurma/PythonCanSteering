@@ -13,7 +13,7 @@ import Gui
 import canlib
 import time
 #import random
-#import math
+import math
 
 import os, struct, array
 from fcntl import ioctl
@@ -120,9 +120,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.oldz = 100000
 		self.oldc = 0
 		self.oldx2 = 0
-
-
-
 
 		# Eigener Lese Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
 		self.readThread = GenericThread(self.readMsg)
@@ -456,7 +453,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgLong(axe, "UM", 0, 5 ) #um = 5 (position mode)
 		time.sleep(0.05)
 
-
 	def whichAxe(self,axe):
 		if axe == idX:
 			return 0
@@ -468,7 +464,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			return 3
 		if axe == idX2:
 			return 4
-
 
 	def Home(self, axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed, button):
 		if velMode :
@@ -554,6 +549,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 	def goX20(self):
 		self.go(idX2, 7500, 4096) # go to 7500 with speed 4096
 
+	# go to a defined 5 dimension coordinate with the specified speed
 	def goTo(self):
 		x = self.X1set.value()
 		y = self.Yset.value()
@@ -561,19 +557,39 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		c = self.Cset.value()
 		x2 = self.X2set.value()
 		vmax = self.Vmaxset.value()
-		print( x,y,z,c,x2,vmax)
+		print(" target x: %d, y: %d, z: %d, c: %d, x2: %d, vmax: %d" % (x,y,z,c,x2,vmax))
+		dx = abs(self.oldx - x)
+		dy = abs(self.oldy - y)
+		dz = abs(self.oldz - z)
+		dc = abs(self.oldc - c)
+		dx2 = abs(self.oldx2 - x2)
 
-		self.goPrepare(idX, x, vmax)
-		self.goPrepare(idY, y, vmax)
-		self.goPrepare(idZ, z, vmax)
-		self.goPrepare(idC, c, vmax)
-		self.goPrepare(idX2, x2, vmax)
-		self.goDo(idX)
-		self.goDo(idY)
-		self.goDo(idZ)
-		self.goDo(idC)
-		self.goDo(idX2)
+		distance = math.sqrt(dx*dx+dy*dy+dz*dz+dc*dc+dx2*dx2)
+		print("distance: ",distance)
+		if distance == 0:
+			return
+		vx = int(vmax * dx/distance)
+		vy = int(vmax * dy/distance)
+		vz = int(vmax * dz/distance)
+		vc = int(vmax * dc/distance)
+		vx2 = int(vmax * dx2/distance)
+		print("speed: x: %d, y: %d, z: %d, c: %d, x2: %d" % (vx,vy,vz,vc,vx2))
 
+		if dx != 0 : self.goPrepare(idX, x, vx)
+		if dy != 0 : self.goPrepare(idY, y, vy)
+		if dz != 0 : self.goPrepare(idZ, z, vz)
+		if dc != 0 : self.goPrepare(idC, c, vc)
+		if dx2 != 0 : self.goPrepare(idX2, x2, vx2)
+		if dx != 0 : self.goDo(idX)
+		if dy != 0 : self.goDo(idY)
+		if dz != 0 : self.goDo(idZ)
+		if dc != 0 : self.goDo(idC)
+		if dx2 != 0 :self.goDo(idX2)
+		self.oldx	= x
+		self.oldy	= y
+		self.oldz	= z
+		self.oldc	= c
+		self.oldx2	= x2
 
 	def aboutBox(self):
 		QtGui.QMessageBox.about(self,"Über dieses Programm", '''
