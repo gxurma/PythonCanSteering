@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>681</width>
+    <width>812</width>
     <height>467</height>
    </rect>
   </property>
@@ -461,7 +461,7 @@
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QPushButton" name="pushButtonJoysticMode">
+         <widget class="QPushButton" name="pushButtonHomeAll">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -469,7 +469,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Joystic mode</string>
+           <string>Home All</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -632,10 +632,10 @@
         <item row="6" column="1" colspan="2">
          <widget class="QSpinBox" name="spinBoxX2">
           <property name="minimum">
-           <number>-20000</number>
+           <number>-4600</number>
           </property>
           <property name="maximum">
-           <number>20000</number>
+           <number>7500</number>
           </property>
          </widget>
         </item>
@@ -648,7 +648,7 @@
            </sizepolicy>
           </property>
           <property name="maximum">
-           <number>10000</number>
+           <number>20000</number>
           </property>
           <property name="value">
            <number>4000</number>
@@ -684,10 +684,10 @@
         <item row="4" column="1" rowspan="2" colspan="2">
          <widget class="QSpinBox" name="spinBoxX">
           <property name="minimum">
-           <number>-20000</number>
+           <number>-16000</number>
           </property>
           <property name="maximum">
-           <number>20000</number>
+           <number>16300</number>
           </property>
          </widget>
         </item>
@@ -722,10 +722,10 @@
         <item row="1" column="4">
          <widget class="QSpinBox" name="spinBoxY">
           <property name="minimum">
-           <number>-20000</number>
+           <number>-19260</number>
           </property>
           <property name="maximum">
-           <number>20000</number>
+           <number>22080</number>
           </property>
           <property name="singleStep">
            <number>1</number>
@@ -764,7 +764,7 @@
         <item row="1" column="5">
          <widget class="QSpinBox" name="spinBoxZ">
           <property name="maximum">
-           <number>105000</number>
+           <number>104000</number>
           </property>
           <property name="value">
            <number>100000</number>
@@ -959,8 +959,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>681</width>
-     <height>22</height>
+     <width>812</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1040,8 +1040,8 @@
      <y>273</y>
     </hint>
     <hint type="destinationlabel">
-     <x>96</x>
-     <y>193</y>
+     <x>121</x>
+     <y>171</y>
     </hint>
    </hints>
   </connection>
@@ -1052,8 +1052,8 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>96</x>
-     <y>193</y>
+     <x>121</x>
+     <y>171</y>
     </hint>
     <hint type="destinationlabel">
      <x>208</x>
@@ -1068,12 +1068,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>583</x>
-     <y>219</y>
+     <x>791</x>
+     <y>204</y>
     </hint>
     <hint type="destinationlabel">
-     <x>550</x>
-     <y>303</y>
+     <x>745</x>
+     <y>298</y>
     </hint>
    </hints>
   </connection>
@@ -1084,12 +1084,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>550</x>
-     <y>303</y>
+     <x>745</x>
+     <y>298</y>
     </hint>
     <hint type="destinationlabel">
-     <x>583</x>
-     <y>219</y>
+     <x>791</x>
+     <y>204</y>
     </hint>
    </hints>
   </connection>
@@ -1100,12 +1100,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>520</x>
-     <y>219</y>
+     <x>705</x>
+     <y>204</y>
     </hint>
     <hint type="destinationlabel">
-     <x>489</x>
-     <y>303</y>
+     <x>663</x>
+     <y>298</y>
     </hint>
    </hints>
   </connection>
@@ -1116,12 +1116,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>489</x>
-     <y>303</y>
+     <x>663</x>
+     <y>298</y>
     </hint>
     <hint type="destinationlabel">
-     <x>520</x>
-     <y>219</y>
+     <x>705</x>
+     <y>204</y>
     </hint>
    </hints>
   </connection>
@@ -1212,8 +1212,8 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>528</x>
-     <y>321</y>
+     <x>791</x>
+     <y>325</y>
     </hint>
     <hint type="destinationlabel">
      <x>415</x>
@@ -1228,12 +1228,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>69</x>
-     <y>379</y>
+     <x>94</x>
+     <y>424</y>
     </hint>
     <hint type="destinationlabel">
-     <x>122</x>
-     <y>388</y>
+     <x>211</x>
+     <y>424</y>
     </hint>
    </hints>
   </connection>
@@ -1260,12 +1260,12 @@
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>530</x>
+     <x>801</x>
      <y>97</y>
     </hint>
     <hint type="destinationlabel">
-     <x>246</x>
-     <y>356</y>
+     <x>353</x>
+     <y>424</y>
     </hint>
    </hints>
   </connection>
@@ -1276,12 +1276,12 @@
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>563</x>
-     <y>117</y>
+     <x>801</x>
+     <y>97</y>
     </hint>
     <hint type="destinationlabel">
-     <x>309</x>
-     <y>381</y>
+     <x>468</x>
+     <y>424</y>
     </hint>
    </hints>
   </connection>
@@ -1292,12 +1292,12 @@
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>582</x>
-     <y>117</y>
+     <x>801</x>
+     <y>97</y>
     </hint>
     <hint type="destinationlabel">
-     <x>395</x>
-     <y>395</y>
+     <x>576</x>
+     <y>424</y>
     </hint>
    </hints>
   </connection>
@@ -1308,12 +1308,12 @@
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>594</x>
-     <y>128</y>
+     <x>801</x>
+     <y>97</y>
     </hint>
     <hint type="destinationlabel">
-     <x>482</x>
-     <y>335</y>
+     <x>683</x>
+     <y>424</y>
     </hint>
    </hints>
   </connection>
@@ -1324,12 +1324,92 @@
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>554</x>
-     <y>48</y>
+     <x>801</x>
+     <y>83</y>
     </hint>
     <hint type="destinationlabel">
-     <x>558</x>
-     <y>363</y>
+     <x>791</x>
+     <y>424</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonHomeAll</sender>
+   <signal>clicked()</signal>
+   <receiver>pushButtonHomeX</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>224</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>288</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonHomeAll</sender>
+   <signal>clicked()</signal>
+   <receiver>pushButtonHomeX2</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonHomeAll</sender>
+   <signal>clicked()</signal>
+   <receiver>pushButtonHomeY</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>240</x>
+     <y>196</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>509</x>
+     <y>251</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonHomeAll</sender>
+   <signal>clicked()</signal>
+   <receiver>pushButtonHomeZ</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>243</x>
+     <y>149</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>641</x>
+     <y>252</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonHomeAll</sender>
+   <signal>clicked()</signal>
+   <receiver>pushButtonHomeC</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>745</x>
+     <y>272</y>
     </hint>
    </hints>
   </connection>
