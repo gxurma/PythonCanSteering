@@ -114,24 +114,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.initCAN()
 		self.startCANComm()
 
-		# self.vMaxX = vMaxX
-		# self.aMaxX = aMaxX
-		# self.vMaxY = vMaxY
-		# self.aMaxY = aMaxY
-		# self.vMaxZ = vMaxZ
-		# self.aMaxZ = aMaxZ
-		# self.vMax = vMax
-		# self.aMax = aMax
-		# #self.AccOrVelChange()
-		# self.oldPosRandX = 0
-		# self.oldPosRandY = 0
-		# self.oldPosRandZ = 0
-		# self.PosX = 0
-		# self.PosY = 0
-		# self.PosZ = 100000
+		self.oldx = 0
+		self.oldy = 0
+		self.oldz = 100000
+		self.oldc = 0
+		self.oldx2 = 0
 
-		# init status machine
-#		self.Status=dict(x='Stop',y='Stop',z='Stop')
+
 
 
 		# Eigener Lese Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
@@ -535,12 +524,16 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.go(axe, targetPos, targetSpeed)
 
 
-	def go(self, axe, target, speed):
-		self.sendElmoMsgLong(axe, "PA",0,target) #pa = target set position goal to target
-		self.sendElmoMsgLong(axe, "SP",0,speed ) #sp = speed set speed
+	def goDo(self, axe):
 		self.sendElmoMsgShort(axe, "BG",0 ) #BeGin
 
+	def goPrepare(self, axe, target, speed):
+		self.sendElmoMsgLong(axe, "PA",0,target) #pa = target set position goal to target
+		self.sendElmoMsgLong(axe, "SP",0,speed ) #sp = speed set speed
 
+	def go(self, axe, target, speed):
+		self.goPrepare(axe,target,speed)
+		self.goDo(axe)
 
 	def goX0Y0(self):
 		self.go(idX, 0, 8192)
@@ -554,7 +547,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def goX20(self):
 		self.go(idX2, 7500, 4096) # go to 7500 with speed 4096
-	
+
 	def goTo(self):
 		x = self.X1set.value()
 		y = self.Yset.value()
@@ -564,13 +557,18 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		vmax = self.Vmaxset.value()
 		print( x,y,z,c,x2,vmax)
 
-		self.go(idX, x, vmax)
-		self.go(idY, y, vmax)
-		self.go(idZ, z, vmax)
-		self.go(idC, c, vmax)
-		self.go(idX2, x2, vmax)
-		
-	
+		self.goPrepare(idX, x, vmax)
+		self.goPrepare(idY, y, vmax)
+		self.goPrepare(idZ, z, vmax)
+		self.goPrepare(idC, c, vmax)
+		self.goPrepare(idX2, x2, vmax)
+		self.goDo(idX)
+		self.goDo(idY)
+		self.goDo(idZ)
+		self.goDo(idC)
+		self.goDo(idX2)
+
+
 	def aboutBox(self):
 		QtGui.QMessageBox.about(self,"Über dieses Programm", '''
 Dies ist ein Programm zum Testen und benutzen einer CNC Maschine
