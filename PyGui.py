@@ -17,6 +17,9 @@ import math
 
 import os, struct, array
 from fcntl import ioctl
+# server socket
+import socket
+
 
 #ids:
 
@@ -51,21 +54,6 @@ minimum[3] = -10000
 maximum[4] = 7500
 minimum[4] = -4600
 
-
-# sample time = 4*135 = 540µs
-vMaxX = 300000 #  *1/2^16 counts/sample time
-aMaxX = 20000
-vMaxY = 300000
-aMaxY = 20000
-vMaxZ = 250000
-aMaxZ = 20000
-vMax = vMaxZ
-aMax = aMaxZ
-
-ready = 0
-stopping = 1
-moving = 2
-
 def cmp(a,b):
 	return (a>b)-(a<b)
 
@@ -73,6 +61,7 @@ def cmp(a,b):
 def v( a, n):
     a1=(a>>(8*n))&255
     return a1
+
 
 
 class canMsg():
@@ -376,12 +365,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			time.sleep(0.2)
 
 	def analyseCANMsg(self,msg):
-		displayText = "%03x %02x %01d   :" % (msg.id, msg.flg, msg.dlc)
-		for j in range(0,msg.dlc) :
-			displayText = displayText + " %02x" % ( msg.msg[j] )
-		displayText = displayText + ":"
-		#self.addCANMsgToCANLog(displayText)
-		#print(displayText)
+		if self.pushButtonCanlog.pressed() :
+			displayText = "%03x %02x %01d   :" % (msg.id, msg.flg, msg.dlc)
+			for j in range(0,msg.dlc) :
+				displayText = displayText + " %02x" % ( msg.msg[j] )
+			displayText = displayText + ":"
+			self.plainTextEditCanLog.appendPlainText(displayText)
+		# print(displayText)
 		if (msg.msg[0] == 0x50) and (msg.msg[1] == 0x58) : # PX = ?
 			pos = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
 			if (pos & 0x80000000) :
@@ -616,7 +606,6 @@ und sollte eigentlich mit Openpnp zusammenarbeiten. ''')
 	    b=bytearray(command,"ascii")
 	    # print ("%x   %x %x %02x %02x %02x %02x %02x %02x" % (idTx+axeId, b[0],b[1], index, 0, v(value,0), v(value,1), v(value,2), v(value,3)))
 	    self.sendMsg (idTx+axeId,( b[0],b[1], index, 0, v(value,0), v(value,1), v(value,2), v(value,3)))
-
 
 	def initCAN(self):
 
