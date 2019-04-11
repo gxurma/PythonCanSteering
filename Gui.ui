@@ -183,7 +183,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -240,7 +240,7 @@
            <string>Home X2</string>
           </property>
           <property name="checkable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -256,7 +256,7 @@
            <string>Home Z</string>
           </property>
           <property name="checkable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -320,7 +320,7 @@
            <string>Home X</string>
           </property>
           <property name="checkable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -336,7 +336,7 @@
            <string>Home Y</string>
           </property>
           <property name="checkable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -412,7 +412,7 @@
            <string>Home C</string>
           </property>
           <property name="checkable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -578,10 +578,10 @@
         <item row="2" column="4">
          <widget class="QSlider" name="Yset">
           <property name="minimum">
-           <number>-19270</number>
+           <number>-19260</number>
           </property>
           <property name="maximum">
-           <number>22100</number>
+           <number>22080</number>
           </property>
           <property name="pageStep">
            <number>100</number>
@@ -607,10 +607,10 @@
         <item row="6" column="3">
          <widget class="QSlider" name="X2set">
           <property name="minimum">
-           <number>-4640</number>
+           <number>-4600</number>
           </property>
           <property name="maximum">
-           <number>7520</number>
+           <number>7500</number>
           </property>
           <property name="pageStep">
            <number>100</number>
@@ -665,7 +665,7 @@
         <item row="7" column="3">
          <widget class="QSlider" name="Vmaxset">
           <property name="maximum">
-           <number>10000</number>
+           <number>20000</number>
           </property>
           <property name="value">
            <number>4000</number>
@@ -799,10 +799,10 @@
         <item row="4" column="3" rowspan="2">
          <widget class="QSlider" name="X1set">
           <property name="minimum">
-           <number>-16380</number>
+           <number>-16000</number>
           </property>
           <property name="maximum">
-           <number>16680</number>
+           <number>16300</number>
           </property>
           <property name="pageStep">
            <number>100</number>
