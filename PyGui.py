@@ -32,23 +32,24 @@ idRx = 0x280
 maximum=[0,0,0,0,0]
 minimum=[0,0,0,0,0]
 # X: 200 count / mm
-maximum[0] = 16680
-minimum[0] = -16380
+maximum[0] = 16300
+minimum[0] = -16000
+
 # Y: 200 count / mm
-maximum[1] = 22100
-minimum[1] = -19270
+maximum[1] = 22080
+minimum[1] = -19260
 
 # Z: 2000 count /mm
 maximum[2] = 104000
 minimum[2] = 0
 
 # C: 2000 count / round
-maximum[3] = 100000
+maximum[3] = 10000
 minimum[3] = -10000
 
 # X2: 200 count / round
-maximum[4] = 7520
-minimum[4] = -4640
+maximum[4] = 7500
+minimum[4] = -4600
 
 
 # sample time = 4*135 = 540µs
@@ -134,11 +135,11 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 #													HomeX2(axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed):
 		#homing threads setup
-		self.homeXThread	= GenericThread(lambda:self.Home(idX,	1,		0,	4096,	-4096,		0,8192))
-		self.homeX2Thread	= GenericThread(lambda:self.Home(idX2,	1,	-4000, -1792,	512,		0,8192))
-		self.homeYThread	= GenericThread(lambda:self.Home(idY,	1,		0,	4096,	-4096,		0,8192))
-		self.homeZThread	= GenericThread(lambda:self.Home(idZ,	0, 100000,	4096,	-4096,	100000,8192))
-		self.homeCThread	= GenericThread(lambda:self.Home(idC,	0,		0,	0,		-4096,		0,8192))
+		self.homeXThread	= GenericThread(lambda:self.Home(idX,	1,		0,	4096,	-4096,		0,8192, self.pushButtonHomeX))
+		self.homeX2Thread	= GenericThread(lambda:self.Home(idX2,	1,	-4000, -1792,	512,		0,8192, self.pushButtonHomeX2))
+		self.homeYThread	= GenericThread(lambda:self.Home(idY,	1,		0,	4096,	-4096,		0,8192, self.pushButtonHomeY))
+		self.homeZThread	= GenericThread(lambda:self.Home(idZ,	0, 100000,	4096,	-4096,	100000,8192, self.pushButtonHomeZ))
+		self.homeCThread	= GenericThread(lambda:self.Home(idC,	0,		0,	0,		-4096,		0,8192, self.pushButtonHomeC))
 		self.pushButtonHomeX.clicked.connect(self.homeXThread.start)
 		self.pushButtonHomeX2.clicked.connect(self.homeX2Thread.start)
 		self.pushButtonHomeY.clicked.connect(self.homeYThread.start)
@@ -469,14 +470,15 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			return 4
 
 
-	def Home(self, axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed):
+	def Home(self, axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed, button):
 		if velMode :
 			self.sendElmoMsgLong(axe, "MO", 0, 0) #mo = 0 motor off
+			time.sleep(0.1)
 			self.sendElmoMsgLong(axe, "UM", 0, 2) #um = 2 (velocity mode)
-		time.sleep(0.05)
+			time.sleep(0.1)
 
 		self.sendElmoMsgLong(axe, "MO", 0, 1) #mo = 1 motor on
-		time.sleep(0.05)
+		time.sleep(0.2)
 
 		self.sendElmoMsgLong(axe, "HM", 2, homePosition)
 		self.sendElmoMsgLong(axe, "HM", 3, 3)#hm[3] = 3 Configures the homing function to be triggered by the Index.
@@ -486,6 +488,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		if jogSpeed != 0:
 			self.sendElmoMsgLong(axe, "JV", 0, jogSpeed)
 			self.sendElmoMsgShort(axe,"BG", 0)
+			time.sleep(0.2)
 
 			ts = time.time()
 			self.VelErr[self.whichAxe(axe)] = 0
@@ -498,11 +501,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					break
 
 			self.sendElmoMsgShort(axe, "ST",0 ) #STop
-		time.sleep(0.05)
+		time.sleep(0.2)
 
 		self.sendElmoMsgLong(axe, "HM", 1,1 ) #HM[1] = 1: arm homing
 		self.sendElmoMsgLong(axe, "JV", 0, searchSpeed)
 		self.sendElmoMsgShort(axe,"BG", 0)
+		time.sleep(0.2)
 
 		ts = time.time()
 		self.StatusReg[self.whichAxe(axe)] = 0xffffffff # muß sein, damit ich auf Antworten warte
@@ -513,16 +517,18 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				break
 
 		self.sendElmoMsgShort(axe, "ST", 0 ) #STop
-		time.sleep(0.05)
+		time.sleep(0.2)
 
 		if velMode :  #switch back to position mode
 			self.sendElmoMsgLong(axe, "MO",0,0) #mo = 0 motor off
+			time.sleep(0.2)
 			self.sendElmoMsgLong(axe, "UM",0,5) #um = 5 (position mode)
 			self.sendElmoMsgLong(axe, "MO",0,1) #mo = 1 motor on
-		time.sleep(0.05)
+			time.sleep(0.2)
 
 		self.go(axe, targetPos, targetSpeed)
 
+		button.setChecked(False)
 
 	def goDo(self, axe):
 		self.sendElmoMsgShort(axe, "BG",0 ) #BeGin
