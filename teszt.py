@@ -3,25 +3,25 @@ import socket
 import re
 import time
 
-# idX = 0x16
-# idY = 0x1c
-# idZ = 0x39
-# idC = 0x18
-# idX2 = 0x4e
-#
-# idTx = 0x300
-# idRx = 0x280
-#
-# def v(a,n):
-#     a1=(a>>(8*n))&255
-#     return a1
-#
-#
-# def sendElmoMsg(axeId, command, index, value):
-#     print ("%x %s %d %d" % (axeId, command, index, value))
-#     b=bytearray(command,"ascii")
-#     print ("%x %x %x %02x %02x %02x %02x %02x %02x" % (idTx+axeId, b[0],b[1], index, 0, v(value,0), v(value,1), v(value,2), v(value,3)))
-#
+idX = 0x16
+idY = 0x1c
+idZ = 0x39
+idC = 0x18
+idX2 = 0x4e
+
+idTx = 0x300
+idRx = 0x280
+
+def v(a,n):
+    a1=(a>>(8*n))&255
+    return a1
+
+
+def sendElmoMsg(axeId, command, index, value):
+    print ("%x %s %d %d" % (axeId, command, index, value))
+    b=bytearray(command,"ascii")
+    print ("%x %x %x %02x %02x %02x %02x %02x %02x" % (idTx+axeId, b[0],b[1], index, 0, v(value,0), v(value,1), v(value,2), v(value,3)))
+
 
 class Color:
    Red = '\033[91m'
@@ -45,7 +45,6 @@ def analyseData(data):
         d=data.decode().split(';')[0]  # strip the comment, if any
         if d[0]=='@':
             print(d[1:].encode())
-            # sbus.write(d[1:].encode())
         else:
             print(Color.Green+d+Color.end)
             m = re.search("(M)([-0-9.]+)", d, re.I)
@@ -53,35 +52,32 @@ def analyseData(data):
             x = re.search('(X)([-0-9.]+)', d, re.I)
             y = re.search('(Y)([-0-9.]+)', d, re.I)
             z = re.search('(Z)([-0-9.]+)', d, re.I)
+            c = re.search('(C)([-0-9.]+)', d, re.I)
             f = re.search('(feedrate)([-0-9.]+)', d, re.I)
             print(Color.Green+repr(g)+Color.end)
             if m:
                if m[2] == '400':
                   time.sleep(0.25)
-                  #sbus.write(b'drive0\r\n')
                   print(Color.Green+'Wait!!!'+Color.end)
                if m[2] == '17':
-                  # sbus.write(b'drive1\r\n')
                   print(Color.Green+'drive1'+Color.end)
                return
             if g:
                if g[2] == '28':
-                  # sbus.write(b'prog1\r\n')
                   print(Color.Green+'Homing sent to drive'+Color.end)
                   time.sleep(0.5)
                if x:
-                   xi=int(float(x[2])*200.0+.5)
-                   print(b'0_VARI1='+str(xi).encode()+b'\r\n')
-                   # sbus.write(b'0_VARI1='+str(xi).encode()+b'\r\n')
-                   # sbus.write(b'0_PROG2\r\n')
+                   sendElmoMsg(idX, "PA", 0, int(float(x[2])*200.0+.5))
+                   sendElmoMsg(idX, "BG", 0,0)
                if y:
-                   yi=int(float(y[2])*200.0+.5)
-                   print(b'1_VARI1='+str(yi).encode()+b'\r\n')
-                   # sbus.write(b'1_VARI1='+str(yi).encode()+b'\r\n')
-                   # sbus.write(b'1_PROG2\r\n')
+                   sendElmoMsg(idY, "PA", 0, int(float(y[2])*200.0+.5))
+                   sendElmoMsg(idY, "BG", 0,0)
                if z:
-                   #zi=int(float(z[2])*200.0+.5)
-                   print(Color.Green+z[0]+' '+z[1]+Color.end)
+                   sendElmoMsg(idZ, "PA", 0, int(float(z[2])*2000.0+.5))
+                   sendElmoMsg(idZ, "BG", 0,0)
+               if c:
+                   sendElmoMsg(idC, "PA", 0, int(float(c[2])*200.0+.5))
+                   sendElmoMsg(idC, "BG", 0,0)
                if f:
                    print(Color.Green+f[0]+' '+f[1]+Color.end)
 
