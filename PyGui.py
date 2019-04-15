@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # PyGui middleware
 # this standing in the middle between the machine and Openpnp
@@ -371,7 +372,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				displayText = displayText + " %02x" % ( msg.msg[j] )
 			displayText = displayText + ":"
 			self.plainTextEditCanLog.appendPlainText(displayText)
-		# print(displayText)
+			# print(displayText)
 		if (msg.msg[0] == 0x50) and (msg.msg[1] == 0x58) : # PX = ?
 			pos = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
 			if (pos & 0x80000000) :
