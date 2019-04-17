@@ -11,6 +11,7 @@ from PyQt4 import QtCore, QtGui
 import sys
 #from Gui import *
 import Gui
+#talking to kvaser
 import canlib
 import time
 #import random
@@ -20,6 +21,12 @@ import os, struct, array
 from fcntl import ioctl
 # server socket
 import socket
+#regular expressions
+import re
+
+
+HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
+PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
 
 #ids:
@@ -63,6 +70,22 @@ def v( a, n):
     a1=(a>>(8*n))&255
     return a1
 
+class Color:
+   Red = '\033[91m'
+   red = '\033[31m'
+   Green = '\033[92m'
+   green = '\033[32m'
+   Yellow = '\033[93m'
+   yellow = '\033[33m'
+   Blue = '\033[94m'
+   blue = '\033[34m'
+   Magenta = '\033[95m'
+   magenta = '\033[35m'
+   Cyan = '\033[96m'
+   cyan = '\033[36m'
+   Bold = '\033[1m'
+   Underline = '\033[4m'
+   end = '\033[0m'
 
 
 class canMsg():
@@ -133,6 +156,11 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.pushButtonHomeZ.clicked.connect(self.homeZThread.start)
 		self.pushButtonHomeC.clicked.connect(self.homeCThread.start)
 
+		self.startSocketListenerThread = GenericThread( self.startSocketListener)
+		self.startSocketListenerThread.start()
+		self.startSocketSenderThread = GenericThread( self.startSocketSender)
+
+
 		# Eigener Joystic Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
 #		self.initJoysticHW()
 #		self.joysticThread = GenericThread(self.handleJoystic)
@@ -146,7 +174,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		# self.axisSpeed = [0,0,0]
 		# self.axisOldSpeed = [0,0,0]
 		#
-		self.currentPos=[0,0,0,0,0]
+		self.currentPos=[0,0,10,0,0]
 		self.StatusReg =[0,0,0,0,0]
 		self.VelErr = [0,0,0,0,0]
 
@@ -584,9 +612,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def aboutBox(self):
 		QtGui.QMessageBox.about(self,"Über dieses Programm", '''
-Dies ist ein Programm zum Testen und benutzen einer CNC Maschine
-mit Elmo Motion Cello Controllern. Die Maschine besteht aus X, X2, Y, Z, und C Achsen,
-und sollte eigentlich mit Openpnp zusammenarbeiten. ''')
+Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern.
+Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,
+um einfachere Pick and Place Aufgaben zu lösen.
+Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
+Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source.
+(C) 2019 Martin Gyurkó
+''')
 
 	def sendMsg(self, msgid, msg):
 		print( "%03x :" %(msgid), end="")
@@ -634,6 +666,87 @@ und sollte eigentlich mit Openpnp zusammenarbeiten. ''')
 		self.sendMsg(0x00, (0x01,idY)) #Start CAN Comm
 		self.sendMsg(0x00, (0x01,idZ)) #Start CAN Comm
 		self.sendMsg(0x00, (0x01,idC)) #Start CAN Comm
+
+	def startSocketListener(self):
+		print("starting socket listener...")
+		with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+			s.bind((HOST, PORT))
+			while True:
+				s.listen()
+				conn, addr = s.accept()
+				self.conn = conn
+				self.startSocketSenderThread.start()
+				with conn:
+					print('Connected by', addr)
+					while True:
+						data = conn.recv(1024)
+						print(data)
+						if not data:
+							break
+							print("got hangup message")
+						if self.pushButtonSocketlog.isChecked():
+							self.plainTextEditSocketLog.appendPlainText(data.encode())
+						self.analyseSocketData(data)
+						time.sleep(0.25)
+						conn.sendall(b'ok\r\n')  # Hope it won't block
+						print(Color.Magenta+'wroteback ok to tcp'+Color.end)
+
+
+
+	def startSocketSender(self):
+		print("starting sender")
+		#wait for connection from listener
+		while (not self.conn):
+			None
+		#sending position data to openpnp
+		print("started sending")
+		while True:
+			time.sleep(0.25)
+			message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n\r" %(self.currentPos[0],self.currentPos[1],self.currentPos[2],self.currentPos[3])
+			print(Color.Magenta+message+Color.end)
+			self.conn.sendall(message.encode("ascii"))
+
+	def analyseSocketData(self, data):
+	    if data:
+	        d=data.decode().split(';')[0]  # strip the comment, if any
+	        if d[0]=='@':
+	            print(Color.yellow+d[1:].encode()+Color.end)
+	        else:
+	            print(Color.Green+d+Color.end)
+	            m = re.search("(M)([-0-9.]+)", d, re.I)
+	            g = re.search("(G)([-0-9.]+)", d, re.I)
+	            x = re.search('(X)([-0-9.]+)', d, re.I)
+	            y = re.search('(Y)([-0-9.]+)', d, re.I)
+	            z = re.search('(Z)([-0-9.]+)', d, re.I)
+	            c = re.search('(C)([-0-9.]+)', d, re.I)
+	            f = re.search('(F)([-0-9.]+)', d, re.I)
+	            print(Color.Green+repr(g)+Color.end)
+	            if m:
+	               if m[2] == '400':
+	                  time.sleep(0.25)
+	                  print(Color.Green+'Wait!!!'+Color.end)
+	               if m[2] == '17':
+	                  print(Color.Green+'drive1'+Color.end)
+	               return
+	            if g:
+	               if g[2] == '28':
+	                  print(Color.Green+'Homing sent to drive'+Color.end)
+	                  time.sleep(0.5)
+	               if x:
+	                   sendElmoMsgLong(idX, "PA", 0, int(float(x[2])*200.0+.5))
+	                   sendElmoMsgShort(idX, "BG", 0)
+	               if y:
+	                   sendElmoMsgLong(idY, "PA", 0, int(float(y[2])*200.0+.5))
+	                   sendElmoMsgShort(idY, "BG", 0)
+	               if z:
+	                   sendElmoMsgLong(idZ, "PA", 0, int(float(z[2])*2000.0+.5))
+	                   sendElmoMsgShort(idZ, "BG", 0)
+	               if c:
+	                   sendElmoMsgLong(idC, "PA", 0, int(float(c[2])*200.0+.5))
+	                   sendElmoMsgShort(idC, "BG", 0)
+	               if f:
+	                   print(Color.Green+f[0]+'\n\r'+f[1]+'\n\r'+f[2]+Color.end)
+
 
 class GenericThread(QtCore.QThread):
 	def __init__(self, function, *args, **kwargs):

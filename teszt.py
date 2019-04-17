@@ -44,7 +44,7 @@ def analyseData(data):
     if data:
         d=data.decode().split(';')[0]  # strip the comment, if any
         if d[0]=='@':
-            print(d[1:].encode())
+            print(Color.yellow+d[1:].encode()+Color.end)
         else:
             print(Color.Green+d+Color.end)
             m = re.search("(M)([-0-9.]+)", d, re.I)
@@ -53,7 +53,7 @@ def analyseData(data):
             y = re.search('(Y)([-0-9.]+)', d, re.I)
             z = re.search('(Z)([-0-9.]+)', d, re.I)
             c = re.search('(C)([-0-9.]+)', d, re.I)
-            f = re.search('(feedrate)([-0-9.]+)', d, re.I)
+            f = re.search('(F)([-0-9.]+)', d, re.I)
             print(Color.Green+repr(g)+Color.end)
             if m:
                if m[2] == '400':
@@ -79,40 +79,41 @@ def analyseData(data):
                    sendElmoMsg(idC, "PA", 0, int(float(c[2])*200.0+.5))
                    sendElmoMsg(idC, "BG", 0,0)
                if f:
-                   print(Color.Green+f[0]+' '+f[1]+Color.end)
+                   print(Color.Green+f[0]+'\n\r'+f[1]+'\n\r'+f[2]+Color.end)
 
 
 def main():
 
-  # sendElmoMsg(idX2, "PA",1,1000)
-  # sendElmoMsg(idX, "PA",1,-1000)
-  # sendElmoMsg(idY, "PA",1,-4096)
-  # sendElmoMsg(idZ, "PA",1,256)
-  # sendElmoMsg(idX2, "PX",1,100000)
-  # sendElmoMsg(idX2, "BG",0,-(2048-256))
-  # sendElmoMsg(idX2, "BG",0,-900)
+    print("started...")
+    # sendElmoMsg(idX2, "PA",1,1000)
+    # sendElmoMsg(idX, "PA",1,-1000)
+    # sendElmoMsg(idY, "PA",1,-4096)
+    # sendElmoMsg(idZ, "PA",1,256)
+    # sendElmoMsg(idX2, "PX",1,100000)
+    # sendElmoMsg(idX2, "BG",0,-(2048-256))
+    # sendElmoMsg(idX2, "BG",0,-900)
 
-  HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-  PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
+    HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
+    PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
-  with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-      s.bind((HOST, PORT))
-      while True:
-          s.listen()
-          conn, addr = s.accept()
-          with conn:
-              print('Connected by', addr)
-              while True:
-                  data = conn.recv(1024)
-                  print(data)
-                  if not data:
-                      break
-                      print("got hangup message")
-                  analyseData(data)
-                  time.sleep(0.5)
-                  conn.sendall(b'ok\r\n')  # Hope it won't block
-                  print(Color.Magenta+'wroteback ok to tcp'+Color.end)
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind((HOST, PORT))
+        while True:
+            s.listen()
+            conn, addr = s.accept()
+            with conn:
+                print('Connected by', addr)
+                while True:
+                    data = conn.recv(1024)
+                    print(data)
+                    if not data:
+                        break
+                        print("got hangup message")
+                    analyseData(data)
+                    time.sleep(0.5)
+                    conn.sendall(b'ok\r\n')  # Hope it won't block
+                    print(Color.Magenta+'wroteback ok to tcp'+Color.end)
 
 
 if __name__ == '__main__':  # if we're running file directly and not importing it
-  	main()  # run the main function
+    main()  # run the main function
