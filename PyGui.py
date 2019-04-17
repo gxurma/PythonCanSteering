@@ -685,7 +685,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 							break
 							print("got hangup message")
 						if self.pushButtonSocketlog.isChecked():
-							self.plainTextEditSocketLog.appendPlainText(data.encode())
+							self.plainTextEditSocketLog.appendPlainText(str(data))
 						self.analyseSocketData(data)
 						time.sleep(0.25)
 						conn.sendall(b'ok\r\n')  # Hope it won't block
@@ -701,8 +701,8 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 		#sending position data to openpnp
 		print("started sending")
 		while True:
-			time.sleep(0.25)
-			message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n\r" %(self.currentPos[0],self.currentPos[1],self.currentPos[2],self.currentPos[3])
+			time.sleep(0.5)
+			message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n\r" %(self.currentPos[0]/200.0,self.currentPos[1]/200.0,self.currentPos[2]/2000.0,self.currentPos[3]/200.0)
 			print(Color.Magenta+message+Color.end)
 			self.conn.sendall(message.encode("ascii"))
 
@@ -710,7 +710,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 	    if data:
 	        d=data.decode().split(';')[0]  # strip the comment, if any
 	        if d[0]=='@':
-	            print(Color.yellow+d[1:].encode()+Color.end)
+	            print(Color.yellow+d[1:]+Color.end)
 	        else:
 	            print(Color.Green+d+Color.end)
 	            m = re.search("(M)([-0-9.]+)", d, re.I)
@@ -733,17 +733,17 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 	                  print(Color.Green+'Homing sent to drive'+Color.end)
 	                  time.sleep(0.5)
 	               if x:
-	                   sendElmoMsgLong(idX, "PA", 0, int(float(x[2])*200.0+.5))
-	                   sendElmoMsgShort(idX, "BG", 0)
+	                   self.sendElmoMsgLong(idX, "PA", 0, int(float(x[2])*200.0+.5))
+	                   self.sendElmoMsgShort(idX, "BG", 0)
 	               if y:
-	                   sendElmoMsgLong(idY, "PA", 0, int(float(y[2])*200.0+.5))
-	                   sendElmoMsgShort(idY, "BG", 0)
+	                   self.sendElmoMsgLong(idY, "PA", 0, int(float(y[2])*200.0+.5))
+	                   self.sendElmoMsgShort(idY, "BG", 0)
 	               if z:
-	                   sendElmoMsgLong(idZ, "PA", 0, int(float(z[2])*2000.0+.5))
-	                   sendElmoMsgShort(idZ, "BG", 0)
+	                   self.sendElmoMsgLong(idZ, "PA", 0, int(float(z[2])*2000.0+.5))
+	                   self.sendElmoMsgShort(idZ, "BG", 0)
 	               if c:
-	                   sendElmoMsgLong(idC, "PA", 0, int(float(c[2])*200.0+.5))
-	                   sendElmoMsgShort(idC, "BG", 0)
+	                   self.sendElmoMsgLong(idC, "PA", 0, int(float(c[2])*200.0+.5))
+	                   self.sendElmoMsgShort(idC, "BG", 0)
 	               if f:
 	                   print(Color.Green+f[0]+'\n\r'+f[1]+'\n\r'+f[2]+Color.end)
 
