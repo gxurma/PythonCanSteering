@@ -745,7 +745,18 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 					# return
 				if g:
 					if g[2] == '28':
-						print(Color.Green+'Homing sent to drive'+Color.end)
+						print(Color.Green+'Homing all axes'+Color.end)
+						self.pushButtonHomeAll.click()
+						# self.Init(idX)
+						# self.Init(idX2)
+						# self.Init(idY)
+						# self.Init(idZ)
+						# self.Init(idC)
+						# self.homeXThread.start()
+						# self.homeX2Thread.start()
+						# self.homeYThread.start()
+						# self.homeZThread.start()
+						# self.homeCThread.start()
 						time.sleep(0.5)
 					if x:
 						self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
@@ -758,7 +769,8 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 					if f:
 						self.Vmaxset.setValue(int(float(f[2])*20000.0/1000.0+.5))
 					# do 5 dimensional movement
-					self.goTo()
+					if x or y or z or c :
+						self.goTo()
 			self.sendTcpQ.put("ok\r\n")
 			print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 
