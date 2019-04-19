@@ -23,7 +23,8 @@ from fcntl import ioctl
 import socket
 #regular expressions
 import re
-
+# sending and receiving queues
+import queue
 
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
@@ -155,6 +156,11 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.pushButtonHomeY.clicked.connect(self.homeYThread.start)
 		self.pushButtonHomeZ.clicked.connect(self.homeZThread.start)
 		self.pushButtonHomeC.clicked.connect(self.homeCThread.start)
+
+		self.sendTcpQ = queue.Queue()  #from middleware to openpnp
+		self.recTcpQ = queue.Queue()	#from openpnp to middleware
+		self.sendSerQ = queue.Queue()  #from middleware to Smothie
+		self.recSerQ = queue.Queue()	#from Smothie to middleware
 
 		self.startSocketListenerThread = GenericThread( self.startSocketListener)
 		self.startSocketListenerThread.start()
@@ -391,7 +397,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			self.sendElmoMsgShort(idY, "PX",0)# get pos
 			self.sendElmoMsgShort(idZ, "PX",0)# get pos
 			self.sendElmoMsgShort(idC, "PX",0)# get pos
-			time.sleep(0.2)
+			time.sleep(0.5)
 
 	def analyseCANMsg(self,msg):
 		if self.pushButtonCanlog.isChecked() :
@@ -672,7 +678,8 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 		with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 			s.bind((HOST, PORT))
 			while True:
-				s.listen()
+				print("started listening...")
+				s.listen() #waits here till connected
 				conn, addr = s.accept()
 				self.conn = conn
 				self.startSocketSenderThread.start()
@@ -682,13 +689,13 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 						data = conn.recv(1024)
 						print(data)
 						if not data:
-							break
 							print("got hangup message")
+							break
 						if self.pushButtonSocketlog.isChecked():
 							self.plainTextEditSocketLog.appendPlainText(str(data))
 						self.analyseSocketData(data)
 						time.sleep(0.25)
-						conn.sendall(b'ok\r\n')  # Hope it won't block
+						conn.sendall(b'ok\r\n')
 						print(Color.Magenta+'wroteback ok to tcp'+Color.end)
 
 
@@ -700,52 +707,56 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 			None
 		#sending position data to openpnp
 		print("started sending")
-		while True:
+		while True :
 			time.sleep(0.5)
-			message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n\r" %(self.currentPos[0]/200.0,self.currentPos[1]/200.0,self.currentPos[2]/2000.0,self.currentPos[3]/200.0)
-			print(Color.Magenta+message+Color.end)
-			self.conn.sendall(message.encode("ascii"))
+			if self.pushButtonReadPos.isChecked()	:
+				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0,self.currentPos[1]/200.0,self.currentPos[2]/2000.0,self.currentPos[3]/200.0)
+				print(Color.Magenta+message+Color.end)
+				self.conn.sendall(message.encode("ascii"))
 
 	def analyseSocketData(self, data):
-	    if data:
-	        d=data.decode().split(';')[0]  # strip the comment, if any
-	        if d[0]=='@':
-	            print(Color.yellow+d[1:]+Color.end)
-	        else:
-	            print(Color.Green+d+Color.end)
-	            m = re.search("(M)([-0-9.]+)", d, re.I)
-	            g = re.search("(G)([-0-9.]+)", d, re.I)
-	            x = re.search('(X)([-0-9.]+)', d, re.I)
-	            y = re.search('(Y)([-0-9.]+)', d, re.I)
-	            z = re.search('(Z)([-0-9.]+)', d, re.I)
-	            c = re.search('(C)([-0-9.]+)', d, re.I)
-	            f = re.search('(F)([-0-9.]+)', d, re.I)
-	            print(Color.Green+repr(g)+Color.end)
-	            if m:
-	               if m[2] == '400':
-	                  time.sleep(0.25)
-	                  print(Color.Green+'Wait!!!'+Color.end)
-	               if m[2] == '17':
-	                  print(Color.Green+'drive1'+Color.end)
-	               return
-	            if g:
-	               if g[2] == '28':
-	                  print(Color.Green+'Homing sent to drive'+Color.end)
-	                  time.sleep(0.5)
-	               if x:
-	                   self.sendElmoMsgLong(idX, "PA", 0, int(float(x[2])*200.0+.5))
-	                   self.sendElmoMsgShort(idX, "BG", 0)
-	               if y:
-	                   self.sendElmoMsgLong(idY, "PA", 0, int(float(y[2])*200.0+.5))
-	                   self.sendElmoMsgShort(idY, "BG", 0)
-	               if z:
-	                   self.sendElmoMsgLong(idZ, "PA", 0, int(float(z[2])*2000.0+.5))
-	                   self.sendElmoMsgShort(idZ, "BG", 0)
-	               if c:
-	                   self.sendElmoMsgLong(idC, "PA", 0, int(float(c[2])*200.0+.5))
-	                   self.sendElmoMsgShort(idC, "BG", 0)
-	               if f:
-	                   print(Color.Green+f[0]+'\n\r'+f[1]+'\n\r'+f[2]+Color.end)
+		if data:
+			if data==b'\n':  # don't process the n
+				return
+			d=data.decode().split(';')[0]  # strip the comment, if any
+			if d[0]=='@':
+				print(Color.yellow+d[1:]+Color.end)
+			else:
+				print(Color.Green+d+Color.end)
+				m = re.search("(M)([-0-9.]+)", d, re.I)
+				g = re.search("(G)([-0-9.]+)", d, re.I)
+				x = re.search('(X)([-0-9.]+)', d, re.I)
+				y = re.search('(Y)([-0-9.]+)', d, re.I)
+				z = re.search('(Z)([-0-9.]+)', d, re.I)
+				c = re.search('(C)([-0-9.]+)', d, re.I)
+				f = re.search('(F)([-0-9.]+)', d, re.I)
+				# print(Color.Green+repr(g)+Color.end)
+				if m:
+					if m[2] == '400':
+						print(Color.Green+'Wait!!!'+Color.end)
+						time.sleep(0.25)
+					if m[2] == '17':
+						print(Color.Green+'drive1'+Color.end)
+					return
+				if g:
+					if g[2] == '28':
+						print(Color.Green+'Homing sent to drive'+Color.end)
+						time.sleep(0.5)
+					if x:
+						print(Color.Green+repr(x)+Color.end)
+						self.sendElmoMsgLong(idX, "PA", 0, int(float(x[2])*200.0+.5))
+						self.sendElmoMsgShort(idX, "BG", 0)
+					if y:
+						self.sendElmoMsgLong(idY, "PA", 0, int(float(y[2])*200.0+.5))
+						self.sendElmoMsgShort(idY, "BG", 0)
+					if z:
+						self.sendElmoMsgLong(idZ, "PA", 0, int(float(z[2])*2000.0+.5))
+						self.sendElmoMsgShort(idZ, "BG", 0)
+					if c:
+						self.sendElmoMsgLong(idC, "PA", 0, int(float(c[2])*200.0+.5))
+						self.sendElmoMsgShort(idC, "BG", 0)
+					if f:
+						print(Color.Green+f[0]+'\n\r'+f[1]+'\n\r'+f[2]+Color.end)
 
 
 class GenericThread(QtCore.QThread):
