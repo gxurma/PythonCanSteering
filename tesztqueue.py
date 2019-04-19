@@ -19,3 +19,14 @@ q.put(b'valami')
 while not q.empty():
     print(type(q.get()))
 print()
+
+q = queue.LifoQueue()
+
+for i in range(5):
+    q.put(i)
+q.put('valami')
+q.put(b'valami')
+
+while not q.empty():
+    print(q.get(), end=' ')
+print()

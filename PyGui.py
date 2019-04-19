@@ -622,8 +622,8 @@ Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion
 Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,
 um einfachere Pick and Place Aufgaben zu lösen.
 Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
-Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source.
-(C) 2019 Martin Gyurkó
+Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
+(C) 2018-2019 Martin Gyurkó
 ''')
 
 	def sendMsg(self, msgid, msg):
@@ -682,21 +682,21 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 				s.listen() #waits here till connected
 				conn, addr = s.accept()
 				self.conn = conn
-				self.startSocketSenderThread.start()
+				self.startSocketSenderThread.start() #we start sending data only as soon as we have a connection to openpnp
 				with conn:
 					print('Connected by', addr)
 					while True:
 						data = conn.recv(1024)
-						print(data)
 						if not data:
 							print("got hangup message")
 							break
+						print(data)
 						if self.pushButtonSocketlog.isChecked():
 							self.plainTextEditSocketLog.appendPlainText(str(data))
 						self.analyseSocketData(data)
-						time.sleep(0.25)
-						conn.sendall(b'ok\r\n')
-						print(Color.Magenta+'wroteback ok to tcp'+Color.end)
+						# time.sleep(0.25)
+						# conn.sendall(b'ok\r\n')
+						# print(Color.Magenta+'wroteback ok to tcp'+Color.end)
 
 
 
@@ -712,7 +712,12 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 			if self.pushButtonReadPos.isChecked()	:
 				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0,self.currentPos[1]/200.0,self.currentPos[2]/2000.0,self.currentPos[3]/200.0)
 				print(Color.Magenta+message+Color.end)
+				self.sendTcpQ.put(message)
+			while not self.sendTcpQ.empty() :
+				message = self.sendTcpQ.get()
+				print(message)
 				self.conn.sendall(message.encode("ascii"))
+
 
 	def analyseSocketData(self, data):
 		if data:
@@ -728,37 +733,37 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 				x = re.search('(X)([-0-9.]+)', d, re.I)
 				y = re.search('(Y)([-0-9.]+)', d, re.I)
 				z = re.search('(Z)([-0-9.]+)', d, re.I)
-				c = re.search('(C)([-0-9.]+)', d, re.I)
+				c = re.search('(E)([-0-9.]+)', d, re.I)
 				f = re.search('(F)([-0-9.]+)', d, re.I)
 				# print(Color.Green+repr(g)+Color.end)
 				if m:
 					if m[2] == '400':
 						print(Color.Green+'Wait!!!'+Color.end)
-						time.sleep(0.25)
+						time.sleep(2) # simulate a movement delay
 					if m[2] == '17':
 						print(Color.Green+'drive1'+Color.end)
-					return
+					# return
 				if g:
 					if g[2] == '28':
 						print(Color.Green+'Homing sent to drive'+Color.end)
 						time.sleep(0.5)
 					if x:
-						print(Color.Green+repr(x)+Color.end)
-						self.sendElmoMsgLong(idX, "PA", 0, int(float(x[2])*200.0+.5))
-						self.sendElmoMsgShort(idX, "BG", 0)
+						self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
 					if y:
-						self.sendElmoMsgLong(idY, "PA", 0, int(float(y[2])*200.0+.5))
-						self.sendElmoMsgShort(idY, "BG", 0)
+						self.Yset.setValue(int(float(y[2])*200.0+.5))
 					if z:
-						self.sendElmoMsgLong(idZ, "PA", 0, int(float(z[2])*2000.0+.5))
-						self.sendElmoMsgShort(idZ, "BG", 0)
+						self.Zset.setValue(100000+int(float(z[2])*2000.0+.5))
 					if c:
-						self.sendElmoMsgLong(idC, "PA", 0, int(float(c[2])*200.0+.5))
-						self.sendElmoMsgShort(idC, "BG", 0)
+						self.Cset.setValue(int(float(c[2])*11.111111+.5))	# 4000 steps / 360°
 					if f:
-						print(Color.Green+f[0]+'\n\r'+f[1]+'\n\r'+f[2]+Color.end)
+						self.Vmaxset.setValue(int(float(f[2])*20000.0/1000.0+.5))
+					# do 5 dimensional movement
+					self.goTo()
+			self.sendTcpQ.put("ok\r\n")
+			print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 
 
+# This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
 class GenericThread(QtCore.QThread):
 	def __init__(self, function, *args, **kwargs):
 		QtCore.QThread.__init__(self)
