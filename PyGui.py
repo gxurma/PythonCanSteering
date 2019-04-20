@@ -25,6 +25,8 @@ import socket
 import re
 # sending and receiving queues
 import queue
+# to communicate to the Smothieware board via serial
+import serial
 
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
@@ -183,6 +185,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.currentPos=[0,0,10,0,0]
 		self.StatusReg =[0,0,0,0,0]
 		self.VelErr = [0,0,0,0,0]
+
+		#start and init serial communication
+		self.sbus = serial.Serial('/dev/pts/3',9600,timeout=0.100)
+		print('sbus=',self.sbus.name)
+		self.serialReaderThread = GenericThread( self.serialReader)
+		self.self.serialReaderThread.start()
 
 	def MotorAus(self, axe, isChecked):
 		self.sendElmoMsgLong(axe, "MO",0, isChecked) #mo = 0 motor off
@@ -698,8 +706,6 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 						# conn.sendall(b'ok\r\n')
 						# print(Color.Magenta+'wroteback ok to tcp'+Color.end)
 
-
-
 	def startSocketSender(self):
 		print("starting sender")
 		#wait for connection from listener
@@ -774,7 +780,20 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 			self.sendTcpQ.put("ok\r\n")
 			print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 
-
+	def serialReader(self):
+		while True:
+			data = self.sbus.readline()  # Should be ready
+			if data:
+				print(Color.Blue+repr(data)+Color.end)
+				self.recSerQ.put(data)
+	def serialSender(self) :
+		while True:
+			while not self.sendSerQ.empty() :
+				message = self.sendSerQ.get()
+				print(message)
+				self.sbus.sendall(message)
+			time.sleep(0.5)
+				
 # This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
 class GenericThread(QtCore.QThread):
 	def __init__(self, function, *args, **kwargs):
