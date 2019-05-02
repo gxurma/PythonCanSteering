@@ -152,7 +152,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.homeX2Thread	= GenericThread(lambda:self.Home(idX2,	1,	-4000, -1792,	512,		0,8192, self.pushButtonHomeX2))
 		self.homeYThread	= GenericThread(lambda:self.Home(idY,	1,		0,	4096,	-4096,		0,8192, self.pushButtonHomeY))
 		self.homeZThread	= GenericThread(lambda:self.Home(idZ,	0, 100000,	4096,	-4096,	100000,8192, self.pushButtonHomeZ))
-		self.homeCThread	= GenericThread(lambda:self.Home(idC,	0,		0,	0,		-4096,		0,8192, self.pushButtonHomeC))
+		self.homeCThread	= GenericThread(lambda:self.Home(idC,	0,		744,	0,		-4096,		0,8192, self.pushButtonHomeC))
 		self.pushButtonHomeX.clicked.connect(self.homeXThread.start)
 		self.pushButtonHomeX2.clicked.connect(self.homeX2Thread.start)
 		self.pushButtonHomeY.clicked.connect(self.homeYThread.start)
@@ -191,10 +191,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
+<<<<<<< HEAD
 		self.serialSenderThread = GenericThread( self.serialSender)
 		self.serialSenderThread.start()
 		self.serialTestThread = GenericThread( self.serialTest)
 		self.serialTestThread.start()
+=======
+>>>>>>> 41f75e9e17cde9621a5b7ca0f1e3e6be16501239
 
 	def MotorAus(self, axe, isChecked):
 		self.sendElmoMsgLong(axe, "MO",0, isChecked) #mo = 0 motor off
@@ -721,7 +724,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 		while True :
 			time.sleep(0.5)
 			if self.pushButtonReadPos.isChecked()	:
-				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0,self.currentPos[1]/200.0,self.currentPos[2]/2000.0,self.currentPos[3]/200.0)
+				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.111111111111)
 				print(Color.Magenta+message+Color.end)
 				self.sendTcpQ.put(message)
 			while not self.sendTcpQ.empty() :
@@ -778,7 +781,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 					if c:
 						self.Cset.setValue(int(float(c[2])*11.111111+.5))	# 4000 steps / 360°
 					if f:
-						self.Vmaxset.setValue(int(float(f[2])*20000.0/1000.0+.5))
+						self.Vmaxset.setValue(int(float(f[2])*10.0+.5))
 					# do 5 dimensional movement
 					if x or y or z or c :
 						self.goTo()
