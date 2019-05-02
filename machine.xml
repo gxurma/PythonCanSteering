@@ -11,11 +11,11 @@
                            <id>SO8</id>
                         </compatible-package-ids>
                         <changer-start-location units="Millimeters" x="73.58" y="-142.574" z="0.0" rotation="0.0"/>
-                        <changer-start-to-mid-speed>0.1</changer-start-to-mid-speed>
+                        <changer-start-to-mid-speed>1.0</changer-start-to-mid-speed>
                         <changer-mid-location units="Millimeters" x="73.58" y="-142.574" z="-20.0" rotation="0.0"/>
                         <changer-mid-to-mid-2-speed>0.1</changer-mid-to-mid-2-speed>
                         <changer-mid-location-2 units="Millimeters" x="83.58" y="-142.574" z="-20.0" rotation="0.0"/>
-                        <changer-mid-2-to-end-speed>0.1</changer-mid-2-to-end-speed>
+                        <changer-mid-2-to-end-speed>1.0</changer-mid-2-to-end-speed>
                         <changer-end-location units="Millimeters" x="83.58" y="-142.574" z="0.0" rotation="0.0"/>
                         <calibration angle-subdivisions="16" angle-start="-180.0" angle-stop="180.0" enabled="true" runout-compensation-algorithm="Model" offset-threshold="0.5">
                            <pipeline>
@@ -45,11 +45,11 @@
                            <id>C1206</id>
                         </compatible-package-ids>
                         <changer-start-location units="Millimeters" x="73.58" y="-112.574" z="0.0" rotation="0.0"/>
-                        <changer-start-to-mid-speed>0.1</changer-start-to-mid-speed>
+                        <changer-start-to-mid-speed>1.0</changer-start-to-mid-speed>
                         <changer-mid-location units="Millimeters" x="73.58" y="-112.574" z="-20.0" rotation="0.0"/>
                         <changer-mid-to-mid-2-speed>0.1</changer-mid-to-mid-2-speed>
                         <changer-mid-location-2 units="Millimeters" x="83.58" y="-112.574" z="-20.0" rotation="0.0"/>
-                        <changer-mid-2-to-end-speed>0.1</changer-mid-2-to-end-speed>
+                        <changer-mid-2-to-end-speed>1.0</changer-mid-2-to-end-speed>
                         <changer-end-location units="Millimeters" x="83.58" y="-112.574" z="0.0" rotation="0.0"/>
                         <calibration angle-subdivisions="6" angle-start="-180.0" angle-stop="180.0" enabled="false" runout-compensation-algorithm="Model" offset-threshold="0.5">
                            <pipeline>
@@ -100,7 +100,7 @@
                   <back-light-compensation property="BackLightCompensation" value="1"/>
                   <brightness property="Brightness" value="162"/>
                   <contrast property="Contrast" value="34"/>
-                  <exposure property="Exposure" value="32" auto="true"/>
+                  <exposure property="Exposure" value="588" auto="true"/>
                   <focus property="Focus"/>
                   <gain property="Gain"/>
                   <gamma property="Gamma"/>
@@ -1038,9 +1038,9 @@
       </part-alignments>
       <discard-location units="Millimeters" x="-77.226" y="-142.364" z="-0.0" rotation="0.0"/>
       <properties/>
-      <driver class="org.openpnp.machine.reference.driver.GcodeDriver" communications="serial" connection-keep-alive="true" units="Millimeters" max-feed-rate="15000" backlash-offset-x="-0.05" backlash-offset-y="-0.05" non-squareness-factor="0.0" backlash-feed-rate-factor="0.1" timeout-milliseconds="10000" connect-wait-time-milliseconds="3000" visual-homing-enabled="true" name="GcodeDriver">
+      <driver class="org.openpnp.machine.reference.driver.GcodeDriver" communications="tcp" connection-keep-alive="true" units="Millimeters" max-feed-rate="2000" backlash-offset-x="-0.05" backlash-offset-y="-0.05" non-squareness-factor="0.0" backlash-feed-rate-factor="0.1" timeout-milliseconds="10000" connect-wait-time-milliseconds="3000" visual-homing-enabled="false" name="GcodeDriver">
          <serial line-ending-type="LF" port-name="/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00" baud="115200" flow-control="Off" data-bits="Eight" stop-bits="One" parity="None" set-dtr="false" set-rts="false" name="SerialPortCommunications"/>
-         <tcp line-ending-type="LF" ip-address="127.0.0.1" port="23" name="TcpCommunications"/>
+         <tcp line-ending-type="LF" ip-address="127.0.0.1" port="65432" name="TcpCommunications"/>
          <homing-fiducial-location units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
          <command type="COMMAND_CONFIRM_REGEX">
             <text><![CDATA[^ok.*]]></text>
@@ -1087,7 +1087,7 @@
             <text><![CDATA[{True:M806}{False:M807}]]></text>
          </command>
          <command type="POSITION_REPORT_REGEX">
-            <text><![CDATA[<Idle,MPos:(?<X>-?\d+\.\d+),(?<Y>-?\d+\.\d+),(?<Z>-?\d+\.\d+),(?<Rotation>-?\d+\.\d+)]]></text>
+            <text><![CDATA[<Idle,MPos:(?<x>-?\d+\.\d+),(?<y>-?\d+\.\d+),(?<z>-?\d+\.\d+),(?<rotation>-?\d+\.\d+)>]]></text>
          </command>
          <sub-drivers class="java.util.ArrayList"/>
          <axes class="java.util.ArrayList">

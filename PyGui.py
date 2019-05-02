@@ -716,7 +716,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 		while True :
 			time.sleep(0.5)
 			if self.pushButtonReadPos.isChecked()	:
-				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0,self.currentPos[1]/200.0,self.currentPos[2]/2000.0,self.currentPos[3]/200.0)
+				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.111111111111)
 				print(Color.Magenta+message+Color.end)
 				self.sendTcpQ.put(message)
 			while not self.sendTcpQ.empty() :
@@ -773,7 +773,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 					if c:
 						self.Cset.setValue(int(float(c[2])*11.111111+.5))	# 4000 steps / 360°
 					if f:
-						self.Vmaxset.setValue(int(float(f[2])*20000.0/1000.0+.5))
+						self.Vmaxset.setValue(int(float(f[2])*10.0+.5))
 					# do 5 dimensional movement
 					if x or y or z or c :
 						self.goTo()
