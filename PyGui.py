@@ -191,13 +191,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
-<<<<<<< HEAD
 		self.serialSenderThread = GenericThread( self.serialSender)
 		self.serialSenderThread.start()
 		self.serialTestThread = GenericThread( self.serialTest)
 		self.serialTestThread.start()
-=======
->>>>>>> 41f75e9e17cde9621a5b7ca0f1e3e6be16501239
 
 	def MotorAus(self, axe, isChecked):
 		self.sendElmoMsgLong(axe, "MO",0, isChecked) #mo = 0 motor off
