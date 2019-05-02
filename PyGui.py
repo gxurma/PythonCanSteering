@@ -771,6 +771,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 							moving = 0
 							for i in range(0,5) :
 								moving = moving + self.MotionStatusReg[i]
+							print("moving: ", moving)
 							if not moving:
 								break
 
