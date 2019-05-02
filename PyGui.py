@@ -40,6 +40,8 @@ idZ = 0x39
 idC = 0x18
 idX2 = 0x4e
 
+axes = {idX, idY, idZ, idC, idX2}
+
 idTx = 0x300
 idRx = 0x280
 
@@ -146,7 +148,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.readPosThread.start()  # starte thread um Positionen zu lesen
 		self.pushButtonReadPos.clicked.connect(self.readPosThread.start) #jedes mal wenn angeklickt wird, starte pos Thread
 
-#													HomeX2(axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed):
+		#												HomeX(axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed):
 		#homing threads setup
 		self.homeXThread	= GenericThread(lambda:self.Home(idX,	1,		0,	4096,	-4096,		0,8192, self.pushButtonHomeX))
 		self.homeX2Thread	= GenericThread(lambda:self.Home(idX2,	1,	-4000, -1792,	512,		0,8192, self.pushButtonHomeX2))
@@ -170,12 +172,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 
 		# Eigener Joystic Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
-#		self.initJoysticHW()
-#		self.joysticThread = GenericThread(self.handleJoystic)
-#		self.joysticModeThread = GenericThread(self.joysticMode)
+		# self.initJoysticHW()
+		# self.joysticThread = GenericThread(self.handleJoystic)
+		# self.joysticModeThread = GenericThread(self.joysticMode)
 
-#		self.pushButtonJoysticMode.clicked.connect(self.joysticThread.start)
-#		self.pushButtonJoysticMode.clicked.connect(self.joysticModeThread.start)
+		# self.pushButtonJoysticMode.clicked.connect(self.joysticThread.start)
+		# self.pushButtonJoysticMode.clicked.connect(self.joysticModeThread.start)
 
 
 		# self.status = [ready,ready,ready]
@@ -184,10 +186,11 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		#
 		self.currentPos=[0,0,10,0,0]
 		self.StatusReg =[0,0,0,0,0]
+		self.MotionStatusReg =[0,0,0,0,0]
 		self.VelErr = [0,0,0,0,0]
 
 		#start and init serial communication
-		self.sbus = serial.Serial('/dev/pts/1',9600,timeout=0.100)
+		self.sbus = serial.Serial('/dev/pts/2',9600,timeout=0.100)
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
@@ -471,6 +474,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				self.StatusReg[3] = StatusReg
 			if msg.id == idRx+idX2 :
 				self.StatusReg[4] = StatusReg
+		if (msg.msg[0] == 0x4D) and (msg.msg[1] == 0x53) : # MS = Motion Status
+			motionStatus = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
+			print("Motion Status: ", motionStatus)
+			for axe in axes:
+				if msg.id == idRx+axe :
+					self.MotionStatusReg[self.whichAxe(axe)] = motionStatus
+
 
 	def readMsg(self):
 		while True:
@@ -750,7 +760,20 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 				if m:
 					if m[2] == '400':
 						print(Color.Green+'Wait!!!'+Color.end)
-						time.sleep(2) # simulate a movement delay
+						# time.sleep(2) # simulate a movement delay
+						moving = 999
+
+						ts = time.time()
+						while moving and ((time.time()-ts) < 10): # we dont want to wait endlessly
+							for axe in axes :
+								self.sendElmoMsgShort(axe,"MS", 0 ) #ask for the motion status of each axis
+							time.sleep(0.1)
+							moving = 0
+							for i in range(0,5) :
+								moving = moving + self.MotionStatusReg[i]
+							if not moving:
+								break
+
 					if m[2] == '17':
 						print(Color.Green+'drive1'+Color.end)
 					# return
@@ -796,9 +819,9 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 			while not self.sendSerQ.empty() :
 				message = self.sendSerQ.get()
 				print(Color.blue+repr(message)+Color.end)
-				self.sbus.send(message)
-				self.sbus.flush()
-			time.sleep(0.2)
+				self.sbus.write(message)
+			self.sbus.flush()
+			time.sleep(0.1)
 	def serialTest(self):
 		while True:
 			while not self.recSerQ.empty():
