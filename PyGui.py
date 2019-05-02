@@ -187,10 +187,14 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.VelErr = [0,0,0,0,0]
 
 		#start and init serial communication
-		self.sbus = serial.Serial('/dev/pts/3',9600,timeout=0.100)
+		self.sbus = serial.Serial('/dev/pts/1',9600,timeout=0.100)
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
-		self.self.serialReaderThread.start()
+		self.serialReaderThread.start()
+		self.serialSenderThread = GenericThread( self.serialSender)
+		self.serialSenderThread.start()
+		self.serialTestThread = GenericThread( self.serialTest)
+		self.serialTestThread.start()
 
 	def MotorAus(self, axe, isChecked):
 		self.sendElmoMsgLong(axe, "MO",0, isChecked) #mo = 0 motor off
@@ -599,7 +603,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 		distance = math.sqrt(dx*dx+dy*dy+dz*dz+dc*dc+dx2*dx2)
 		print("distance: ",distance)
-		if distance == 0:
+		if distance == 0: # division by zero means no good. and we dont move.
 			return
 		vx = int(vmax * dx/distance)
 		vy = int(vmax * dy/distance)
@@ -607,12 +611,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		vc = int(vmax * dc/distance)
 		vx2 = int(vmax * dx2/distance)
 		print("speed: x: %d, y: %d, z: %d, c: %d, x2: %d" % (vx,vy,vz,vc,vx2))
-
+		#preparing takes some time to send
 		if dx != 0 : self.goPrepare(idX, x, vx)
 		if dy != 0 : self.goPrepare(idY, y, vy)
 		if dz != 0 : self.goPrepare(idZ, z, vz)
 		if dc != 0 : self.goPrepare(idC, c, vc)
 		if dx2 != 0 : self.goPrepare(idX2, x2, vx2)
+		# since we do not use synchronous start of movement, we try to start like this as synchronous as possible
 		if dx != 0 : self.goDo(idX)
 		if dy != 0 : self.goDo(idY)
 		if dz != 0 : self.goDo(idZ)
@@ -727,7 +732,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 
 	def analyseSocketData(self, data):
 		if data:
-			if data==b'\n':  # don't process the n
+			if data==b'\n':  # don't process the newline
 				return
 			d=data.decode().split(';')[0]  # strip the comment, if any
 			if d[0]=='@':
@@ -790,10 +795,16 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 		while True:
 			while not self.sendSerQ.empty() :
 				message = self.sendSerQ.get()
-				print(message)
-				self.sbus.sendall(message)
-			time.sleep(0.5)
-				
+				print(Color.blue+repr(message)+Color.end)
+				self.sbus.send(message)
+				self.sbus.flush()
+			time.sleep(0.2)
+	def serialTest(self):
+		while True:
+			while not self.recSerQ.empty():
+				self.sendSerQ.put(self.recSerQ.get())
+			time.sleep(0.2)
+
 # This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
 class GenericThread(QtCore.QThread):
 	def __init__(self, function, *args, **kwargs):
