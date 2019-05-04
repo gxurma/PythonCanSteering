@@ -190,7 +190,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.VelErr = [0,0,0,0,0]
 
 		#start and init serial communication
-		self.sbus = serial.Serial('/dev/pts/2',9600,timeout=0.100)
+		self.sbus = serial.Serial('/dev/pts/3',9600,timeout=0.100)
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
@@ -792,7 +792,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 						# self.homeYThread.start()
 						# self.homeZThread.start()
 						# self.homeCThread.start()
-						time.sleep(0.5)
+						# time.sleep(0.5)
 					if x:
 						self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
 					if y:
