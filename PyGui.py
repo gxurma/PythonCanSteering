@@ -770,7 +770,8 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 							time.sleep(0.1)
 							moving = 0
 							for i in range(0,5) :
-								moving = moving + self.MotionStatusReg[i]
+								if self.MotionStatusReg[i] == 2 :
+									moving = moving + 1
 							print("moving: ", moving)
 							if not moving:
 								break
