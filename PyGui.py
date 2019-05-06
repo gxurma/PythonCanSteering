@@ -67,6 +67,10 @@ minimum[3] = -10000
 maximum[4] = 7500
 minimum[4] = -4600
 
+maxAcceleration = [10000, 10000, 100000, 100000, 10000]
+maxDeceleration = maxAcceleration
+smoothingFactor = 50
+
 def cmp(a,b):
 	return (a>b)-(a<b)
 
@@ -498,6 +502,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgLong(axe, "PX", 0, 0 ) #px = 0 set PX
 		self.sendElmoMsgLong(axe, "PY", 0, 0 ) #py = 0 set aux position
 		self.sendElmoMsgLong(axe, "UM", 0, 5 ) #um = 5 (position mode)
+		self.sendElmoMsgLong(axe, "AC",0,maxAcceleration[self.whichAxe(axe)] ) #ac = acceleration
+		self.sendElmoMsgLong(axe, "DC",0,maxDeceleration[self.whichAxe(axe)] ) #dc = deceleration
 		time.sleep(0.05)
 
 	def whichAxe(self,axe):
@@ -729,7 +735,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 		#sending position data to openpnp
 		print("started sending")
 		while True :
-			time.sleep(0.5)
+			time.sleep(0.05)
 			if self.pushButtonReadPos.isChecked()	:
 				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.111111111111)
 				print(Color.Magenta+message+Color.end)
