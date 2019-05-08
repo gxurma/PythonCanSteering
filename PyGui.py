@@ -40,11 +40,12 @@ idZ = 0x39
 idC = 0x18
 idX2 = 0x4e
 
-axes = {idX, idY, idZ, idC, idX2}
+axes = [idX, idY, idZ, idC, idX2]
 
 idTx = 0x300
 idRx = 0x280
 
+#position maximums and minimums of axes
 maximum=[0,0,0,0,0]
 minimum=[0,0,0,0,0]
 # X: 200 count / mm
@@ -67,7 +68,7 @@ minimum[3] = -10000
 maximum[4] = 7500
 minimum[4] = -4600
 
-maxAcceleration = [10000, 10000, 100000, 100000, 10000]
+maxAcceleration = 10000 # [10000, 10000, 100000, 100000, 10000]
 maxDeceleration = maxAcceleration
 smoothingFactor = 50
 
@@ -502,8 +503,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgLong(axe, "PX", 0, 0 ) #px = 0 set PX
 		self.sendElmoMsgLong(axe, "PY", 0, 0 ) #py = 0 set aux position
 		self.sendElmoMsgLong(axe, "UM", 0, 5 ) #um = 5 (position mode)
-		self.sendElmoMsgLong(axe, "AC",0,maxAcceleration[self.whichAxe(axe)] ) #ac = acceleration
-		self.sendElmoMsgLong(axe, "DC",0,maxDeceleration[self.whichAxe(axe)] ) #dc = deceleration
+		time.sleep(0.05)
+		self.sendElmoMsgLong(axe, "AC",0,maxAcceleration)#[self.whichAxe(axe)] ) #ac = acceleration
+		self.sendElmoMsgLong(axe, "DC",0,maxDeceleration)#[self.whichAxe(axe)] ) #dc = deceleration
+		self.sendElmoMsgLong(axe, "SD",0,maxAcceleration * 100 ) #sd = emergency stop deceleration
+		self.sendElmoMsgLong(axe, "SF",0,smoothingFactor ) #sf = smoothing factor in ms...
+
 		time.sleep(0.05)
 
 	def whichAxe(self,axe):
