@@ -201,8 +201,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.serialReaderThread.start()
 		self.serialSenderThread = GenericThread( self.serialSender)
 		self.serialSenderThread.start()
-		self.serialTestThread = GenericThread( self.serialTest)
-		self.serialTestThread.start()
+		# self.serialTestThread = GenericThread( self.serialTest)
+		# self.serialTestThread.start()
 
 	def MotorAus(self, axe, isChecked):
 		self.sendElmoMsgLong(axe, "MO",0, isChecked) #mo = 0 motor off
@@ -772,7 +772,6 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 				if m:
 					if m[2] == '400':
 						print(Color.Green+'Wait!!!'+Color.end)
-						self.sendSerQ.put(data)
 						# time.sleep(2) # simulate a movement delay
 						moving = 999
 
@@ -839,9 +838,9 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 			time.sleep(0.1)
 	def serialTest(self):
 		while True:
-			while not self.recSerQ.empty():
-				self.sendSerQ.put(self.recSerQ.get())
-			time.sleep(0.2)
+	# 		while not self.recSerQ.empty():
+	# 			self.sendSerQ.put(self.recSerQ.get())
+	# 		time.sleep(0.2)
 
 # This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
 class GenericThread(QtCore.QThread):
