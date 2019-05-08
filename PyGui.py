@@ -417,7 +417,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			self.sendElmoMsgShort(idY, "PX",0)# get pos
 			self.sendElmoMsgShort(idZ, "PX",0)# get pos
 			self.sendElmoMsgShort(idC, "PX",0)# get pos
-			time.sleep(0.5)
+			time.sleep(0.25)
 
 	def analyseCANMsg(self,msg):
 		if self.pushButtonCanlog.isChecked() :
@@ -758,6 +758,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 			d=data.decode().split(';')[0]  # strip the comment, if any
 			if d[0]=='@':
 				print(Color.yellow+d[1:]+Color.end)
+				self.sendSerQ.put(d[1:].encode("ascii"))
 			else:
 				print(Color.Green+d+Color.end)
 				m = re.search("(M)([-0-9.]+)", d, re.I)
@@ -771,6 +772,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 				if m:
 					if m[2] == '400':
 						print(Color.Green+'Wait!!!'+Color.end)
+						self.sendSerQ.put(data)
 						# time.sleep(2) # simulate a movement delay
 						moving = 999
 
@@ -810,7 +812,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 					if y:
 						self.Yset.setValue(int(float(y[2])*200.0+.5))
 					if z:
-						self.Zset.setValue(100000+int(float(z[2])*2000.0+.5))
+						self.Zset.setValue(100000+int(float(z[2])*2000.0+.5)) #openpnp likes to think it starts at z=0
 					if c:
 						self.Cset.setValue(int(float(c[2])*11.111111+.5))	# 4000 steps / 360°
 					if f:
