@@ -195,7 +195,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.VelErr = [0,0,0,0,0]
 
 		#start and init serial communication
-		self.sbus = serial.Serial('/dev/pts/3',9600,timeout=0.100)
+		self.sbus = serial.Serial('/dev/ttyACM0',9600,timeout=0.100)
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
@@ -740,7 +740,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 		#sending position data to openpnp
 		print("started sending")
 		while True :
-			time.sleep(0.05)
+			time.sleep(0.25)
 			if self.pushButtonReadPos.isChecked()	:
 				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.111111111111)
 				print(Color.Magenta+message+Color.end)
@@ -758,7 +758,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 			d=data.decode().split(';')[0]  # strip the comment, if any
 			if d[0]=='@':
 				print(Color.yellow+d[1:]+Color.end)
-				self.sendSerQ.put(d[1:].encode("ascii")) # sending to smoothie
+				self.sendSerQ.put(d[1:].encode("ascii")+b'\n') # sending to smoothie
 			else:
 				print(Color.Green+d+Color.end)
 				m = re.search("(M)([-0-9.]+)", d, re.I)
@@ -770,7 +770,8 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 				f = re.search('(F)([-0-9.]+)', d, re.I)
 				# print(Color.Green+repr(g)+Color.end)
 				if m:
-					if m[2] == '400':
+					m = int(m[2])                  # get the number
+					if m == 400 :
 						print(Color.Green+'Wait!!!'+Color.end)
 						# time.sleep(2) # simulate a movement delay
 						moving = 999
@@ -779,7 +780,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 						while moving and ((time.time()-ts) < 10): # we dont want to wait endlessly
 							for axe in axes :
 								self.sendElmoMsgShort(axe,"MS", 0 ) #ask for the motion status of each axis
-							time.sleep(0.1)
+							time.sleep(0.1) # wait for processing of request
 							moving = 0
 							for i in range(0,5) :
 								if self.MotionStatusReg[i] == 2 :
@@ -788,8 +789,9 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 							if not moving:
 								break
 
-					if m[2] == '17':
-						print(Color.Green+'drive1'+Color.end)
+					if m >= 800 :
+						print(Color.Green+'m'+Color.end , m)
+						self.sendSerQ.put(d.encode("ascii")+b'\n') 
 					# return
 				if g:
 					if g[2] == '28':
