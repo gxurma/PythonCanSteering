@@ -758,7 +758,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 			d=data.decode().split(';')[0]  # strip the comment, if any
 			if d[0]=='@':
 				print(Color.yellow+d[1:]+Color.end)
-				self.sendSerQ.put(d[1:].encode("ascii"))
+				self.sendSerQ.put(d[1:].encode("ascii")) # sending to smoothie
 			else:
 				print(Color.Green+d+Color.end)
 				m = re.search("(M)([-0-9.]+)", d, re.I)
@@ -836,8 +836,8 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 				self.sbus.write(message)
 			self.sbus.flush()
 			time.sleep(0.1)
-	def serialTest(self):
-		while True:
+	# def serialTest(self):
+	# 	while True:
 	# 		while not self.recSerQ.empty():
 	# 			self.sendSerQ.put(self.recSerQ.get())
 	# 		time.sleep(0.2)
