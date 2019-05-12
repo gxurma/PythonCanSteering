@@ -68,9 +68,9 @@ minimum[3] = -10000
 maximum[4] = 7500
 minimum[4] = -4600
 
-maxAcceleration = 10000 # [10000, 10000, 100000, 100000, 10000]
+maxAcceleration = 200000 # [10000, 10000, 100000, 100000, 10000]
 maxDeceleration = maxAcceleration
-smoothingFactor = 50
+smoothingFactor = 20
 
 def cmp(a,b):
 	return (a>b)-(a<b)
@@ -506,7 +506,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		time.sleep(0.05)
 		self.sendElmoMsgLong(axe, "AC",0,maxAcceleration)#[self.whichAxe(axe)] ) #ac = acceleration
 		self.sendElmoMsgLong(axe, "DC",0,maxDeceleration)#[self.whichAxe(axe)] ) #dc = deceleration
-		self.sendElmoMsgLong(axe, "SD",0,maxAcceleration * 100 ) #sd = emergency stop deceleration
+		self.sendElmoMsgLong(axe, "SD",0,maxAcceleration * 10 ) #sd = emergency stop deceleration
 		self.sendElmoMsgLong(axe, "SF",0,smoothingFactor ) #sf = smoothing factor in ms...
 
 		time.sleep(0.05)
@@ -794,7 +794,8 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 						self.sendSerQ.put(d.encode("ascii")+b'\n') 
 					# return
 				if g:
-					if g[2] == '28':
+					g = int(g[2])
+					if g == 28:
 						print(Color.Green+'Homing all axes'+Color.end)
 						self.pushButtonHomeAll.click()
 						# self.Init(idX)
@@ -808,19 +809,20 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 						# self.homeZThread.start()
 						# self.homeCThread.start()
 						# time.sleep(0.5)
-					if x:
-						self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
-					if y:
-						self.Yset.setValue(int(float(y[2])*200.0+.5))
-					if z:
-						self.Zset.setValue(100000+int(float(z[2])*2000.0+.5)) #openpnp likes to think it starts at z=0
-					if c:
-						self.Cset.setValue(int(float(c[2])*11.111111+.5))	# 4000 steps / 360°
-					if f:
-						self.Vmaxset.setValue(int(float(f[2])*10.0+.5))
-					# do 5 dimensional movement
-					if x or y or z or c :
-						self.goTo()
+					if (g == 0) or (g == 1) :
+						if x:
+							self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
+						if y:
+							self.Yset.setValue(int(float(y[2])*200.0+.5))
+						if z:
+							self.Zset.setValue(100000+int(float(z[2])*2000.0+.5)) #openpnp likes to think it starts at z=0
+						if c:
+							self.Cset.setValue(int(float(c[2])*11.111111+.5))	# 4000 steps / 360°
+						if f:
+							self.Vmaxset.setValue(int(float(f[2])*10.0+.5))
+						# do 5 dimensional movement
+						if x or y or z or c :
+							self.goTo()
 			self.sendTcpQ.put("ok\r\n")
 			print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 
