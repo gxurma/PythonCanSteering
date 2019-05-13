@@ -68,7 +68,7 @@ minimum[3] = -10000
 maximum[4] = 7500
 minimum[4] = -4600
 
-maxAcceleration = 200000 # [10000, 10000, 100000, 100000, 10000]
+maxAcceleration = [200000, 200000, 200000, 50000, 50000]
 maxDeceleration = maxAcceleration
 smoothingFactor = 20
 
@@ -504,9 +504,9 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgLong(axe, "PY", 0, 0 ) #py = 0 set aux position
 		self.sendElmoMsgLong(axe, "UM", 0, 5 ) #um = 5 (position mode)
 		time.sleep(0.05)
-		self.sendElmoMsgLong(axe, "AC",0,maxAcceleration)#[self.whichAxe(axe)] ) #ac = acceleration
-		self.sendElmoMsgLong(axe, "DC",0,maxDeceleration)#[self.whichAxe(axe)] ) #dc = deceleration
-		self.sendElmoMsgLong(axe, "SD",0,maxAcceleration * 10 ) #sd = emergency stop deceleration
+		self.sendElmoMsgLong(axe, "AC",0,maxAcceleration[self.whichAxe(axe)] ) #ac = acceleration
+		self.sendElmoMsgLong(axe, "DC",0,maxDeceleration[self.whichAxe(axe)] ) #dc = deceleration
+		self.sendElmoMsgLong(axe, "SD",0,maxAcceleration[self.whichAxe(axe)] * 10 ) #sd = emergency stop deceleration
 		self.sendElmoMsgLong(axe, "SF",0,smoothingFactor ) #sf = smoothing factor in ms...
 
 		time.sleep(0.05)
@@ -631,6 +631,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		vz = int(vmax * dz/distance)
 		vc = int(vmax * dc/distance)
 		vx2 = int(vmax * dx2/distance)
+		if vx2 >= 12500 :
+			vx2 = 12500
 		print("speed: x: %d, y: %d, z: %d, c: %d, x2: %d" % (vx,vy,vz,vc,vx2))
 		#preparing takes some time to send
 		if dx != 0 : self.goPrepare(idX, x, vx)
@@ -791,7 +793,7 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 
 					if m >= 800 :
 						print(Color.Green+'m'+Color.end , m)
-						self.sendSerQ.put(d.encode("ascii")+b'\n') 
+						self.sendSerQ.put(d.encode("ascii")+b'\n')
 					# return
 				if g:
 					g = int(g[2])
