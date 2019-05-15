@@ -10,13 +10,13 @@
                            <id>TO232</id>
                            <id>SO8</id>
                         </compatible-package-ids>
-                        <changer-start-location units="Millimeters" x="73.58" y="-142.574" z="0.0" rotation="0.0"/>
+                        <changer-start-location units="Millimeters" x="63.58" y="-142.76" z="0.0" rotation="0.0"/>
                         <changer-start-to-mid-speed>1.0</changer-start-to-mid-speed>
-                        <changer-mid-location units="Millimeters" x="73.58" y="-142.574" z="-20.0" rotation="0.0"/>
+                        <changer-mid-location units="Millimeters" x="63.58" y="-142.76" z="-50.0" rotation="0.0"/>
                         <changer-mid-to-mid-2-speed>0.1</changer-mid-to-mid-2-speed>
-                        <changer-mid-location-2 units="Millimeters" x="83.58" y="-142.574" z="-20.0" rotation="0.0"/>
+                        <changer-mid-location-2 units="Millimeters" x="83.58" y="-142.76" z="-50.0" rotation="0.0"/>
                         <changer-mid-2-to-end-speed>1.0</changer-mid-2-to-end-speed>
-                        <changer-end-location units="Millimeters" x="83.58" y="-142.574" z="0.0" rotation="0.0"/>
+                        <changer-end-location units="Millimeters" x="83.58" y="-142.76" z="0.0" rotation="0.0"/>
                         <calibration angle-subdivisions="16" angle-start="-180.0" angle-stop="180.0" enabled="true" runout-compensation-algorithm="Model" offset-threshold="0.5">
                            <pipeline>
                               <stages>
@@ -38,19 +38,19 @@
                         <vacuum-level-part-on>0.0</vacuum-level-part-on>
                         <vacuum-level-part-off>0.0</vacuum-level-part-off>
                      </nozzle-tip>
-                     <nozzle-tip class="org.openpnp.machine.reference.ReferenceNozzleTip" id="TIP1539897197873" name="ReferenceNozzleTip" allow-incompatible-packages="false" pick-dwell-milliseconds="500" place-dwell-milliseconds="100">
+                     <nozzle-tip class="org.openpnp.machine.reference.ReferenceNozzleTip" id="TIP1539897197873" name="NT2" allow-incompatible-packages="false" pick-dwell-milliseconds="500" place-dwell-milliseconds="400">
                         <compatible-package-ids class="java.util.HashSet">
                            <id>R0603</id>
                            <id>R0805</id>
                            <id>C1206</id>
                         </compatible-package-ids>
-                        <changer-start-location units="Millimeters" x="73.58" y="-112.574" z="0.0" rotation="0.0"/>
+                        <changer-start-location units="Millimeters" x="63.58" y="-112.76" z="0.0" rotation="0.0"/>
                         <changer-start-to-mid-speed>1.0</changer-start-to-mid-speed>
-                        <changer-mid-location units="Millimeters" x="73.58" y="-112.574" z="-20.0" rotation="0.0"/>
+                        <changer-mid-location units="Millimeters" x="63.58" y="-112.76" z="-50.0" rotation="0.0"/>
                         <changer-mid-to-mid-2-speed>0.1</changer-mid-to-mid-2-speed>
-                        <changer-mid-location-2 units="Millimeters" x="83.58" y="-112.574" z="-20.0" rotation="0.0"/>
+                        <changer-mid-location-2 units="Millimeters" x="83.58" y="-112.76" z="-50.0" rotation="0.0"/>
                         <changer-mid-2-to-end-speed>1.0</changer-mid-2-to-end-speed>
-                        <changer-end-location units="Millimeters" x="83.58" y="-112.574" z="0.0" rotation="0.0"/>
+                        <changer-end-location units="Millimeters" x="83.58" y="-112.76" z="0.0" rotation="0.0"/>
                         <calibration angle-subdivisions="6" angle-start="-180.0" angle-stop="180.0" enabled="false" runout-compensation-algorithm="Model" offset-threshold="0.5">
                            <pipeline>
                               <stages>
@@ -78,18 +78,18 @@
                </nozzle>
             </nozzles>
             <actuators>
-               <actuator class="org.openpnp.machine.reference.ReferenceActuator" id="ACT1542551008657" name="TC Vac" index="0">
+               <actuator class="org.openpnp.machine.reference.ReferenceActuator" id="ACT1542551008657" name="TipChangerVac" index="0">
                   <head-offsets units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
                   <safe-z value="0.0" units="Millimeters"/>
                </actuator>
-               <actuator class="org.openpnp.machine.reference.ReferenceActuator" id="ACT1542551569640" name="Tooltip Vac" index="0">
+               <actuator class="org.openpnp.machine.reference.ReferenceActuator" id="ACT1542551569640" name="TooltipVac" index="0">
                   <head-offsets units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
                   <safe-z value="0.0" units="Millimeters"/>
                </actuator>
             </actuators>
             <cameras>
                <camera class="org.openpnp.machine.reference.camera.OpenPnpCaptureCamera" id="CAM1541183453661" name="TOP OpenPnpCaptureCamera" looking="Down" settle-time-ms="250" rotation="179.0" flip-x="false" flip-y="false" offset-x="0" offset-y="0" crop-width="0" crop-height="0" scale-width="0" scale-height="0" deinterlace="false" unique-id="UVC Camera (046d:0825) usb-0000:04:01.2-3" format-id="37" fps="20.0">
-                  <units-per-pixel units="Millimeters" x="0.064" y="0.065" z="0.0" rotation="0.0"/>
+                  <units-per-pixel units="Millimeters" x="0.0621" y="0.065" z="0.0" rotation="0.0"/>
                   <vision-provider class="org.openpnp.machine.reference.vision.OpenCvVisionProvider"/>
                   <head-offsets units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
                   <safe-z value="0.0" units="Millimeters"/>
@@ -100,7 +100,7 @@
                   <back-light-compensation property="BackLightCompensation" value="1"/>
                   <brightness property="Brightness" value="162"/>
                   <contrast property="Contrast" value="34"/>
-                  <exposure property="Exposure" value="588" auto="true"/>
+                  <exposure property="Exposure" value="671" auto="true"/>
                   <focus property="Focus"/>
                   <gain property="Gain"/>
                   <gamma property="Gamma"/>
@@ -378,11 +378,11 @@
                </stages>
             </pipeline>
          </feeder>
-         <feeder class="org.openpnp.machine.reference.feeder.ReferenceTrayFeeder" id="FDR1542475426591" name="ReferenceTrayFeeder" enabled="true" part-id="R0603-1K" retry-count="3" tray-count-x="1" tray-count-y="3" feed-count="3">
+         <feeder class="org.openpnp.machine.reference.feeder.ReferenceTrayFeeder" id="FDR1542475426591" name="ReferenceTrayFeeder" enabled="false" part-id="R0603-1K" retry-count="3" tray-count-x="1" tray-count-y="3" feed-count="3">
             <location units="Millimeters" x="77.637" y="3.273" z="-13.1" rotation="0.0"/>
             <offsets units="Millimeters" x="5.0" y="10.0" z="0.0" rotation="0.0"/>
          </feeder>
-         <feeder class="org.openpnp.machine.reference.feeder.AdvancedLoosePartFeeder" id="FDR1543919346812" name="AdvancedLoosePartFeeder" enabled="true" part-id="Atmel ATTiny 13 25 45 85" retry-count="1">
+         <feeder class="org.openpnp.machine.reference.feeder.AdvancedLoosePartFeeder" id="FDR1543919346812" name="AdvancedLoosePartFeeder" enabled="false" part-id="Atmel ATTiny 13 25 45 85" retry-count="1">
             <location units="Millimeters" x="-69.226" y="-52.364" z="-15.7" rotation="0.0"/>
             <pipeline>
                <stages>
@@ -463,7 +463,7 @@
                </stages>
             </pipeline>
          </feeder>
-         <feeder class="org.openpnp.machine.reference.feeder.ReferenceTrayFeeder" id="FDR1546686110348" name="ReferenceTrayFeeder" enabled="false" part-id="Atmel ATTiny 13 25 45 85" retry-count="3" tray-count-x="5" tray-count-y="1" feed-count="5">
+         <feeder class="org.openpnp.machine.reference.feeder.ReferenceTrayFeeder" id="FDR1546686110348" name="ReferenceTrayFeeder" enabled="true" part-id="Atmel ATTiny 13 25 45 85" retry-count="3" tray-count-x="5" tray-count-y="1" feed-count="0">
             <location units="Millimeters" x="-48.732" y="-45.447" z="-15.5" rotation="0.0"/>
             <offsets units="Millimeters" x="8.1" y="0.0" z="0.0" rotation="0.0"/>
          </feeder>
@@ -504,7 +504,7 @@
          </actuator>
       </actuators>
       <part-alignments>
-         <part-alignment class="org.openpnp.machine.reference.vision.ReferenceBottomVision" enabled="true" pre-rotate="true">
+         <part-alignment class="org.openpnp.machine.reference.vision.ReferenceBottomVision" enabled="true" pre-rotate="true" max-vision-passes="3" max-angular-offset="10.0">
             <pipeline>
                <stages>
                   <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -528,10 +528,11 @@
                   <cv-stage class="org.openpnp.vision.pipeline.stages.ImageWriteDebug" name="15" enabled="true" prefix="bv_result_" suffix=".png"/>
                </stages>
             </pipeline>
+            <max-linear-offset value="1.0" units="Millimeters"/>
             <part-settings-by-part-id class="java.util.HashMap">
                <entry>
                   <string>C0805-10uF-16v</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -559,7 +560,7 @@
                </entry>
                <entry>
                   <string>R0603-1K</string>
-                  <part-settings enabled="true">
+                  <part-settings enabled="true" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -587,7 +588,7 @@
                </entry>
                <entry>
                   <string>R0805-2k2</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -615,7 +616,7 @@
                </entry>
                <entry>
                   <string>fidrect1_pack</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -643,7 +644,7 @@
                </entry>
                <entry>
                   <string>big fid</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -671,7 +672,7 @@
                </entry>
                <entry>
                   <string>R0201-1K</string>
-                  <part-settings enabled="true">
+                  <part-settings enabled="true" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -699,7 +700,7 @@
                </entry>
                <entry>
                   <string>R0402-1K</string>
-                  <part-settings enabled="true">
+                  <part-settings enabled="true" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -727,7 +728,7 @@
                </entry>
                <entry>
                   <string>FIDUCIAL-1X2-FIDUCIAL1X2</string>
-                  <part-settings enabled="true">
+                  <part-settings enabled="true" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -755,7 +756,7 @@
                </entry>
                <entry>
                   <string>c1206-10uF</string>
-                  <part-settings enabled="true">
+                  <part-settings enabled="true" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -783,7 +784,7 @@
                </entry>
                <entry>
                   <string>R0805-1K</string>
-                  <part-settings enabled="true">
+                  <part-settings enabled="true" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -811,7 +812,7 @@
                </entry>
                <entry>
                   <string>Diode-Minimelf</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -839,7 +840,7 @@
                </entry>
                <entry>
                   <string>R0805-10k</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -867,7 +868,7 @@
                </entry>
                <entry>
                   <string>testpickup</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -895,7 +896,7 @@
                </entry>
                <entry>
                   <string>c0805-10uF-25v</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -923,7 +924,7 @@
                </entry>
                <entry>
                   <string>Atmel ATTiny 13 25 45 85</string>
-                  <part-settings enabled="true">
+                  <part-settings enabled="true" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -951,7 +952,7 @@
                </entry>
                <entry>
                   <string>fidsmall_part</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -979,7 +980,7 @@
                </entry>
                <entry>
                   <string>FIDUCIAL-HOME</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -1007,7 +1008,7 @@
                </entry>
                <entry>
                   <string>BC817</string>
-                  <part-settings enabled="false">
+                  <part-settings enabled="false" pre-rotate-usage="Default">
                      <pipeline>
                         <stages>
                            <cv-stage class="org.openpnp.vision.pipeline.stages.ImageCapture" name="0" enabled="true" settle-first="true"/>
@@ -1036,9 +1037,9 @@
             </part-settings-by-part-id>
          </part-alignment>
       </part-alignments>
-      <discard-location units="Millimeters" x="-77.226" y="-142.364" z="-0.0" rotation="0.0"/>
+      <discard-location units="Millimeters" x="-78.02" y="-142.76" z="-0.0" rotation="0.0"/>
       <properties/>
-      <driver class="org.openpnp.machine.reference.driver.GcodeDriver" communications="tcp" connection-keep-alive="true" units="Millimeters" max-feed-rate="2000" backlash-offset-x="-0.05" backlash-offset-y="-0.05" non-squareness-factor="0.0" backlash-feed-rate-factor="0.1" timeout-milliseconds="10000" connect-wait-time-milliseconds="3000" visual-homing-enabled="false" name="GcodeDriver">
+      <driver class="org.openpnp.machine.reference.driver.GcodeDriver" communications="tcp" connection-keep-alive="true" units="Millimeters" max-feed-rate="10000" backlash-offset-x="-0.05" backlash-offset-y="-0.05" non-squareness-factor="0.0" backlash-feed-rate-factor="0.1" timeout-milliseconds="10000" connect-wait-time-milliseconds="3000" visual-homing-enabled="false" name="GcodeDriver">
          <serial line-ending-type="LF" port-name="/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00" baud="115200" flow-control="Off" data-bits="Eight" stop-bits="One" parity="None" set-dtr="false" set-rts="false" name="SerialPortCommunications"/>
          <tcp line-ending-type="LF" ip-address="127.0.0.1" port="65432" name="TcpCommunications"/>
          <homing-fiducial-location units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
