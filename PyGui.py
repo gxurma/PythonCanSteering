@@ -819,7 +819,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 						if x:
 							xVal = float(x[2])
 							print("x: ",xVal)
-							if (minimumf[0] < xVal) and (xVal < maximumf[0]) :
+							if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
 								self.X1set.setValue(int(xVal*200.0))
 								self.X2set.setValue(0)
 							elif (xVal > maximumf[0]) :
