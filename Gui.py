@@ -270,7 +270,7 @@ class Ui_MainWindow(object):
 		sizePolicy.setVerticalStretch(0)
 		sizePolicy.setHeightForWidth(self.pushButtonHomeAll.sizePolicy().hasHeightForWidth())
 		self.pushButtonHomeAll.setSizePolicy(sizePolicy)
-		self.pushButtonHomeAll.setCheckable(True)
+		self.pushButtonHomeAll.setCheckable(False)
 		self.pushButtonHomeAll.setChecked(False)
 		self.pushButtonHomeAll.setDefault(False)
 		self.pushButtonHomeAll.setObjectName(_fromUtf8("pushButtonHomeAll"))
