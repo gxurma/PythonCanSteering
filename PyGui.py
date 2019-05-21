@@ -48,25 +48,37 @@ idRx = 0x280
 #position maximums and minimums of axes
 maximum=[0,0,0,0,0]
 minimum=[0,0,0,0,0]
+maximumf=[.0,.0,.0,.0,.0]
+minimumf=[.0,.0,.0,.0,.0]
 # X: 200 count / mm
 maximum[0] = 16300
 minimum[0] = -16000
+maximumf[0] = maximum[0]/200.0
+minimumf[0] = minimum[0]/200.0
 
 # Y: 200 count / mm
 maximum[1] = 22080
 minimum[1] = -19260
+maximumf[1] = maximum[1]/200.0
+minimumf[1] = minimum[1]/200.0
 
 # Z: 2000 count /mm
 maximum[2] = 104000
 minimum[2] = 0
+maximumf[2] = maximum[2]/2000.0
+minimumf[2] = minimum[2]/2000.0
 
 # C: 2000 count / round
 maximum[3] = 10000
 minimum[3] = -10000
+maximumf[3] = maximum[3]/11.111111111111111111
+minimumf[3] = minimum[3]/11.111111111111111111
 
 # X2: 200 count / round
 maximum[4] = 7500
 minimum[4] = -4600
+maximumf[4] = maximum[4]/66.66666666666666666666666
+minimumf[4] = minimum[4]/66.66666666666666666666666
 
 maxAcceleration = [200000, 200000, 200000, 50000, 50000]
 maxDeceleration = maxAcceleration
@@ -508,7 +520,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgLong(axe, "DC",0,maxDeceleration[self.whichAxe(axe)] ) #dc = deceleration
 		self.sendElmoMsgLong(axe, "SD",0,maxAcceleration[self.whichAxe(axe)] * 10 ) #sd = emergency stop deceleration
 		self.sendElmoMsgLong(axe, "SF",0,smoothingFactor ) #sf = smoothing factor in ms...
-
 		time.sleep(0.05)
 
 	def whichAxe(self,axe):
@@ -654,13 +665,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def aboutBox(self):
 		QtGui.QMessageBox.about(self,"Über dieses Programm", '''
-Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern.
-Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,
-um einfachere Pick and Place Aufgaben zu lösen.
-Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
-Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
-(C) 2018-2019 Martin Gyurkó
-''')
+		Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern.
+		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um einfachere Pick and Place Aufgaben zu lösen.
+		Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
+		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
+		(C) 2018-2019 Martin Gyurkó
+		''')
 
 	def sendMsg(self, msgid, msg):
 		print( "%03x :" %(msgid), end="")
@@ -805,15 +815,21 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 						self.Init(idZ)
 						self.Init(idC)
 						self.pushButtonHomeAll.click()
-						# self.homeXThread.start()
-						# self.homeX2Thread.start()
-						# self.homeYThread.start()
-						# self.homeZThread.start()
-						# self.homeCThread.start()
-						# time.sleep(0.5)
 					if (g == 0) or (g == 1) :
 						if x:
-							self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
+							x = float(x[2])
+							print("x: ",x)
+							if (minimumf[0] < x) and (x < maximumf[0]) :
+								self.X1set.setValue(int(x*200.0))
+								self.X2set.setValue(0)
+							elif (x > maximumf[0]) :
+								self.X1set.setValue(maximum[0])
+								self.X2set.setValue((x-maximumf[0])*66.6666666666)
+							else : #(x < minimumf[0]) :
+								self.X1set.setValue(minimum[0])
+								self.X2set.setValue((x-minimumf[0])*66.6666666666)
+
+							# self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
 						if y:
 							self.Yset.setValue(int(float(y[2])*200.0+.5))
 						if z:
@@ -842,11 +858,6 @@ Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist di
 				self.sbus.write(message)
 			self.sbus.flush()
 			time.sleep(0.1)
-	# def serialTest(self):
-	# 	while True:
-	# 		while not self.recSerQ.empty():
-	# 			self.sendSerQ.put(self.recSerQ.get())
-	# 		time.sleep(0.2)
 
 # This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
 class GenericThread(QtCore.QThread):
