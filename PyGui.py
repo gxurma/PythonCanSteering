@@ -817,17 +817,17 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 						self.pushButtonHomeAll.click()
 					if (g == 0) or (g == 1) :
 						if x:
-							x = float(x[2])
-							print("x: ",x)
-							if (minimumf[0] < x) and (x < maximumf[0]) :
-								self.X1set.setValue(int(x*200.0))
+							xVal = float(x[2])
+							print("x: ",xVal)
+							if (minimumf[0] < xVal) and (xVal < maximumf[0]) :
+								self.X1set.setValue(int(xVal*200.0))
 								self.X2set.setValue(0)
-							elif (x > maximumf[0]) :
+							elif (xVal > maximumf[0]) :
 								self.X1set.setValue(maximum[0])
-								self.X2set.setValue((x-maximumf[0])*66.6666666666)
-							else : #(x < minimumf[0]) :
+								self.X2set.setValue((xVal-maximumf[0])*66.6666666666)
+							else : #(xVal < minimumf[0]) :
 								self.X1set.setValue(minimum[0])
-								self.X2set.setValue((x-minimumf[0])*66.6666666666)
+								self.X2set.setValue((xVal-minimumf[0])*66.6666666666)
 
 							# self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
 						if y:
