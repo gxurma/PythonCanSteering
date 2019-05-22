@@ -754,7 +754,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		while True :
 			time.sleep(0.25)
 			if self.pushButtonReadPos.isChecked()	:
-				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0+self.currentPos[0]/66.66666666666, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.111111111111)
+				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0+self.currentPos[4]/66.66666666666, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.111111111111)
 				print(Color.Magenta+message+Color.end)
 				self.sendTcpQ.put(message)
 			while not self.sendTcpQ.empty() :
@@ -823,11 +823,11 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 								self.X1set.setValue(int(xVal*200.0))
 								self.X2set.setValue(0)
 							elif (xVal > maximumf[0]) :
-								self.X1set.setValue(maximum[0])
-								self.X2set.setValue((xVal-maximumf[0])*66.6666666666)
+								self.X1set.setValue((xVal-maximumf[4])*200.0)
+								self.X2set.setValue(maximum[4])
 							else : #(xVal < minimumf[0]) :
-								self.X1set.setValue(minimum[0])
-								self.X2set.setValue((xVal-minimumf[0])*66.6666666666)
+								self.X1set.setValue((xVal-minimumf[4])*200.0)
+								self.X2set.setValue(minimum[4])
 
 							# self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
 						if y:
