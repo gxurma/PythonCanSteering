@@ -207,7 +207,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.VelErr = [0,0,0,0,0]
 
 		#start and init serial communication
-		self.sbus = serial.Serial('/dev/ttyACM0',9600,timeout=0.100)
+		self.sbus = serial.Serial('/dev/ttyACM1',9600,timeout=0.100)
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
@@ -754,7 +754,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		while True :
 			time.sleep(0.25)
 			if self.pushButtonReadPos.isChecked()	:
-				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0+self.currentPos[4]/66.66666666666, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.111111111111)
+				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0+self.currentPos[4]/66.66666666666, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.388888889)
 				print(Color.Magenta+message+Color.end)
 				self.sendTcpQ.put(message)
 			while not self.sendTcpQ.empty() :
@@ -835,7 +835,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 						if z:
 							self.Zset.setValue(100000+int(float(z[2])*2000.0+.5)) #openpnp likes to think it starts at z=0
 						if c:
-							self.Cset.setValue(int(float(c[2])*11.111111+.5))	# 4000 steps / 360°
+							self.Cset.setValue(int(float(c[2])*11.388888889+.5))	# 4100 steps / 360°
 						if f:
 							self.Vmaxset.setValue(int(float(f[2])*10.0+.5))
 						# do 5 dimensional movement
