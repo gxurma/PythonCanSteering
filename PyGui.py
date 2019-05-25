@@ -71,8 +71,8 @@ minimumf[2] = minimum[2]/2000.0
 # C: 2000 count / round
 maximum[3] = 10000
 minimum[3] = -10000
-maximumf[3] = maximum[3]/11.111111111111111111
-minimumf[3] = minimum[3]/11.111111111111111111
+maximumf[3] = maximum[3]/11.388888889
+minimumf[3] = minimum[3]/11.388888889
 
 # X2: 200 count / round
 maximum[4] = 7500
