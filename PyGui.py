@@ -782,7 +782,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				f = re.search('(F)([-0-9.]+)', d, re.I)
 				# print(Color.Green+repr(g)+Color.end)
 				if m:
-					m = int(m[2])                  # get the number
+					m = float(m[2])                  # get the number
 					if m == 400 :
 						print(Color.Green+'Wait!!!'+Color.end)
 						# time.sleep(2) # simulate a movement delay
@@ -799,14 +799,15 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 									moving = moving + 1
 							print("moving: ", moving)
 							if not moving:
+								self.sendTcpQ.put("ok\r\n")
+								print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 								break
-
-					if m >= 800 :
+					else :
 						print(Color.Green+'m'+Color.end , m)
 						self.sendSerQ.put(d.encode("ascii")+b'\n')
 					# return
 				if g:
-					g = int(g[2])
+					g = float(g[2])
 					if g == 28:
 						print(Color.Green+'Init and Homing all axes'+Color.end)
 						self.Init(idX)
@@ -831,25 +832,26 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 							# self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
 						if y:
-							self.Yset.setValue(int(float(y[2])*200.0+.5))
+							self.Yset.setValue(int(float(y[2])*200.0))
 						if z:
-							self.Zset.setValue(100000+int(float(z[2])*2000.0+.5)) #openpnp likes to think it starts at z=0
+							self.Zset.setValue(100000+int(float(z[2])*2000.0)) #openpnp likes to think it starts at z=0
 						if c:
-							self.Cset.setValue(int(float(c[2])*11.388888889+.5))	# 4100 steps / 360°
+							self.Cset.setValue(int(float(c[2])*11.388888889))	# 4100 steps / 360°
 						if f:
-							self.Vmaxset.setValue(int(float(f[2])*10.0+.5))
+							self.Vmaxset.setValue(int(float(f[2])*10.0))
 						# do 5 dimensional movement
 						if x or y or z or c :
 							self.goTo()
-			self.sendTcpQ.put("ok\r\n")
-			print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
+					self.sendTcpQ.put("ok\r\n")
+					print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 
 	def serialReader(self):
 		while True:
 			data = self.sbus.readline()  # Should be ready
 			if data:
 				print(Color.Blue+repr(data)+Color.end)
-				self.recSerQ.put(data)
+				self.sendTcpQ.put(data.decode('ascii'))
+			time.sleep(0.1)
 	def serialSender(self) :
 		while True:
 			while not self.sendSerQ.empty() :
