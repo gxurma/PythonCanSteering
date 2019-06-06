@@ -575,6 +575,13 @@
         <string>Pos Testing</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>X2</string>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="4">
          <widget class="QSlider" name="Yset">
           <property name="minimum">
@@ -594,13 +601,6 @@
           </property>
           <property name="tickInterval">
            <number>1000</number>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>X2</string>
           </property>
          </widget>
         </item>
@@ -648,7 +648,7 @@
            </sizepolicy>
           </property>
           <property name="maximum">
-           <number>100000</number>
+           <number>200000</number>
           </property>
           <property name="value">
            <number>20000</number>
@@ -659,31 +659,6 @@
          <widget class="QLabel" name="label_11">
           <property name="text">
            <string>Z</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="3">
-         <widget class="QSlider" name="Vmaxset">
-          <property name="maximum">
-           <number>100000</number>
-          </property>
-          <property name="pageStep">
-           <number>100</number>
-          </property>
-          <property name="value">
-           <number>20000</number>
-          </property>
-          <property name="sliderPosition">
-           <number>20000</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksAbove</enum>
-          </property>
-          <property name="tickInterval">
-           <number>1000</number>
           </property>
          </widget>
         </item>
@@ -713,11 +688,11 @@
         </item>
         <item row="0" column="2">
          <widget class="QSpinBox" name="spinBoxC">
-          <property name="maximum">
-           <number>4100</number>
-          </property>
           <property name="minimum">
            <number>-4100</number>
+          </property>
+          <property name="maximum">
+           <number>4100</number>
           </property>
          </widget>
         </item>
@@ -783,7 +758,7 @@
         <item row="0" column="3" rowspan="3">
          <widget class="QDial" name="Cset">
           <property name="minimum">
-          <number>-4100</number>
+           <number>-4100</number>
           </property>
           <property name="maximum">
            <number>4100</number>
@@ -840,6 +815,31 @@
           </property>
           <property name="text">
            <string>Go</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="3">
+         <widget class="QSlider" name="Vmaxset">
+          <property name="maximum">
+           <number>200000</number>
+          </property>
+          <property name="pageStep">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>20000</number>
+          </property>
+          <property name="sliderPosition">
+           <number>20000</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1000</number>
           </property>
          </widget>
         </item>
@@ -962,6 +962,43 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Setting</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButtonJoysticMode">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>111</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Joystic mode</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonbCNCMode">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>10</y>
+          <width>111</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>bCNC mode</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -972,7 +1009,7 @@
      <x>0</x>
      <y>0</y>
      <width>812</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
