@@ -207,7 +207,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.VelErr = [0,0,0,0,0]
 
 		#start and init serial communication
-		self.sbus = serial.Serial('/dev/ttyACM1',9600,timeout=0.100)
+		self.sbus = serial.Serial('/dev/ttyACM0',9600,timeout=0.100)
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
@@ -752,7 +752,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		#sending position data to openpnp
 		print("started sending")
 		while True :
-			time.sleep(0.25)
+			time.sleep(0.1)
 			if self.pushButtonReadPos.isChecked()	:
 				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0+self.currentPos[4]/66.66666666666, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.388888889)
 				print(Color.Magenta+message+Color.end)
