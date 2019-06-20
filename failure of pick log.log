@@ -2875,3 +2875,253 @@
 2019-06-20 19:18:22.710 ReferencePnpJobProcessor DEBUG: saveJobAndConfig(false)
 2019-06-20 19:18:22.710 ReferencePnpJobProcessor DEBUG: Auto saving job.
 
+
+
+------------------------------------------ new log -------------------
+2019-06-20 20:04:08.480 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M806, 10000) => [ok]
+2019-06-20 20:04:08.480 ReferencePnpJobProcessor DEBUG: Fed id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1.
+2019-06-20 20:04:08.480 ReferenceHead DEBUG: H1.moveToSafeZ(1.0)
+2019-06-20 20:04:08.480 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:08.481 ReferenceCamera DEBUG: TOP OpenPnpCaptureCamera.moveToSafeZ(1.0)
+2019-06-20 20:04:08.481 ReferenceActuator DEBUG: TipChangerVac.moveToSafeZ(1.0)
+2019-06-20 20:04:08.481 ReferenceActuator DEBUG: TooltipVac.moveToSafeZ(1.0)
+2019-06-20 20:04:08.481 ReferenceNozzle DEBUG: N1.moveTo((-130.670000, -48.795000, 0.000000, 0.000000 mm), 1.0)
+2019-06-20 20:04:08.481 GcodeDriver DEBUG: sendCommand(G0 X-133.0950 Y-1.4650  E0.0000 F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:08.580 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0 X-133.0950 Y-1.4650  E0.0000 F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:08.580 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:09.382 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:09.382 ReferenceNozzle DEBUG: N1.moveTo((-130.670000, -48.795000, -42.998000, 0.000000 mm), 1.0)
+2019-06-20 20:04:09.383 GcodeDriver DEBUG: sendCommand(G0   Z-42.9980  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:09.483 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z-42.9980  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:09.487 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:10.889 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:10.889 ReferenceNozzle DEBUG: N1.pick()
+2019-06-20 20:04:10.889 GcodeDriver DEBUG: sendCommand(M800, 10000)...
+2019-06-20 20:04:10.989 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M800, 10000) => [ok]
+2019-06-20 20:04:11.291 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:11.291 GcodeDriver DEBUG: sendCommand(G0   Z0.0000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:11.391 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z0.0000  F20000 ; Send standard Gcode move, 10000) => [ok, ok]
+2019-06-20 20:04:11.391 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:12.796 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:12.798 ReferencePnpJobProcessor DEBUG: Pick id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1
+2019-06-20 20:04:12.799 ReferenceActuator DEBUG: Feeder1.actuate(true)
+2019-06-20 20:04:12.801 GcodeDriver DEBUG: sendCommand(M806, 10000)...
+2019-06-20 20:04:12.997 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M806, 10000) => [ok]
+2019-06-20 20:04:12.998 ReferenceBottomVision DEBUG: R_0402_1005Metric-1k.canHandle(false) => {}
+2019-06-20 20:04:12.999 ReferencePnpJobProcessor DEBUG: Not aligning id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) as no compatible enabled aligners defined
+2019-06-20 20:04:12.999 ReferenceHead DEBUG: H1.moveToSafeZ(1.0)
+2019-06-20 20:04:12.999 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:12.999 ReferenceCamera DEBUG: TOP OpenPnpCaptureCamera.moveToSafeZ(1.0)
+2019-06-20 20:04:13.000 ReferenceActuator DEBUG: TipChangerVac.moveToSafeZ(1.0)
+2019-06-20 20:04:13.000 ReferenceActuator DEBUG: TooltipVac.moveToSafeZ(1.0)
+2019-06-20 20:04:13.000 ReferenceNozzle DEBUG: N1.moveTo((-95.074350, 7.781469, 0.000000, 0.251554 mm), 1.0)
+2019-06-20 20:04:13.000 GcodeDriver DEBUG: sendCommand(G0 X-97.4994 Y55.1115  E0.2516 F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:13.099 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0 X-97.4994 Y55.1115  E0.2516 F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:13.099 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:13.800 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:13.801 ReferenceNozzle DEBUG: N1.moveTo((-95.074350, 7.781469, -39.600000, 0.251554 mm), 1.0)
+2019-06-20 20:04:13.801 GcodeDriver DEBUG: sendCommand(G0   Z-39.6000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:13.901 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z-39.6000  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:13.901 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:15.305 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:15.306 ReferenceNozzle DEBUG: N1.place()
+2019-06-20 20:04:15.306 GcodeDriver DEBUG: sendCommand(M801, 10000)...
+2019-06-20 20:04:15.407 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M801, 10000) => [ok]
+2019-06-20 20:04:15.707 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:15.707 GcodeDriver DEBUG: sendCommand(G0   Z0.0000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:15.807 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z0.0000  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:15.807 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:17.212 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:17.213 ReferencePnpJobProcessor DEBUG: Place id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) with N1
+2019-06-20 20:04:17.213 ReferencePnpJobProcessor DEBUG: saveJobAndConfig(false)
+2019-06-20 20:04:17.213 ReferencePnpJobProcessor DEBUG: Auto saving job.
+2019-06-20 20:04:17.297 ReferencePnpJobProcessor DEBUG: Planner complete in 0ms: [R469]
+2019-06-20 20:04:17.297 ReferencePnpJobProcessor DEBUG: Planned placements [N1 N1 -> R469]
+2019-06-20 20:04:17.297 ReferencePnpJobProcessor DEBUG: No nozzle change needed for nozzle N1 N1
+2019-06-20 20:04:17.297 ReferencePnpJobProcessor DEBUG: Attempt Feed id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1.
+2019-06-20 20:04:17.297 ReferenceActuator DEBUG: Feeder1.actuate(true)
+2019-06-20 20:04:17.297 GcodeDriver DEBUG: sendCommand(M806, 10000)...
+2019-06-20 20:04:17.412 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M806, 10000) => [ok]
+2019-06-20 20:04:17.412 ReferencePnpJobProcessor DEBUG: Fed id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1.
+2019-06-20 20:04:17.412 ReferenceHead DEBUG: H1.moveToSafeZ(1.0)
+2019-06-20 20:04:17.412 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:17.413 ReferenceCamera DEBUG: TOP OpenPnpCaptureCamera.moveToSafeZ(1.0)
+2019-06-20 20:04:17.413 ReferenceActuator DEBUG: TipChangerVac.moveToSafeZ(1.0)
+2019-06-20 20:04:17.413 ReferenceActuator DEBUG: TooltipVac.moveToSafeZ(1.0)
+2019-06-20 20:04:17.413 ReferenceNozzle DEBUG: N1.moveTo((-130.670000, -48.795000, 0.000000, 0.000000 mm), 1.0)
+2019-06-20 20:04:17.413 GcodeDriver DEBUG: sendCommand(G0 X-133.0950 Y-1.4650  E0.0000 F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:17.512 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0 X-133.0950 Y-1.4650  E0.0000 F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:17.512 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:18.219 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:18.219 ReferenceNozzle DEBUG: N1.moveTo((-130.670000, -48.795000, -42.998000, 0.000000 mm), 1.0)
+2019-06-20 20:04:18.219 GcodeDriver DEBUG: sendCommand(G0   Z-42.9980  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:18.319 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z-42.9980  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:18.320 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:19.928 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:19.929 ReferenceNozzle DEBUG: N1.pick()
+2019-06-20 20:04:19.929 GcodeDriver DEBUG: sendCommand(M800, 10000)...
+2019-06-20 20:04:20.029 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M800, 10000) => [ok]
+2019-06-20 20:04:20.329 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:20.330 GcodeDriver DEBUG: sendCommand(G0   Z0.0000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:20.430 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z0.0000  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:20.431 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:21.852 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:21.853 ReferencePnpJobProcessor DEBUG: Pick id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1
+2019-06-20 20:04:21.853 ReferenceActuator DEBUG: Feeder1.actuate(true)
+2019-06-20 20:04:21.853 GcodeDriver DEBUG: sendCommand(M806, 10000)...
+2019-06-20 20:04:21.938 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M806, 10000) => [ok]
+2019-06-20 20:04:21.938 ReferenceBottomVision DEBUG: R_0402_1005Metric-1k.canHandle(false) => {}
+2019-06-20 20:04:21.938 ReferencePnpJobProcessor DEBUG: Not aligning id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) as no compatible enabled aligners defined
+2019-06-20 20:04:21.939 ReferenceHead DEBUG: H1.moveToSafeZ(1.0)
+2019-06-20 20:04:21.939 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:21.939 ReferenceCamera DEBUG: TOP OpenPnpCaptureCamera.moveToSafeZ(1.0)
+2019-06-20 20:04:21.939 ReferenceActuator DEBUG: TipChangerVac.moveToSafeZ(1.0)
+2019-06-20 20:04:21.940 ReferenceActuator DEBUG: TooltipVac.moveToSafeZ(1.0)
+2019-06-20 20:04:21.940 ReferenceNozzle DEBUG: N1.moveTo((95.098991, 13.183531, 0.000000, 0.251554 mm), 1.0)
+2019-06-20 20:04:21.940 GcodeDriver DEBUG: sendCommand(G0 X92.6740 Y60.5135  E0.2516 F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:22.138 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0 X92.6740 Y60.5135  E0.2516 F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:22.139 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:23.545 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:23.546 ReferenceNozzle DEBUG: N1.moveTo((95.098991, 13.183531, -39.600000, 0.251554 mm), 1.0)
+2019-06-20 20:04:23.546 GcodeDriver DEBUG: sendCommand(G0   Z-39.6000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:23.647 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z-39.6000  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:23.649 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:25.052 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:25.052 ReferenceNozzle DEBUG: N1.place()
+2019-06-20 20:04:25.052 GcodeDriver DEBUG: sendCommand(M801, 10000)...
+2019-06-20 20:04:25.253 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M801, 10000) => [ok]
+2019-06-20 20:04:25.553 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:25.554 GcodeDriver DEBUG: sendCommand(G0   Z0.0000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:25.653 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z0.0000  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:25.654 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:27.057 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:27.058 ReferencePnpJobProcessor DEBUG: Place id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) with N1
+2019-06-20 20:04:27.058 ReferencePnpJobProcessor DEBUG: saveJobAndConfig(false)
+2019-06-20 20:04:27.058 ReferencePnpJobProcessor DEBUG: Auto saving job.
+2019-06-20 20:04:27.106 ReferencePnpJobProcessor DEBUG: Planner complete in 0ms: [R470]
+2019-06-20 20:04:27.108 ReferencePnpJobProcessor DEBUG: Planned placements [N1 N1 -> R470]
+2019-06-20 20:04:27.108 ReferencePnpJobProcessor DEBUG: No nozzle change needed for nozzle N1 N1
+2019-06-20 20:04:27.108 ReferencePnpJobProcessor DEBUG: Attempt Feed id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1.
+2019-06-20 20:04:27.108 ReferenceActuator DEBUG: Feeder1.actuate(true)
+2019-06-20 20:04:27.108 GcodeDriver DEBUG: sendCommand(M806, 10000)...
+2019-06-20 20:04:27.157 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M806, 10000) => [ok]
+2019-06-20 20:04:27.158 ReferencePnpJobProcessor DEBUG: Fed id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1.
+2019-06-20 20:04:27.158 ReferenceHead DEBUG: H1.moveToSafeZ(1.0)
+2019-06-20 20:04:27.158 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:27.158 ReferenceCamera DEBUG: TOP OpenPnpCaptureCamera.moveToSafeZ(1.0)
+2019-06-20 20:04:27.158 ReferenceActuator DEBUG: TipChangerVac.moveToSafeZ(1.0)
+2019-06-20 20:04:27.158 ReferenceActuator DEBUG: TooltipVac.moveToSafeZ(1.0)
+2019-06-20 20:04:27.159 ReferenceNozzle DEBUG: N1.moveTo((-130.670000, -48.795000, 0.000000, 0.000000 mm), 1.0)
+2019-06-20 20:04:27.159 GcodeDriver DEBUG: sendCommand(G0 X-133.0950 Y-1.4650  E0.0000 F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:27.358 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0 X-133.0950 Y-1.4650  E0.0000 F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:27.358 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:28.764 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:28.764 ReferenceNozzle DEBUG: N1.moveTo((-130.670000, -48.795000, -42.998000, 0.000000 mm), 1.0)
+2019-06-20 20:04:28.765 GcodeDriver DEBUG: sendCommand(G0   Z-42.9980  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:28.864 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z-42.9980  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:28.865 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:30.470 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:30.471 ReferenceNozzle DEBUG: N1.pick()
+2019-06-20 20:04:30.471 GcodeDriver DEBUG: sendCommand(M800, 10000)...
+2019-06-20 20:04:30.671 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M800, 10000) => [ok]
+2019-06-20 20:04:30.972 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:30.973 GcodeDriver DEBUG: sendCommand(G0   Z0.0000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:31.075 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z0.0000  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:31.075 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:32.681 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:32.681 ReferencePnpJobProcessor DEBUG: Pick id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1
+2019-06-20 20:04:32.681 ReferenceActuator DEBUG: Feeder1.actuate(true)
+2019-06-20 20:04:32.681 GcodeDriver DEBUG: sendCommand(M806, 10000)...
+2019-06-20 20:04:32.792 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M806, 10000) => [ok]
+2019-06-20 20:04:32.792 ReferenceBottomVision DEBUG: R_0402_1005Metric-1k.canHandle(false) => {}
+2019-06-20 20:04:32.792 ReferencePnpJobProcessor DEBUG: Not aligning id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) as no compatible enabled aligners defined
+2019-06-20 20:04:32.793 ReferenceHead DEBUG: H1.moveToSafeZ(1.0)
+2019-06-20 20:04:32.793 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:32.793 ReferenceCamera DEBUG: TOP OpenPnpCaptureCamera.moveToSafeZ(1.0)
+2019-06-20 20:04:32.793 ReferenceActuator DEBUG: TipChangerVac.moveToSafeZ(1.0)
+2019-06-20 20:04:32.793 ReferenceActuator DEBUG: TooltipVac.moveToSafeZ(1.0)
+2019-06-20 20:04:32.794 ReferenceNozzle DEBUG: N1.moveTo((90.093982, 13.173529, 0.000000, 0.251554 mm), 1.0)
+2019-06-20 20:04:32.794 GcodeDriver DEBUG: sendCommand(G0 X87.6690 Y60.5035  E0.2516 F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:32.886 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0 X87.6690 Y60.5035  E0.2516 F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:32.887 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:32.987 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:32.988 ReferenceNozzle DEBUG: N1.moveTo((90.093982, 13.173529, -39.600000, 0.251554 mm), 1.0)
+2019-06-20 20:04:32.988 GcodeDriver DEBUG: sendCommand(G0   Z-39.6000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:34.393 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z-39.6000  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:34.393 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:34.393 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:34.393 ReferenceNozzle DEBUG: N1.place()
+2019-06-20 20:04:34.393 GcodeDriver DEBUG: sendCommand(M801, 10000)...
+2019-06-20 20:04:35.797 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M801, 10000) => [ok]
+2019-06-20 20:04:36.097 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:36.098 GcodeDriver DEBUG: sendCommand(G0   Z0.0000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:36.099 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z0.0000  F20000 ; Send standard Gcode move, 10000) => [ok, ok, ok]
+2019-06-20 20:04:36.099 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:36.201 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:36.202 ReferencePnpJobProcessor DEBUG: Place id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) with N1
+2019-06-20 20:04:36.207 ReferencePnpJobProcessor DEBUG: saveJobAndConfig(false)
+2019-06-20 20:04:36.207 ReferencePnpJobProcessor DEBUG: Auto saving job.
+2019-06-20 20:04:36.266 ReferencePnpJobProcessor DEBUG: Planner complete in 0ms: [R471]
+2019-06-20 20:04:36.267 ReferencePnpJobProcessor DEBUG: Planned placements [N1 N1 -> R471]
+2019-06-20 20:04:36.267 ReferencePnpJobProcessor DEBUG: No nozzle change needed for nozzle N1 N1
+2019-06-20 20:04:36.267 ReferencePnpJobProcessor DEBUG: Attempt Feed id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1.
+2019-06-20 20:04:36.267 ReferenceActuator DEBUG: Feeder1.actuate(true)
+2019-06-20 20:04:36.268 GcodeDriver DEBUG: sendCommand(M806, 10000)...
+2019-06-20 20:04:37.706 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M806, 10000) => [ok]
+2019-06-20 20:04:37.706 ReferencePnpJobProcessor DEBUG: Fed id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1.
+2019-06-20 20:04:37.706 ReferenceHead DEBUG: H1.moveToSafeZ(1.0)
+2019-06-20 20:04:37.706 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:37.707 ReferenceCamera DEBUG: TOP OpenPnpCaptureCamera.moveToSafeZ(1.0)
+2019-06-20 20:04:37.707 ReferenceActuator DEBUG: TipChangerVac.moveToSafeZ(1.0)
+2019-06-20 20:04:37.707 ReferenceActuator DEBUG: TooltipVac.moveToSafeZ(1.0)
+2019-06-20 20:04:37.707 ReferenceNozzle DEBUG: N1.moveTo((-130.670000, -48.795000, 0.000000, 0.000000 mm), 1.0)
+2019-06-20 20:04:37.707 GcodeDriver DEBUG: sendCommand(G0 X-133.0950 Y-1.4650  E0.0000 F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:37.806 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0 X-133.0950 Y-1.4650  E0.0000 F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:37.807 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:37.907 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:37.907 ReferenceNozzle DEBUG: N1.moveTo((-130.670000, -48.795000, -42.998000, 0.000000 mm), 1.0)
+2019-06-20 20:04:37.907 GcodeDriver DEBUG: sendCommand(G0   Z-42.9980  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:37.915 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z-42.9980  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:37.917 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:38.007 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:38.008 ReferenceNozzle DEBUG: N1.pick()
+2019-06-20 20:04:38.008 GcodeDriver DEBUG: sendCommand(M800, 10000)...
+2019-06-20 20:04:39.314 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M800, 10000) => [ok]
+2019-06-20 20:04:39.616 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:39.616 GcodeDriver DEBUG: sendCommand(G0   Z0.0000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:39.716 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z0.0000  F20000 ; Send standard Gcode move, 10000) => [ok, ok]
+2019-06-20 20:04:39.716 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:41.120 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:41.120 ReferencePnpJobProcessor DEBUG: Pick id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) from org.openpnp.machine.reference.feeder.ReferenceAutoFeeder@493208e5 with N1 N1
+2019-06-20 20:04:41.120 ReferenceActuator DEBUG: Feeder1.actuate(true)
+2019-06-20 20:04:41.121 GcodeDriver DEBUG: sendCommand(M806, 10000)...
+2019-06-20 20:04:41.220 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M806, 10000) => [ok]
+2019-06-20 20:04:41.221 ReferenceBottomVision DEBUG: R_0402_1005Metric-1k.canHandle(false) => {}
+2019-06-20 20:04:41.221 ReferencePnpJobProcessor DEBUG: Not aligning id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) as no compatible enabled aligners defined
+2019-06-20 20:04:41.221 ReferenceHead DEBUG: H1.moveToSafeZ(1.0)
+2019-06-20 20:04:41.221 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:41.221 ReferenceCamera DEBUG: TOP OpenPnpCaptureCamera.moveToSafeZ(1.0)
+2019-06-20 20:04:41.223 ReferenceActuator DEBUG: TipChangerVac.moveToSafeZ(1.0)
+2019-06-20 20:04:41.223 ReferenceActuator DEBUG: TooltipVac.moveToSafeZ(1.0)
+2019-06-20 20:04:41.223 ReferenceNozzle DEBUG: N1.moveTo((85.088973, 13.163528, 0.000000, 0.251554 mm), 1.0)
+2019-06-20 20:04:41.223 GcodeDriver DEBUG: sendCommand(G0 X82.6640 Y60.4935  E0.2516 F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:41.427 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0 X82.6640 Y60.4935  E0.2516 F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:41.428 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:42.826 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:42.827 ReferenceNozzle DEBUG: N1.moveTo((85.088973, 13.163528, -39.600000, 0.251554 mm), 1.0)
+2019-06-20 20:04:42.827 GcodeDriver DEBUG: sendCommand(G0   Z-39.6000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:42.925 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z-39.6000  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:42.927 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:44.330 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:44.330 ReferenceNozzle DEBUG: N1.place()
+2019-06-20 20:04:44.331 GcodeDriver DEBUG: sendCommand(M801, 10000)...
+2019-06-20 20:04:44.534 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M801, 10000) => [ok]
+2019-06-20 20:04:44.834 ReferenceNozzle DEBUG: N1.moveToSafeZ(1.0)
+2019-06-20 20:04:44.836 GcodeDriver DEBUG: sendCommand(G0   Z0.0000  F20000 ; Send standard Gcode move, 10000)...
+2019-06-20 20:04:44.933 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 G0   Z0.0000  F20000 ; Send standard Gcode move, 10000) => [ok]
+2019-06-20 20:04:44.933 GcodeDriver DEBUG: sendCommand(M400 ; Wait for moves to complete before returning, 10000)...
+2019-06-20 20:04:46.338 GcodeDriver DEBUG: sendCommand(tcp://127.0.0.1:65432 M400 ; Wait for moves to complete before returning, 10000) => [ok]
+2019-06-20 20:04:46.339 ReferencePnpJobProcessor DEBUG: Place id R_0402_1005Metric-1k, name null, heightUnits Millimeters, height 0.800000, packageId (R0402) with N1
+2019-06-20 20:04:46.339 ReferencePnpJobProcessor DEBUG: saveJobAndConfig(false)
+2019-06-20 20:04:46.339 ReferencePnpJobProcessor DEBUG: Auto saving job.
+
