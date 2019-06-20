@@ -207,12 +207,14 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.VelErr = [0,0,0,0,0]
 
 		#start and init serial communication
-		self.sbus = serial.Serial('/dev/ttyACM0',9600,timeout=0.100)
+
+		self.sbus = serial.Serial('/dev/ttyACM0',115200,timeout=0.100)
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
 		self.serialSenderThread = GenericThread( self.serialSender)
 		self.serialSenderThread.start()
+
 		# self.serialTestThread = GenericThread( self.serialTest)
 		# self.serialTestThread.start()
 
