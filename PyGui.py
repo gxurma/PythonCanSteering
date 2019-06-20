@@ -767,85 +767,87 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def analyseSocketData(self, data):
 		if data:
-			if data==b'\n':  # don't process the newline
+			if data==b'\n':  # don't process if only the newline is sent
 				return
-			d=data.decode().split(';')[0]  # strip the comment, if any
-			if d[0]=='@':
-				print(Color.yellow+d[1:]+Color.end)
-				self.sendSerQ.put(d[1:].encode("ascii")+b'\n') # sending to smoothie
-			else:
-				print(Color.Green+d+Color.end)
-				m = re.search("(M)([-0-9.]+)", d, re.I)
-				g = re.search("(G)([-0-9.]+)", d, re.I)
-				x = re.search('(X)([-0-9.]+)', d, re.I)
-				y = re.search('(Y)([-0-9.]+)', d, re.I)
-				z = re.search('(Z)([-0-9.]+)', d, re.I)
-				c = re.search('(E)([-0-9.]+)', d, re.I)
-				f = re.search('(F)([-0-9.]+)', d, re.I)
-				# print(Color.Green+repr(g)+Color.end)
-				if m:
-					m = float(m[2])                  # get the number
-					if m == 400 :
-						print(Color.Green+'Wait!!!'+Color.end)
-						# time.sleep(2) # simulate a movement delay
-						moving = 999
+			dlines=data.decode().split('\n')
+			for d in dlines:
+				d=data.decode().split(';')[0]  # strip the comment, if any
+				if d[0]=='@':
+					print(Color.yellow+d[1:]+Color.end)
+					self.sendSerQ.put(d[1:].encode("ascii")+b'\n') # sending to smoothie
+				else:
+					print(Color.Green+d+Color.end)
+					m = re.search("(M)([-0-9.]+)", d, re.I)
+					g = re.search("(G)([-0-9.]+)", d, re.I)
+					x = re.search('(X)([-0-9.]+)', d, re.I)
+					y = re.search('(Y)([-0-9.]+)', d, re.I)
+					z = re.search('(Z)([-0-9.]+)', d, re.I)
+					c = re.search('(E)([-0-9.]+)', d, re.I)
+					f = re.search('(F)([-0-9.]+)', d, re.I)
+					# print(Color.Green+repr(g)+Color.end)
+					if m:
+						m = float(m[2])                  # get the number
+						if m == 400 :
+							print(Color.Green+'Wait!!!'+Color.end)
+							# time.sleep(2) # simulate a movement delay
+							moving = 999
 
-						ts = time.time()
-						while moving and ((time.time()-ts) < 10): # we dont want to wait endlessly
-							for axe in axes :
-								self.sendElmoMsgShort(axe,"MS", 0 ) #ask for the motion status of each axis
-							time.sleep(0.1) # wait for processing of request
-							moving = 0
-							for i in range(0,5) :
-								if self.MotionStatusReg[i] == 2 :
-									moving = moving + 1
-							print("moving: ", moving)
-							if not moving:
-								self.sendTcpQ.put("ok\r\n")
-								print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
-								break
-					else :
-						print(Color.Green+'m'+Color.end , m)
-						self.sendSerQ.put(d.encode("ascii")+b'\n')
-					# return
-				if g:
-					g = float(g[2])
-					if g == 28:
-						print(Color.Green+'Init and Homing all axes'+Color.end)
-						self.Init(idX)
-						self.Init(idX2)
-						self.Init(idY)
-						self.Init(idZ)
-						self.Init(idC)
-						self.pushButtonHomeAll.click()
-					if (g == 0) or (g == 1) :
-						if x:
-							xVal = float(x[2])
-							print("x: ",xVal)
-							if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
-								self.X1set.setValue(int(xVal*200.0))
-								self.X2set.setValue(0)
-							elif (xVal > maximumf[0]) :
-								self.X1set.setValue((xVal-maximumf[4])*200.0)
-								self.X2set.setValue(maximum[4])
-							else : #(xVal < minimumf[0]) :
-								self.X1set.setValue((xVal-minimumf[4])*200.0)
-								self.X2set.setValue(minimum[4])
+							ts = time.time()
+							while moving and ((time.time()-ts) < 10): # we dont want to wait endlessly
+								for axe in axes :
+									self.sendElmoMsgShort(axe,"MS", 0 ) #ask for the motion status of each axis
+								time.sleep(0.1) # wait for processing of request
+								moving = 0
+								for i in range(0,5) :
+									if self.MotionStatusReg[i] == 2 :
+										moving = moving + 1
+								print("moving: ", moving)
+								if not moving:
+									self.sendTcpQ.put("ok\r\n")
+									print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
+									break
+						else :
+							print(Color.Green+'m'+Color.end , m)
+							self.sendSerQ.put(d.encode("ascii")+b'\n')
+						# return
+					if g:
+						g = float(g[2])
+						if g == 28:
+							print(Color.Green+'Init and Homing all axes'+Color.end)
+							self.Init(idX)
+							self.Init(idX2)
+							self.Init(idY)
+							self.Init(idZ)
+							self.Init(idC)
+							self.pushButtonHomeAll.click()
+						if (g == 0) or (g == 1) :
+							if x:
+								xVal = float(x[2])
+								print("x: ",xVal)
+								if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
+									self.X1set.setValue(int(xVal*200.0))
+									self.X2set.setValue(0)
+								elif (xVal > maximumf[0]) :
+									self.X1set.setValue((xVal-maximumf[4])*200.0)
+									self.X2set.setValue(maximum[4])
+								else : #(xVal < minimumf[0]) :
+									self.X1set.setValue((xVal-minimumf[4])*200.0)
+									self.X2set.setValue(minimum[4])
 
-							# self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
-						if y:
-							self.Yset.setValue(int(float(y[2])*200.0))
-						if z:
-							self.Zset.setValue(100000+int(float(z[2])*2000.0)) #openpnp likes to think it starts at z=0
-						if c:
-							self.Cset.setValue(int(float(c[2])*11.388888889))	# 4100 steps / 360°
-						if f:
-							self.Vmaxset.setValue(int(float(f[2])*10.0))
-						# do 5 dimensional movement
-						if x or y or z or c :
-							self.goTo()
-					self.sendTcpQ.put("ok\r\n")
-					print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
+								# self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
+							if y:
+								self.Yset.setValue(int(float(y[2])*200.0))
+							if z:
+								self.Zset.setValue(100000+int(float(z[2])*2000.0)) #openpnp likes to think it starts at z=0
+							if c:
+								self.Cset.setValue(int(float(c[2])*11.388888889))	# 4100 steps / 360°
+							if f:
+								self.Vmaxset.setValue(int(float(f[2])*10.0))
+							# do 5 dimensional movement
+							if x or y or z or c :
+								self.goTo()
+						self.sendTcpQ.put("ok\r\n")
+						print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 
 	def serialReader(self):
 		while True:
