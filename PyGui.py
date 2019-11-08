@@ -208,7 +208,16 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 		#start and init serial communication
 
-		self.sbus = serial.Serial('/dev/ttyACM0',115200,timeout=0.100)
+		try: 
+			self.sbus = serial.Serial('/dev/ttyACM0',115200,timeout=0.100)
+		except:
+			print("Foglalt, vagy nincs, megpróbálom a másikat")
+			try: 
+				self.sbus = serial.Serial('/dev/ttyACM1',115200,timeout=0.100)
+			except:
+				print("na ez szívás...")
+				exit
+		
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
@@ -537,11 +546,16 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			return 4
 
 	def Home(self, axe, velMode, homePosition, jogSpeed, searchSpeed, targetPos, targetSpeed, button):
-		if velMode :
+		if velMode == 1:
 			self.sendElmoMsgLong(axe, "MO", 0, 0) #mo = 0 motor off
 			time.sleep(0.1)
 			self.sendElmoMsgLong(axe, "UM", 0, 2) #um = 2 (velocity mode)
 			time.sleep(0.1)
+		# if velMode == 2:
+			# self.sendElmoMsgLong(axe, "MO", 0, 0) #mo = 0 motor off
+			# time.sleep(0.1)
+			# self.sendElmoMsgLong(axe, "UM", 0, 3) #um = 3 (microstepping mode)
+			# time.sleep(0.1)
 
 		self.sendElmoMsgLong(axe, "MO", 0, 1) #mo = 1 motor on
 		time.sleep(0.2)
