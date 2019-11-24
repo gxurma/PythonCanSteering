@@ -216,7 +216,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				self.sbus = serial.Serial('/dev/ttyACM1',115200,timeout=0.100)
 			except:
 				print("na ez szívás...")
-				exit
+				exit()
 		
 		print('sbus=',self.sbus.name)
 		self.serialReaderThread = GenericThread( self.serialReader)
