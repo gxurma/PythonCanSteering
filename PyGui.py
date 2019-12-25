@@ -681,7 +681,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def aboutBox(self):
 		QtGui.QMessageBox.about(self,"Über dieses Programm", '''
-		Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern.
+		Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern und Smoothieware.
 		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um einfachere Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
 		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
@@ -832,11 +832,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 							g = float(g[2])
 							if g == 28:
 								print(Color.Green+'Init and Homing all axes'+Color.end)
+								self.Init(idZ)
 								self.Init(idX)
 								self.Init(idX2)
 								self.Init(idY)
-								self.Init(idZ)
 								self.Init(idC)
+								self.Init(idZ)
 								self.pushButtonHomeAll.click()
 							if (g == 0) or (g == 1) :
 								if x:

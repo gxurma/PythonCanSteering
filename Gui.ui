@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>812</width>
-    <height>467</height>
+    <width>621</width>
+    <height>330</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -847,53 +847,48 @@
       </widget>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>Log</string>
+        <string>Actuators, Sensors</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_15">
-          <property name="text">
-           <string>Send Msg</string>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButtonToolTipVac">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="pushButtonSendMsg">
           <property name="text">
-           <string>Send Msg</string>
+           <string>Tool Tip Vac</string>
           </property>
           <property name="checkable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="checked">
            <bool>false</bool>
           </property>
           <property name="default">
            <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QPlainTextEdit" name="plainTextEditSendMsg"/>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>CANlog</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>Socket Log </string>
           </property>
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="QPushButton" name="pushButtonCanlog">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>Canlog</string>
+           <string>Touchdown</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButtonUplight">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Up Light</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -906,26 +901,42 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QPushButton" name="pushButtonClearCanlog">
+        <item row="0" column="5">
+         <widget class="QPushButton" name="pushButtonToolTipVacRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
-           <string>ClearCanlog</string>
+           <string>Tool Tip Vac
+ Read</string>
           </property>
           <property name="checkable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="checked">
            <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
           </property>
           <property name="default">
            <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item row="3" column="2">
-         <widget class="QPushButton" name="pushButtonSocketlog">
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButtonDownlight">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
-           <string>Socketlog</string>
+           <string>Down light</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -938,13 +949,41 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="3">
-         <widget class="QPushButton" name="pushButtonClearSocketlog">
+        <item row="0" column="3">
+         <widget class="QPushButton" name="pushButtonToolChangerVac">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
-           <string>ClearSocketlog</string>
+           <string>Tool Changer Vac</string>
           </property>
           <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="default">
            <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButtonPump">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Pump</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
           </property>
           <property name="checked">
            <bool>false</bool>
@@ -954,11 +993,76 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0" colspan="2">
-         <widget class="QPlainTextEdit" name="plainTextEditCanLog"/>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Tip Vac Pressure</string>
+          </property>
+         </widget>
         </item>
-        <item row="4" column="2" colspan="2">
-         <widget class="QPlainTextEdit" name="plainTextEditSocketLog"/>
+        <item row="0" column="6">
+         <widget class="QPushButton" name="pushButtonTouchDownRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Touch Down 
+ Read</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="7">
+         <widget class="QProgressBar" name="progressBarToolTipVacRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>1000</number>
+          </property>
+          <property name="value">
+           <number>950</number>
+          </property>
+          <property name="format">
+           <string>%v mBar</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="7">
+         <widget class="QProgressBar" name="progressBarTouchDownRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+          <property name="format">
+           <string>%p%</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -1008,8 +1112,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>812</width>
-     <height>25</height>
+     <width>621</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1235,38 +1339,6 @@
     <hint type="destinationlabel">
      <x>92</x>
      <y>367</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonClearCanlog</sender>
-   <signal>clicked()</signal>
-   <receiver>plainTextEditCanLog</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>237</x>
-     <y>321</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>76</x>
-     <y>399</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonClearSocketlog</sender>
-   <signal>clicked()</signal>
-   <receiver>plainTextEditSocketLog</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>791</x>
-     <y>325</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>415</x>
-     <y>399</y>
     </hint>
    </hints>
   </connection>
