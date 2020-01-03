@@ -25,7 +25,7 @@ except AttributeError:
 class Ui_MainWindow(object):
 	def setupUi(self, MainWindow):
 		MainWindow.setObjectName(_fromUtf8("MainWindow"))
-		MainWindow.resize(621, 330)
+		MainWindow.resize(992, 508)
 		self.centralwidget = QtGui.QWidget(MainWindow)
 		self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 		self.gridLayout_2 = QtGui.QGridLayout(self.centralwidget)
@@ -571,7 +571,7 @@ class Ui_MainWindow(object):
 		self.gridLayout_2.addWidget(self.tabWidget, 1, 0, 1, 1)
 		MainWindow.setCentralWidget(self.centralwidget)
 		self.menubar = QtGui.QMenuBar(MainWindow)
-		self.menubar.setGeometry(QtCore.QRect(0, 0, 621, 21))
+		self.menubar.setGeometry(QtCore.QRect(0, 0, 992, 21))
 		self.menubar.setObjectName(_fromUtf8("menubar"))
 		self.menuFile = QtGui.QMenu(self.menubar)
 		self.menuFile.setObjectName(_fromUtf8("menuFile"))
@@ -594,7 +594,7 @@ class Ui_MainWindow(object):
 		self.menubar.addAction(self.menuHelp.menuAction())
 
 		self.retranslateUi(MainWindow)
-		self.tabWidget.setCurrentIndex(0)
+		self.tabWidget.setCurrentIndex(1)
 		QtCore.QObject.connect(self.actionExit, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.close)
 		QtCore.QObject.connect(self.Cset, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.spinBoxC.setValue)
 		QtCore.QObject.connect(self.spinBoxC, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.Cset.setValue)

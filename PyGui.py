@@ -182,6 +182,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.recTcpQ = queue.Queue()	#from openpnp to middleware
 		self.sendSerQ = queue.Queue()  #from middleware to Smothie
 		self.recSerQ = queue.Queue()	#from Smothie to middleware
+		self.sendSensQ = queue.Queue()  #from middleware to Sensor
+		self.recSensQ = queue.Queue()	#from Sensor to middleware
 
 		self.startSocketListenerThread = GenericThread( self.startSocketListener)
 		self.startSocketListenerThread.start()
@@ -209,16 +211,19 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		#start and init serial communication
 
 		try: 
-			self.sbus = serial.Serial('/dev/ttyACM0',115200,timeout=0.100)
+			self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
 		except:
-			print("Foglalt, vagy nincs, megpróbálom a másikat")
-			try: 
-				self.sbus = serial.Serial('/dev/ttyACM1',115200,timeout=0.100)
-			except:
-				print("na ez szívás...")
-				exit()
+			print("Foglalt, vagy nincs Smoothie!")
+			exit()
+		try: 
+			self.sbus2 = serial.Serial('/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7533531343735131C1C1-if00',115200,timeout=0.100)
+		except:
+			print("na ez szívás... Foglalt, vagy nincs szenzorpanel")
+			exit()
 		
 		print('sbus=',self.sbus.name)
+		print('sbus2=',self.sbus2.name)
+		
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
 		self.serialSenderThread = GenericThread( self.serialSender)
@@ -868,21 +873,39 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 							self.sendTcpQ.put("ok\r\n")
 							print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 
+	def analyseSensorData(self):
+		while True:
+			while not self.recSensQ.empty() :
+			
+	
 	def serialReader(self):
 		while True:
 			data = self.sbus.readline()  # Should be ready
 			if data:
 				print(Color.Blue+repr(data)+Color.end)
 				self.sendTcpQ.put(data.decode('ascii'))
-			time.sleep(0.1)
+				
+			data = self.sbus2.readline()  # Should be ready
+			if data:
+				print(Color.Cyan+repr(data)+Color.end)
+				self.sendTcpQ.put(data.decode('ascii')) #copy data to OpenPNP
+				self.recSensQ.put(data.decode('ascii')) #lets also use the sensed data here			
+			time.sleep(0.05)
+
+
 	def serialSender(self) :
 		while True:
 			while not self.sendSerQ.empty() :
 				message = self.sendSerQ.get()
 				print(Color.blue+repr(message)+Color.end)
 				self.sbus.write(message)
+			while not self.sendSensQ.empty() :
+				message = self.sendSensQ.get()
+				print(Color.cyan+repr(message)+Color.end)
+				self.sbus2.write(message)
 			self.sbus.flush()
-			time.sleep(0.1)
+			self.sbus2.flush()
+			time.sleep(0.05)
 
 # This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
 class GenericThread(QtCore.QThread):
