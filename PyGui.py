@@ -146,6 +146,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.pushButtonInitZ.clicked.connect(lambda: self.Init(idZ))
 		self.pushButtonInitC.clicked.connect(lambda: self.Init(idC))
 
+		self.pushButtonToolTipVacRead.connect(self.requestSensValue)
+		
 		self.pushButtonNotStop.clicked.connect(self.NotStop)
 		self.initCAN()
 		self.startCANComm()
@@ -226,6 +228,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
+
+		self.serialSensorReaderThread = GenericThread( self.serialSensorReader)
+		self.serialSensorReaderThread.start()
+
 		self.serialSenderThread = GenericThread( self.serialSender)
 		self.serialSenderThread.start()
 
@@ -876,7 +882,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 	def analyseSensorData(self):
 		while True:
 			while not self.recSensQ.empty() :
-			
+				data = self.recSensQ.get()
+				print(data)
+				p = re.search("(P:)([-0-9.]+)", data, re.I)
+				print ("Pressure:",p)
+			time.sleep(0.05)
+				
 	
 	def serialReader(self):
 		while True:
@@ -884,13 +895,17 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			if data:
 				print(Color.Blue+repr(data)+Color.end)
 				self.sendTcpQ.put(data.decode('ascii'))
+			# time.sleep(0.05)
 				
+	def serialSensorReader(self):
+		while True:
 			data = self.sbus2.readline()  # Should be ready
 			if data:
 				print(Color.Cyan+repr(data)+Color.end)
 				self.sendTcpQ.put(data.decode('ascii')) #copy data to OpenPNP
-				self.recSensQ.put(data.decode('ascii')) #lets also use the sensed data here			
-			time.sleep(0.05)
+				self.recSensQ.put(data.decode('ascii')) #lets also use the sensed data here	
+				self.analyseSensorData()
+			# time.sleep(0.05)
 
 
 	def serialSender(self) :
@@ -907,6 +922,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			self.sbus2.flush()
 			time.sleep(0.05)
 
+	def requestSensValue(self) :
+		self.sendSensQ.put("P\n")
+		
+		
 # This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
 class GenericThread(QtCore.QThread):
 	def __init__(self, function, *args, **kwargs):
