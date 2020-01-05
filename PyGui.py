@@ -146,8 +146,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.pushButtonInitZ.clicked.connect(lambda: self.Init(idZ))
 		self.pushButtonInitC.clicked.connect(lambda: self.Init(idC))
 
-		self.pushButtonToolTipVacRead.connect(self.requestSensValue)
-		
+		self.pushButtonToolTipVacRead.clicked.connect(self.requestSensValue)
+
 		self.pushButtonNotStop.clicked.connect(self.NotStop)
 		self.initCAN()
 		self.startCANComm()
@@ -212,20 +212,20 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 		#start and init serial communication
 
-		try: 
+		try:
 			self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
 		except:
 			print("Foglalt, vagy nincs Smoothie!")
 			exit()
-		try: 
+		try:
 			self.sbus2 = serial.Serial('/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7533531343735131C1C1-if00',115200,timeout=0.100)
 		except:
 			print("na ez szívás... Foglalt, vagy nincs szenzorpanel")
 			exit()
-		
+
 		print('sbus=',self.sbus.name)
 		print('sbus2=',self.sbus2.name)
-		
+
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
 
@@ -454,12 +454,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			time.sleep(0.25)
 
 	def analyseCANMsg(self,msg):
-		if self.pushButtonCanlog.isChecked() :
-			displayText = "%03x %02x %01d   :" % (msg.id, msg.flg, msg.dlc)
-			for j in range(0,msg.dlc) :
-				displayText = displayText + " %02x" % ( msg.msg[j] )
-			displayText = displayText + ":"
-			self.plainTextEditCanLog.appendPlainText(displayText)
+#		if self.pushButtonCanlog.isChecked() :
+#			displayText = "%03x %02x %01d   :" % (msg.id, msg.flg, msg.dlc)
+#			for j in range(0,msg.dlc) :
+#				displayText = displayText + " %02x" % ( msg.msg[j] )
+#			displayText = displayText + ":"
+#			self.plainTextEditCanLog.appendPlainText(displayText)
 			# print(displayText)
 		if (msg.msg[0] == 0x50) and (msg.msg[1] == 0x58) : # PX = ?
 			pos = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
@@ -764,8 +764,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 							print("got hangup message")
 							break
 						print(data)
-						if self.pushButtonSocketlog.isChecked():
-							self.plainTextEditSocketLog.appendPlainText(str(data))
+						# if self.pushButtonSocketlog.isChecked():
+						# 	self.plainTextEditSocketLog.appendPlainText(str(data))
 						self.analyseSocketData(data)
 						# time.sleep(0.25)
 						# conn.sendall(b'ok\r\n')
@@ -786,8 +786,9 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				self.sendTcpQ.put(message)
 			while not self.sendTcpQ.empty() :
 				message = self.sendTcpQ.get()
-				print(message)
-				self.conn.sendall(message.encode("ascii"))
+				print("to openpnp:",message)
+				self.conn.sendall(message.encode("utf-8"))
+				#self.conn.flush()
 
 
 	def analyseSocketData(self, data):
@@ -880,30 +881,29 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 							print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 
 	def analyseSensorData(self):
-		while True:
-			while not self.recSensQ.empty() :
-				data = self.recSensQ.get()
-				print(data)
-				p = re.search("(P:)([-0-9.]+)", data, re.I)
-				print ("Pressure:",p)
-			time.sleep(0.05)
-				
-	
+		while not self.recSensQ.empty() :
+			data = self.recSensQ.get()
+			print(data)
+			p = re.search("(P. )([-0-9.]+)", data, re.I)
+			if p :
+				pressure = float(p[2])
+				print ("Pressure:",pressure)
+
 	def serialReader(self):
 		while True:
 			data = self.sbus.readline()  # Should be ready
 			if data:
 				print(Color.Blue+repr(data)+Color.end)
-				self.sendTcpQ.put(data.decode('ascii'))
+				self.sendTcpQ.put(data.decode('utf-8'))
 			# time.sleep(0.05)
-				
+
 	def serialSensorReader(self):
 		while True:
 			data = self.sbus2.readline()  # Should be ready
 			if data:
 				print(Color.Cyan+repr(data)+Color.end)
-				self.sendTcpQ.put(data.decode('ascii')) #copy data to OpenPNP
-				self.recSensQ.put(data.decode('ascii')) #lets also use the sensed data here	
+				self.sendTcpQ.put(data.decode('utf-8')) #copy data to OpenPNP
+				self.recSensQ.put(data.decode('utf-8')) #lets also use the sensed data here
 				self.analyseSensorData()
 			# time.sleep(0.05)
 
@@ -923,9 +923,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			time.sleep(0.05)
 
 	def requestSensValue(self) :
-		self.sendSensQ.put("P\n")
-		
-		
+		data = "P\n"
+		self.sendSensQ.put(data.encode("utf-8"))
+
+
 # This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
 class GenericThread(QtCore.QThread):
 	def __init__(self, function, *args, **kwargs):
