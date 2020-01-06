@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Gui.ui'
 #
-# Created by: PyQt4 UI code generator 4.11.4
+# Created by: PyQt4 UI code generator 4.12.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -117,6 +117,7 @@ class Ui_MainWindow(object):
 		self.tab_2 = QtGui.QWidget()
 		self.tab_2.setObjectName(_fromUtf8("tab_2"))
 		self.gridLayout_3 = QtGui.QGridLayout(self.tab_2)
+		self.gridLayout_3.setMargin(0)
 		self.gridLayout_3.setObjectName(_fromUtf8("gridLayout_3"))
 		self.pushButtonMotorZAus = QtGui.QPushButton(self.tab_2)
 		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
@@ -325,6 +326,7 @@ class Ui_MainWindow(object):
 		self.tab = QtGui.QWidget()
 		self.tab.setObjectName(_fromUtf8("tab"))
 		self.gridLayout_4 = QtGui.QGridLayout(self.tab)
+		self.gridLayout_4.setMargin(0)
 		self.gridLayout_4.setObjectName(_fromUtf8("gridLayout_4"))
 		self.label_8 = QtGui.QLabel(self.tab)
 		self.label_8.setObjectName(_fromUtf8("label_8"))
@@ -450,6 +452,7 @@ class Ui_MainWindow(object):
 		self.tab_3 = QtGui.QWidget()
 		self.tab_3.setObjectName(_fromUtf8("tab_3"))
 		self.gridLayout_5 = QtGui.QGridLayout(self.tab_3)
+		self.gridLayout_5.setMargin(0)
 		self.gridLayout_5.setObjectName(_fromUtf8("gridLayout_5"))
 		self.pushButtonToolTipVac = QtGui.QPushButton(self.tab_3)
 		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
@@ -482,7 +485,7 @@ class Ui_MainWindow(object):
 		sizePolicy.setVerticalStretch(0)
 		sizePolicy.setHeightForWidth(self.pushButtonToolTipVacRead.sizePolicy().hasHeightForWidth())
 		self.pushButtonToolTipVacRead.setSizePolicy(sizePolicy)
-		self.pushButtonToolTipVacRead.setCheckable(True)
+		self.pushButtonToolTipVacRead.setCheckable(False)
 		self.pushButtonToolTipVacRead.setChecked(False)
 		self.pushButtonToolTipVacRead.setAutoRepeat(True)
 		self.pushButtonToolTipVacRead.setDefault(False)
@@ -530,7 +533,7 @@ class Ui_MainWindow(object):
 		sizePolicy.setVerticalStretch(0)
 		sizePolicy.setHeightForWidth(self.pushButtonTouchDownRead.sizePolicy().hasHeightForWidth())
 		self.pushButtonTouchDownRead.setSizePolicy(sizePolicy)
-		self.pushButtonTouchDownRead.setCheckable(True)
+		self.pushButtonTouchDownRead.setCheckable(False)
 		self.pushButtonTouchDownRead.setChecked(False)
 		self.pushButtonTouchDownRead.setAutoRepeat(True)
 		self.pushButtonTouchDownRead.setDefault(False)
@@ -673,7 +676,7 @@ class Ui_MainWindow(object):
 		self.pushButtonToolChangerVac.setText(_translate("MainWindow", "Tool Changer Vac", None))
 		self.pushButtonPump.setText(_translate("MainWindow", "Pump", None))
 		self.label_13.setText(_translate("MainWindow", "Tip Vac Pressure", None))
-		self.pushButtonTouchDownRead.setText(_translate("MainWindow", "Touch Down \n"
+		self.pushButtonTouchDownRead.setText(_translate("MainWindow", "Touch Down\n"
 " Read", None))
 		self.progressBarToolTipVacRead.setFormat(_translate("MainWindow", "%v mBar", None))
 		self.progressBarTouchDownRead.setFormat(_translate("MainWindow", "%p%", None))

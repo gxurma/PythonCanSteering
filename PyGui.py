@@ -836,6 +836,9 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 										self.sendTcpQ.put("ok\r\n")
 										print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 										break
+							elif m == 401 :   # get vacuum pressure
+								print(Color.Green+'Vacuum?'+Color.end)
+								self.requestSensValue()
 							else :
 								print(Color.Green+'m'+Color.end , m)
 								self.sendSerQ.put(d.encode("ascii")+b'\n')
