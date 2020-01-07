@@ -597,7 +597,7 @@ class Ui_MainWindow(object):
 		self.menubar.addAction(self.menuHelp.menuAction())
 
 		self.retranslateUi(MainWindow)
-		self.tabWidget.setCurrentIndex(1)
+		self.tabWidget.setCurrentIndex(0)
 		QtCore.QObject.connect(self.actionExit, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.close)
 		QtCore.QObject.connect(self.Cset, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.spinBoxC.setValue)
 		QtCore.QObject.connect(self.spinBoxC, QtCore.SIGNAL(_fromUtf8("valueChanged(int)")), self.Cset.setValue)
@@ -701,4 +701,3 @@ if __name__ == "__main__":
 	ui.setupUi(MainWindow)
 	MainWindow.show()
 	sys.exit(app.exec_())
-

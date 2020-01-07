@@ -180,6 +180,14 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.pushButtonHomeZ.clicked.connect(self.homeZThread.start)
 		self.pushButtonHomeC.clicked.connect(self.homeCThread.start)
 
+
+		self.pushButtonToolTipVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolTipVac.isChecked(), "M800", "M801" ))
+		self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
+		self.pushButtonDownlight.clicked.connect(lambda: self.SetActuator(self.pushButtonDownlight.isChecked(), "M810", "M811" ))
+		self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
+		self.pushButtonPump.clicked.connect(lambda: self.SetActuator(self.pushButtonPump.isChecked(), "M808", "M809" ))
+
+
 		self.sendTcpQ = queue.Queue()  #from middleware to openpnp
 		self.recTcpQ = queue.Queue()	#from openpnp to middleware
 		self.sendSerQ = queue.Queue()  #from middleware to Smothie
@@ -237,6 +245,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 		# self.serialTestThread = GenericThread( self.serialTest)
 		# self.serialTestThread.start()
+
+	def SetActuator(self,value,OnCommand,OffCommand):
+		if value :
+			data = OnCommand+"\n"
+		else :
+			data = OffCommand+"\n"
+		self.sendSerQ.put(data.encode("utf-8"))
 
 	def MotorAus(self, axe, isChecked):
 		self.sendElmoMsgLong(axe, "MO",0, isChecked) #mo = 0 motor off
