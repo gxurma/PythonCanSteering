@@ -891,6 +891,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			if p :
 				pressure = float(p[2])
 				print ("Pressure:",pressure)
+				self.progressBarToolTipVacRead.setValue(pressure)
 
 	def serialReader(self):
 		while True:
