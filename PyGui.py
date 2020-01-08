@@ -903,7 +903,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		while not self.recSensQ.empty() :
 			data = self.recSensQ.get()
 			print(data)
-			p = re.search("(P. )([-0-9.]+)", data, re.I)
+			p = re.search("(P. |P.)([-0-9.]+)", data, re.I)
 			if p :
 				pressure = float(p[2])
 				print ("Pressure:",pressure)
