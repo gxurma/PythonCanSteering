@@ -238,6 +238,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.serialReaderThread.start()
 
 		self.serialSensorReaderThread = GenericThread( self.serialSensorReader)
+		self.connect( self, QtCore.SIGNAL("analyseSensor"), self.analyseSensorData )
 		self.serialSensorReaderThread.start()
 
 		self.serialSenderThread = GenericThread( self.serialSender)
@@ -923,7 +924,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				print(Color.Cyan+repr(data)+Color.end)
 				self.sendTcpQ.put(data.decode('utf-8')) #copy data to OpenPNP
 				self.recSensQ.put(data.decode('utf-8')) #lets also use the sensed data here
-				self.analyseSensorData()
+				self.emit( QtCore.SIGNAL("analyseSensor"))
 			# time.sleep(0.05)
 
 
