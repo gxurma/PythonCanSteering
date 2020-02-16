@@ -1,0 +1,1 @@
+cmd_/home/gyurma/Dokumentumok/linuxcan3/pcican/kvpcican.ko := ld -r -m elf_x86_64 -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/gyurma/Dokumentumok/linuxcan3/pcican/kvpcican.ko /home/gyurma/Dokumentumok/linuxcan3/pcican/kvpcican.o /home/gyurma/Dokumentumok/linuxcan3/pcican/kvpcican.mod.o ;  true

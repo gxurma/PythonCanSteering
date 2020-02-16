@@ -1,0 +1,1 @@
+cmd_/home/gyurma/Dokumentumok/linuxcan3/mhydra/mhydra.ko := ld -r -m elf_x86_64 -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/gyurma/Dokumentumok/linuxcan3/mhydra/mhydra.ko /home/gyurma/Dokumentumok/linuxcan3/mhydra/mhydra.o /home/gyurma/Dokumentumok/linuxcan3/mhydra/mhydra.mod.o ;  true

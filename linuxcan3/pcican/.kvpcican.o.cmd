@@ -1,0 +1,1 @@
+cmd_/home/gyurma/Dokumentumok/linuxcan3/pcican/kvpcican.o := ld -m elf_x86_64 -z max-page-size=0x200000   -r -o /home/gyurma/Dokumentumok/linuxcan3/pcican/kvpcican.o /home/gyurma/Dokumentumok/linuxcan3/pcican/PciCanHwIf.o /home/gyurma/Dokumentumok/linuxcan3/pcican/dallas.o 
