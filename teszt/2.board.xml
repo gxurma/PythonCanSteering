@@ -1,0 +1,25 @@
+<openpnp-board version="1.1" name="2.board.xml">
+   <dimensions units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
+   <fiducials/>
+   <placements>
+      <placement version="1.2" id="TEST" side="Top" part-id="testpickup" type="Ignore" check-fids="false">
+         <location units="Millimeters" x="36.18555429085755" y="12.068174274420358" z="0.0" rotation="0.0"/>
+      </placement>
+      <placement version="1.2" id="r1" side="Top" part-id="c1206-10uF" type="Place" check-fids="false">
+         <location units="Millimeters" x="23.12254939971291" y="3.880375807306794" z="0.0" rotation="0.0"/>
+      </placement>
+      <placement version="1.2" id="fidboard" side="Top" part-id="FIDUCIAL-1X2-FIDUCIAL1X2" type="Ignore" check-fids="false">
+         <location units="Millimeters" x="12.846891651865008" y="-4.682978723404247" z="0.0" rotation="0.0"/>
+      </placement>
+      <placement version="1.2" id="fidboard2" side="Top" part-id="FIDUCIAL-1X2-FIDUCIAL1X2" type="Ignore" check-fids="false">
+         <location units="Millimeters" x="3.962662293593194" y="9.127006160697462" z="0.0" rotation="0.0"/>
+      </placement>
+      <placement version="1.2" id="r2" side="Top" part-id="c1206-10uF" type="Place" check-fids="false">
+         <location units="Millimeters" x="23.208753903225475" y="1.4118915668647845" z="0.0" rotation="0.0"/>
+      </placement>
+      <placement version="1.2" id="r3" side="Top" part-id="c1206-10uF" type="Place" check-fids="false">
+         <location units="Millimeters" x="26.718779827689392" y="1.602004833166269" z="0.0" rotation="0.0"/>
+      </placement>
+   </placements>
+   <solder-paste-pads/>
+</openpnp-board>

@@ -1,0 +1,220 @@
+<openpnp-job>
+   <panels>
+      <panel>
+         <id>Panel1</id>
+         <columns>5</columns>
+         <rows>3</rows>
+         <x-gap value="20.0" units="Millimeters"/>
+         <y-gap value="29.0" units="Millimeters"/>
+         <part-id>bigfidpart</part-id>
+         <check-fids>true</check-fids>
+         <fiducials>
+            <placement version="1.4" id="PanelFid1" side="Top" part-id="bigfidpart" type="Fiducial" enabled="true">
+               <location units="Millimeters" x="6.235" y="-9.06" z="0.0" rotation="0.9061615735180897"/>
+               <error-handling>Alert</error-handling>
+            </placement>
+            <placement version="1.4" id="PanelFid2" side="Top" part-id="bigfidpart" type="Fiducial" enabled="true">
+               <location units="Millimeters" x="93.84" y="-9.06" z="0.0" rotation="0.9061615735180897"/>
+               <error-handling>Alert</error-handling>
+            </placement>
+         </fiducials>
+      </panel>
+   </panels>
+   <board-locations>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="5.224254323383391" y="-48.19661062439356" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="25.177128227696045" y="-46.82445066338351" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="45.1300021320087" y="-45.45229070237346" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="65.08287603632135" y="-44.08013074136341" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="85.035749940634" y="-42.707970780353364" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="3.2346223799188207" y="-19.26494346314021" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="23.187496284231475" y="-17.89278350213016" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="43.140370188544125" y="-16.520623541120113" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="63.09324409285678" y="-15.148463580110061" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="83.04611799716943" y="-13.776303619100013" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="1.2449904364542506" y="9.666723698113138" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="21.197864340766905" y="11.038883659123186" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="41.15073824507956" y="12.411043620133235" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="61.10361214939221" y="13.783203581143283" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+      <board-location side="Top" board-file="../../mfa-switch/mfa-switch.board.xml" panel-id="Panel1" check-fiducials="false" enabled="false">
+         <location units="Millimeters" x="81.05648605370486" y="15.155363542153331" z="-42.0" rotation="3.934039146550419"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>U1</string>
+               <boolean>true</boolean>
+            </entry>
+            <entry>
+               <string>D1</string>
+               <boolean>true</boolean>
+            </entry>
+         </placed>
+      </board-location>
+   </board-locations>
+</openpnp-job>
