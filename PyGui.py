@@ -225,14 +225,14 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		except:
 			print("Foglalt, vagy nincs Smoothie!")
 			exit()
-		try:
-			self.sbus2 = serial.Serial('/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7533531343735131C1C1-if00',115200,timeout=0.100)
-		except:
-			print("na ez szívás... Foglalt, vagy nincs szenzorpanel")
-			exit()
+#		try:
+#			self.sbus2 = serial.Serial('/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7533531343735131C1C1-if00',115200,timeout=0.100)
+#		except:
+#			print("na ez szívás... Foglalt, vagy nincs szenzorpanel")
+#			exit()
 
 		print('sbus=',self.sbus.name)
-		print('sbus2=',self.sbus2.name)
+#		print('sbus2=',self.sbus2.name)
 
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
@@ -919,7 +919,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def serialSensorReader(self):
 		while True:
-			data = self.sbus2.readline()  # Should be ready
+#			data = self.sbus2.readline()  # Should be ready
+			data = "" #self.sbus2.readline()  # Should be ready
 			if data:
 				print(Color.Cyan+repr(data)+Color.end)
 				self.sendTcpQ.put(data.decode('utf-8')) #copy data to OpenPNP
@@ -937,9 +938,9 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			while not self.sendSensQ.empty() :
 				message = self.sendSensQ.get()
 				print(Color.cyan+repr(message)+Color.end)
-				self.sbus2.write(message)
+#				self.sbus2.write(message)
 			self.sbus.flush()
-			self.sbus2.flush()
+#			self.sbus2.flush()
 			time.sleep(0.05)
 
 	def requestSensValue(self) :
