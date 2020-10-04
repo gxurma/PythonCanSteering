@@ -119,7 +119,9 @@
 #define CMD_TX_REQUEST                               60
 #define CMD_SET_HEARTBEAT_RATE_REQ                   61
 #define CMD_HEARTBEAT_RESP                           62
+
 #define CMD_SET_AUTO_TX_BUFFER                       63
+
 #define CMD_GET_EXTENDED_INFO                        64
 #define CMD_TCP_KEEPALIVE                            65
 #define CMD_FLUSH_QUEUE_RESP                         66
@@ -127,9 +129,7 @@
 #define CMD_HYDRA_TX_INTERVAL_RESP                   68
 #define CMD_SET_BUSPARAMS_FD_REQ                     69
 #define CMD_SET_BUSPARAMS_FD_RESP                    70
-
-// 71 can be reused
-
+#define CMD_GET_BUSPARAMS_TQ_REQ                     71
 #define CMD_AUTO_TX_BUFFER_REQ                       72
 #define CMD_AUTO_TX_BUFFER_RESP                      73
 #define CMD_SET_TRANSCEIVER_MODE_REQ                 74
@@ -140,8 +140,9 @@
 #define CMD_LOG_TRIG_STARTUP                         79
 #define CMD_SELF_TEST_REQ                            80
 #define CMD_SELF_TEST_RESP                           81
-// 82-84 can be reused
+#define CMD_SET_BUSPARAMS_TQ_RESP                    84
 #define CMD_SET_BUSPARAMS_RESP                       85
+
 #define CMD_SET_IO_PORTS_REQ                         86
 #define CMD_GET_IO_PORTS_REQ                         87
 #define CMD_GET_IO_PORTS_RESP                        88
@@ -150,16 +151,14 @@
 #define CMD_TRANSPORT_RESP                           92
 #define CMD_KDI                                      93
 
-// 94 can be used
+#define CMD_STORAGE                                  94
 
 #define CMD_GET_CAPABILITIES_REQ                     95
 #define CMD_GET_CAPABILITIES_RESP                    96
 #define CMD_GET_TRANSCEIVER_INFO_REQ                 97
 #define CMD_GET_TRANSCEIVER_INFO_RESP                98
 #define CMD_MEMO_CONFIG_MODE                         99
-
-// 100 can be used
-
+#define CMD_GET_BUSPARAMS_TQ_RESP                    100
 #define CMD_LED_ACTION_REQ                          101
 #define CMD_LED_ACTION_RESP                         102
 #define CMD_INTERNAL_DUMMY                          103
@@ -169,7 +168,12 @@
 #define CMD_LOG_TRIG                                107
 #define CMD_LOG_RTC_TIME                            108
 
-// 109 - 113 reserved
+#define CMD_SCRIPT_ENVVAR_CTRL_REQ                  109
+#define CMD_SCRIPT_ENVVAR_CTRL_RESP                 110
+#define CMD_SCRIPT_ENVVAR_TRANSFER_CTRL_REQ         111 // PC wants to set value in VM
+#define CMD_SCRIPT_ENVVAR_TRANSFER_CTRL_RESP        112 // PC wants to set value in VM
+#define CMD_SCRIPT_ENVVAR_TRANSFER_BULK             113 // PC wants to set value in VM
+
 
 #define CMD_SCRIPT_CTRL_REQ                         116
 #define CMD_SCRIPT_CTRL_RESP                        117
@@ -205,6 +209,8 @@
 
 #define CMD_LOG_ACTION                              138
 
+#define CMD_SET_BUSPARAMS_TQ_REQ                    139
+
 #define CMD_IO_TRIG_REQ                             148
 #define CMD_IO_TRIG_RESP                            149
 #define CMD_IO_TRIG_MSG                             150
@@ -229,6 +235,8 @@
 #define CMD_LOG_TRIG_STARTUP_FD                     173
 #define CMD_LOG_RTC_TIME_FD                         174
 #define CMD_LOG_VERSION_FD                          175
+
+#define CMD_IO_PIN_CMD                              190
 
 #define CMD_MAP_CHANNEL_REQ                         200
 #define CMD_MAP_CHANNEL_RESP                        201
@@ -756,6 +764,9 @@ typedef struct hcanErrorFrameData_s {
 #define SWOPTION_CANFD_CAP           0x400L // Software supports CAN-FD.
 #define SWOPTION_NONISO_CAP          0x800L // Software supports NON-ISO.
 #define SWOPTION_CAP_REQ            0x1000L // Software supporte CMD_GET_CAPABILITIES_REQ
+#define SWOPTION_80_MHZ_CAN_CLK     0x2000L // CAN controller run at 80 MHz
+#define SWOPTION_24_MHZ_CAN_CLK     0x4000L // CAN controller run tat 24 MHz
+#define SWOPTION_CAN_CLK_MASK       0x6000L
 
 // CMD_SET_AUTO_TX_REQ and _RESP enum values
 #define AUTOTXBUFFER_CMD_GET_INFO     1     // Get implementation information
@@ -1086,6 +1097,27 @@ typedef struct {
   uint8_t     padding2[7];
 } hcmdSetBusparamsReq;
 
+typedef struct {
+  uint16_t  prop;
+  uint16_t  phase1;
+  uint16_t  phase2;
+  uint16_t  sjw;
+  uint16_t  brp;
+  uint16_t  propFd;
+  uint16_t  phase1Fd;
+  uint16_t  phase2Fd;
+  uint16_t  sjwFd;
+  uint16_t  brpFd;
+  uint8_t   open_as_canfd;
+  uint8_t   res1;
+  uint8_t   padding[6];
+} hcmdSetBusparamsTqReq;
+
+typedef struct {
+  uint8_t  status;
+  uint8_t  reserved[27];
+} hcmdSetBusparamsTqResp;
+
 #define BUSPARAM_FLAG_CANFD  0x01
 
 typedef struct {
@@ -1101,6 +1133,27 @@ typedef struct {
   uint8_t     noSamp;
   uint8_t     reserved[20];
 } hcmdGetBusparamsResp;
+
+typedef struct {
+  uint8_t     param_type;
+  uint8_t     reserved[27];
+} hcmdGetBusparamsTqReq;
+
+typedef struct {
+  uint16_t  prop;
+  uint16_t  phase1;
+  uint16_t  phase2;
+  uint16_t  sjw;
+  uint16_t  brp;
+  uint16_t  propFd;
+  uint16_t  phase1Fd;
+  uint16_t  phase2Fd;
+  uint16_t  sjwFd;
+  uint16_t  brpFd;
+  uint8_t   open_as_canfd;
+  uint8_t   status;
+  uint8_t   padding[6];
+} hcmdGetBusparamsTqResp;
 
 typedef struct {
   uint8_t     reserved;
@@ -1597,6 +1650,8 @@ typedef struct {
 #define CAP_SUB_CMD_LIN_HYBRID               11
 #define CAP_SUB_CMD_KDI_INFO                 12
 #define CAP_SUB_CMD_HAS_KDI                  13
+#define CAP_SUB_CMD_HAS_IO_API               14
+#define CAP_SUB_CMD_HAS_BUSPARAMS_TQ         15
 
 // the following are not capabilities/bits
 #define CAP_SUB_CMD_DATA_START               1024
@@ -1685,6 +1740,8 @@ typedef struct {
     hchannelCap32_t scriptCap;     // CAP_SUB_CMD_HAS_SCRIPT
     hchannelCap32_t linHybridCap;  // CAP_SUB_CMD_LIN_HYBRID
     hchannelCap32_t kdiCap;        // CAP_SUB_CMD_HAS_KDI
+    hchannelCap32_t ioApiCap;      // CAP_SUB_CMD_HAS_IO_API
+    hchannelCap32_t busparamsTqCap;// CAP_SUB_CMD_HAS_BUSPARAMS_TQ
     hInfo_t loggerType;            // CAP_SUB_CMD_GET_LOGGER_TYPE
     hRemoteInfo_t remoteInfo;      // CAP_SUB_CMD_REMOTE_TYPE
     hhwStatus_t   hwStatus;        // CAP_SUB_CMD_HW_STATUS
@@ -1831,6 +1888,120 @@ typedef struct {
   hkdiCtrlData data;
 } hcmdKDICmd;
 
+// Use with CMD_IO_PIN_CMD
+#define IO_SUBCMD_GET_COUNT                       1
+#define IO_SUBCMD_GET_PIN_INFO                    2
+#define IO_SUBCMD_SET_PIN_INFO                    3
+
+#define IO_SUBCMD_GET_DIGITAL                    10
+#define IO_SUBCMD_SET_DIGITAL                    11
+#define IO_SUBCMD_GET_ANALOG                     12
+#define IO_SUBCMD_SET_ANALOG                     13
+#define IO_SUBCMD_SET_RELAY                      16
+
+#define IO_SUBCMD_EVENT_SETUP                    20
+#define IO_SUBCMD_EVENT_DISABLE                  21
+#define IO_SUBCMD_CONFIRM_CONFIG                 22
+
+#define IO_SUBCMD_GET_OUTPUT_RELAY               23
+#define IO_SUBCMD_GET_OUTPUT_ANALOG              24
+#define IO_SUBCMD_GET_OUTPUT_DIGITAL             25
+#define IO_SUBCMD_GET_MODULE_PORTS               26
+#define IO_SUBCMD_SET_MODULE_PORTS               27
+
+#define IO_PIN_INFO_UNKNOWN                       0
+#define IO_PIN_INFO_MODULE_TYPE                   1
+#define IO_PIN_INFO_DIRECTION                     2
+
+#define IO_PIN_INFO_TYPE                          4
+#define IO_PIN_INFO_NUMBER_OF_BITS                5
+#define IO_PIN_INFO_RANGE_MIN                     6
+#define IO_PIN_INFO_RANGE_MAX                     7
+#define IO_PIN_INFO_DIGITAL_LOW_HIGH_FILTER       8
+#define IO_PIN_INFO_DIGITAL_HIGH_LOW_FILTER       9
+#define IO_PIN_INFO_ANALOG_LOWPASS_FILTER_ORDER  10
+#define IO_PIN_INFO_ANALOG_HYSTERESIS            11
+#define IO_PIN_INFO_ANALOG_VALUE_ABOVE           12
+#define IO_PIN_INFO_ANALOG_VALUE_BELOW           13
+#define IO_PIN_INFO_MODULE_NUMBER                14
+#define IO_PIN_INFO_SERIAL_NUMBER                15
+#define IO_PIN_INFO_FW_VERSION                   16
+
+#define IO_PIN_TYPE_UNKNOWN                       0
+#define IO_PIN_TYPE_DIGITAL                       1
+#define IO_PIN_TYPE_ANALOG                        2
+#define IO_PIN_TYPE_RELAY                         3
+
+#define IO_PIN_DIRECTION_UNKNOWN                  0
+#define IO_PIN_DIRECTION_IN                       4
+#define IO_PIN_DIRECTION_OUT                      8
+
+#define IO_MODULE_TYPE_UNKNOWN                    0
+#define IO_MODULE_TYPE_DIGITAL                    1
+#define IO_MODULE_TYPE_ANALOG                     2
+#define IO_MODULE_TYPE_RELAY                      3
+#define IO_MODULE_TYPE_INTERNAL                   4
+
+#define IO_EVENT_UNKNOWN                          0
+#define IO_EVENT_CONFIG_CHANGED                   2
+#define IO_EVENT_VALUE_CHANGED                    3
+#define IO_EVENT_VALUE_ABOVE                      4
+#define IO_EVENT_VALUE_BELOW                      5
+#define IO_EVENT_POSITIVE_FLANK                   6
+#define IO_EVENT_NEGATIVE_FLANK                   7
+
+#define IO_API_OK                                 0
+#define IO_API_ERROR_CONFIG_CHANGED              -1
+#define IO_API_ERROR_NO_CONFIG                   -2
+#define IO_API_ERROR_PIN_NOT_FOUND_IN_CONFIG     -3
+#define IO_API_ERROR_WRONG_PIN_MODULE_TYPE       -4
+#define IO_API_ERROR_PIN_INFO_ITEM_UNKNOWN       -5
+#define IO_API_ERROR_PIN_INFO_ITEM_READ_ONLY     -6
+#define IO_API_ERROR_PIN_PENDING                 -7
+#define IO_API_ERROR_UNKNOWN_EVENT               -8
+#define IO_API_ERROR_TOO_MANY_EVENTS             -9
+#define IO_API_ERROR_COMMUNICATION              -10
+#define IO_API_ERROR_CONFIG_NOT_CONFIRMED       -11
+#define IO_API_ERROR_RX_CRC                     -12
+#define IO_API_ERROR_HW_NOT_READY               -13
+#define IO_API_ERROR_RX_TIMEOUT                 -14
+#define IO_API_ERROR_INDEX_TOO_HIGH             -15
+#define IO_API_ERROR_VALUE_OUT_OF_RANGE         -16
+
+typedef struct {
+  uint8_t subCmdNo;
+  int8_t status;
+  uint16_t dummy; // Needed for alignment
+  uint16_t pinNo;
+  uint16_t item;
+
+  union {
+    uint32_t int_value;
+    float float_value;
+    uint8_t buffer[20];
+  };
+} hcmdIOCmd;
+
+
+// Use with CMD_STORAGE
+#define STORAGE_SUBCMD_FORMAT_FAT32 1
+
+#define STORAGE_STATUS_OK                 1
+#define STORAGE_STATUS_NOT_IMPLEMENTED    2
+#define STORAGE_STATUS_ERROR              3
+
+typedef union {
+  uint8_t              buffer[24];
+} hstorageData;
+
+typedef struct {
+  uint8_t subCmdNo;       // STORAGE_SUBCMD_FORMAT etc
+  uint8_t status;         // STORAGE_STATUS...
+  uint8_t dioStatus;      // When applicable
+  uint8_t lioStatus;      // When applicable
+  hstorageData data;       // When applicable
+} hcmdStorageCmd;
+
 // Well-known HEs
 #define BROADCAST         0x0f
 #define BROADCAST_DEBUG   0x1f
@@ -1838,7 +2009,6 @@ typedef struct {
 #define ROUTER_HE         0x00
 #define DYNAMIC_HE        ROUTER_HE
 #define ILLEGAL_HE        0x3e
-
 
 #define HYDRA_CMD_SIZE          32
 
@@ -1882,10 +2052,18 @@ typedef struct hydraHostCmd {
 
     hcmdGetBusparamsReq       getBusparamsReq;
     hcmdGetBusparamsResp      getBusparamsResp;
+
+    hcmdSetBusparamsTqReq     setBusparamsTqReq;
+    hcmdSetBusparamsTqResp    setBusparamsTqResp;
+
+    hcmdGetBusparamsTqReq     getBusparamsTqReq;
+    hcmdGetBusparamsTqResp    getBusparamsTqResp;
+
     hcmdGetChipStateReq       getChipStateReq;
     hcmdChipStateEvent        chipStateEvent;
     hcmdSetDrivermodeReq      setDrivermodeReq;
     hcmdGetDrivermodeReq      getDrivermodeReq;
+    hcmdGetDrivermodeResp     getDrivermodeResp;
 
     hcmdResetChipReq          resetChipReq;
     hcmdResetCardReq          resetCardReq;
@@ -2007,6 +2185,9 @@ typedef struct hydraHostCmd {
     hcmdCapabilitiesResp          capabilitiesResp;
 
     hcmdKDICmd                    kdiCmd;
+    hcmdIOCmd                     ioCmd;
+    
+    hcmdStorageCmd               storageCmd;
 
     hcmdHydraOtherCommand        o;
 
@@ -2126,5 +2307,8 @@ typedef struct {
     hcmdTxAckFd               txAckFd;
   };
 } hydraHostCmdExt;
+
+
+
 
 #endif //_HYDRA_HOST_CMDS_H_

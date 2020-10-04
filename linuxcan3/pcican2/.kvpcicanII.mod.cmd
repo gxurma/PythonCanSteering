@@ -1,0 +1,1 @@
+cmd_/home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pcican2/kvpcicanII.mod := { echo  /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pcican2/PciCan2HwIf.o /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pcican2/memQ.o; echo; } > /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pcican2/kvpcicanII.mod

@@ -72,7 +72,9 @@
 #include "vcanevt.h"
 
 #include "VCanFunctions.h"
+#include "VCanScriptFunctions.h"
 #include "debug.h"
+#include "tq_util.h"
 
 
 #include <stdio.h>
@@ -85,6 +87,8 @@
 #include <pthread.h>
 #include <string.h>
 #include <sys/ioctl.h>
+
+#include "canlib_channel_list.h"
 
 #if DEBUG
 #   define DEBUGPRINT(args) printf args
@@ -138,6 +142,13 @@ static const char *errorStrings[] = {
   "Memo failure",                    // canERR_MEMO_FAIL
   "Script error",                    // canERR_SCRIPT_FAIL
   "Script version mismatch",         // canERR_SCRIPT_WRONG_VERSION
+  "Script container version mismatch",  // canERR_SCRIPT_TXE_CONTAINER_VERSION
+  "Script container format error",   // canERR_SCRIPT_TXE_CONTAINER_FORMAT
+  "Buffer provided too small to hold data",           // canERR_BUFFER_TOO_SMALL
+  "I/O pin doesn't exist or I/O pin type mismatch",   // canERR_IO_WRONG_PIN_TYPE
+  "I/O pin configuration is not confirmed",           // canERR_IO_NOT_CONFIRMED,
+  "Configuration changed after last call to kvIoConfirmConfig",  // canERR_IO_CONFIG_CHANGED
+  "The previous I/O pin value has not yet changed the output and is still pending", //canERR_IO_PENDING
 };
 
 struct dev_descr {
@@ -193,15 +204,7 @@ static kvTimeDomainHead  timeDomains;
 
 static int Initialized = FALSE;
 
-// This has to be modified if we add/remove drivers.
-static const char *dev_name[] = {"lapcan", "pcican", "pcicanII",
-                                 "usbcanII", "leaf", "mhydra",
-                                 "pciefd",
-                                 "kvvirtualcan"}; // Virtual channels should always be last
-static const char *off_name[] = {"LAPcan", "PCIcan", "PCIcanII",
-                                 "USBcanII", "Leaf", "Minihydra",
-                                 "PCIe CAN",
-                                 "VIRTUALcan"}; // Virtual channels should always be last
+
 static struct dev_descr dev_descr_list[] = {
           {"Kvaser Unknown",                                    {0x00000000, 0x00000000}},
           {"Kvaser Virtual CAN",                                {0x00000000, 0x00000000}},
@@ -289,7 +292,11 @@ static struct dev_descr dev_descr_list[] = {
           {"Kvaser Mini PCI Express HS v2",                     {0x30010383, 0x00073301}},
           {"Kvaser Hybrid Pro 2xCAN/LIN",                       {0x30010420, 0x00073301}},
           {"Kvaser BlackBird Pro HS v2",                        {0x30009837, 0x00073301}},
-          {"Kvaser Ethercan HS",                                {0x30009769, 0x00073301}}
+          {"Kvaser Ethercan HS",                                {0x30009769, 0x00073301}},
+          {"Kvaser Memorator Light HS",                         {0x30010581, 0x00073301}},
+          {"Kvaser U100",                                       {0x30011731, 0x00073301}},
+          {"Kvaser U100P",                                      {0x30011748, 0x00073301}},
+          {"Kvaser U100S",                                      {0x30011816, 0x00073301}},
 };
 
 static canStatus check_bitrate (const CanHandle hnd, unsigned int bitrate);
@@ -301,72 +308,32 @@ static
 canStatus getDevParams (int channel, char devName[], int *devChannel,
                         CANOps **canOps, char officialName[])
 {
-  // For now, we just count the number of /dev/%s%d files (see dev_name),
-  // where %d is numbers between 0 and 255.
-  // This is slow!
+  canStatus  stat;
+  ccl_class  channel_list;
 
-  int         chanCounter = 0;
-  int         devCounter  = 0;
-  struct stat stbuf;
-
-  unsigned n = 0;
-
-  int CardNo          = -1;
-  int ChannelNoOnCard = 0;
-  int ChannelsOnCard  = 0;
-  int err;
-  int fd;
-
-  for(n = 0; n < sizeof(dev_name) / sizeof(*dev_name); n++) {
-    CardNo = -1;
-    ChannelNoOnCard = 0;
-    ChannelsOnCard = 0;
-
-    // There are 256 minor inode numbers
-    for(devCounter = 0; devCounter <= 255; devCounter++) {
-      snprintf(devName, DEVICE_NAME_LEN, "/dev/%s%d", dev_name[n], devCounter);
-      if (stat(devName, &stbuf) != -1) {  // Check for existance
-
-        if (!ChannelsOnCard) {
-          err = 1;
-          fd = open(devName, O_RDONLY);
-          if (fd != -1) {
-            err = ioctl(fd, VCAN_IOC_GET_NRCHANNELS, &ChannelsOnCard);
-            close(fd);
-          }
-          if (err) {
-            ChannelsOnCard = 1;
-          } else {
-            ChannelNoOnCard = 0;
-            CardNo++;
-          }
-        } else {
-          ChannelNoOnCard++;
-        }
-        ChannelsOnCard--;
-
-        if (chanCounter++ == channel) {
-          *canOps = &vCanOps;
-          sprintf(officialName, "KVASER %s channel %d", off_name[n], devCounter);
-          *devChannel = ChannelNoOnCard;
-
-          errno = 0; // Calling stat() may set errno.
-          return canOK;
-        }
-      }
-      else {
-        // Handle gaps in device numbers
-        continue;
-      }
-    }
+  if (channel < 0) {
+    return canERR_NOTFOUND;
   }
 
-  DEBUGPRINT((TXT("return canERR_NOTFOUND\n")));
-  devName[0]  = 0;
-  *devChannel = -1;
-  *canOps     = NULL;
+  stat = ccl_get_channel_list(&channel_list);
 
-  return canERR_NOTFOUND;
+  if (stat != canOK) {
+    devName[0]  = 0;
+    *devChannel = -1;
+    *canOps     = NULL;
+    return stat;
+  }
+  
+  if ((uint32_t)(channel + 1) > channel_list.n_channel) {
+    return canERR_NOTFOUND;
+  }
+
+  *canOps = &vCanOps;
+  sprintf(officialName, "KVASER %s channel %d", channel_list.channel[channel].official_name, channel_list.channel[channel].number_on_driver);
+  *devChannel = channel_list.channel[channel].number_on_card;
+  sprintf(devName, "%s", channel_list.channel[channel].mknod_name);
+
+  return stat;
 }
 
 //
@@ -418,8 +385,9 @@ CanHandle CANLIBAPI canOpenChannel (int channel, int flags)
   hData->requireInitAccess   = ((flags & canOPEN_REQUIRE_INIT_ACCESS) != 0);
   hData->initAccess          = ((flags & canOPEN_NO_INIT_ACCESS)      == 0);
 
-  hData->notifyFd = canINVALID_HANDLE;
-  hData->valid    = TRUE;
+  hData->notifyFd   = canINVALID_HANDLE;
+  hData->valid      = TRUE;
+  hData->auto_reset = 1;
 
   status = getDevParams(channel,
                         hData->deviceName,
@@ -489,6 +457,8 @@ int CANLIBAPI canClose (const CanHandle hnd)
   if (close(hData->fd) != 0) {
     return canERR_INVHANDLE;
   }
+  
+  clear_print_text_data(hData);
 
   free(hData);
 
@@ -633,10 +603,6 @@ canSetBusParamsFd (const CanHandle hnd, long freq_brs, unsigned int tseg1_brs,
     return canERR_INVHANDLE;
   }
 
-  if ((OPEN_AS_CANFD_ISO != hData->openMode) && (OPEN_AS_CANFD_NONISO != hData->openMode)) {
-    return canERR_INVHANDLE;
-  }
-
   ret = hData->canOps->getBusParams(hData, &freq, &tseg1, &tseg2, &sjw, &noSamp,
                                     NULL, NULL, NULL, NULL, &syncmode);
   if (ret != canOK) {
@@ -728,6 +694,106 @@ canGetBusParamsFd (const CanHandle hnd, long *freq, unsigned int *tseg1,
 
   return hData->canOps->getBusParams(hData, NULL, NULL, NULL, NULL, NULL,
                                      freq, tseg1, tseg2, sjw, NULL);
+}
+
+canStatus CANLIBAPI
+canSetBusParamsTq(const CanHandle     hnd,
+                  const kvBusParamsTq nominal)
+{
+  HandleData         *hData;
+  
+  hData = findHandle(hnd);
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  if (tqu_check_nominal (nominal)) {
+    return canERR_PARAM;
+  }
+  
+  return hData->canOps->setBusParamsTq (hData, &nominal, NULL);
+}
+
+canStatus CANLIBAPI
+CANLIBAPI canGetBusParamsTq(const CanHandle      hnd,
+                                  kvBusParamsTq *nominal)
+{
+  HandleData *hData;
+  int         ret;
+  
+  hData = findHandle(hnd);
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  if (nominal == NULL) {
+    return canERR_PARAM;
+  }
+  
+  ret = hData->canOps->getBusParamsTq (hData, nominal, NULL);
+
+  if (ret) {
+    return ret;
+  }
+
+  return canOK;
+}
+
+canStatus CANLIBAPI
+canSetBusParamsFdTq(const CanHandle     hnd,
+                    const kvBusParamsTq nominal,
+                    const kvBusParamsTq data)
+{
+  HandleData         *hData;
+  
+  hData = findHandle(hnd);
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  if (tqu_check_nominal (nominal)) {
+    return canERR_PARAM;
+  }
+  
+  if (tqu_check_data (data)) {
+    return canERR_PARAM;
+  }
+  
+  if (nominal.prescaler != data.prescaler) {
+    return canERR_PARAM;
+  }
+
+  return hData->canOps->setBusParamsTq (hData, &nominal, &data);
+}
+
+canStatus CANLIBAPI
+canGetBusParamsFdTq(const CanHandle  hnd,
+                    kvBusParamsTq   *nominal,
+                    kvBusParamsTq   *data)
+{
+  HandleData *hData;
+  int         ret;
+  
+  hData = findHandle(hnd);
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  if (nominal == NULL) {
+    return canERR_PARAM;
+  }
+
+  if (data == NULL) {
+    return canERR_PARAM;
+  }
+
+  ret = hData->canOps->getBusParamsTq (hData, nominal, data);
+
+  if (ret) {
+    return ret;
+  }
+
+  return canOK;
 }
 
 
@@ -1370,38 +1436,23 @@ unsigned int CANLIBAPI canGetVersionEx(unsigned int itemCode)
 //******************************************************
 canStatus CANLIBAPI canGetNumberOfChannels (int *channelCount)
 {
-  // For now, we just count the number of /dev/%s%d files (see dev_name),
-  // where %d is numbers between 0 and 255.
-  // This is slow!
-
-  int tmpCount = 0;
-  int cardNr;
-  char filename[DEVICE_NAME_LEN];
-  unsigned n = 0;
+  canStatus stat;
+  ccl_class channel_list;
 
   if (channelCount == NULL) {
     return canERR_PARAM;
   }
 
-  for(n = 0; n < sizeof(dev_name) / sizeof(*dev_name); n++) {
-    // There are 256 minor inode numbers
-    for(cardNr = 0; cardNr <= 255; cardNr++) {
-      snprintf(filename,  DEVICE_NAME_LEN, "/dev/%s%d", dev_name[n], cardNr);
-      if (access(filename, F_OK) == 0) {  // Check for existance
-        tmpCount++;
-      }
-      else {
-        // Handle gaps in device numbers
-        continue;
-      }
-    }
+  stat = ccl_get_channel_list(&channel_list);
+
+  if (stat != canOK) {
+    return stat;
   }
 
-  *channelCount = tmpCount;
+  *channelCount = channel_list.n_channel;
 
-  return canOK;
+  return stat;
 }
-
 
 
 //******************************************************
@@ -1941,13 +1992,16 @@ kvStatus CANLIBAPI kvReadDeviceCustomerData(const CanHandle hnd,
 
 /***************************************************************************/
 kvStatus CANLIBAPI kvScriptStatus(const CanHandle hnd,
-                                  int  slot,
+                                  int  slotNo,
                                   unsigned int *status)
 {
-  (void) hnd;
-  (void) slot;
-  (void) status;
-  return canERR_NOT_IMPLEMENTED;
+  HandleData *hData;
+
+  hData = findHandle(hnd);
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+  return hData->canOps->kvScriptStatus(hData, slotNo, status);
 }
 
 /***************************************************************************/
@@ -1993,90 +2047,177 @@ kvStatus CANLIBAPI kvScriptSendEvent(const CanHandle hnd,
                                       int eventNo,
                                       unsigned int data)
 {
-  (void) hnd;
-  (void) slotNo;
-  (void) eventType;
-  (void) eventNo;
-  (void) data;
-  return canERR_NOT_IMPLEMENTED;
+  HandleData *hData;
+
+  hData = findHandle(hnd);
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+  return hData->canOps->kvScriptSendEvent(hData, slotNo, eventType, eventNo, data);
 }
+
+/***************************************************************************/
+
+// Some functions dealing with the kvEnvHandle type
+
+// encode/decoce using ^
+
+#define HND_MASK 0x3141592658979323LL
+
+
+static int64_t EncodeHandle(int64_t ev) {
+  return (kvEnvHandle)(ev^HND_MASK);
+}
+
+static int64_t DecodeHandle(int64_t ev) {
+  return EncodeHandle(ev);
+}
+ 
+static canHandle GetCANLIBHandle(int64_t ev) {
+  int64_t hnd = DecodeHandle(ev);
+  return (hnd & 0xFFFFFFFF); 
+}
+
+static int GetENVVARHandle(int64_t ev) {
+  int64_t hnd = DecodeHandle(ev);
+  return (int)(hnd>>32);
+}
+
+/*
+static int GetENVVARHandle(int64_t ev) {
+  int64_t hnd = DecodeHandle(ev);
+  return (int)(hnd>>32);
+}
+*/ 
 
 /***************************************************************************/
 kvEnvHandle CANLIBAPI kvScriptEnvvarOpen(const CanHandle hnd,
-                                         char* envvarName,
+                                         const char* envvarName,
                                          int *envvarType,
                                          int *envvarSize)
 {
-  (void) hnd;
-  (void) envvarName;
-  (void) envvarType;
-  (void) envvarSize;
-  return canERR_NOT_IMPLEMENTED;
+  kvEnvHandle tmp;
+  HandleData *hData;
+
+  hData = findHandle(hnd);
+
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  tmp = hData->canOps->kvScriptEnvvarOpen(hData, envvarName, envvarType, envvarSize);
+
+  if (tmp < 0){
+    return tmp;
+  } else {
+    return EncodeHandle(tmp);
+  }
 }
 
 /***************************************************************************/
-kvStatus CANLIBAPI kvScriptEnvvarClose (kvEnvHandle eHnd)
+kvStatus CANLIBAPI kvScriptEnvvarClose(const kvEnvHandle eHnd)
 {
-  (void) eHnd;
-  return canERR_NOT_IMPLEMENTED;
+  HandleData *hData;
+
+  hData = findHandle(GetCANLIBHandle(eHnd));
+
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  return hData->canOps->kvScriptEnvvarClose(hData, GetENVVARHandle(eHnd));
 }
 
 /***************************************************************************/
-kvStatus CANLIBAPI kvScriptEnvvarSetInt(kvEnvHandle eHnd, int val)
+kvStatus CANLIBAPI kvScriptEnvvarSetInt(const kvEnvHandle eHnd, int val)
 {
-  (void) eHnd;
-  (void) val;
-  return canERR_NOT_IMPLEMENTED;
+  HandleData *hData;
+
+  hData = findHandle(GetCANLIBHandle(eHnd));
+
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  return hData->canOps->kvScriptEnvvarSetInt(hData, GetENVVARHandle(eHnd), val);
 }
 
 /***************************************************************************/
-kvStatus CANLIBAPI kvScriptEnvvarGetInt(kvEnvHandle eHnd, int *val)
+kvStatus CANLIBAPI kvScriptEnvvarGetInt(const kvEnvHandle eHnd, int *val)
 {
-  (void) eHnd;
-  (void) val;
-  return canERR_NOT_IMPLEMENTED;
+  HandleData *hData;
+
+  hData = findHandle(GetCANLIBHandle(eHnd));
+
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  return hData->canOps->kvScriptEnvvarGetInt(hData, GetENVVARHandle(eHnd), val);
 }
 
 /***************************************************************************/
-kvStatus CANLIBAPI kvScriptEnvvarSetFloat(kvEnvHandle eHnd, float val)
+kvStatus CANLIBAPI kvScriptEnvvarSetFloat(const kvEnvHandle eHnd, float val)
 {
-  (void) eHnd;
-  (void) val;
-  return canERR_NOT_IMPLEMENTED;
+  HandleData *hData;
+
+  hData = findHandle(GetCANLIBHandle(eHnd));
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+  return hData->canOps->kvScriptEnvvarSetFloat(hData, GetENVVARHandle(eHnd), val);
 }
 
 /***************************************************************************/
-kvStatus CANLIBAPI kvScriptEnvvarGetFloat(kvEnvHandle eHnd, float *val)
+kvStatus CANLIBAPI kvScriptEnvvarGetFloat(const kvEnvHandle eHnd, float *val)
 {
-  (void) eHnd;
-  (void) val;
-  return canERR_NOT_IMPLEMENTED;
+  HandleData *hData;
+
+  hData = findHandle(GetCANLIBHandle(eHnd));
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+  return hData->canOps->kvScriptEnvvarGetFloat(hData, GetENVVARHandle(eHnd), val);
 }
 
 /***************************************************************************/
-kvStatus CANLIBAPI kvScriptEnvvarSetData(kvEnvHandle eHnd,
+kvStatus CANLIBAPI kvScriptEnvvarSetData(const kvEnvHandle eHnd,
+                                         const void *buf,
+                                         int start_index,
+                                         int data_len)
+{
+  HandleData *hData;
+
+  hData = findHandle(GetCANLIBHandle(eHnd));
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  if (start_index){
+      return canERR_PARAM;
+  }
+
+  return hData->canOps->kvScriptEnvvarSetData(hData, GetENVVARHandle(eHnd), buf, start_index, data_len);
+}
+
+/***************************************************************************/
+kvStatus CANLIBAPI kvScriptEnvvarGetData(const kvEnvHandle eHnd,
                                          void *buf,
                                          int start_index,
                                          int data_len)
 {
-  (void) eHnd;
-  (void) buf;
-  (void) start_index;
-  (void) data_len;
-  return canERR_NOT_IMPLEMENTED;
-}
+  HandleData *hData;
 
-/***************************************************************************/
-kvStatus CANLIBAPI kvScriptEnvvarGetData(kvEnvHandle eHnd,
-                                         void *buf,
-                                         int start_index,
-                                         int data_len)
-{
-  (void) eHnd;
-  (void) buf;
-  (void) start_index;
-  (void) data_len;
-  return canERR_NOT_IMPLEMENTED;
+  hData = findHandle(GetCANLIBHandle(eHnd));
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  if (start_index){
+      return canERR_PARAM;
+  }
+
+  return hData->canOps->kvScriptEnvvarGetData(hData, GetENVVARHandle(eHnd), buf, start_index, data_len);
 }
 
 /***************************************************************************/
@@ -2098,15 +2239,47 @@ kvStatus CANLIBAPI kvScriptLoadFileOnDevice(const CanHandle hnd,
                                             int slotNo,
                                             char *localFile)
 {
-  (void) hnd;
-  (void) slotNo;
-  (void) localFile;
-  return canERR_NOT_IMPLEMENTED;
+  HandleData *hData;
+
+  hData = findHandle(hnd);
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  return hData->canOps->kvScriptLoadFileOnDevice(hData, slotNo, localFile);
 }
 
 /***************************************************************************/
+kvStatus CANLIBAPI kvScriptRequestText(const CanHandle hnd,
+                                       unsigned int slot,
+                                       unsigned int request)
+{
+  HandleData *hData;
 
+  hData = findHandle(hnd);
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+  return hData->canOps->kvScriptRequestText(hData, slot, request);
+}
 
+/***************************************************************************/
+kvStatus CANLIBAPI kvScriptGetText(const CanHandle hnd,
+                                   int  *slot,
+                                   unsigned long *time,
+                                   unsigned int  *flags,
+                                   char *buf,
+                                   size_t bufsize)
+{
+  HandleData *hData;
+
+  hData = findHandle(hnd);
+  if (hData == NULL) {
+    return canERR_INVHANDLE;
+  }
+
+  return hData->canOps->kvScriptGetText(hData, slot, time, flags, buf, bufsize);
+}
 
 
 static void InitializeListHead (LIST_ENTRY *head)
@@ -2703,7 +2876,7 @@ canSetNotify (const CanHandle hnd, void (*callback)(canNotifyData *),
 {
   HandleData *hData;
   const int validFlags = canNOTIFY_RX | canNOTIFY_TX | canNOTIFY_ERROR |
-                         canNOTIFY_STATUS | canNOTIFY_ENVVAR;
+                         canNOTIFY_STATUS | canNOTIFY_ENVVAR  | canNOTIFY_BUSONOFF;
 
   if (notifyFlags & ~validFlags) {
     return canERR_PARAM;
@@ -2742,7 +2915,7 @@ kvStatus CANLIBAPI kvSetNotifyCallback(const CanHandle hnd,
 {
   HandleData *hData;
   const unsigned int validFlags = canNOTIFY_RX | canNOTIFY_TX | canNOTIFY_ERROR |
-                                  canNOTIFY_STATUS | canNOTIFY_ENVVAR;
+                                  canNOTIFY_STATUS | canNOTIFY_ENVVAR | canNOTIFY_BUSONOFF;
 
   if (notifyFlags & ~validFlags) {
     return canERR_PARAM;
@@ -2782,6 +2955,7 @@ kvStatus CANLIBAPI kvSetNotifyCallback(const CanHandle hnd,
 void CANLIBAPI canInitializeLibrary (void)
 {
   if (Initialized != TRUE) {
+    vCanScript_envvar_init();
     memset(&timeDomains, 0, sizeof(kvTimeDomainHead));
     if (pthread_mutex_init(&timeDomains.critSect, PTHREAD_PROCESS_PRIVATE)) {
       PRINTF_TIMEDOMAIN(("canInitializeLibrary: pthread_mutex_init failed\n"));
@@ -2792,6 +2966,14 @@ void CANLIBAPI canInitializeLibrary (void)
   }
   return;
 }
+
+canStatus CANLIBAPI canEnumHardwareEx (int *channelCount)
+{
+  canStatus stat;
+  stat = canGetNumberOfChannels(channelCount);
+  return stat;
+}
+
 
 //******************************************************
 // Unload library
@@ -2830,4 +3012,207 @@ static canStatus check_bitrate (const CanHandle hnd, unsigned int bitrate)
     }
   }
   return canOK;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoConfirmConfig  (const int hnd)
+{
+  (void) hnd;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoGetNumberOfPins   (const int hnd, unsigned int *pinCount)
+{
+  (void) hnd;
+  (void) pinCount;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinGetInfo    (const int hnd,
+                                       unsigned int pin,
+                                       int item,
+                                       void *buffer,
+                                       const unsigned int bufsize)
+{
+  (void) hnd;
+  (void) pin;
+  (void) item;
+  (void) buffer;
+  (void) bufsize;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinGetAnalog (const int  hnd,
+                                      unsigned int pin,
+                                      float *  value)
+{
+  (void) hnd;
+  (void) pin;
+  (void) value;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinGetOutputAnalog (const int  hnd,
+                                      unsigned int pin,
+                                      float *  value)
+{
+  (void) hnd;
+  (void) pin;
+  (void) value;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinGetDigital (const int  hnd,
+                                      unsigned int pin,
+                                      unsigned int * value)
+{
+  (void) hnd;
+  (void) pin;
+  (void) value;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinGetOutputDigital (const int  hnd,
+                                      unsigned int pin,
+                                      unsigned int * value)
+{
+  (void) hnd;
+  (void) pin;
+  (void) value;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinSetAnalog (const int  hnd,
+                                      unsigned int pin,
+                                      float value)
+{
+  (void) hnd;
+  (void) pin;
+  (void) value;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinSetDigital (const int  hnd,
+                                       unsigned int pin,
+                                       unsigned int value)
+{
+  (void) hnd;
+  (void) pin;
+  (void) value;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinSetRelay (const int  hnd,
+                                     unsigned int pin,
+                                     unsigned int value)
+{
+  (void) hnd;
+  (void) pin;
+  (void) value;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinGetOutputRelay (const int  hnd,
+                                     unsigned int pin,
+                                     unsigned int *value)
+{
+  (void) hnd;
+  (void) pin;
+  (void) value;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoPinSetInfo (const int  hnd,
+                                    unsigned int pin,
+                                    int  item,
+                                    const void *  buffer,
+                                    const unsigned int  bufsize)
+{
+  (void) hnd;
+  (void) pin;
+  (void) item;
+  (void) buffer;
+  (void) bufsize;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoModuleGetPorts (const CanHandle hnd,
+                                        unsigned int module,
+                                        void *buffer,
+                                        const unsigned int bufsize)
+{
+  (void) hnd;
+  (void) module;
+  (void) buffer;
+  (void) bufsize;
+
+  return canERR_NOT_IMPLEMENTED;
+}
+
+//******************************************************
+// IoAPI - not implemented in linux
+//******************************************************
+canStatus CANLIBAPI kvIoModuleSetPorts (const CanHandle hnd,
+                                        unsigned int module,
+                                        const void *buffer,
+                                        const unsigned int bufsize)
+{
+  (void) hnd;
+  (void) module;
+  (void) buffer;
+  (void) bufsize;
+
+  return canERR_NOT_IMPLEMENTED;
 }

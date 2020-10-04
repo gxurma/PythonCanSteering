@@ -65,8 +65,14 @@
 
 MODNAME=kvvirtualcan
 DEPMOD=`which depmod`
+DIR="${0%/*}"
+KERNEL_VER=`uname -r` # Kernel version at install time
 
-install -m 644 $MODNAME.ko /lib/modules/`uname -r`/kernel/drivers/char/
+# append to file in case installer is run several times on different kernels
+echo $KERNEL_VER >> $DIR/kernel_ver 
+
+install -d -m 755 /lib/modules/$KERNEL_VER/kernel/drivers/char/
+install -m 644 $MODNAME.ko /lib/modules/$KERNEL_VER/kernel/drivers/char/
 if [ "$?" -ne 0 ] ; then
   exit 1
 fi
@@ -95,9 +101,13 @@ echo "remove    $MODNAME /usr/sbin/virtualcan.sh stop"  >> newconf
 cat newconf > $CONF
 rm newconf
 
-$DEPMOD -a
-if [ "$?" -ne 0 ] ; then
-  echo Failed to execute $DEPMOD -a
+if [ "$#" -gt 0 ] && [ $1 = "develinstall" ] ; then
+  echo "Ignoring $DEPMOD -a for now.."
+else
+  $DEPMOD -a
+  if [ "$?" -ne 0 ] ; then
+    echo Failed to execute $DEPMOD -a
+  fi
 fi
 
 MODCONF=/etc/modules-load.d/kvaser.conf

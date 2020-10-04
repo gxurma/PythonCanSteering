@@ -1,0 +1,1 @@
+cmd_/home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/usbcanII/usbcanII.mod := { echo  /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/usbcanII/usbcanHWIf.o; echo; } > /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/usbcanII/usbcanII.mod

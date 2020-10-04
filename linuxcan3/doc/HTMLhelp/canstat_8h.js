@@ -1,5 +1,6 @@
 var canstat_8h =
 [
+    [ "canEVENT_BUSONOFF", "canstat_8h.html#a7cb834f7374f19ec2c9f7cf8705c9fb3", null ],
     [ "canEVENT_ENVVAR", "canstat_8h.html#accbc123f913273ebadcdf894a8748df8", null ],
     [ "canEVENT_ERROR", "canstat_8h.html#a5a6431078d49d8f7cc36c6313db44406", null ],
     [ "canEVENT_RX", "canstat_8h.html#af5f5917ba5476570815747b960e26ba6", null ],
@@ -34,6 +35,7 @@ var canstat_8h =
     [ "canMSGERR_OVERRUN", "canstat_8h.html#adf0d578c7b25ede29a9733da44f08ab3", null ],
     [ "canMSGERR_STUFF", "canstat_8h.html#a3b8c31d47d9fef0014dbaa3118902bac", null ],
     [ "canMSGERR_SW_OVERRUN", "canstat_8h.html#a810afd58f22df8c44c729f78d955e006", null ],
+    [ "canNOTIFY_BUSONOFF", "canstat_8h.html#a55ea94efdb14977028e56f7c6042e3ff", null ],
     [ "canNOTIFY_ENVVAR", "canstat_8h.html#ab69dc959890826b245c422966c4bf627", null ],
     [ "canNOTIFY_ERROR", "canstat_8h.html#a91afcc669b1b8be0ed390aac37e44805", null ],
     [ "canNOTIFY_NONE", "canstat_8h.html#aac3167adc3230d49b3a359ed3e9c6422", null ],
@@ -145,6 +147,11 @@ var canstat_8h =
       [ "canERR_SCRIPT_TXE_CONTAINER_VERSION", "canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7aea19c70918f0993acd55691d28748914", null ],
       [ "canERR_SCRIPT_TXE_CONTAINER_FORMAT", "canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a58c38bbd185bd93144a10f22f12ca8fd", null ],
       [ "canERR_BUFFER_TOO_SMALL", "canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7afc999ab39dd6545165d8bfd44bf900ec", null ],
+      [ "canERR_IO_WRONG_PIN_TYPE", "canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a6675d7df5e1d243cfe2e315afe5cb573", null ],
+      [ "canERR_IO_NOT_CONFIRMED", "canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a6c6da6c9e7a89ab174763dc62b4541df", null ],
+      [ "canERR_IO_CONFIG_CHANGED", "canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a5f7b2b164921928f3bede7ca56273132", null ],
+      [ "canERR_IO_PENDING", "canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a3a5d08cbc5d0e7b2942118e2174c335b", null ],
+      [ "canERR_IO_NO_VALID_CONFIG", "canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a084500747262b1b59587180359b6cfe1", null ],
       [ "canERR__RESERVED", "canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a7fdb374ab194f07a46dfddd2c57fee5e", null ]
     ] ]
 ];

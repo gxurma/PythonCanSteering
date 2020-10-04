@@ -1,5 +1,5 @@
 #
-#             Copyright 2017 by Kvaser AB, Molndal, Sweden
+#             Copyright 2018 by Kvaser AB, Molndal, Sweden
 #                         http://www.kvaser.com
 #
 #  This software is dual licensed under the following two licenses:
@@ -74,17 +74,28 @@ CFLAGS  += -Wall -Werror -Wextra -DCANLIB_NAME_STRING=\"$(LIBRARY)\" -O2 -fomit-
 CFLAGS  += $(ccflags-y)
 CFLAGS  += -I. -I../include
 
+# GCC 4.6 and below does not allow initializing of struct with '{ 0 }'
+GCC_VERSION_LTEQ_4_6 := $(shell expr `gcc -dumpversion | cut -f1-2 -d'.'` \<= 4.6)
+ifeq ($(GCC_VERSION_LTEQ_4_6),1)
+CFLAGS += -Wno-missing-field-initializers
+endif
+
 # Flags for  reentrant, position independent code
 LIBCFLAGS = $(CFLAGS) -D_REENTRANT -fPIC
 LDFLAGS = -lc -pthread
 
 SRCS := canlib.c
+SRCS += canlib_channel_list.c
 SRCS += linkedlist.c
 SRCS += VCanFunctions.c
 SRCS += VCanFuncUtil.c
 SRCS += VCanMemoFunctions.c
 SRCS += VCanScriptFunctions.c
+SRCS += md5.c
+SRCS += txe.c
+SRCS += txe_fopen.c
 SRCS += dlc.c
+SRCS += tq_util.c
 
 OBJS := $(patsubst %.c, %.o, $(SRCS))
 OTHERDEPS := ../include/canlib.h
@@ -137,6 +148,7 @@ install:
 	/sbin/ldconfig
 	install -m 644 ../include/canlib.h /usr/include
 	install -m 644 ../include/canstat.h /usr/include
+	install -m 644 ../include/bus_params_tq.h /usr/include
 	install -m 644 ../include/obsolete.h /usr/include
 	mkdir -p /usr/doc/canlib
 	cp -r ../doc/HTMLhelp /usr/doc/canlib
@@ -145,7 +157,7 @@ uninstall:
 	$(MAKE) -C examples uninstall
 	rm -f /usr/lib/$(LIBNAME) /usr/lib/$(SONAME) /usr/lib/$(LIBRARY)
 	/sbin/ldconfig
-	rm -f /usr/include/canlib.h /usr/include/canstat.h /usr/include/obsolete.h
+	rm -f /usr/include/canlib.h /usr/include/canstat.h /usr/include/obsolete.h /usr/include/bus_params_tq.h
 	rm -rf /usr/doc/canlib
 
 clean:

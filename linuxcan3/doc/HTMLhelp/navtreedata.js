@@ -1,17 +1,16 @@
 var NAVTREE =
 [
   [ "Welcome to Kvaser Linux Drivers and SDK!", "index.html", [
+    [ "Installation", "page_installing.html", "page_installing" ],
+    [ "Tutorials", "page_tutorial.html", "page_tutorial" ],
     [ "CAN bus API (CANlib)", "page_canlib.html", "page_canlib" ],
     [ "LIN bus API (LINlib)", "page_linlib.html", [
-      [ "Using the LIN Bus", "page_linlib.html#section_user_guide_lin_intro", null ]
+      [ "Description", "page_linlib.html#section_user_guide_lin_lib_1", null ],
+      [ "Using the LIN Bus", "page_linlib.html#section_user_guide_lin_intro", null ],
+      [ "LIN Frame Identifiers", "page_linlib.html#section_user_guide_lin_frame_identifiers", null ],
+      [ "Where to go from here", "page_linlib.html#section_user_guide_lin_where_to_go_from_here", null ]
     ] ],
-    [ "Database API (kvaDbLib)", "page_kvadblib.html", [
-      [ "Description", "page_kvadblib.html#section_user_guide_kvadblib_1", null ],
-      [ "Naming convention", "page_kvadblib.html#section_user_guide_kvadblib_2", null ],
-      [ "Build an application", "page_kvadblib.html#section_user_guide_kvadblib_3", [
-        [ "Example", "page_kvadblib.html#section_user_guide_kvadblib_3_3", null ]
-      ] ]
-    ] ],
+    [ "Database API (kvaDbLib)", "page_kvadblib.html", "page_kvadblib" ],
     [ "Converter API (kvlclib)", "page_kvlclib.html", [
       [ "Description", "page_kvlclib.html#section_user_guide_kvlclib_1", null ],
       [ "Naming convention", "page_kvlclib.html#section_user_guide_kvlclib_2", null ],
@@ -26,7 +25,13 @@ var NAVTREE =
       [ "Description", "page_kvamemolibxml.html#section_user_guide_kvamemolibxml_1", null ],
       [ "Build an application", "page_kvamemolibxml.html#section_user_guide_kvamemolibxml_2", null ]
     ] ],
+    [ "Remote Device API (kvrlib)", "page_kvrlib.html", [
+      [ "Description", "page_kvrlib.html#section_user_guide_kvrlib_1", null ]
+    ] ],
     [ "License and Copyright", "page_license_and_copyright.html", null ],
+    [ "Sample Programs (kvrlib)", "page_user_guide_kvrlib_samples.html", "page_user_guide_kvrlib_samples" ],
+    [ "Kvaser Support", "page_support.html", null ],
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
@@ -45,12 +50,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"canlib_8h.html#ae2dfc110a395c79703a7c4929b2f8279",
-"group___c_a_n.html#gafb5e475233ef14ccf9084f610caba560",
-"group__kvadb__database.html#gaefa8ebb68ad9d0f5fcb397b675f29f3a",
-"group__kvlc__database.html#gabf63c240a42cf4474f0e3fe9010e5f0b",
-"kva_db_lib_8h.html#a486155dbae03cc008297edad213339d0abfd4618467f068a7b1082a71383a8fe0",
-"linlib_8h.html#aa71a0b1071a3246b40ed830f32ed43ce"
+"canlib_8h.html#abc63331b227da4573dff86d7b119969c",
+"group___c_a_n.html#ga2ca01a0c71b8c3b5204f07b051eb4758",
+"group__kvadb__attributes.html#ga40223b0e02ed37ce5a858a99d41e28b6",
+"group__kvadb__signals.html#gac094c8af277fc9d21315bb190d7ae3fd",
+"group__kvm__rtc.html#ga0545d8d9c2782728d263ed67cbc0efac",
+"kva_memo_lib_x_m_l_8h.html#af101e30719b94a31bfca04d5089dfc0d",
+"page_linlib.html#section_user_guide_lin_lib_1",
+"structkv_time_domain_data__s.html#a9cc0826be3a3477969cc862737e0f334"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

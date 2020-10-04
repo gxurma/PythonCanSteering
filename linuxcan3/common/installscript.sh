@@ -67,7 +67,11 @@ MODNAME=kvcommon
 DEPMOD=`which depmod`
 UDEVCTRL=`which udevcontrol`
 UDEVADM=`which udevadm`
+DIR="${0%/*}"
+KERNEL_VER=`uname -r` # Kernel version at install time
 
+# append to file in case installer is run several times on different kernels
+echo $KERNEL_VER >> $DIR/kernel_ver 
 
 # Check if module is loaded
 MODLOADED=$(lsmod | grep $MODNAME)
@@ -79,12 +83,17 @@ if [ $? -eq 0 ] ; then
   echo "***********************************************************************"
 fi
 
-install -D -m 644 $MODNAME.ko /lib/modules/`uname -r`/kernel/drivers/usb/misc
+install -d -m 755 /lib/modules/$KERNEL_VER/kernel/drivers/usb/misc
+install -D -m 644 $MODNAME.ko /lib/modules/$KERNEL_VER/kernel/drivers/usb/misc
 if [ "$?" -ne 0 ] ; then
   exit 1
 fi
 
-$DEPMOD -a
-if [ "$?" -ne 0 ] ; then
-  echo Failed to execute $DEPMOD -a
+if [ "$#" -gt 0 ] && [ $1 = "develinstall" ] ; then
+  echo "Ignoring $DEPMOD -a for now.."
+else
+  $DEPMOD -a
+  if [ "$?" -ne 0 ] ; then
+    echo Failed to execute $DEPMOD -a
+  fi
 fi

@@ -87,6 +87,10 @@
 #include <asm/io.h>
 #include <linux/seq_file.h>
 
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 29))
+#error Linux kernel version 2.6.29 or later required for kvpciefd!
+#endif /* KERNEL_VERSION < 2.6.29 */
+
 #if LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)
 #   include <asm/system.h>
 #endif /* KERNEL_VERSION < 3.4.0 */
@@ -114,6 +118,15 @@
 
 #include "hwnames.h"
 
+
+// Force 32-bit DMA addresses
+#ifdef KV_PCIEFD_DMA_32BIT
+#undef KV_PCIEFD_DMA_64BIT
+#else
+#ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
+#define KV_PCIEFD_DMA_64BIT 1
+#endif /* CONFIG_ARCH_DMA_ADDR_T_64BIT */
+#endif /* KV_PCIEFD_DMA_32BIT */
 
 #ifdef PCIEFD_DEBUG
 //
@@ -175,7 +188,9 @@ static int pciCanInitAllDevices(void);
 static int pciCanSetBusParams (VCanChanData *vChd, VCanBusParams *par);
 static int pciCanGetBusParams (VCanChanData *vChd, VCanBusParams *par);
 static int pciCanSetOutputMode (VCanChanData *vChd, int silent);
+static int pciCanGetOutputMode (VCanChanData *vChd, int *silent);
 static int pciCanSetTranceiverMode (VCanChanData *vChd, int linemode, int resnet);
+static int pciCanReqBusStats (VCanChanData *vChan);
 static int pciCanBusOn (VCanChanData *vChd);
 static int pciCanBusOff(VCanChanData *vChd);
 static int pciCanGetTxErr(VCanChanData *vChd);
@@ -202,6 +217,7 @@ static VCanHWInterface hwIf = {
   .setBusParams       = pciCanSetBusParams,
   .getBusParams       = pciCanGetBusParams,
   .setOutputMode      = pciCanSetOutputMode,
+  .getOutputMode      = pciCanGetOutputMode,
   .setTranceiverMode  = pciCanSetTranceiverMode,
   .busOn              = pciCanBusOn,
   .busOff             = pciCanBusOff,
@@ -218,6 +234,7 @@ static VCanHWInterface hwIf = {
   .getCustChannelName = pciCanGetCustChannelName,
   .getCardInfo        = vCanGetCardInfo,
   .getCardInfo2       = vCanGetCardInfo2,
+  .reqBusStats        = pciCanReqBusStats,
 };
 
 
@@ -296,7 +313,7 @@ static int dmaInit(VCanCardData *vCard)
   PciCanCardData *hCard = vCard->hwCardData;
   struct device *dev = &hCard->dev->dev;
 
-#ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
+#ifdef KV_PCIEFD_DMA_64BIT
   if (!dma_set_mask(dev, DMA_BIT_MASK(64))) {
     hCard->useDmaAddr64 = 1;
     DEBUGPRINT(3,"Use 64-bit dma address mask\n");
@@ -361,8 +378,8 @@ static int setupBusMasterTranslationTable(VCanCardData * vCard, int pos, dmaCtxB
   // Every table entry is 64 bits, two table entries are used for each channel.
   unsigned int tabEntryOffset = 0x1000+pos*8;
 
-#ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
-  DEBUGPRINT(3,"CONFIG_ARCH64\n");
+#ifdef KV_PCIEFD_DMA_64BIT
+  DEBUGPRINT(3,"KV_PCIEFD_DMA_64BIT\n");
 
   if(hCard->useDmaAddr64)
     {
@@ -381,7 +398,7 @@ static int setupBusMasterTranslationTable(VCanCardData * vCard, int pos, dmaCtxB
                  OFFSET_FROM_BASE(hCard->pcieBar0Base, tabEntryOffset) );
       iowrite32(0, OFFSET_FROM_BASE(hCard->pcieBar0Base, tabEntryOffset+4) );
 
-#ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
+#ifdef KV_PCIEFD_DMA_64BIT
     }
 #endif
 
@@ -1246,7 +1263,8 @@ static int pciCanProbe (VCanCardData *vCard)
                         VCAN_CHANNEL_CAP_TXREQUEST            |
                         VCAN_CHANNEL_CAP_TXACKNOWLEDGE        |
                         VCAN_CHANNEL_CAP_CANFD                |
-                        VCAN_CHANNEL_CAP_CANFD_NONISO,
+                        VCAN_CHANNEL_CAP_CANFD_NONISO         |
+                        VCAN_CHANNEL_CAP_SILENTMODE,
                         0xFFFFFFFF,
                         0xFFFFFFFF,
                         MAX_CARD_CHANNELS);
@@ -1586,6 +1604,7 @@ static int pciCanGetBusParams (VCanChanData *vChd, VCanBusParams *par)
 } // pciCanGetBusParams
 
 
+
 //======================================================================
 //  Set silent or normal mode
 //======================================================================
@@ -1617,6 +1636,28 @@ static int pciCanSetOutputMode (VCanChanData *vChd, int silent)
   return VCAN_STAT_OK;
 } // pciCanSetOutputMode
 
+
+//======================================================================
+//  Get silent or normal mode
+//======================================================================
+static int pciCanGetOutputMode (VCanChanData *vChd, int *silent)
+{
+  PciCanChanData *hChd = vChd->hwChanData;
+  unsigned long irqFlags;
+  uint32_t mode;
+
+  if (!vChd || !silent) return VCAN_STAT_BAD_PARAMETER;
+
+  spin_lock_irqsave(&hChd->lock, irqFlags);
+
+  mode = IORD_PCIEFD_MOD(hChd->canControllerBase);
+
+  *silent = !!(mode & PCIEFD_MOD_LOM_MSK);
+
+  spin_unlock_irqrestore(&hChd->lock, irqFlags);
+
+  return VCAN_STAT_OK;
+}
 
 //======================================================================
 //  Line mode
@@ -1909,6 +1950,17 @@ static int waitForBusOn(int loopmax, VCanChanData *vChd)
   }
 }
 
+//======================================================================
+// Reading bus stats, only bus load is read
+//======================================================================
+static int pciCanReqBusStats (VCanChanData *vChan)
+{
+        PciCanChanData *hChd = vChan->hwChanData;
+
+        vChan->busStats.busLoad = hChd->load;
+
+        return VCAN_STAT_OK;
+}
 
 //======================================================================
 //  Go bus on
@@ -2994,11 +3046,6 @@ static int pciCanTransmitMessage (VCanChanData *vChd, CAN_MSG *m)
 
   transId = atomic_read(&vChd->transId);
 
-  if (transId == 0) {
-    DEBUGPRINT(1,"--- transId must not be zero\n");
-    return VCAN_STAT_NO_RESOURCES;
-  }
-
   if (hChd->current_tx_message[transId - 1].user_data) {
     DEBUGPRINT(2, "Transid is already in use: %x %d   %x %d CH:%u\n\n",
                hChd->current_tx_message[transId - 1].id,
@@ -3450,51 +3497,39 @@ static void pciCanSend (void *void_chanData)
 
   wait_for_completion(&devChan->busOnCompletion);
 
-  if (!chd->isOnBus) {
-    DEBUGPRINT(4, "Attempt to send when not on bus\n");
-    complete(&devChan->busOnCompletion);
-
-    return;
-  }
-
-  if (chd->minorNr < 0) {  // Channel not initialized?
-    DEBUGPRINT(1, "Attempt to send on unitialized channel\n");
-    complete(&devChan->busOnCompletion);
-    return;
-  }
-
-  if (!pciCanTxAvailable(chd)) {
-    DEBUGPRINT(4, "Maximum number of messages outstanding reached\n");
-    complete(&devChan->busOnCompletion);
-    return;
-  }
-
-  // Send Messages
-  queuePos = queue_front(&chd->txChanQueue);
-  if (queuePos >= 0) {
-    if (pciCanTransmitMessage(chd, &chd->txChanBuffer[queuePos]) ==
-        VCAN_STAT_OK) {
-      queue_pop(&chd->txChanQueue);
-      queue_wakeup_on_space(&chd->txChanQueue);
-
-    } else {
-      DEBUGPRINT(1, "Message send failed\n");
-      queue_release(&chd->txChanQueue);
-
-      // Need to retry work!
-#if !defined(TRY_RT_QUEUE)
-      schedule_work(&devChan->txTaskQ);
-#else
-      queue_work(devChan->txTaskQ, &devChan->txWork);
-#endif
+  while (1) {
+    if (!chd->isOnBus) {
+      DEBUGPRINT(4, "Attempt to send when not on bus\n");
+      break;
     }
-  } else {
-    queue_release(&chd->txChanQueue);
+    
+    if (chd->minorNr < 0) {  // Channel not initialized?
+      DEBUGPRINT(1, "Attempt to send on unitialized channel\n");
+      break;
+    }
+    
+    if (!pciCanTxAvailable(chd)) {
+      DEBUGPRINT(4, "Maximum number of messages outstanding reached\n");
+      break;
+    }
+    
+    // Send Messages
+    queuePos = queue_front(&chd->txChanQueue);
+    if (queuePos >= 0) {
+      if (pciCanTransmitMessage(chd, &chd->txChanBuffer[queuePos]) == VCAN_STAT_OK) {
+        queue_pop(&chd->txChanQueue);
+        queue_wakeup_on_space(&chd->txChanQueue);
+      } else {
+        queue_release(&chd->txChanQueue);
+        break;
+      }
+    } else {
+      queue_release(&chd->txChanQueue);
+      break;
+    }
   }
 
   complete(&devChan->busOnCompletion);
-
-  return;
 }
 
 //======================================================================

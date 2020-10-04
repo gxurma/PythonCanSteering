@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['obsolete_2eh',['obsolete.h',['../obsolete_8h.html',1,'']]]
+  ['installing_2etxt',['installing.txt',['../installing_8txt.html',1,'']]],
+  ['io_5fpin_2etxt',['io_pin.txt',['../io__pin_8txt.html',1,'']]]
 ];

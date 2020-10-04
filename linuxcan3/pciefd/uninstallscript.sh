@@ -65,21 +65,55 @@
 
 MODNAME=kvpciefd
 DEPMOD=`which depmod`
+DIR="${0%/*}"
+DEVEL=
+PURGE=
+
+print_usage() {
+  echo "Usage: uninstallscript.sh [-p] [-d] [-h]"
+  echo
+  echo "  -p    Uninstall all versions of $MODNAME"
+  echo "  -d    Developer install, ignores $DEPMOD -a"
+  echo "  -h    Prints this usage message"
+}
+
+while getopts 'dph' flag ; do
+  case "${flag}" in
+    d) DEVEL=true ;;
+    p) PURGE=true ;;
+    h) print_usage
+       exit 0 ;;
+  esac
+done
 
 /usr/sbin/pciefd.sh stop 2>/dev/null
-rm -f /lib/modules/`uname -r`/kernel/drivers/char/$MODNAME.ko \
-      /usr/sbin/pciefd.sh
+
+if [ "$PURGE" = true ] ; then
+    find /lib/modules/*/kernel/drivers/char/ -name $MODNAME.ko -exec rm -f {} +
+
+# Need to loop in case installer was run several times on different kernel versions
+elif test -f "$DIR/kernel_ver"; then
+  while read line; do
+    rm -f /lib/modules/$line/kernel/drivers/char/$MODNAME.ko
+  done < "$DIR/kernel_ver"
+  rm -f "$DIR/kernel_ver"
+# If user for some reason deleted kernel_ver we try deleting in current kernel
+else
+  rm -f /lib/modules/`uname -r`/kernel/drivers/char/$MODNAME.ko
+fi
+
+rm -f /usr/sbin/pciefd.sh
 
 echo Remove SocketCAN Kvaser PCI driver from blacklist.
 
 if [ -f /etc/modprobe.conf ] ; then
   # CentOS/Redhat/RHEL/Fedora Linux...
   CONF=/etc/modprobe.conf
-  BLACKLIST="alias     kvaser_pci   /dev/null"
+  BLACKLIST=$(printf "alias     kvaser_pci   /dev/null\nalias     kvaser_pciefd  /dev/null")
 else
   # Debian/Ubuntu Linux
   CONF=/etc/modprobe.d/kvaser.conf
-  BLACKLIST="blacklist kvaser_pci"
+  BLACKLIST=$(printf "blacklist kvaser_pci\nblacklist kvaser_pciefd")
   if [ ! -f $CONF ] ; then
     touch $CONF
   fi
@@ -91,9 +125,13 @@ grep -v "^${BLACKLIST}\|pciefd" < $CONF                > newconf
 cat newconf > $CONF
 rm newconf
 
-$DEPMOD -a
-if [ "$?" -ne 0 ] ; then
-  echo Failed to execute $DEPMOD -a
+if [ "$DEVEL" = true ] ; then
+  echo "Ignoring $DEPMOD -a for now.."
+else
+  $DEPMOD -a
+  if [ "$?" -ne 0 ] ; then
+    echo Failed to execute $DEPMOD -a
+  fi
 fi
 
 MODCONF=/etc/modules-load.d/kvaser.conf

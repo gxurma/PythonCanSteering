@@ -1,0 +1,1 @@
+cmd_/home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/leaf/leaf.mod := { echo  /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/leaf/leafHWIf.o; echo; } > /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/leaf/leaf.mod

@@ -171,6 +171,7 @@ static int leaf_get_cust_channel_name(const VCanChanData * const vChan,
                                       unsigned int * const status);
 static int leaf_get_card_info_misc(const VCanChanData *chd, KCAN_IOCTL_MISC_INFO *cardInfoMisc);
 static int leaf_flash_leds(const VCanChanData *chd, int action, int timeout);
+static int leaf_get_silent(VCanChanData *vChan, int *silent);
 
 static VCanDriverData driverData;
 
@@ -209,6 +210,7 @@ static VCanHWInterface hwIf = {
   .getCustChannelName = leaf_get_cust_channel_name,
   .getCardInfoMisc    = leaf_get_card_info_misc,
   .flashLeds          = leaf_flash_leds,
+  .getOutputMode      = leaf_get_silent,
 };
 
 
@@ -231,7 +233,7 @@ static unsigned long ticks_to_10us (VCanCardData *vCard,
     timestamp = softSyncLoc2Glob(vCard, timestamp);
   }
 
-  retval = div_u64 (timestamp + 4999, 10000) - vCard->timestamp_offset;
+  retval = div_u64 (timestamp + 4999, 10000);
   return retval;
 }
 
@@ -2398,6 +2400,15 @@ static int leaf_start (VCanCardData *vCard)
 
     r = leaf_capabilities (vCard, VCAN_CHANNEL_CAP_SYNC_TX_FLUSH);
     if (r != VCAN_STAT_OK) DEBUGPRINT(2, (TXT("Failed reading capability: VCAN_CHANNEL_CAP_SYNC_TX_FLUSH\n")));
+
+    r = leaf_capabilities (vCard, VCAN_CHANNEL_CAP_HAS_LOGGER);
+    if (r != VCAN_STAT_OK) DEBUGPRINT(2, (TXT("Failed reading capability: VCAN_CHANNEL_CAP_HAS_LOGGER\n")));
+
+    r = leaf_capabilities (vCard, VCAN_CHANNEL_CAP_HAS_REMOTE);
+    if (r != VCAN_STAT_OK) DEBUGPRINT(2, (TXT("Failed reading capability: VCAN_CHANNEL_CAP_HAS_REMOTE\n")));
+
+    r = leaf_capabilities (vCard, VCAN_CHANNEL_CAP_HAS_SCRIPT);
+    if (r != VCAN_STAT_OK) DEBUGPRINT(2, (TXT("Failed reading capability: VCAN_CHANNEL_CAP_HAS_SCRIPT\n")));
   }
 
   set_capability_value (vCard,
@@ -2792,6 +2803,33 @@ static int leaf_set_silent (VCanChanData *vChan, int silent)
 
   return ret;
 } // _set_silent
+
+
+//======================================================================
+//
+//  Get silent or normal mode
+//
+static int leaf_get_silent(VCanChanData *vChan, int *silent)
+{
+  filoCmd cmd, reply;
+  int ret;
+
+  if (!vChan || !silent) return VCAN_STAT_BAD_PARAMETER;
+
+  memset(&cmd, 0, sizeof(cmd));
+  memset(&reply, 0, sizeof(reply));
+  cmd.getDrivermodeReq.cmdNo    = CMD_GET_DRIVERMODE_REQ;
+  cmd.getDrivermodeReq.cmdLen   = sizeof(cmdGetDrivermodeReq);
+  cmd.getDrivermodeReq.channel  = (unsigned char)vChan->channel;
+  ret = leaf_send_and_wait_reply(vChan->vCard, &cmd, &reply,
+                                 CMD_GET_DRIVERMODE_RESP,
+                                 0,
+                                 SKIP_ERROR_EVENT);
+
+  *silent  = reply.getDrivermodeResp.driverMode == DRIVERMODE_SILENT;
+
+  return ret;
+}
 
 
 //======================================================================
@@ -3691,6 +3729,18 @@ static int leaf_capabilities (VCanCardData *vCard, uint32_t vcan_cmd) {
     case CAP_SUB_CMD_SYNC_TX_FLUSH:
       value = reply.capabilitiesResp.syncTxFlushCap.value;
       mask  = reply.capabilitiesResp.syncTxFlushCap.mask;
+      break;
+    case CAP_SUB_CMD_HAS_LOGGER:
+      value = reply.capabilitiesResp.loggerCap.value;
+      mask  = reply.capabilitiesResp.loggerCap.mask;
+      break;
+    case CAP_SUB_CMD_HAS_REMOTE:
+      value = reply.capabilitiesResp.remoteCap.value;
+      mask  = reply.capabilitiesResp.remoteCap.mask;
+      break;
+    case CAP_SUB_CMD_HAS_SCRIPT:
+      value = reply.capabilitiesResp.scriptCap.value;
+      mask  = reply.capabilitiesResp.scriptCap.mask;
       break;
     default: return VCAN_STAT_BAD_PARAMETER; break;
   }

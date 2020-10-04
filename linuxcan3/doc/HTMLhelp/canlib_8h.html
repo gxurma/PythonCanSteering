@@ -91,6 +91,7 @@ $(document).ready(function(){initNavTree('canlib_8h.html','');});
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="canstat_8h_source.html">canstat.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="bus__params__tq_8h_source.html">bus_params_tq.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="obsolete_8h_source.html">obsolete.h</a>&quot;</code><br />
 </div>
 <p><a href="canlib_8h_source.html">Go to the source code of this file.</a></p>
@@ -99,16 +100,29 @@ $(document).ready(function(){initNavTree('canlib_8h.html','');});
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcan_notify_data.html">canNotifyData</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_clock_info.html">kvClockInfo</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_bus_param_limits.html">kvBusParamLimits</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcan_user_io_port_data.html">canUserIoPortData</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcan_bus_statistics__s.html">canBusStatistics_s</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_time_domain_data__s.html">kvTimeDomainData_s</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_io_module_digital.html">kvIoModuleDigital</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_io_module_internal.html">kvIoModuleInternal</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_io_module_relay.html">kvIoModuleRelay</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_io_module_analog.html">kvIoModuleAnalog</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ad1f2b460c7780224a9dbc0f8f8a4918a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ad1f2b460c7780224a9dbc0f8f8a4918a">canINVALID_HANDLE</a>&#160;&#160;&#160;(-1)</td></tr>
+<tr class="memdesc:ad1f2b460c7780224a9dbc0f8f8a4918a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates an invalid <a class="el" href="canlib_8h.html#ae3d1b041d62207d5336f93c089cd5b65">canHandle</a>.  <a href="#ad1f2b460c7780224a9dbc0f8f8a4918a">More...</a><br /></td></tr>
 <tr class="separator:ad1f2b460c7780224a9dbc0f8f8a4918a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">canOPEN_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canOPEN_xxx"></a> These defines are used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>. </p>
@@ -170,8 +184,8 @@ Macros</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">canBITRATE_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="BAUD_xxx"></a><a class="anchor" id="canBITRATE_xxx"></a><a class="anchor" id="canFD_BITRATE_xxx"></a></p>
 <p>Common bus speeds. Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gac34c1577cae55385250e7412513c8cbd">canSetBusParamsC200()</a>. The values are translated in canlib, <a class="el" href="group___c_a_n.html#gaf38b95fce4930347d9986887ec046e13">canTranslateBaud()</a>.</p>
-<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="canlib_8h.html#BAUD_xxx">BAUD_xxx</a> names are only retained for compability.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_misc.html#section_user_guide_misc_bitrate">Bit Rate Constants</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="canlib_8h.html#BAUD_xxx">BAUD_xxx</a> names are only retained for compatibility.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_chips_channels.html#section_user_guide_init_bit_rate_can">Set CAN Bitrate</a>, <a class="el" href="page_user_guide_chips_channels.html#section_user_guide_init_bit_rate_canfd">Set CAN FD Bitrate</a> </dd></dl>
 </div></td></tr>
 <tr class="memitem:ac823cae7d94763607a7ca40fcdb5196d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ac823cae7d94763607a7ca40fcdb5196d">canBITRATE_1M</a>&#160;&#160;&#160;(-1)</td></tr>
 <tr class="separator:ac823cae7d94763607a7ca40fcdb5196d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -237,7 +251,7 @@ Macros</h2></td></tr>
 <tr class="separator:aac5e7b3f0081eed9bdf5f5d50ff8aab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">canCHANNELDATA_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canCHANNELDATA_xxx"></a></p>
-<p>These defines are used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. </p>
+<p>These defines are used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a> and <a class="el" href="group___c_a_n.html#ga909e5c14b09fe76bad280475138d503e">canGetHandleData()</a>. </p>
 </div></td></tr>
 <tr class="memitem:a7eeb70e7c666f629ca3762f4692469ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a7eeb70e7c666f629ca3762f4692469ae">canCHANNELDATA_CHANNEL_CAP</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a7eeb70e7c666f629ca3762f4692469ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -315,6 +329,8 @@ Macros</h2></td></tr>
 <tr class="separator:a3cc31ba6fd77280ecd11aea7a4089472"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a810b2e8dc8153bac191b645a74c36ad9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a810b2e8dc8153bac191b645a74c36ad9">canCHANNELDATA_CHANNEL_CAP_MASK</a>&#160;&#160;&#160;38</td></tr>
 <tr class="separator:a810b2e8dc8153bac191b645a74c36ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e91dd0d999b3043c6da5cb911dd83d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a0e91dd0d999b3043c6da5cb911dd83d8">canCHANNELDATA_CUST_CHANNEL_NAME</a>&#160;&#160;&#160;39</td></tr>
+<tr class="separator:a0e91dd0d999b3043c6da5cb911dd83d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a928b5c304c08ff8f834511733fd73e5c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a928b5c304c08ff8f834511733fd73e5c">canCHANNELDATA_IS_REMOTE</a>&#160;&#160;&#160;40</td></tr>
 <tr class="separator:a928b5c304c08ff8f834511733fd73e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad05c95b1ca22a5ccdf0ed713f0b1e2d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aad05c95b1ca22a5ccdf0ed713f0b1e2d">canCHANNELDATA_REMOTE_TYPE</a>&#160;&#160;&#160;41</td></tr>
@@ -325,8 +341,12 @@ Macros</h2></td></tr>
 <tr class="separator:ae2dfc110a395c79703a7c4929b2f8279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6c0532c716939735508973662242487"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ac6c0532c716939735508973662242487">canCHANNELDATA_FEATURE_EAN</a>&#160;&#160;&#160;44</td></tr>
 <tr class="separator:ac6c0532c716939735508973662242487"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e91dd0d999b3043c6da5cb911dd83d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a0e91dd0d999b3043c6da5cb911dd83d8">canCHANNELDATA_CUST_CHANNEL_NAME</a>&#160;&#160;&#160;39</td></tr>
-<tr class="separator:a0e91dd0d999b3043c6da5cb911dd83d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4a719c4336ae1ec409bc835a9321f05"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ad4a719c4336ae1ec409bc835a9321f05">canCHANNELDATA_BUS_PARAM_LIMITS</a>&#160;&#160;&#160;45</td></tr>
+<tr class="separator:ad4a719c4336ae1ec409bc835a9321f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40c7c5a86334adcc799cd78696deca2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a40c7c5a86334adcc799cd78696deca2e">canCHANNELDATA_CLOCK_INFO</a>&#160;&#160;&#160;46</td></tr>
+<tr class="separator:a40c7c5a86334adcc799cd78696deca2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8f3ade70e6718ccca7d914b251d0d2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ae8f3ade70e6718ccca7d914b251d0d2c">canCHANNELDATA_CHANNEL_CAP_EX</a>&#160;&#160;&#160;47</td></tr>
+<tr class="separator:ae8f3ade70e6718ccca7d914b251d0d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">canCHANNEL_IS_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canCHANNEL_IS_xxx"></a> These channelFlags are used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a> and in conjunction with <a class="el" href="canlib_8h.html#a9d7f6f8a7b736970d1d9c2ca28a5621e">canCHANNELDATA_CHANNEL_FLAGS</a>. </p>
 </div></td></tr>
@@ -448,69 +468,84 @@ Macros</h2></td></tr>
 <tr class="memitem:a053c71698b7c28ccda9338875a74bfef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a053c71698b7c28ccda9338875a74bfef">canHWTYPE_CANLINHYBRID</a>&#160;&#160;&#160;84</td></tr>
 <tr class="memdesc:a053c71698b7c28ccda9338875a74bfef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kvaser Hybrid CAN/LIN.  <a href="#a053c71698b7c28ccda9338875a74bfef">More...</a><br /></td></tr>
 <tr class="separator:a053c71698b7c28ccda9338875a74bfef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f227b989d37c23ae0a641bb1cdad209"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a2f227b989d37c23ae0a641bb1cdad209">canHWTYPE_DINRAIL</a>&#160;&#160;&#160;86</td></tr>
+<tr class="memdesc:a2f227b989d37c23ae0a641bb1cdad209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kvaser DIN Rail SE400S and variants.  <a href="#a2f227b989d37c23ae0a641bb1cdad209">More...</a><br /></td></tr>
+<tr class="separator:a2f227b989d37c23ae0a641bb1cdad209"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab943def3563eb89a526ecd8f3b489768"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ab943def3563eb89a526ecd8f3b489768">canHWTYPE_U100</a>&#160;&#160;&#160;88</td></tr>
+<tr class="memdesc:ab943def3563eb89a526ecd8f3b489768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kvaser U100 and variants.  <a href="#ab943def3563eb89a526ecd8f3b489768">More...</a><br /></td></tr>
+<tr class="separator:ab943def3563eb89a526ecd8f3b489768"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">canCHANNEL_CAP_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canCHANNEL_CAP_xxx"></a> Channel capabilities. </p>
 </div></td></tr>
 <tr class="memitem:aea4674f9e6857f681e911f638fd0c00e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aea4674f9e6857f681e911f638fd0c00e">canCHANNEL_CAP_EXTENDED_CAN</a>&#160;&#160;&#160;0x00000001L</td></tr>
-<tr class="memdesc:aea4674f9e6857f681e911f638fd0c00e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can use extended identifiers.  <a href="#aea4674f9e6857f681e911f638fd0c00e">More...</a><br /></td></tr>
+<tr class="memdesc:aea4674f9e6857f681e911f638fd0c00e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can use extended identifiers.  <a href="#aea4674f9e6857f681e911f638fd0c00e">More...</a><br /></td></tr>
 <tr class="separator:aea4674f9e6857f681e911f638fd0c00e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6657cafcf7b244917cc6e84a895e9bc9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a6657cafcf7b244917cc6e84a895e9bc9">canCHANNEL_CAP_BUS_STATISTICS</a>&#160;&#160;&#160;0x00000002L</td></tr>
-<tr class="memdesc:a6657cafcf7b244917cc6e84a895e9bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can report busload etc.  <a href="#a6657cafcf7b244917cc6e84a895e9bc9">More...</a><br /></td></tr>
+<tr class="memdesc:a6657cafcf7b244917cc6e84a895e9bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can report busload etc.  <a href="#a6657cafcf7b244917cc6e84a895e9bc9">More...</a><br /></td></tr>
 <tr class="separator:a6657cafcf7b244917cc6e84a895e9bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a759fbc45e4c750b1753b1426526ebd4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a759fbc45e4c750b1753b1426526ebd4f">canCHANNEL_CAP_ERROR_COUNTERS</a>&#160;&#160;&#160;0x00000004L</td></tr>
-<tr class="memdesc:a759fbc45e4c750b1753b1426526ebd4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can return error counters.  <a href="#a759fbc45e4c750b1753b1426526ebd4f">More...</a><br /></td></tr>
+<tr class="memdesc:a759fbc45e4c750b1753b1426526ebd4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can return error counters.  <a href="#a759fbc45e4c750b1753b1426526ebd4f">More...</a><br /></td></tr>
 <tr class="separator:a759fbc45e4c750b1753b1426526ebd4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a168efe9404165ade0e25455d39327d06"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a168efe9404165ade0e25455d39327d06">canCHANNEL_CAP_RESERVED_2</a>&#160;&#160;&#160;0x00000008L</td></tr>
 <tr class="memdesc:a168efe9404165ade0e25455d39327d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete, only used by LAPcan driver.  <a href="#a168efe9404165ade0e25455d39327d06">More...</a><br /></td></tr>
 <tr class="separator:a168efe9404165ade0e25455d39327d06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac16175a4cc065c0836fa51f72831f399"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ac16175a4cc065c0836fa51f72831f399">canCHANNEL_CAP_GENERATE_ERROR</a>&#160;&#160;&#160;0x00000010L</td></tr>
-<tr class="memdesc:ac16175a4cc065c0836fa51f72831f399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can send error frames.  <a href="#ac16175a4cc065c0836fa51f72831f399">More...</a><br /></td></tr>
+<tr class="memdesc:ac16175a4cc065c0836fa51f72831f399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can send error frames.  <a href="#ac16175a4cc065c0836fa51f72831f399">More...</a><br /></td></tr>
 <tr class="separator:ac16175a4cc065c0836fa51f72831f399"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5139cc32d451a7f63c5a92692044396d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a5139cc32d451a7f63c5a92692044396d">canCHANNEL_CAP_GENERATE_OVERLOAD</a>&#160;&#160;&#160;0x00000020L</td></tr>
-<tr class="memdesc:a5139cc32d451a7f63c5a92692044396d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can send CAN overload frame.  <a href="#a5139cc32d451a7f63c5a92692044396d">More...</a><br /></td></tr>
+<tr class="memdesc:a5139cc32d451a7f63c5a92692044396d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can send CAN overload frame.  <a href="#a5139cc32d451a7f63c5a92692044396d">More...</a><br /></td></tr>
 <tr class="separator:a5139cc32d451a7f63c5a92692044396d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1a2f0419774877761035eb16441b406"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#af1a2f0419774877761035eb16441b406">canCHANNEL_CAP_TXREQUEST</a>&#160;&#160;&#160;0x00000040L</td></tr>
-<tr class="memdesc:af1a2f0419774877761035eb16441b406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can report when a CAN messsage transmission is initiated.  <a href="#af1a2f0419774877761035eb16441b406">More...</a><br /></td></tr>
+<tr class="memdesc:af1a2f0419774877761035eb16441b406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can report when a CAN message transmission is initiated.  <a href="#af1a2f0419774877761035eb16441b406">More...</a><br /></td></tr>
 <tr class="separator:af1a2f0419774877761035eb16441b406"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46307333df823ca35cf18a582a2fedb0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a46307333df823ca35cf18a582a2fedb0">canCHANNEL_CAP_TXACKNOWLEDGE</a>&#160;&#160;&#160;0x00000080L</td></tr>
-<tr class="memdesc:a46307333df823ca35cf18a582a2fedb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can report when a CAN messages has been transmitted.  <a href="#a46307333df823ca35cf18a582a2fedb0">More...</a><br /></td></tr>
+<tr class="memdesc:a46307333df823ca35cf18a582a2fedb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can report when a CAN messages has been transmitted.  <a href="#a46307333df823ca35cf18a582a2fedb0">More...</a><br /></td></tr>
 <tr class="separator:a46307333df823ca35cf18a582a2fedb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79e88cce2d07e78b482070824583e059"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a79e88cce2d07e78b482070824583e059">canCHANNEL_CAP_VIRTUAL</a>&#160;&#160;&#160;0x00010000L</td></tr>
-<tr class="memdesc:a79e88cce2d07e78b482070824583e059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual CAN channel.  <a href="#a79e88cce2d07e78b482070824583e059">More...</a><br /></td></tr>
+<tr class="memdesc:a79e88cce2d07e78b482070824583e059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Virtual CAN channel.  <a href="#a79e88cce2d07e78b482070824583e059">More...</a><br /></td></tr>
 <tr class="separator:a79e88cce2d07e78b482070824583e059"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62edfa89566e668ea94fe669f3bedb74"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a62edfa89566e668ea94fe669f3bedb74">canCHANNEL_CAP_SIMULATED</a>&#160;&#160;&#160;0x00020000L</td></tr>
-<tr class="memdesc:a62edfa89566e668ea94fe669f3bedb74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulated CAN channel.  <a href="#a62edfa89566e668ea94fe669f3bedb74">More...</a><br /></td></tr>
+<tr class="memdesc:a62edfa89566e668ea94fe669f3bedb74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Simulated CAN channel.  <a href="#a62edfa89566e668ea94fe669f3bedb74">More...</a><br /></td></tr>
 <tr class="separator:a62edfa89566e668ea94fe669f3bedb74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad171fc2715be577d685c665b4c808809"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ad171fc2715be577d685c665b4c808809">canCHANNEL_CAP_RESERVED_1</a>&#160;&#160;&#160;0x00040000L</td></tr>
 <tr class="memdesc:ad171fc2715be577d685c665b4c808809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete, use canCHANNEL_CAP_REMOTE_ACCESS or <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a> instead.  <a href="#ad171fc2715be577d685c665b4c808809">More...</a><br /></td></tr>
 <tr class="separator:ad171fc2715be577d685c665b4c808809"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af46aa24f177eabf4355d89a00fc0ffe4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#af46aa24f177eabf4355d89a00fc0ffe4">canCHANNEL_CAP_CAN_FD</a>&#160;&#160;&#160;0x00080000L</td></tr>
-<tr class="memdesc:af46aa24f177eabf4355d89a00fc0ffe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">CAN-FD ISO compliant channel.  <a href="#af46aa24f177eabf4355d89a00fc0ffe4">More...</a><br /></td></tr>
+<tr class="memdesc:af46aa24f177eabf4355d89a00fc0ffe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. CAN-FD ISO compliant channel.  <a href="#af46aa24f177eabf4355d89a00fc0ffe4">More...</a><br /></td></tr>
 <tr class="separator:af46aa24f177eabf4355d89a00fc0ffe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45e356713bd5b6f87d15966045a19f1c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a45e356713bd5b6f87d15966045a19f1c">canCHANNEL_CAP_CAN_FD_NONISO</a>&#160;&#160;&#160;0x00100000L</td></tr>
-<tr class="memdesc:a45e356713bd5b6f87d15966045a19f1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">CAN-FD NON-ISO compliant channel.  <a href="#a45e356713bd5b6f87d15966045a19f1c">More...</a><br /></td></tr>
+<tr class="memdesc:a45e356713bd5b6f87d15966045a19f1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. CAN-FD NON-ISO compliant channel.  <a href="#a45e356713bd5b6f87d15966045a19f1c">More...</a><br /></td></tr>
 <tr class="separator:a45e356713bd5b6f87d15966045a19f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af685c865f8ee78b5a2e5285bb57bd335"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#af685c865f8ee78b5a2e5285bb57bd335">canCHANNEL_CAP_SILENT_MODE</a>&#160;&#160;&#160;0x00200000L</td></tr>
-<tr class="memdesc:af685c865f8ee78b5a2e5285bb57bd335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel supports Silent mode.  <a href="#af685c865f8ee78b5a2e5285bb57bd335">More...</a><br /></td></tr>
+<tr class="memdesc:af685c865f8ee78b5a2e5285bb57bd335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel supports Silent mode.  <a href="#af685c865f8ee78b5a2e5285bb57bd335">More...</a><br /></td></tr>
 <tr class="separator:af685c865f8ee78b5a2e5285bb57bd335"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80b4c1cf5b60fbed64a5ba220a5007ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a80b4c1cf5b60fbed64a5ba220a5007ea">canCHANNEL_CAP_SINGLE_SHOT</a>&#160;&#160;&#160;0x00400000L</td></tr>
-<tr class="memdesc:a80b4c1cf5b60fbed64a5ba220a5007ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel supports Single Shot messages.  <a href="#a80b4c1cf5b60fbed64a5ba220a5007ea">More...</a><br /></td></tr>
+<tr class="memdesc:a80b4c1cf5b60fbed64a5ba220a5007ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel supports Single Shot messages.  <a href="#a80b4c1cf5b60fbed64a5ba220a5007ea">More...</a><br /></td></tr>
 <tr class="separator:a80b4c1cf5b60fbed64a5ba220a5007ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79b87625040f4762b83954245b139a96"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a79b87625040f4762b83954245b139a96">canCHANNEL_CAP_LOGGER</a>&#160;&#160;&#160;0x00800000L</td></tr>
-<tr class="memdesc:a79b87625040f4762b83954245b139a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel has logger capabilities.  <a href="#a79b87625040f4762b83954245b139a96">More...</a><br /></td></tr>
+<tr class="memdesc:a79b87625040f4762b83954245b139a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has logger capabilities.  <a href="#a79b87625040f4762b83954245b139a96">More...</a><br /></td></tr>
 <tr class="separator:a79b87625040f4762b83954245b139a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f59a672fed4cbe5482b32d1bd948222"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a4f59a672fed4cbe5482b32d1bd948222">canCHANNEL_CAP_REMOTE_ACCESS</a>&#160;&#160;&#160;0x01000000L</td></tr>
-<tr class="memdesc:a4f59a672fed4cbe5482b32d1bd948222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel has remote capabilities.  <a href="#a4f59a672fed4cbe5482b32d1bd948222">More...</a><br /></td></tr>
+<tr class="memdesc:a4f59a672fed4cbe5482b32d1bd948222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has remote capabilities.  <a href="#a4f59a672fed4cbe5482b32d1bd948222">More...</a><br /></td></tr>
 <tr class="separator:a4f59a672fed4cbe5482b32d1bd948222"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c3c68d592ead785f1bbb5de757ee7a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a1c3c68d592ead785f1bbb5de757ee7a0">canCHANNEL_CAP_SCRIPT</a>&#160;&#160;&#160;0x02000000L</td></tr>
-<tr class="memdesc:a1c3c68d592ead785f1bbb5de757ee7a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel has script capabilities.  <a href="#a1c3c68d592ead785f1bbb5de757ee7a0">More...</a><br /></td></tr>
+<tr class="memdesc:a1c3c68d592ead785f1bbb5de757ee7a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has script capabilities.  <a href="#a1c3c68d592ead785f1bbb5de757ee7a0">More...</a><br /></td></tr>
 <tr class="separator:a1c3c68d592ead785f1bbb5de757ee7a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5db0cb246c1e9c485f6863ceed9bb39a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a5db0cb246c1e9c485f6863ceed9bb39a">canCHANNEL_CAP_LIN_HYBRID</a>&#160;&#160;&#160;0x04000000L</td></tr>
-<tr class="memdesc:a5db0cb246c1e9c485f6863ceed9bb39a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel has LIN capabilities.  <a href="#a5db0cb246c1e9c485f6863ceed9bb39a">More...</a><br /></td></tr>
+<tr class="memdesc:a5db0cb246c1e9c485f6863ceed9bb39a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has LIN capabilities.  <a href="#a5db0cb246c1e9c485f6863ceed9bb39a">More...</a><br /></td></tr>
 <tr class="separator:a5db0cb246c1e9c485f6863ceed9bb39a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0651695dbca39a7c1ed81c96079551ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a0651695dbca39a7c1ed81c96079551ad">canCHANNEL_CAP_DIAGNOSTICS</a>&#160;&#160;&#160;0x08000000L</td></tr>
-<tr class="memdesc:a0651695dbca39a7c1ed81c96079551ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Channel has diagnostic capabilities.  <a href="#a0651695dbca39a7c1ed81c96079551ad">More...</a><br /></td></tr>
+<tr class="memitem:a116f1a9d0623257d2b1865669054d0b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a116f1a9d0623257d2b1865669054d0b7">canCHANNEL_CAP_IO_API</a>&#160;&#160;&#160;0x08000000L</td></tr>
+<tr class="memdesc:a116f1a9d0623257d2b1865669054d0b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has IO API capabilities.  <a href="#a116f1a9d0623257d2b1865669054d0b7">More...</a><br /></td></tr>
+<tr class="separator:a116f1a9d0623257d2b1865669054d0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0651695dbca39a7c1ed81c96079551ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a0651695dbca39a7c1ed81c96079551ad">canCHANNEL_CAP_DIAGNOSTICS</a>&#160;&#160;&#160;0x10000000L</td></tr>
+<tr class="memdesc:a0651695dbca39a7c1ed81c96079551ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has diagnostic capabilities.  <a href="#a0651695dbca39a7c1ed81c96079551ad">More...</a><br /></td></tr>
 <tr class="separator:a0651695dbca39a7c1ed81c96079551ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">canCHANNEL_CAP_EX_xxx</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canCHANNEL_CAP_EX_xxx"></a> Channel extended capabilities. </p>
+</div></td></tr>
+<tr class="memitem:aeaa66fdba7afa78344fdebce758fd198"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aeaa66fdba7afa78344fdebce758fd198">canCHANNEL_CAP_EX_BUSPARAMS_TQ</a>&#160;&#160;&#160;0x0000000000000001L</td></tr>
+<tr class="memdesc:aeaa66fdba7afa78344fdebce758fd198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a> with <a class="el" href="canlib_8h.html#ae8f3ade70e6718ccca7d914b251d0d2c">canCHANNELDATA_CHANNEL_CAP_EX</a> as the item argument. Channel has BusParams TQ API.  <a href="#aeaa66fdba7afa78344fdebce758fd198">More...</a><br /></td></tr>
+<tr class="separator:aeaa66fdba7afa78344fdebce758fd198"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">canCHANNEL_OPMODE_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canCHANNEL_OPMODE_xxx"></a> Current WLAN operational mode. </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 </div></td></tr>
@@ -606,8 +641,12 @@ Macros</h2></td></tr>
 <tr class="separator:a917e47b0cab806f58ff40c44ca306f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada265ce8e62e94e850381ad1c645945f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ada265ce8e62e94e850381ad1c645945f">canIOCTL_SET_BRLIMIT</a>&#160;&#160;&#160;43</td></tr>
 <tr class="separator:ada265ce8e62e94e850381ad1c645945f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbc1fa43a63d15364c3006b7d61afccc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#adbc1fa43a63d15364c3006b7d61afccc">canIOCTL_SET_USB_THROTTLE_SCALED</a>&#160;&#160;&#160;41</td></tr>
+<tr class="separator:adbc1fa43a63d15364c3006b7d61afccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a209b1bfbe11114d7b1b72d447672bcb4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a209b1bfbe11114d7b1b72d447672bcb4">canIOCTL_SET_THROTTLE_SCALED</a>&#160;&#160;&#160;41</td></tr>
 <tr class="separator:a209b1bfbe11114d7b1b72d447672bcb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02f9d2480cbecb5e7018a75bba25eeeb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a02f9d2480cbecb5e7018a75bba25eeeb">canIOCTL_GET_USB_THROTTLE_SCALED</a>&#160;&#160;&#160;42</td></tr>
+<tr class="separator:a02f9d2480cbecb5e7018a75bba25eeeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a668aff1bb8e1ff96d50c8bded8706d48"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a668aff1bb8e1ff96d50c8bded8706d48">canIOCTL_GET_THROTTLE_SCALED</a>&#160;&#160;&#160;42</td></tr>
 <tr class="separator:a668aff1bb8e1ff96d50c8bded8706d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5abee158dc1d1872a75dd9483a699b6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ab5abee158dc1d1872a75dd9483a699b6">canIOCTL_RESET_OVERRUN_COUNT</a>&#160;&#160;&#160;44</td></tr>
@@ -745,7 +784,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a91b026158afca0b0c6000678bc9da1cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a91b026158afca0b0c6000678bc9da1cc">kvBUSTYPE_LAN</a>&#160;&#160;&#160;9</td></tr>
 <tr class="separator:a91b026158afca0b0c6000678bc9da1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">kvBUSTYPE_GROUP_xxx</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvBUSTYPE_GROUP_xxx"></a> Bus type group, returned when using <a class="el" href="canlib_8h.html#ab47621a7326e1da3427db331ec9afdee">canCHANNELDATA_BUS_TYPE</a> This is a grouping of the individual <a class="el" href="canlib_8h.html#kvBUSTYPE_xxx">kvBUSTYPE_xxx</a>. </p><dl class="section note"><dt>Note</dt><dd>Not inplemented in linux. </dd></dl>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvBUSTYPE_GROUP_xxx"></a> Bus type group, returned when using <a class="el" href="canlib_8h.html#ab47621a7326e1da3427db331ec9afdee">canCHANNELDATA_BUS_TYPE</a> This is a grouping of the individual <a class="el" href="canlib_8h.html#kvBUSTYPE_xxx">kvBUSTYPE_xxx</a>. </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 </div></td></tr>
 <tr class="memitem:a36522a0f1a83d90a107afae6dff04ff0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a36522a0f1a83d90a107afae6dff04ff0">kvBUSTYPE_GROUP_VIRTUAL</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a36522a0f1a83d90a107afae6dff04ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -756,7 +795,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a4d6dedfc7f9a78c23743b59392b824a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a4d6dedfc7f9a78c23743b59392b824a0">kvBUSTYPE_GROUP_INTERNAL</a>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:a4d6dedfc7f9a78c23743b59392b824a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">kvENVVAR_TYPE_xxx</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvENVVAR_TYPE_xxx"></a> These defines are used in <a class="el" href="group__t_script.html#ga258b5b89187ba90e6bacfbc7590f2e27">kvScriptEnvvarOpen()</a>. </p>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvENVVAR_TYPE_xxx"></a> These defines are used in <a class="el" href="group__t_script.html#gac090487e06584e640350e9a2364715c6">kvScriptEnvvarOpen()</a>. </p>
 </div></td></tr>
 <tr class="memitem:aaba97b9227340a6a9bb1105b4633e20f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aaba97b9227340a6a9bb1105b4633e20f">kvENVVAR_TYPE_INT</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:aaba97b9227340a6a9bb1105b4633e20f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -776,6 +815,15 @@ Macros</h2></td></tr>
 <tr class="separator:a6e2559022254e1e5f797da3187e7a176"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4c1f532f113deb0fc86e12fc50ff184"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aa4c1f532f113deb0fc86e12fc50ff184">kvSCRIPT_STOP_FORCED</a>&#160;&#160;&#160;-9</td></tr>
 <tr class="separator:aa4c1f532f113deb0fc86e12fc50ff184"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">kvSCRIPT_REQUEST_TEXT_xxx</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvSCRIPT_REQUEST_TEXT_xxx"></a> These defines are used in <a class="el" href="group__t_script.html#ga044da1984b0eae0e4f6950d6dcb5d0e0">kvScriptRequestText()</a> for printf message subscribe/unsubscribe. </p>
+</div></td></tr>
+<tr class="memitem:aaa5f8480b5aa827c6a1ae47bbf3f1dde"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aaa5f8480b5aa827c6a1ae47bbf3f1dde">kvSCRIPT_REQUEST_TEXT_UNSUBSCRIBE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:aaa5f8480b5aa827c6a1ae47bbf3f1dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab34ed53484ec00e6fef96e691a0e78f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aab34ed53484ec00e6fef96e691a0e78f">kvSCRIPT_REQUEST_TEXT_SUBSCRIBE</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:aab34ed53484ec00e6fef96e691a0e78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a358697a3478a7f965429f27b4c842585"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a358697a3478a7f965429f27b4c842585">kvSCRIPT_REQUEST_TEXT_ALL_SLOTS</a>&#160;&#160;&#160;255</td></tr>
+<tr class="separator:a358697a3478a7f965429f27b4c842585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">kvSCRIPT_STATUS_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Script status flag bits. Used by <a class="el" href="group__t_script.html#gadcbe8f74ee454f27f22f9645ce0a144f">kvScriptStatus()</a>. <a class="anchor" id="kvSCRIPT_STATUS_xxx"></a></p>
 </div></td></tr>
@@ -783,6 +831,24 @@ Macros</h2></td></tr>
 <tr class="separator:a6be5ed5fdf575e7d9ae0902623c01adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4497ec902263e12d337c9a0707e38dd7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a4497ec902263e12d337c9a0707e38dd7">kvSCRIPT_STATUS_RUNNING</a>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:a4497ec902263e12d337c9a0707e38dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">canTXEDATA_xxx</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canTXEDATA_xxx"></a></p>
+<p>These defines are used in <a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData()</a>. </p>
+</div></td></tr>
+<tr class="memitem:a1635981ddf3b7437be823b800a29fa9a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a1635981ddf3b7437be823b800a29fa9a">canTXEDATA_FILE_VERSION</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a1635981ddf3b7437be823b800a29fa9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24a3dd7d75f6e82b5033829fa1d95748"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a24a3dd7d75f6e82b5033829fa1d95748">canTXEDATA_COMPILER_VERSION</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a24a3dd7d75f6e82b5033829fa1d95748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14f51bd64a644cb0c22370c00acd0429"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a14f51bd64a644cb0c22370c00acd0429">canTXEDATA_DATE</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a14f51bd64a644cb0c22370c00acd0429"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a3bb829a77a8230c76be3e2a1f0490c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a3a3bb829a77a8230c76be3e2a1f0490c">canTXEDATA_DESCRIPTION</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a3a3bb829a77a8230c76be3e2a1f0490c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaaf8eee8bad814ac01aaa9e9d86d820"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#afaaf8eee8bad814ac01aaa9e9d86d820">canTXEDATA_SOURCE</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:afaaf8eee8bad814ac01aaa9e9d86d820"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e28e4ca27012e27619b4add63fabe16"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a8e28e4ca27012e27619b4add63fabe16">canTXEDATA_SIZE_OF_CODE</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a8e28e4ca27012e27619b4add63fabe16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07917c4e4a406cf35b9b5b341f92e42c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a07917c4e4a406cf35b9b5b341f92e42c">canTXEDATA_IS_ENCRYPTED</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:a07917c4e4a406cf35b9b5b341f92e42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">kvDEVICE_MODE_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvDEVICE_MODE_xxx"></a></p>
 <p>These defines are used in <a class="el" href="group__can__general.html#ga8ec3c64b63e50ff210294001bdbad7c3">kvDeviceSetMode()</a> and <a class="el" href="group__can__general.html#ga2f80c456dd1653ffe8a9062de3e1ad76">kvDeviceGetMode()</a>.</p>
@@ -792,6 +858,78 @@ Macros</h2></td></tr>
 <tr class="separator:a9e91da25cc455ebc488786b3b5aa0fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a039bc2bb8b14cc0554ee736c58a2c204"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a039bc2bb8b14cc0554ee736c58a2c204">kvDEVICE_MODE_LOGGER</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:a039bc2bb8b14cc0554ee736c58a2c204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">kvIO_INFO_GET_xxx</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvIO_INFO_GET_xxx"></a></p>
+<p>These defines are used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>. The value range for each property is specified in the manufacturer's user manual. </p>
+</div></td></tr>
+<tr class="memitem:a1098328030dee156b74c349493782cdb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a1098328030dee156b74c349493782cdb">kvIO_INFO_GET_MODULE_TYPE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a1098328030dee156b74c349493782cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa35b3f04d717c654cec0a4f0468ebf84"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aa35b3f04d717c654cec0a4f0468ebf84">kvIO_INFO_GET_DIRECTION</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:aa35b3f04d717c654cec0a4f0468ebf84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca429207da12ba1659499a6793ce18b4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aca429207da12ba1659499a6793ce18b4">kvIO_INFO_GET_PIN_TYPE</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:aca429207da12ba1659499a6793ce18b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac32b2fe0d62c2ca63c4a15994d65f725"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ac32b2fe0d62c2ca63c4a15994d65f725">kvIO_INFO_GET_NUMBER_OF_BITS</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:ac32b2fe0d62c2ca63c4a15994d65f725"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4208430dc0a552a3a66d2103bde6c02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aa4208430dc0a552a3a66d2103bde6c02">kvIO_INFO_GET_RANGE_MIN</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:aa4208430dc0a552a3a66d2103bde6c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ef294dd72816343f9bab9dc9c9dab39"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a3ef294dd72816343f9bab9dc9c9dab39">kvIO_INFO_GET_RANGE_MAX</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:a3ef294dd72816343f9bab9dc9c9dab39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1132596e7b709d07e3e500d79ecc27c9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a1132596e7b709d07e3e500d79ecc27c9">kvIO_INFO_GET_DI_LOW_HIGH_FILTER</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a1132596e7b709d07e3e500d79ecc27c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3d4a8c7f3ae2bbae10a6421ec2837f8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ac3d4a8c7f3ae2bbae10a6421ec2837f8">kvIO_INFO_GET_DI_HIGH_LOW_FILTER</a>&#160;&#160;&#160;9</td></tr>
+<tr class="separator:ac3d4a8c7f3ae2bbae10a6421ec2837f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8bc23793eb734cc2c70fd57f5150cb5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ab8bc23793eb734cc2c70fd57f5150cb5">kvIO_INFO_GET_AI_LP_FILTER_ORDER</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:ab8bc23793eb734cc2c70fd57f5150cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3446e6e4785a80e6181d8460d7bf966"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ad3446e6e4785a80e6181d8460d7bf966">kvIO_INFO_GET_AI_HYSTERESIS</a>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:ad3446e6e4785a80e6181d8460d7bf966"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615221bf13f09e226d9f2fc0a2bdf0ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a615221bf13f09e226d9f2fc0a2bdf0ce">kvIO_INFO_GET_MODULE_NUMBER</a>&#160;&#160;&#160;14</td></tr>
+<tr class="separator:a615221bf13f09e226d9f2fc0a2bdf0ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0ee3b9360531d5a5976a5cfa4ddeed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a7e0ee3b9360531d5a5976a5cfa4ddeed">kvIO_INFO_GET_SERIAL_NUMBER</a>&#160;&#160;&#160;15</td></tr>
+<tr class="separator:a7e0ee3b9360531d5a5976a5cfa4ddeed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9fc705004cd541512dbaa6b16af2d32"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aa9fc705004cd541512dbaa6b16af2d32">kvIO_INFO_GET_FW_VERSION</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:aa9fc705004cd541512dbaa6b16af2d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">kvIO_INFO_SET_xxx</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvIO_INFO_SET_xxx"></a></p>
+<p>These defines are used in <a class="el" href="group__kv__io.html#ga88dda296acccff6acbc979a94b961188">kvIoPinSetInfo()</a>. The value range for each property is specified in the manufacturer's user manual. </p>
+</div></td></tr>
+<tr class="memitem:afa7572ee9ed7b364ed70002d3101dfdd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#afa7572ee9ed7b364ed70002d3101dfdd">kvIO_INFO_SET_DI_LOW_HIGH_FILTER</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:afa7572ee9ed7b364ed70002d3101dfdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13fe255e44c25ff63a4bb2271d816606"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a13fe255e44c25ff63a4bb2271d816606">kvIO_INFO_SET_DI_HIGH_LOW_FILTER</a>&#160;&#160;&#160;9</td></tr>
+<tr class="separator:a13fe255e44c25ff63a4bb2271d816606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8dd482621b791755305bcbe70b4caaa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#af8dd482621b791755305bcbe70b4caaa">kvIO_INFO_SET_AI_LP_FILTER_ORDER</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:af8dd482621b791755305bcbe70b4caaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5515549989d5f70a258f159aa8fef0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a0d5515549989d5f70a258f159aa8fef0">kvIO_INFO_SET_AI_HYSTERESIS</a>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:a0d5515549989d5f70a258f159aa8fef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">kvIO_MODULE_TYPE_xxx</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvIO_MODULE_TYPE_xxx"></a></p>
+<p>These defines are used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>. </p>
+</div></td></tr>
+<tr class="memitem:aa7236356b4f86163b32e6f3b1f2a81e0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aa7236356b4f86163b32e6f3b1f2a81e0">kvIO_MODULE_TYPE_DIGITAL</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:aa7236356b4f86163b32e6f3b1f2a81e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7a0f43fd1cf00fd220e21f3e6e3f4c9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#af7a0f43fd1cf00fd220e21f3e6e3f4c9">kvIO_MODULE_TYPE_ANALOG</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:af7a0f43fd1cf00fd220e21f3e6e3f4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16ff8dcf16321da24929f0fb68a204f5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a16ff8dcf16321da24929f0fb68a204f5">kvIO_MODULE_TYPE_RELAY</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a16ff8dcf16321da24929f0fb68a204f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac05269c6116dcf35be85879b0237399d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ac05269c6116dcf35be85879b0237399d">kvIO_MODULE_TYPE_INTERNAL</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:ac05269c6116dcf35be85879b0237399d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">kvIO_PIN_TYPE_xxx</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvIO_PIN_TYPE_xxx"></a></p>
+<p>These defines are used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>. </p>
+</div></td></tr>
+<tr class="memitem:a6c6338d248a8b47f09b4d53041b9f167"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a6c6338d248a8b47f09b4d53041b9f167">kvIO_PIN_TYPE_DIGITAL</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a6c6338d248a8b47f09b4d53041b9f167"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a757a9a7296413cb3187b78775553317d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a757a9a7296413cb3187b78775553317d">kvIO_PIN_TYPE_ANALOG</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a757a9a7296413cb3187b78775553317d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb5238d0a6c1de0fb683de27a9ee8a9c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#abb5238d0a6c1de0fb683de27a9ee8a9c">kvIO_PIN_TYPE_RELAY</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:abb5238d0a6c1de0fb683de27a9ee8a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">kvIO_PIN_DIRECTION_xxx</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="kvIO_PIN_DIRECTION_xxx"></a></p>
+<p>These defines are used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>. </p>
+</div></td></tr>
+<tr class="memitem:a9e269996cbfabef79b05627e60bfb0f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a9e269996cbfabef79b05627e60bfb0f4">kvIO_PIN_DIRECTION_IN</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a9e269996cbfabef79b05627e60bfb0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32aebdbba25ff32662f8112e222af0a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a32aebdbba25ff32662f8112e222af0a4">kvIO_PIN_DIRECTION_OUT</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a32aebdbba25ff32662f8112e222af0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -801,6 +939,10 @@ Typedefs</h2></td></tr>
 <tr class="separator:a75f2e3a4c7b1e47c8c6b25b76975b510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58db5be8859c14cd8a0c0f6963c64f26"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcan_notify_data.html">canNotifyData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a58db5be8859c14cd8a0c0f6963c64f26">canNotifyData</a></td></tr>
 <tr class="separator:a58db5be8859c14cd8a0c0f6963c64f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfa6eceefcd36704a04b99b8af669528"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structkv_clock_info.html">kvClockInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#acfa6eceefcd36704a04b99b8af669528">kvClockInfo</a></td></tr>
+<tr class="separator:acfa6eceefcd36704a04b99b8af669528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af504af7b3820af8ec1ec997f3b0333d3"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structkv_bus_param_limits.html">kvBusParamLimits</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#af504af7b3820af8ec1ec997f3b0333d3">kvBusParamLimits</a></td></tr>
+<tr class="separator:af504af7b3820af8ec1ec997f3b0333d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bb3bba2f57c8222ace214f3f005c39c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcan_bus_statistics__s.html">canBusStatistics_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a2bb3bba2f57c8222ace214f3f005c39c">canBusStatistics</a></td></tr>
 <tr class="separator:a2bb3bba2f57c8222ace214f3f005c39c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48bb105cf654887225e6c1eadb144314"><td class="memItemLeft" align="right" valign="top">typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a48bb105cf654887225e6c1eadb144314">kvTimeDomain</a></td></tr>
@@ -818,6 +960,8 @@ Typedefs</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:gaff1ec1d3416d3bdd56336a7b9ac008b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#gaff1ec1d3416d3bdd56336a7b9ac008b1">canInitializeLibrary</a> (void)</td></tr>
 <tr class="separator:gaff1ec1d3416d3bdd56336a7b9ac008b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2cf37192c855ce901fc0d69bfe72fbd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#ga2cf37192c855ce901fc0d69bfe72fbd5">canEnumHardwareEx</a> (int *channelCount)</td></tr>
+<tr class="separator:ga2cf37192c855ce901fc0d69bfe72fbd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga49525373a4d08d93c651ec10f79dd36b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga49525373a4d08d93c651ec10f79dd36b">canClose</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd)</td></tr>
 <tr class="separator:ga49525373a4d08d93c651ec10f79dd36b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga99c7c99cc71580f8099a1407f4f9ea1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga99c7c99cc71580f8099a1407f4f9ea1a">canBusOn</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd)</td></tr>
@@ -826,12 +970,20 @@ Functions</h2></td></tr>
 <tr class="separator:gaf1786cfbfd542b18b9c599d278837bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7eb8c2e92cfae57e7ec5031818524301"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, long freq, unsigned int tseg1, unsigned int tseg2, unsigned int sjw, unsigned int noSamp, unsigned int syncmode)</td></tr>
 <tr class="separator:ga7eb8c2e92cfae57e7ec5031818524301"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga50f169c6f9dd6df93b17c322e8e4fd00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga50f169c6f9dd6df93b17c322e8e4fd00">canSetBusParamsTq</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, const <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> nominal)</td></tr>
+<tr class="separator:ga50f169c6f9dd6df93b17c322e8e4fd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafcd85fbac103dcb123f4cd609be6fa14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, long freq_brs, unsigned int tseg1_brs, unsigned int tseg2_brs, unsigned int sjw_brs)</td></tr>
 <tr class="separator:gafcd85fbac103dcb123f4cd609be6fa14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4beeb28ede2e21a2988076e66f873723"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga4beeb28ede2e21a2988076e66f873723">canSetBusParamsFdTq</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, const <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> arbitration, const <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> data)</td></tr>
+<tr class="separator:ga4beeb28ede2e21a2988076e66f873723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf2a734c0486030610389331685a3827a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gaf2a734c0486030610389331685a3827a">canGetBusParams</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, long *freq, unsigned int *tseg1, unsigned int *tseg2, unsigned int *sjw, unsigned int *noSamp, unsigned int *syncmode)</td></tr>
 <tr class="separator:gaf2a734c0486030610389331685a3827a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae517a9c243c446e040f6f8898d09a677"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gae517a9c243c446e040f6f8898d09a677">canGetBusParamsTq</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *nominal)</td></tr>
+<tr class="separator:gae517a9c243c446e040f6f8898d09a677"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab620a5cd6249e2e53cf2a0099e7e8685"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gab620a5cd6249e2e53cf2a0099e7e8685">canGetBusParamsFd</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, long *freq_brs, unsigned int *tseg1_brs, unsigned int *tseg2_brs, unsigned int *sjw_brs)</td></tr>
 <tr class="separator:gab620a5cd6249e2e53cf2a0099e7e8685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2ca01a0c71b8c3b5204f07b051eb4758"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga2ca01a0c71b8c3b5204f07b051eb4758">canGetBusParamsFdTq</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *nominal, <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *data)</td></tr>
+<tr class="separator:ga2ca01a0c71b8c3b5204f07b051eb4758"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafca31590718ac7101d065b0c18b2410e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gafca31590718ac7101d065b0c18b2410e">canSetBusOutputControl</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, const unsigned int drivertype)</td></tr>
 <tr class="separator:gafca31590718ac7101d065b0c18b2410e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1683419d56af8afdbfc9184678c82fdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga1683419d56af8afdbfc9184678c82fdd">canGetBusOutputControl</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int *drivertype)</td></tr>
@@ -956,8 +1108,8 @@ Functions</h2></td></tr>
 <tr class="separator:ga5281c6fb6a81282850d8022293fd92d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1ab0e65f93389fddf3cd7531a96a5662"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga1ab0e65f93389fddf3cd7531a96a5662">kvScriptSendEvent</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int slotNo, int eventType, int eventNo, unsigned int data)</td></tr>
 <tr class="separator:ga1ab0e65f93389fddf3cd7531a96a5662"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga258b5b89187ba90e6bacfbc7590f2e27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canlib_8h.html#ac12ca60f6d6e18d9bd29acc00c8ea2ff">kvEnvHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga258b5b89187ba90e6bacfbc7590f2e27">kvScriptEnvvarOpen</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, char *envvarName, int *envvarType, int *envvarSize)</td></tr>
-<tr class="separator:ga258b5b89187ba90e6bacfbc7590f2e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac090487e06584e640350e9a2364715c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canlib_8h.html#ac12ca60f6d6e18d9bd29acc00c8ea2ff">kvEnvHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#gac090487e06584e640350e9a2364715c6">kvScriptEnvvarOpen</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, const char *envvarName, int *envvarType, int *envvarSize)</td></tr>
+<tr class="separator:gac090487e06584e640350e9a2364715c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga30f88cbfc588c801f8bf4c81c094875c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga30f88cbfc588c801f8bf4c81c094875c">kvScriptEnvvarClose</a> (<a class="el" href="canlib_8h.html#ac12ca60f6d6e18d9bd29acc00c8ea2ff">kvEnvHandle</a> eHnd)</td></tr>
 <tr class="separator:ga30f88cbfc588c801f8bf4c81c094875c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaef0cffb28882fa9a731cda884ea8332c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#gaef0cffb28882fa9a731cda884ea8332c">kvScriptEnvvarSetInt</a> (<a class="el" href="canlib_8h.html#ac12ca60f6d6e18d9bd29acc00c8ea2ff">kvEnvHandle</a> eHnd, int val)</td></tr>
@@ -968,18 +1120,24 @@ Functions</h2></td></tr>
 <tr class="separator:ga0e1f89bb27cb2041643e9e97efd47839"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafee8ff7e33041bee5f523115aae7f59e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#gafee8ff7e33041bee5f523115aae7f59e">kvScriptEnvvarGetFloat</a> (<a class="el" href="canlib_8h.html#ac12ca60f6d6e18d9bd29acc00c8ea2ff">kvEnvHandle</a> eHnd, float *val)</td></tr>
 <tr class="separator:gafee8ff7e33041bee5f523115aae7f59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga69c47354ff6b8d45e2c1fede92d02ade"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga69c47354ff6b8d45e2c1fede92d02ade">kvScriptEnvvarSetData</a> (<a class="el" href="canlib_8h.html#ac12ca60f6d6e18d9bd29acc00c8ea2ff">kvEnvHandle</a> eHnd, void *buf, int start_index, int data_len)</td></tr>
-<tr class="separator:ga69c47354ff6b8d45e2c1fede92d02ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5d81bb016783417bbb90cee739fed5a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga5d81bb016783417bbb90cee739fed5a4">kvScriptEnvvarSetData</a> (<a class="el" href="canlib_8h.html#ac12ca60f6d6e18d9bd29acc00c8ea2ff">kvEnvHandle</a> eHnd, const void *buf, int start_index, int data_len)</td></tr>
+<tr class="separator:ga5d81bb016783417bbb90cee739fed5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5cbb37e43a2e24358c63295fedfe06a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga5cbb37e43a2e24358c63295fedfe06a3">kvScriptEnvvarGetData</a> (<a class="el" href="canlib_8h.html#ac12ca60f6d6e18d9bd29acc00c8ea2ff">kvEnvHandle</a> eHnd, void *buf, int start_index, int data_len)</td></tr>
 <tr class="separator:ga5cbb37e43a2e24358c63295fedfe06a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga921d35535c61b11893252602d59c8397"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga921d35535c61b11893252602d59c8397">kvScriptLoadFileOnDevice</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int slotNo, char *localFile)</td></tr>
 <tr class="separator:ga921d35535c61b11893252602d59c8397"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga14d0df6bf3a9eec3e17bef266b3d9ef9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga14d0df6bf3a9eec3e17bef266b3d9ef9">kvScriptLoadFile</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int slotNo, char *filePathOnPC)</td></tr>
 <tr class="separator:ga14d0df6bf3a9eec3e17bef266b3d9ef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga044da1984b0eae0e4f6950d6dcb5d0e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga044da1984b0eae0e4f6950d6dcb5d0e0">kvScriptRequestText</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int slot, unsigned int request)</td></tr>
+<tr class="separator:ga044da1984b0eae0e4f6950d6dcb5d0e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e75e46d804d2cfaeecafca022eaef45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga1e75e46d804d2cfaeecafca022eaef45">kvScriptGetText</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int *slot, unsigned long *time, unsigned int *flags, char *buf, size_t bufsize)</td></tr>
+<tr class="separator:ga1e75e46d804d2cfaeecafca022eaef45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadcbe8f74ee454f27f22f9645ce0a144f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#gadcbe8f74ee454f27f22f9645ce0a144f">kvScriptStatus</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int slot, unsigned int *status)</td></tr>
 <tr class="separator:gadcbe8f74ee454f27f22f9645ce0a144f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafe38fc6634a1743f404001def0ffa392"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#gafe38fc6634a1743f404001def0ffa392">kvScriptGetMaxEnvvarSize</a> (int hnd, int *envvarSize)</td></tr>
 <tr class="separator:gafe38fc6634a1743f404001def0ffa392"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga442c63a2cddbf96ffa0a100e9d9e4283"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData</a> (const char *filePathOnPC, int item, void *buffer, unsigned int *bufsize)</td></tr>
+<tr class="separator:ga442c63a2cddbf96ffa0a100e9d9e4283"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga17b1093e1d294442635e5899120c548e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga17b1093e1d294442635e5899120c548e">kvFileCopyToDevice</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, char *hostFileName, char *deviceFileName)</td></tr>
 <tr class="separator:ga17b1093e1d294442635e5899120c548e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga95f4a1383f8be77e74ff48d8be71aecf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga95f4a1383f8be77e74ff48d8be71aecf">kvFileCopyFromDevice</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, char *deviceFileName, char *hostFileName)</td></tr>
@@ -992,6 +1150,8 @@ Functions</h2></td></tr>
 <tr class="separator:ga6f7e3b5d2faf2556a40ec7818cd74c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa5c82841a46a9ed78605120edb98cf23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#gaa5c82841a46a9ed78605120edb98cf23">kvFileGetSystemData</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int itemCode, int *result)</td></tr>
 <tr class="separator:gaa5c82841a46a9ed78605120edb98cf23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga40ce4dc39d01e0d33f4a1a8590e60a9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga40ce4dc39d01e0d33f4a1a8590e60a9d">kvFileDiskFormat</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd)</td></tr>
+<tr class="separator:ga40ce4dc39d01e0d33f4a1a8590e60a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8ec3c64b63e50ff210294001bdbad7c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#ga8ec3c64b63e50ff210294001bdbad7c3">kvDeviceSetMode</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int mode)</td></tr>
 <tr class="separator:ga8ec3c64b63e50ff210294001bdbad7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2f80c456dd1653ffe8a9062de3e1ad76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#ga2f80c456dd1653ffe8a9062de3e1ad76">kvDeviceGetMode</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int *result)</td></tr>
@@ -1000,6 +1160,34 @@ Functions</h2></td></tr>
 <tr class="separator:ga0671078a6184ab2b73287946a49763f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafa060c0f78d459498d1f6236e2d0b5ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#gafa060c0f78d459498d1f6236e2d0b5ae">kvReadTimer64</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, uint64_t *time)</td></tr>
 <tr class="separator:gafa060c0f78d459498d1f6236e2d0b5ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0194114ea5bfcbf770d938b613ba87e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#ga0194114ea5bfcbf770d938b613ba87e6">kvIoGetNumberOfPins</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int *pinCount)</td></tr>
+<tr class="separator:ga0194114ea5bfcbf770d938b613ba87e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa50d734d29488bea72f5d3808835d7d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#gaa50d734d29488bea72f5d3808835d7d9">kvIoConfirmConfig</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd)</td></tr>
+<tr class="separator:gaa50d734d29488bea72f5d3808835d7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga851cb68946bf38686a065fccf11d6b42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, int item, void *buffer, const unsigned int bufsize)</td></tr>
+<tr class="separator:ga851cb68946bf38686a065fccf11d6b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga88dda296acccff6acbc979a94b961188"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#ga88dda296acccff6acbc979a94b961188">kvIoPinSetInfo</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, int item, const void *buffer, const unsigned int bufsize)</td></tr>
+<tr class="separator:ga88dda296acccff6acbc979a94b961188"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad5a1f760ce49861c5970764024a732c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#gad5a1f760ce49861c5970764024a732c7">kvIoPinSetDigital</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, unsigned int value)</td></tr>
+<tr class="separator:gad5a1f760ce49861c5970764024a732c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa5699336bbf78ddbe430dee8658ca7b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#gaa5699336bbf78ddbe430dee8658ca7b3">kvIoPinGetDigital</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, unsigned int *value)</td></tr>
+<tr class="separator:gaa5699336bbf78ddbe430dee8658ca7b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaa8b56dd310525951aea002efa0d55ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#gaaa8b56dd310525951aea002efa0d55ef">kvIoPinGetOutputDigital</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, unsigned int *value)</td></tr>
+<tr class="separator:gaaa8b56dd310525951aea002efa0d55ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb4bfa9d8f76d64065e03a9c95b7dace"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#gabb4bfa9d8f76d64065e03a9c95b7dace">kvIoPinSetRelay</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, unsigned int value)</td></tr>
+<tr class="separator:gabb4bfa9d8f76d64065e03a9c95b7dace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga26aaef6002a588a2ee56bdfc89a703df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#ga26aaef6002a588a2ee56bdfc89a703df">kvIoPinGetOutputRelay</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, unsigned int *value)</td></tr>
+<tr class="separator:ga26aaef6002a588a2ee56bdfc89a703df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga38a215ebc548b0d201fe805c5a8b3797"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#ga38a215ebc548b0d201fe805c5a8b3797">kvIoPinSetAnalog</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, float value)</td></tr>
+<tr class="separator:ga38a215ebc548b0d201fe805c5a8b3797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga209b5932e8abf5e085c778d0dcac78ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#ga209b5932e8abf5e085c778d0dcac78ab">kvIoPinGetAnalog</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, float *value)</td></tr>
+<tr class="separator:ga209b5932e8abf5e085c778d0dcac78ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga78dd0cebc929d0c0d2b801943c6b0ddc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#ga78dd0cebc929d0c0d2b801943c6b0ddc">kvIoPinGetOutputAnalog</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int pin, float *value)</td></tr>
+<tr class="separator:ga78dd0cebc929d0c0d2b801943c6b0ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7a16c491567db189b36428fe1976364b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#ga7a16c491567db189b36428fe1976364b">kvIoGetModulePins</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int module, void *buffer, const unsigned int bufsize)</td></tr>
+<tr class="separator:ga7a16c491567db189b36428fe1976364b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga32257d2f426a766a67d689eef5336b81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__kv__io.html#ga32257d2f426a766a67d689eef5336b81">kvIoSetModulePins</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned int module, const void *buffer, const unsigned int bufsize)</td></tr>
+<tr class="separator:ga32257d2f426a766a67d689eef5336b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definitions for the CANlib API. </p>
@@ -1212,7 +1400,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gac34c1577cae55385250e7412513c8cbd">canSetBusParamsC200()</a>. Indicate a bitrate of 500 kbit/s. </p>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2open_channels_8c-example.html#a4">how-to/c/openChannels.c</a>.</dd>
+</dl>
 </div>
 </div>
 <a id="a9f0ad5c28bc92808241f2307c907cbbb"></a>
@@ -1272,7 +1461,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Can report busload etc. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can report busload etc. </p>
 
 </div>
 </div>
@@ -1288,7 +1477,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>CAN-FD ISO compliant channel. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. CAN-FD ISO compliant channel. </p>
 
 </div>
 </div>
@@ -1304,7 +1493,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>CAN-FD NON-ISO compliant channel. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. CAN-FD NON-ISO compliant channel. </p>
 
 </div>
 </div>
@@ -1315,12 +1504,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define canCHANNEL_CAP_DIAGNOSTICS&#160;&#160;&#160;0x08000000L</td>
+          <td class="memname">#define canCHANNEL_CAP_DIAGNOSTICS&#160;&#160;&#160;0x10000000L</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Channel has diagnostic capabilities. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has diagnostic capabilities. </p>
 
 </div>
 </div>
@@ -1336,7 +1525,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Can return error counters. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can return error counters. </p>
+
+</div>
+</div>
+<a id="aeaa66fdba7afa78344fdebce758fd198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaa66fdba7afa78344fdebce758fd198">&#9670;&nbsp;</a></span>canCHANNEL_CAP_EX_BUSPARAMS_TQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canCHANNEL_CAP_EX_BUSPARAMS_TQ&#160;&#160;&#160;0x0000000000000001L</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a> with <a class="el" href="canlib_8h.html#ae8f3ade70e6718ccca7d914b251d0d2c">canCHANNELDATA_CHANNEL_CAP_EX</a> as the item argument. Channel has BusParams TQ API. </p>
 
 </div>
 </div>
@@ -1352,7 +1557,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Can use extended identifiers. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can use extended identifiers. </p>
 
 </div>
 </div>
@@ -1368,7 +1573,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Can send error frames. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can send error frames. </p>
 
 </div>
 </div>
@@ -1384,7 +1589,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Can send CAN overload frame. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can send CAN overload frame. </p>
+
+</div>
+</div>
+<a id="a116f1a9d0623257d2b1865669054d0b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a116f1a9d0623257d2b1865669054d0b7">&#9670;&nbsp;</a></span>canCHANNEL_CAP_IO_API</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canCHANNEL_CAP_IO_API&#160;&#160;&#160;0x08000000L</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has IO API capabilities. </p>
 
 </div>
 </div>
@@ -1400,7 +1621,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Channel has LIN capabilities. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has LIN capabilities. </p>
 
 </div>
 </div>
@@ -1416,7 +1637,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Channel has logger capabilities. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has logger capabilities. </p>
 
 </div>
 </div>
@@ -1432,7 +1653,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Channel has remote capabilities. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has remote capabilities. </p>
 
 </div>
 </div>
@@ -1480,7 +1701,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Channel has script capabilities. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has script capabilities. </p>
 
 </div>
 </div>
@@ -1496,7 +1717,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Channel supports Silent mode. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel supports Silent mode. </p>
 
 </div>
 </div>
@@ -1512,7 +1733,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Simulated CAN channel. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Simulated CAN channel. </p>
 
 </div>
 </div>
@@ -1528,7 +1749,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Channel supports Single Shot messages. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel supports Single Shot messages. </p>
 
 </div>
 </div>
@@ -1544,7 +1765,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Can report when a CAN messages has been transmitted. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can report when a CAN messages has been transmitted. </p>
 
 </div>
 </div>
@@ -1560,7 +1781,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Can report when a CAN messsage transmission is initiated. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Can report when a CAN message transmission is initiated. </p>
 
 </div>
 </div>
@@ -1576,7 +1797,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Virtual CAN channel. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Virtual CAN channel. </p>
 
 </div>
 </div>
@@ -1730,6 +1951,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ad4a719c4336ae1ec409bc835a9321f05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4a719c4336ae1ec409bc835a9321f05">&#9670;&nbsp;</a></span>canCHANNELDATA_BUS_PARAM_LIMITS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canCHANNELDATA_BUS_PARAM_LIMITS&#160;&#160;&#160;45</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
+<p><em>buffer</em> is <a class="el" href="structkv_bus_param_limits.html">kvBusParamLimits</a>. </p>
+
+</div>
+</div>
 <a id="ab47621a7326e1da3427db331ec9afdee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab47621a7326e1da3427db331ec9afdee">&#9670;&nbsp;</a></span>canCHANNELDATA_BUS_TYPE</h2>
 
@@ -1759,7 +1996,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to a 64-bit (8 bytes) area which receives the firmware revision number on the card. This number consists of four 16-bit words: the major revision, the minor revision, the release number and the build number, listed in order from the most significant to the least significant. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a14">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2list_channels_8c-example.html#a7">how-to/c/listChannels.c</a>, and <a class="el" href="list_channels_8c-example.html#a13">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -1808,7 +2045,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to a 64-bit (8 bytes) area which receives the serial number of the card. If the card doesn't have a serial number, 0 is returned. The serial number is an 8-byte unsigned integer. Currently, no products are using all 8 bytes; at most 4 bytes are used. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a13">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2list_channels_8c-example.html#a6">how-to/c/listChannels.c</a>, and <a class="el" href="list_channels_8c-example.html#a12">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -1841,7 +2078,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to a 8-byte area which receives the UPC (EAN) number for the card. If there is no UPC number, the buffer is filled with zeros. The UPC (EAN) number is coded as a BCD string with the LSB first, so e.g. 733-0130-00122-0 is coded as 0x30001220 0x00073301. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a12">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2list_channels_8c-example.html#a5">how-to/c/listChannels.c</a>, and <a class="el" href="list_channels_8c-example.html#a11">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -1858,7 +2095,8 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to a 32-bit unsigned integer which receives the channel number on the card. </p>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2list_channels_8c-example.html#a8">how-to/c/listChannels.c</a>.</dd>
+</dl>
 </div>
 </div>
 <a id="a7eeb70e7c666f629ca3762f4692469ae"></a>
@@ -1877,6 +2115,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ae8f3ade70e6718ccca7d914b251d0d2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8f3ade70e6718ccca7d914b251d0d2c">&#9670;&nbsp;</a></span>canCHANNELDATA_CHANNEL_CAP_EX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canCHANNELDATA_CHANNEL_CAP_EX&#160;&#160;&#160;47</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
+<p><em>buffer</em> points to an array of two 64-bit unsigned integers that receives the capabilities value and capabilities mask of the CAN channel.</p>
+<p>The value specifies the capabilities of the CAN controller; this is a combination of the <a class="el" href="canlib_8h.html#canCHANNEL_CAP_EX_xxx">canCHANNEL_CAP_EX_xxx</a> flags. A one in a bit means that the capability is supported.</p>
+<p>The mask specifies which capabilities the corresponding device is guaranteed to support/not support at the moment. See <a class="el" href="canlib_8h.html#canCHANNEL_CAP_EX_xxx">canCHANNEL_CAP_EX_xxx</a> for info about flags.</p>
+<p>Contents depending on index:</p>
+<ul>
+<li>0: value </li>
+<li>1: mask </li>
+</ul>
+
+</div>
+</div>
 <a id="a810b2e8dc8153bac191b645a74c36ad9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a810b2e8dc8153bac191b645a74c36ad9">&#9670;&nbsp;</a></span>canCHANNELDATA_CHANNEL_CAP_MASK</h2>
 
@@ -1889,7 +2150,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
-<p><em>buffer</em> points to a 32-bit unsigned integer that receives the capabilities mask of the CAN channel. This mask specifies which capabilities corresponding device is guaranteed to support/not support at the moment, see <a class="el" href="canlib_8h.html#canCHANNEL_CAP_xxx">canCHANNEL_CAP_xxx</a> for info about flags. </p>
+<p><em>buffer</em> points to a 32-bit unsigned integer that receives the capabilities mask of the CAN channel. This mask specifies which capabilities the corresponding device is guaranteed to support/not support at the moment, see <a class="el" href="canlib_8h.html#canCHANNEL_CAP_xxx">canCHANNEL_CAP_xxx</a> for info about flags. </p>
 
 </div>
 </div>
@@ -1905,7 +2166,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
-<p><em>buffer</em> returns a combination of <a class="el" href="canlib_8h.html#canCHANNEL_IS_xxx">canCHANNEL_IS_xxx</a> flags. </p>
+<p><em>buffer</em> points to a 32-bit unsigned integer that receives a combination of <a class="el" href="canlib_8h.html#canCHANNEL_IS_xxx">canCHANNEL_IS_xxx</a> flags. </p>
 
 </div>
 </div>
@@ -1920,11 +2181,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>Use <a class="el" href="canlib_8h.html#afc7edc82e3d370444c3b83c66a9c6479">canCHANNELDATA_DEVDESCR_ASCII</a> instead.</dd></dl>
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to an area which receives a zero-terminated string with a clear-text name of the channel.</p>
 <dl class="section note"><dt>Note</dt><dd>Use of this item code is no longer recommended. The returned channel name doesn't contain the exact hardware type (it just contains the device family) and uses zero-based channel numbering, which is not user friendly. Instead, use e.g. <a class="el" href="canlib_8h.html#afc7edc82e3d370444c3b83c66a9c6479">canCHANNELDATA_DEVDESCR_ASCII</a> and <a class="el" href="canlib_8h.html#a4e0823a649d26191cde50f2c4fa5a65d">canCHANNELDATA_CHAN_NO_ON_CARD</a> to build your own channel name.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="canlib_8h.html#af401a271df81c288ca1ba3a18eddd5ec">canCHANNELDATA_DEVNAME_ASCII</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a11">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a10">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -1946,6 +2208,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a40c7c5a86334adcc799cd78696deca2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40c7c5a86334adcc799cd78696deca2e">&#9670;&nbsp;</a></span>canCHANNELDATA_CLOCK_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canCHANNELDATA_CLOCK_INFO&#160;&#160;&#160;46</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
+<p><em>buffer</em> is <a class="el" href="structkv_clock_info.html">kvClockInfo</a>. </p>
+
+</div>
+</div>
 <a id="a0e91dd0d999b3043c6da5cb911dd83d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0e91dd0d999b3043c6da5cb911dd83d8">&#9670;&nbsp;</a></span>canCHANNELDATA_CUST_CHANNEL_NAME</h2>
 
@@ -1958,8 +2236,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
+<dl class="section note"><dt>Note</dt><dd>If no channel name is set, <a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a41e892edb8f1b6f9f609599df8e20bdf">canERR_NOT_IMPLEMENTED</a> will be returned, regardless of channel name is supported in the device or not.</dd></dl>
 <p><em>buffer</em> is a user supplied byte array of length 'bufsize' (at least one byte long) to which the null terminated UTF-8 coded channel name will be placed. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a15">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2list_channels_8c-example.html#a9">how-to/c/listChannels.c</a>, and <a class="el" href="list_channels_8c-example.html#a14">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -1976,7 +2255,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to a buffer which receives the product name of the device as a zero-terminated ASCII string. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a10">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2list_channels_8c-example.html#a4">how-to/c/listChannels.c</a>, and <a class="el" href="list_channels_8c-example.html#a9">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2038,7 +2317,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
-<p><em>buffer</em> points to a CHAR array of at least 32 characters which receives the current device name as a <code>NULL</code> terminated ASCII string.</p>
+<p><em>buffer</em> points to a CHAR array of at least 32 characters which receives the current device name as a <code>NULL</code> terminated ASCII string. The user settable device name is currently only implemented in remote devices.</p>
 <p>If device name is not set or the device does not support this functionality, an error will be returned. </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -2061,10 +2340,9 @@ Functions</h2></td></tr>
 <li>0: 0 </li>
 <li>1: The build number </li>
 <li>2: The minor revision number </li>
-<li>3: The major revision number <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
-</li>
+<li>3: The major revision number </li>
 </ul>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a9">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a8">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2105,13 +2383,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to an array of 4 16-bit unsigned integers which receives the product version number of the second-level DLL driver file, i.e. the DLL that interfaces between canlib32.dll and the driver proper.</p>
-<p>Contents depening on index:</p>
+<p>Contents depending on index:</p>
 <ul>
 <li>0: 0 </li>
 <li>1: 1 </li>
 <li>2: The minor revision number </li>
-<li>3: The major revision number <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
-</li>
+<li>3: The major revision number </li>
 </ul>
 
 </div>
@@ -2129,13 +2406,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to an array of four 16-bit unsigned integers which receives the file version number of the kernel-mode driver.</p>
-<p>Contents depening on index:</p>
+<p>Contents depending on index:</p>
 <ul>
 <li>0: The build number </li>
 <li>1: 0 </li>
 <li>2: The minor revision number </li>
-<li>3: The major revision number <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
-</li>
+<li>3: The major revision number </li>
 </ul>
 
 </div>
@@ -2152,9 +2428,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
-<p><em>buffer</em> points to a buffer which receives the name of the device driver (e.g. "kcans") as a zero-terminated ASCII string.</p>
+<p><em>buffer</em> points to a buffer which receives the name of the device driver (e.g. "kcanl") as a zero-terminated ASCII string.</p>
 <dl class="section note"><dt>Note</dt><dd>The device driver names have no special meanings and may change from a release to another. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a8">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a7">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2171,13 +2447,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to an array of four 16-bit unsigned integers which receives the product version number of the kernel-mode driver.</p>
-<p>Contents depening on index:</p>
+<p>Contents depending on index:</p>
 <ul>
 <li>0: 0 </li>
 <li>1: 0 </li>
 <li>2: The minor revision number </li>
-<li>3: The major revision number <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
-</li>
+<li>3: The major revision number </li>
 </ul>
 
 </div>
@@ -2228,7 +2503,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
-<p><em>buffer</em> points to a 32-bit unsigned integer that is 1 if the channel(device) is currently connected as a remote device. 0 if it is not currenty a remote device. </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
+<p><em>buffer</em> points to a 32-bit unsigned integer that is 1 if the channel(device) is currently connected as a remote device. 0 if it is not currently a remote device. </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
 </div>
@@ -2404,7 +2679,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
-<p><em>buffer</em> points to a 32-bit unsigned integer that contains the time in milliseconds since the last communication occured.</p>
+<p><em>buffer</em> points to a 32-bit unsigned integer that contains the time in milliseconds since the last communication occurred.</p>
 <p>For WLAN devices, this is the time since the last keep-alive message. </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -2597,7 +2872,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd()</a> when using the CAN FD protocol. Indicates a bitrate of 1.0 Mbit/s and sampling point at 80%. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdmonitor_8c-example.html#a6">canfdmonitor.c</a>, and <a class="el" href="canfdwrite_8c-example.html#a8">canfdwrite.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdmonitor_8c-example.html#a6">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a8">canfdwrite.c</a>, and <a class="el" href="how-to_2c_2open_channels_8c-example.html#a9">how-to/c/openChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2644,7 +2919,8 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd()</a> when using the CAN FD protocol. Indicates a bitrate of 0.5 Mbit/s and sampling point at 80%. </p>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2open_channels_8c-example.html#a7">how-to/c/openChannels.c</a>.</dd>
+</dl>
 </div>
 </div>
 <a id="ac1d8bd40554b1433f00e4f1bca3f7a8e"></a>
@@ -2860,6 +3136,22 @@ Not implemented in linux. </dd></dl>
 </div><div class="memdoc">
 
 <p>CANpari (obsolete). </p>
+
+</div>
+</div>
+<a id="a2f227b989d37c23ae0a641bb1cdad209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f227b989d37c23ae0a641bb1cdad209">&#9670;&nbsp;</a></span>canHWTYPE_DINRAIL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canHWTYPE_DINRAIL&#160;&#160;&#160;86</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kvaser DIN Rail SE400S and variants. </p>
 
 </div>
 </div>
@@ -3199,6 +3491,22 @@ Not implemented in linux. </dd></dl>
 
 </div>
 </div>
+<a id="ab943def3563eb89a526ecd8f3b489768"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab943def3563eb89a526ecd8f3b489768">&#9670;&nbsp;</a></span>canHWTYPE_U100</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canHWTYPE_U100&#160;&#160;&#160;88</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kvaser U100 and variants. </p>
+
+</div>
+</div>
 <a id="a9260bb6dc758ba110edb786ffb96a645"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9260bb6dc758ba110edb786ffb96a645">&#9670;&nbsp;</a></span>canHWTYPE_USBCAN</h2>
 
@@ -3323,6 +3631,8 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Indicates an invalid <a class="el" href="canlib_8h.html#ae3d1b041d62207d5336f93c089cd5b65">canHandle</a>. </p>
+
 </div>
 </div>
 <a id="ac5cc3132d209cce6dc311c215508f881"></a>
@@ -3336,10 +3646,12 @@ Not implemented in linux. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The following canIOCTL code is deprecated. It is recommended to use <a class="el" href="canlib_8h.html#ab5abee158dc1d1872a75dd9483a699b6">canIOCTL_RESET_OVERRUN_COUNT</a> to reset overrun status (Note that CAN error counters are never updated on device and will be briefly changed back to their original values after this call)</p>
+<p>Note that CAN error counters are never updated on device and will be briefly changed back to their original values after this call.</p>
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> and <em>buflen</em> refers to this functions arguments.</p>
-<p>Tells CANlib to clear the CAN error counters. The contents of <em>buf</em> and <em>buflen</em> are ignored. CAN error counters on device side are NOT updated.</p>
-<dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
+<p>Tells CANlib to clear the CAN error counters. The contents of <em>buf</em> and <em>buflen</em> is ignored. CAN error counters on device side are NOT updated.</p>
+<dl class="section note"><dt>Note</dt><dd>It is recommended to use <a class="el" href="canlib_8h.html#ab5abee158dc1d1872a75dd9483a699b6">canIOCTL_RESET_OVERRUN_COUNT</a> to reset overrun status.</dd>
+<dd>
+Not implemented in linux. </dd></dl>
 
 </div>
 </div>
@@ -3355,7 +3667,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p>Connects the handle to the virtual bus number (0..31) which the <em>buf</em> points to.</p>
+<p>Connects the handle to a virtual bus. <em>buf</em> points to a unsigned int containing the virtual bus number (0..31).</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -3372,7 +3684,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p>Disonnects the handle from the virtual bus number (0..31) which the <em>buf</em> points to.</p>
+<p>Disconnects the handle from a virtual bus. <em>buf</em> points to a unsigned int containing the virtual bus number (0..31).</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -3389,7 +3701,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> and <em>buflen</em> refers to this functions arguments.</p>
-<p>Discard the current contents of the RX queue. The values of <em>buf</em> and <em>buflen</em> are ignored.</p>
+<p>Discard the current contents of the RX queue. The values of <em>buf</em> and <em>buflen</em> is ignored.</p>
 <dl class="section note"><dt>Note</dt><dd>This is the same thing as calling <a class="el" href="group___c_a_n.html#ga7abcf8f512da6ab568850b9faa0bc28b">canFlushReceiveQueue()</a> </dd></dl>
 
 </div>
@@ -3406,7 +3718,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> and <em>buflen</em> refers to this functions arguments.</p>
-<p>Discard the current contents of the TX queue. The values of <em>buf</em> and <em>buflen</em> are ignored.</p>
+<p>Discard the current contents of the TX queue. The values of <em>buf</em> and <em>buflen</em> is ignored.</p>
 <dl class="section note"><dt>Note</dt><dd>This is the same thing as calling <a class="el" href="group___c_a_n.html#ga52a17bb8012bf025d127b4d29e5f3aa8">canFlushTransmitQueue()</a>. </dd></dl>
 
 </div>
@@ -3510,6 +3822,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
+<p>Returns the round trip time to a device.</p>
 <p><em>buf</em> points to a <code>DWORD</code> that contains the roundtrip time measured in milliseconds.</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
@@ -3527,7 +3840,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p><em>buf</em> points at a <code>DWORD</code> which receives the current RX queue level. The returned value is approximative (this is because not all hardware supports retrieving the queue levels. In that case a best-effort guess is returned. Also note that a device with embedded CPU will report its queue levels to the host computer after a short delay that depends on the bus traffic intensity, and consequently the value returned by the call to <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a> might be a few milliseconds old.) </p>
+<p><em>buf</em> points at a <code>DWORD</code> which receives the current RX queue level. The returned value is approximative, this is because not all hardware supports retrieving the queue levels. In that case a best-effort guess is returned. Also note that a device with embedded CPU will report its queue levels to the host computer after a short delay that depends on the bus traffic intensity, and consequently the value returned by the call to <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a> might be a few milliseconds old. </p>
 
 </div>
 </div>
@@ -3543,7 +3856,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p>This ioctl can be used to set the responsitivity of some devices. <em>buf</em> points to a <code>DWORD</code> that should contain a value between 0 and 100. A value of 0 means that the device should be very responsive and a value of 100 means that the device generates less cpu load or requires more bandwidth. Note that not all devices support this. Some hardware will accept this command but neglect it. This can be found out by reading the scaled throttle.</p>
+<p>This ioctl can be used to set the responsitivity of some devices. <em>buf</em> points to a <code>DWORD</code> that should contain a value between 0 and 100. A value of 0 means that the device should be very responsive and a value of 100 means that the device generates less CPU load or requires more bandwidth. Note that not all devices support this. Some hardware will accept this command but neglect it. This can be found out by reading the scaled throttle.</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -3560,7 +3873,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p><em>buf</em> points to a <code>DWORD</code> that contains the time in milliseconds since the last communication occured.</p>
+<p><em>buf</em> points to a <code>DWORD</code> that contains the time in milliseconds since the last communication occurred.</p>
 <p>For WLAN devices, this is the time since the last keep-alive message.</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
@@ -3612,7 +3925,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p><em>buf</em> points at a <code>DWORD</code> which receives the current TX queue level. The returned value is approximative (this is because not all hardware supports retrieving the queue levels. In that case a best-effort guess is returned. Also note that a device with embedded CPU will report its queue levels to the host computer after a short delay that depends on the bus traffic intensity, and consequently the value returned by the call to <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a> might be a few milliseconds old.) </p>
+<p><em>buf</em> points at a <code>DWORD</code> which receives the current TX queue level. The returned value is approximative, this is because not all hardware supports retrieving the queue levels. In that case a best-effort guess is returned. Also note that a device with embedded CPU will report its queue levels to the host computer after a short delay that depends on the bus traffic intensity, and consequently the value returned by the call to <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a> might be a few milliseconds old. </p>
 
 </div>
 </div>
@@ -3650,6 +3963,22 @@ Not implemented in linux. </dd></dl>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>.</p>
 <dl class="section note"><dt>Note</dt><dd>This is only intended for internal use. </dd></dl>
+
+</div>
+</div>
+<a id="a02f9d2480cbecb5e7018a75bba25eeeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02f9d2480cbecb5e7018a75bba25eeeb">&#9670;&nbsp;</a></span>canIOCTL_GET_USB_THROTTLE_SCALED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canIOCTL_GET_USB_THROTTLE_SCALED&#160;&#160;&#160;42</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>Use <a class="el" href="canlib_8h.html#a668aff1bb8e1ff96d50c8bded8706d48">canIOCTL_GET_THROTTLE_SCALED</a> instead</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
 </div>
@@ -3731,7 +4060,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> and <em>buflen</em> refers to this functions arguments.</p>
-<p>Tells CANlib to "prefer" extended identifiers; that is, if you send a message with <a class="el" href="group___c_a_n.html#ga62c185329d6741c90102511e2f37983e">canWrite()</a> and don't specify <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> nor <a class="el" href="canstat_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a>, <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> will be assumed. The contents of <em>buf</em> and <em>buflen</em> are ignored. <a class="el" href="group___c_a_n.html#ga157d49a9343dea68ac953145e02266d8">canRead()</a> et al will set <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="canstat_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a> as usual and are not affected by this call.</p>
+<p>Tells CANlib to "prefer" extended identifiers; that is, if you send a message with <a class="el" href="group___c_a_n.html#ga62c185329d6741c90102511e2f37983e">canWrite()</a> and don't specify <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> nor <a class="el" href="canstat_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a>, <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> will be assumed and the most significant bits of the identifier will be cut off. The contents of <em>buf</em> and <em>buflen</em> is ignored. <a class="el" href="group___c_a_n.html#ga157d49a9343dea68ac953145e02266d8">canRead()</a> et al will set <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="canstat_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a> as usual and are not affected by this call.</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -3767,7 +4096,7 @@ Not implemented in linux. </dd></dl>
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
 <p>This ioctl resets overrun count and flags, </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="group___c_a_n.html#gaca3da209fe673b3838a50a3abe831855">canReadStatus</a> </dd>
 <dd>
-<a class="el" href="group___c_a_n.html#ga8d78ccbef4e6038ff63662f06b7cde65">canGetBusStatistics</a> </dd></dl>
+<a class="el" href="group___c_a_n.html#ga8d78ccbef4e6038ff63662f06b7cde65">canGetBusStatistics</a>. The contents of <em>buf</em> and <em>buflen</em> is ignored. </dd></dl>
 
 </div>
 </div>
@@ -3783,7 +4112,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p>Some hardware have a bitrate limit, which must be met when using any of <em><a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a></em>, <em><a class="el" href="group___c_a_n.html#gac34c1577cae55385250e7412513c8cbd">canSetBusParamsC200()</a></em> and <em><a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd()</a></em> functions. The bitrate limit can be overriden with this IOCTL. <em>buf</em> points to a <code>long</code> value that contains a user defined bitrate. A value of 0 means that the device should use its own default bitrate limit.<br />
+<p>Some hardware have a bitrate limit, which must be met when using any of <em><a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a></em>, <em><a class="el" href="group___c_a_n.html#gac34c1577cae55385250e7412513c8cbd">canSetBusParamsC200()</a></em> and <em><a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd()</a></em> functions. The bitrate limit can be overridden with this IOCTL. <em>buf</em> points to a <code>unsigned</code> long value that contains a user defined bitrate. A value of 0 means that the device should use its own default bitrate limit.<br />
  To find out which devices that have a bitrate limit, see <a class="el" href="canlib_8h.html#a3cc31ba6fd77280ecd11aea7a4089472">canCHANNELDATA_MAX_BITRATE</a>. </p>
 
 </div>
@@ -3816,9 +4145,9 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
+<p>This function enables or disables automatic time reset on bus on. By default, this is enabled, so the timer will automatically reset when a handle goes on bus.</p>
 <p><em>buf</em> points to a DWORD. If the value is zero, the CAN clock will not be reset at buson for the handle. Otherwise, the CAN clock will be reset at buson.</p>
-<p>Default value is <code>1</code>, the CAN clock will be reset at buson.</p>
-<dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
+<p>Default value is <code>1</code>, the CAN clock will be reset at buson. </p>
 
 </div>
 </div>
@@ -3850,6 +4179,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
+<p>This function turns error frame reporting on or off. If it is off, the channel handle will ignore any error frames it receives.</p>
 <p><em>buf</em> points to an unsigned byte. If the value is zero, the reporting of error frames is turned off for the handle. Otherwise, error frame reporting is turned on.</p>
 <p>Default value is <code>1</code>, error frame reporting is turned on.</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
@@ -3907,9 +4237,8 @@ Not implemented in linux. </dd></dl>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
 <p>Use this function code to set the size of the receive buffer for a specific handle. <em>buf</em> points to an unsigned integer which contains the new size (number of messages) of the receive buffer.</p>
-<dl class="section note"><dt>Note</dt><dd>The receive buffer consumes system nonpaged pool memory, which is a limited resource. Do not increase the receive buffer size unless you have good reasons to do so.</dd>
-<dd>
-You can't use this function code when the channel is on bus.</dd>
+<p>The receive buffer consumes system non-paged pool memory, which is a limited resource. Do not increase the receive buffer size unless you have good reasons to do so.</p>
+<dl class="section note"><dt>Note</dt><dd>You can't use this function code when the channel is on bus.</dd>
 <dd>
 Not implemented in linux. </dd></dl>
 
@@ -3927,7 +4256,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p>This ioctl can be used to set the responsitivity of some devices. <em>buf</em> points to a <code>DWORD</code> that should contain a value between 0 and 100. A value of 0 means that the device should be very responsive and a value of 100 means that the device generates less cpu load or requires more bandwidth. Note that not all devices support this. Some hardware will accept this command but neglect it. This can be found out by reading the scaled throttle.</p>
+<p>This ioctl can be used to set the responsitivity of some devices. <em>buf</em> points to a <code>DWORD</code> that should contain a value between 0 and 100. A value of 0 means that the device should be very responsive and a value of 100 means that the device generates less CPU load or requires more bandwidth. Note that not all devices support this. Some hardware will accept this command but neglect it. This can be found out by reading the scaled throttle.</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -3944,7 +4273,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p><em>buf</em> points to a DWORD which contains the desired time-stamp clock resolution in microseconds. The default value is 1000 microseconds, i.e. one millisecond.</p>
+<p>The timer scale determines how precisely the channel's timestamps will be displayed without changing the accuracy of the clock. <em>buf</em> points to a DWORD which contains the desired time-stamp clock resolution in microseconds. The default value is 1000 microseconds, i.e. one millisecond.</p>
 <dl class="section note"><dt>Note</dt><dd>The accuracy of the clock isn't affected. </dd></dl>
 
 </div>
@@ -3961,6 +4290,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
+<p>Enabling transmit Acknowledges on a channel results in that channel receiving a message with the TXACK flag enabled every time a message is successfully transmitted.</p>
 <p><em>buf</em> points to a DWORD which contains</p>
 <ul>
 <li>0: to turn Transmit Acknowledges off. </li>
@@ -3983,6 +4313,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
+<p>Turns transmit requests on or off. If transmit requests are enabled on a channel, the channel will receive a message any time it writes a message to the channel.</p>
 <p><em>buf</em> points to a <code>DWORD</code> which contains</p>
 <ul>
 <li><code>0</code> to turn Transmit Requests off. </li>
@@ -4005,6 +4336,22 @@ Not implemented in linux. </dd></dl>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>.</p>
 <dl class="section note"><dt>Note</dt><dd>This is only intended for internal use. </dd></dl>
+
+</div>
+</div>
+<a id="adbc1fa43a63d15364c3006b7d61afccc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbc1fa43a63d15364c3006b7d61afccc">&#9670;&nbsp;</a></span>canIOCTL_SET_USB_THROTTLE_SCALED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canIOCTL_SET_USB_THROTTLE_SCALED&#160;&#160;&#160;41</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd>Use <a class="el" href="canlib_8h.html#a209b1bfbe11114d7b1b72d447672bcb4">canIOCTL_SET_THROTTLE_SCALED</a> instead.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
 </div>
@@ -4138,8 +4485,8 @@ Not implemented in linux. </dd></dl>
 </div><div class="memdoc">
 <p>Allow opening of virtual channels as well as physical channels.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_virtual.html">Virtual Channels</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a6">cancount.c</a>, <a class="el" href="canmonitor_8c-example.html#a14">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a14">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a6">writeloop.c</a>.</dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_device_and_channel.html#section_user_guide_virtual">Virtual Channels</a> </dd></dl>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a6">cancount.c</a>, <a class="el" href="canmonitor_8c-example.html#a14">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a14">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a7">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a4">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a6">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -4156,7 +4503,7 @@ Not implemented in linux. </dd></dl>
 </div><div class="memdoc">
 <p>The channel will use the CAN FD protocol, ISO compliant. This also means that messages with <a class="el" href="canstat_8h.html#canFDMSG_xxx">canFDMSG_xxx</a> flags can now be used.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdmonitor_8c-example.html#a4">canfdmonitor.c</a>, and <a class="el" href="canfdwrite_8c-example.html#a4">canfdwrite.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdmonitor_8c-example.html#a4">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a4">canfdwrite.c</a>, and <a class="el" href="how-to_2c_2open_channels_8c-example.html#a5">how-to/c/openChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -4192,9 +4539,10 @@ Not implemented in linux. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Don't allow sharing of this circuit between applications.</p>
+<p>Don't allow sharing of this CANlib channel between applications.</p>
+<p>Two or more applications can share the same CAN channel. You can, for example, have one application send messages on the bus and another application that just monitors the bus. If this is not desired (for performance or other reasons) you can open an exclusive handle to a channel. This means that no other application can open a handle to the same channel. Do this by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparms_8c-example.html#a4">busparms.c</a>, <a class="el" href="cancount_8c-example.html#a4">cancount.c</a>, <a class="el" href="canfdwrite_8c-example.html#a5">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a12">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a12">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a4">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparms_8c-example.html#a4">busparms.c</a>, <a class="el" href="cancount_8c-example.html#a4">cancount.c</a>, <a class="el" href="canfdwrite_8c-example.html#a5">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a12">canmonitor.c</a>, <a class="el" href="how-to_2c_2open_channels_8c-example.html#a6">how-to/c/openChannels.c</a>, <a class="el" href="simplewrite_8c-example.html#a12">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a4">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -4283,10 +4631,115 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>Fail the call if the channel cannot be opened with init access.</p>
-<p>Init access means that the the CAN handle can set bit rate and CAN driver mode. At most one CAN handle may have init access to any given channel. If you try to set the bit rate or CAN driver mode for a handle to which you don't have init access, the call will silently fail (i.e. <a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> is returned although the call had no effect), unless you enable "access error
+<p>Init access means that the CAN handle can set bit rate and CAN driver mode. At most one CAN handle may have init access to any given channel. If you try to set the bit rate or CAN driver mode for a handle to which you don't have init access, the call will silently fail (i.e. <a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> is returned although the call had no effect), unless you enable "access error
 reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a> using <a class="el" href="canlib_8h.html#a40080b62856e3ed5557782444e9e070f">canIOCTL_SET_REPORT_ACCESS_ERRORS</a>. Access error reporting is by default off. Init access is the default.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="canlib_8h.html#a1d7dee5873b91fc267239dfaedf977df">canOPEN_NO_INIT_ACCESS</a>, <a class="el" href="canlib_8h.html#a40080b62856e3ed5557782444e9e070f">canIOCTL_SET_REPORT_ACCESS_ERRORS</a> </dd></dl>
+
+</div>
+</div>
+<a id="a24a3dd7d75f6e82b5033829fa1d95748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24a3dd7d75f6e82b5033829fa1d95748">&#9670;&nbsp;</a></span>canTXEDATA_COMPILER_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canTXEDATA_COMPILER_VERSION&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData()</a>, <em>buffer</em> mentioned below refers to this functions argument. </p>
+
+</div>
+</div>
+<a id="a14f51bd64a644cb0c22370c00acd0429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14f51bd64a644cb0c22370c00acd0429">&#9670;&nbsp;</a></span>canTXEDATA_DATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canTXEDATA_DATE&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData()</a>, <em>buffer</em> mentioned below refers to this functions argument. </p>
+
+</div>
+</div>
+<a id="a3a3bb829a77a8230c76be3e2a1f0490c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a3bb829a77a8230c76be3e2a1f0490c">&#9670;&nbsp;</a></span>canTXEDATA_DESCRIPTION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canTXEDATA_DESCRIPTION&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData()</a>, <em>buffer</em> mentioned below refers to this functions argument. </p>
+
+</div>
+</div>
+<a id="a1635981ddf3b7437be823b800a29fa9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1635981ddf3b7437be823b800a29fa9a">&#9670;&nbsp;</a></span>canTXEDATA_FILE_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canTXEDATA_FILE_VERSION&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData()</a>, <em>buffer</em> mentioned below refers to this functions argument. </p>
+
+</div>
+</div>
+<a id="a07917c4e4a406cf35b9b5b341f92e42c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07917c4e4a406cf35b9b5b341f92e42c">&#9670;&nbsp;</a></span>canTXEDATA_IS_ENCRYPTED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canTXEDATA_IS_ENCRYPTED&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData()</a>, <em>buffer</em> mentioned below refers to this functions argument. </p>
+
+</div>
+</div>
+<a id="a8e28e4ca27012e27619b4add63fabe16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e28e4ca27012e27619b4add63fabe16">&#9670;&nbsp;</a></span>canTXEDATA_SIZE_OF_CODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canTXEDATA_SIZE_OF_CODE&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData()</a>, <em>buffer</em> mentioned below refers to this functions argument. </p>
+
+</div>
+</div>
+<a id="afaaf8eee8bad814ac01aaa9e9d86d820"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaaf8eee8bad814ac01aaa9e9d86d820">&#9670;&nbsp;</a></span>canTXEDATA_SOURCE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canTXEDATA_SOURCE&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData()</a>, <em>buffer</em> mentioned below refers to this functions argument. </p>
 
 </div>
 </div>
@@ -4369,7 +4822,8 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Don't allow sharing of this circuit between applications.</p>
+<p>Don't allow sharing of this CANlib channel between applications.</p>
+<p>Two or more applications can share the same CAN channel. You can, for example, have one application send messages on the bus and another application that just monitors the bus. If this is not desired (for performance or other reasons) you can open an exclusive handle to a channel. This means that no other application can open a handle to the same channel. Do this by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> </p>
 
 </div>
@@ -4385,7 +4839,8 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Don't allow sharing of this circuit between applications.</p>
+<p>Don't allow sharing of this CANlib channel between applications.</p>
+<p>Two or more applications can share the same CAN channel. You can, for example, have one application send messages on the bus and another application that just monitors the bus. If this is not desired (for performance or other reasons) you can open an exclusive handle to a channel. This means that no other application can open a handle to the same channel. Do this by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> </p>
 
 </div>
@@ -4401,7 +4856,8 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Don't allow sharing of this circuit between applications.</p>
+<p>Don't allow sharing of this CANlib channel between applications.</p>
+<p>Two or more applications can share the same CAN channel. You can, for example, have one application send messages on the bus and another application that just monitors the bus. If this is not desired (for performance or other reasons) you can open an exclusive handle to a channel. This means that no other application can open a handle to the same channel. Do this by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> </p>
 
 </div>
@@ -4417,7 +4873,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="canlib_8h.html#a918efc9b6a9cf78201c4436712b65c1b">kvBUSTYPE_PCI</a>, <a class="el" href="canlib_8h.html#ad07fee09fe9b5700e48426b12ae77397">kvBUSTYPE_PCMCIA</a>, ... </p><dl class="section note"><dt>Note</dt><dd>Not inplemented in linux. </dd></dl>
+<p><a class="el" href="canlib_8h.html#a918efc9b6a9cf78201c4436712b65c1b">kvBUSTYPE_PCI</a>, <a class="el" href="canlib_8h.html#ad07fee09fe9b5700e48426b12ae77397">kvBUSTYPE_PCMCIA</a>, ... </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
 </div>
@@ -4432,7 +4888,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="canlib_8h.html#a90243bb8b778e2bf323ee0c16c0208de">kvBUSTYPE_USB</a> </p><dl class="section note"><dt>Note</dt><dd>Not inplemented in linux. </dd></dl>
+<p><a class="el" href="canlib_8h.html#a90243bb8b778e2bf323ee0c16c0208de">kvBUSTYPE_USB</a> </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
 </div>
@@ -4447,7 +4903,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="canlib_8h.html#ab7c70409147e76675e586a7d201f8ae4">kvBUSTYPE_WLAN</a>, <a class="el" href="canlib_8h.html#a91b026158afca0b0c6000678bc9da1cc">kvBUSTYPE_LAN</a> </p><dl class="section note"><dt>Note</dt><dd>Not inplemented in linux. </dd></dl>
+<p><a class="el" href="canlib_8h.html#ab7c70409147e76675e586a7d201f8ae4">kvBUSTYPE_WLAN</a>, <a class="el" href="canlib_8h.html#a91b026158afca0b0c6000678bc9da1cc">kvBUSTYPE_LAN</a> </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
 </div>
@@ -4462,7 +4918,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="canlib_8h.html#ad41966e845e89d6176e0ee6cd9ca4970">kvBUSTYPE_VIRTUAL</a> </p><dl class="section note"><dt>Note</dt><dd>Not inplemented in linux. </dd></dl>
+<p><a class="el" href="canlib_8h.html#ad41966e845e89d6176e0ee6cd9ca4970">kvBUSTYPE_VIRTUAL</a> </p><dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
 </div>
@@ -4659,7 +5115,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This define is used in <a class="el" href="group__t_script.html#ga258b5b89187ba90e6bacfbc7590f2e27">kvScriptEnvvarOpen()</a>.</p>
+<p>This define is used in <a class="el" href="group__t_script.html#gac090487e06584e640350e9a2364715c6">kvScriptEnvvarOpen()</a>.</p>
 <p>It defines the type of the envvar as <code>float</code>. </p>
 
 </div>
@@ -4675,7 +5131,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This define is used in <a class="el" href="group__t_script.html#ga258b5b89187ba90e6bacfbc7590f2e27">kvScriptEnvvarOpen()</a>.</p>
+<p>This define is used in <a class="el" href="group__t_script.html#gac090487e06584e640350e9a2364715c6">kvScriptEnvvarOpen()</a>.</p>
 <p>It defines the type of the envvar as <code>int</code>. </p>
 
 </div>
@@ -4691,7 +5147,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This define is used in <a class="el" href="group__t_script.html#ga258b5b89187ba90e6bacfbc7590f2e27">kvScriptEnvvarOpen()</a>.</p>
+<p>This define is used in <a class="el" href="group__t_script.html#gac090487e06584e640350e9a2364715c6">kvScriptEnvvarOpen()</a>.</p>
 <p>It defines the type of the envvar as <code>string</code>. </p>
 
 </div>
@@ -4709,6 +5165,423 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__t_script.html#ga1ab0e65f93389fddf3cd7531a96a5662">kvScriptSendEvent()</a>.</p>
 <p>It defines an event of type "key pressed". </p>
+
+</div>
+</div>
+<a id="ad3446e6e4785a80e6181d8460d7bf966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3446e6e4785a80e6181d8460d7bf966">&#9670;&nbsp;</a></span>kvIO_INFO_GET_AI_HYSTERESIS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_AI_HYSTERESIS&#160;&#160;&#160;11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>A float that contains the hysteresis in volt for an analog input pin, i.e. the amount the input have to change before the sampled value is updated.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only used for analog input pins. </dd></dl>
+
+</div>
+</div>
+<a id="ab8bc23793eb734cc2c70fd57f5150cb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8bc23793eb734cc2c70fd57f5150cb5">&#9670;&nbsp;</a></span>kvIO_INFO_GET_AI_LP_FILTER_ORDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_AI_LP_FILTER_ORDER&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>An unsigned 32-bit integer that contains the low-pass filter order for an analog input pin.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only used for analog input pins. </dd></dl>
+
+</div>
+</div>
+<a id="ac3d4a8c7f3ae2bbae10a6421ec2837f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3d4a8c7f3ae2bbae10a6421ec2837f8">&#9670;&nbsp;</a></span>kvIO_INFO_GET_DI_HIGH_LOW_FILTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_DI_HIGH_LOW_FILTER&#160;&#160;&#160;9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>An unsigned 32-bit integer that contains the filter time in micro seconds when a digital input pin goes from HIGH to LOW.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only used for digital input pins. </dd></dl>
+
+</div>
+</div>
+<a id="a1132596e7b709d07e3e500d79ecc27c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1132596e7b709d07e3e500d79ecc27c9">&#9670;&nbsp;</a></span>kvIO_INFO_GET_DI_LOW_HIGH_FILTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_DI_LOW_HIGH_FILTER&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>An unsigned 32-bit integer that contains the filter time in micro seconds when a digital input pin goes from LOW to HIGH.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only used for digital input pins. </dd></dl>
+
+</div>
+</div>
+<a id="aa35b3f04d717c654cec0a4f0468ebf84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa35b3f04d717c654cec0a4f0468ebf84">&#9670;&nbsp;</a></span>kvIO_INFO_GET_DIRECTION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_DIRECTION&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>An unsigned 32-bit integer, see <a class="el" href="canlib_8h.html#kvIO_PIN_DIRECTION_xxx">kvIO_PIN_DIRECTION_xxx</a>. Read-only. </p>
+
+</div>
+</div>
+<a id="aa9fc705004cd541512dbaa6b16af2d32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9fc705004cd541512dbaa6b16af2d32">&#9670;&nbsp;</a></span>kvIO_INFO_GET_FW_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_FW_VERSION&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a> to get the FW version number.</p>
+<p>An unsigned 32-bit integer that contains the software version number of the submodule the pin belongs to. This number consists of two 16-bit words, where the most significant word represents the major and the least significant the minor software version number. Read-only. </p>
+
+</div>
+</div>
+<a id="a615221bf13f09e226d9f2fc0a2bdf0ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615221bf13f09e226d9f2fc0a2bdf0ce">&#9670;&nbsp;</a></span>kvIO_INFO_GET_MODULE_NUMBER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_MODULE_NUMBER&#160;&#160;&#160;14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a> to get the module number.</p>
+<p>An unsigned 32-bit integer that contains the module number the pin belongs to. The number starts from 0. Read-only. </p>
+
+</div>
+</div>
+<a id="a1098328030dee156b74c349493782cdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1098328030dee156b74c349493782cdb">&#9670;&nbsp;</a></span>kvIO_INFO_GET_MODULE_TYPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_MODULE_TYPE&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>An unsigned 32-bit integer, see <a class="el" href="canlib_8h.html#kvIO_MODULE_TYPE_xxx">kvIO_MODULE_TYPE_xxx</a>. Read-only. </p>
+
+</div>
+</div>
+<a id="ac32b2fe0d62c2ca63c4a15994d65f725"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac32b2fe0d62c2ca63c4a15994d65f725">&#9670;&nbsp;</a></span>kvIO_INFO_GET_NUMBER_OF_BITS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_NUMBER_OF_BITS&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>An unsigned 32-bit integer that contains the resolution in number of bits. Read-only. </p>
+
+</div>
+</div>
+<a id="aca429207da12ba1659499a6793ce18b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca429207da12ba1659499a6793ce18b4">&#9670;&nbsp;</a></span>kvIO_INFO_GET_PIN_TYPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_PIN_TYPE&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>An unsigned 32-bit integer, see <a class="el" href="canlib_8h.html#kvIO_PIN_TYPE_xxx">kvIO_PIN_TYPE_xxx</a>. Read-only. </p>
+
+</div>
+</div>
+<a id="a3ef294dd72816343f9bab9dc9c9dab39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ef294dd72816343f9bab9dc9c9dab39">&#9670;&nbsp;</a></span>kvIO_INFO_GET_RANGE_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_RANGE_MAX&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>A float that contains the upper range limit in volts. Read-only.</p>
+<dl class="section note"><dt>Note</dt><dd>This is not applicable for relay pins. </dd></dl>
+
+</div>
+</div>
+<a id="aa4208430dc0a552a3a66d2103bde6c02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4208430dc0a552a3a66d2103bde6c02">&#9670;&nbsp;</a></span>kvIO_INFO_GET_RANGE_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_RANGE_MIN&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a>.</p>
+<p>A float that contains the lower range limit in volts. Read-only.</p>
+<dl class="section note"><dt>Note</dt><dd>This is not applicable for relay pins. </dd></dl>
+
+</div>
+</div>
+<a id="a7e0ee3b9360531d5a5976a5cfa4ddeed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0ee3b9360531d5a5976a5cfa4ddeed">&#9670;&nbsp;</a></span>kvIO_INFO_GET_SERIAL_NUMBER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_GET_SERIAL_NUMBER&#160;&#160;&#160;15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga851cb68946bf38686a065fccf11d6b42">kvIoPinGetInfo()</a> to get the serial number.</p>
+<p>An unsigned 32-bit integer that contains the serial number of the submodule the pin belongs to. Read-only. </p>
+
+</div>
+</div>
+<a id="a0d5515549989d5f70a258f159aa8fef0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d5515549989d5f70a258f159aa8fef0">&#9670;&nbsp;</a></span>kvIO_INFO_SET_AI_HYSTERESIS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_SET_AI_HYSTERESIS&#160;&#160;&#160;11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga88dda296acccff6acbc979a94b961188">kvIoPinSetInfo()</a>.</p>
+<p>A float that contains the hysteresis in volt for an analog input pin, i.e. the amount the input have to change before the sampled value is updated.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only used for analog input pins. </dd></dl>
+
+</div>
+</div>
+<a id="af8dd482621b791755305bcbe70b4caaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8dd482621b791755305bcbe70b4caaa">&#9670;&nbsp;</a></span>kvIO_INFO_SET_AI_LP_FILTER_ORDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_SET_AI_LP_FILTER_ORDER&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga88dda296acccff6acbc979a94b961188">kvIoPinSetInfo()</a>.</p>
+<p>An unsigned 32-bit integer that contains the low-pass filter order for an analog input pin.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only used for analog input pins. </dd></dl>
+
+</div>
+</div>
+<a id="a13fe255e44c25ff63a4bb2271d816606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13fe255e44c25ff63a4bb2271d816606">&#9670;&nbsp;</a></span>kvIO_INFO_SET_DI_HIGH_LOW_FILTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_SET_DI_HIGH_LOW_FILTER&#160;&#160;&#160;9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga88dda296acccff6acbc979a94b961188">kvIoPinSetInfo()</a>.</p>
+<p>An unsigned 32-bit integer that contains the filter time in micro seconds when a digital input pin goes from HIGH to LOW.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only used for digital input pins. </dd></dl>
+
+</div>
+</div>
+<a id="afa7572ee9ed7b364ed70002d3101dfdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa7572ee9ed7b364ed70002d3101dfdd">&#9670;&nbsp;</a></span>kvIO_INFO_SET_DI_LOW_HIGH_FILTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_INFO_SET_DI_LOW_HIGH_FILTER&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__kv__io.html#ga88dda296acccff6acbc979a94b961188">kvIoPinSetInfo()</a>.</p>
+<p>An unsigned 32-bit integer that contains the filter time in micro seconds when a digital input pin goes from LOW to HIGH.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only used for digital input pins. </dd></dl>
+
+</div>
+</div>
+<a id="af7a0f43fd1cf00fd220e21f3e6e3f4c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7a0f43fd1cf00fd220e21f3e6e3f4c9">&#9670;&nbsp;</a></span>kvIO_MODULE_TYPE_ANALOG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_MODULE_TYPE_ANALOG&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Kvaser Add-on module with analog inputs and analog outputs </p>
+
+</div>
+</div>
+<a id="aa7236356b4f86163b32e6f3b1f2a81e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7236356b4f86163b32e6f3b1f2a81e0">&#9670;&nbsp;</a></span>kvIO_MODULE_TYPE_DIGITAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_MODULE_TYPE_DIGITAL&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Kvaser Add-on module with digital inputs and digital outputs </p>
+
+</div>
+</div>
+<a id="ac05269c6116dcf35be85879b0237399d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac05269c6116dcf35be85879b0237399d">&#9670;&nbsp;</a></span>kvIO_MODULE_TYPE_INTERNAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_MODULE_TYPE_INTERNAL&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Kvaser built-in module with digital inputs and digital outputs </p>
+
+</div>
+</div>
+<a id="a16ff8dcf16321da24929f0fb68a204f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16ff8dcf16321da24929f0fb68a204f5">&#9670;&nbsp;</a></span>kvIO_MODULE_TYPE_RELAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_MODULE_TYPE_RELAY&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Kvaser Add-on module with relays and digital inputs </p>
+
+</div>
+</div>
+<a id="a9e269996cbfabef79b05627e60bfb0f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e269996cbfabef79b05627e60bfb0f4">&#9670;&nbsp;</a></span>kvIO_PIN_DIRECTION_IN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_PIN_DIRECTION_IN&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Input </p>
+
+</div>
+</div>
+<a id="a32aebdbba25ff32662f8112e222af0a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32aebdbba25ff32662f8112e222af0a4">&#9670;&nbsp;</a></span>kvIO_PIN_DIRECTION_OUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_PIN_DIRECTION_OUT&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Output </p>
+
+</div>
+</div>
+<a id="a757a9a7296413cb3187b78775553317d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a757a9a7296413cb3187b78775553317d">&#9670;&nbsp;</a></span>kvIO_PIN_TYPE_ANALOG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_PIN_TYPE_ANALOG&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Analog </p>
+
+</div>
+</div>
+<a id="a6c6338d248a8b47f09b4d53041b9f167"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c6338d248a8b47f09b4d53041b9f167">&#9670;&nbsp;</a></span>kvIO_PIN_TYPE_DIGITAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_PIN_TYPE_DIGITAL&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Digital </p>
+
+</div>
+</div>
+<a id="abb5238d0a6c1de0fb683de27a9ee8a9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb5238d0a6c1de0fb683de27a9ee8a9c">&#9670;&nbsp;</a></span>kvIO_PIN_TYPE_RELAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvIO_PIN_TYPE_RELAY&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Relay </p>
 
 </div>
 </div>
@@ -5212,6 +6085,51 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
 
 </div>
 </div>
+<a id="a358697a3478a7f965429f27b4c842585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a358697a3478a7f965429f27b4c842585">&#9670;&nbsp;</a></span>kvSCRIPT_REQUEST_TEXT_ALL_SLOTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvSCRIPT_REQUEST_TEXT_ALL_SLOTS&#160;&#160;&#160;255</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Select all script slots. </p>
+
+</div>
+</div>
+<a id="aab34ed53484ec00e6fef96e691a0e78f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab34ed53484ec00e6fef96e691a0e78f">&#9670;&nbsp;</a></span>kvSCRIPT_REQUEST_TEXT_SUBSCRIBE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvSCRIPT_REQUEST_TEXT_SUBSCRIBE&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Subscribe to printf messages from script slots. </p>
+
+</div>
+</div>
+<a id="aaa5f8480b5aa827c6a1ae47bbf3f1dde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa5f8480b5aa827c6a1ae47bbf3f1dde">&#9670;&nbsp;</a></span>kvSCRIPT_REQUEST_TEXT_UNSUBSCRIBE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define kvSCRIPT_REQUEST_TEXT_UNSUBSCRIBE&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Cancel subscription of printf messages from script slots. </p>
+
+</div>
+</div>
 <a id="a6be5ed5fdf575e7d9ae0902623c01adc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6be5ed5fdf575e7d9ae0902623c01adc">&#9670;&nbsp;</a></span>kvSCRIPT_STATUS_LOADED</h2>
 
@@ -5333,6 +6251,23 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
 
 </div>
 </div>
+<a id="af504af7b3820af8ec1ec997f3b0333d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af504af7b3820af8ec1ec997f3b0333d3">&#9670;&nbsp;</a></span>kvBusParamLimits</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structkv_bus_param_limits.html">kvBusParamLimits</a> <a class="el" href="structkv_bus_param_limits.html">kvBusParamLimits</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returned when using <a class="el" href="canlib_8h.html#ad4a719c4336ae1ec409bc835a9321f05">canCHANNELDATA_BUS_PARAM_LIMITS</a></p>
+<p>This struct shows the low level limits of the parameters.</p>
+<p>Note that seg1 = prop + phase1 and seg2 = phase2 </p>
+
+</div>
+</div>
 <a id="a7e926c0359a2caa6b9a663a333bab78d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7e926c0359a2caa6b9a663a333bab78d">&#9670;&nbsp;</a></span>kvCallback_t</h2>
 
@@ -5354,6 +6289,24 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
 
 </div>
 </div>
+<a id="acfa6eceefcd36704a04b99b8af669528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfa6eceefcd36704a04b99b8af669528">&#9670;&nbsp;</a></span>kvClockInfo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structkv_clock_info.html">kvClockInfo</a> <a class="el" href="structkv_clock_info.html">kvClockInfo</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returned when using <a class="el" href="canlib_8h.html#a40c7c5a86334adcc799cd78696deca2e">canCHANNELDATA_CLOCK_INFO</a></p>
+<p>Returns clock characteristics for device.</p>
+<p>The device clock frequency can then be calculated as:</p>
+<p>double frequency = numerator/denominator * 10 ** power_of_ten; </p>
+
+</div>
+</div>
 <a id="ac12ca60f6d6e18d9bd29acc00c8ea2ff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac12ca60f6d6e18d9bd29acc00c8ea2ff">&#9670;&nbsp;</a></span>kvEnvHandle</h2>
 
@@ -5365,7 +6318,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>A handle to a t-script envvar. Returned by the function <a class="el" href="group__t_script.html#ga258b5b89187ba90e6bacfbc7590f2e27">kvScriptEnvvarOpen()</a>. </p>
+<p>A handle to a t-script envvar. Returned by the function <a class="el" href="group__t_script.html#gac090487e06584e640350e9a2364715c6">kvScriptEnvvarOpen()</a>. </p>
 
 </div>
 </div>
@@ -5452,7 +6405,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a class="el" href="dir_b077c42d920d220d4fe5af62a68f598c.html">src</a></li><li class="navelem"><a class="el" href="canlib_8h.html">canlib.h</a></li>
-    <li class="footer"> (canlib 5.24) Tue Jul 3 2018</li>
+    <li class="footer"> (canlib 5.34) Wed Sep 9 2020</li>
   </ul>
 </div>
 </body>

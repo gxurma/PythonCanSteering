@@ -64,6 +64,7 @@
 /* Kvaser Linux Canlib VCan layer functions used in Memorators */
 
 #include <errno.h>
+#include <stdio.h>
 #include <string.h>
 #include <sys/ioctl.h>
 #include "kcanio_memorator.h"
@@ -72,6 +73,7 @@
 #include "VCanFuncUtil.h"
 #include "lio_error.h"
 #include "dio_error.h"
+#include "debug.h"
 
 #if DEBUG
 #   define DEBUGPRINT(args) printf args
@@ -168,6 +170,16 @@ static canStatus memoResultToCanStatus(KCANY_MEMO_INFO *info)
   return ret;
 }
 
+#if (__GLIBC__ <= 2)
+#if (__GLIBC_MINOR__ < 10)
+static size_t strnlen(const char *s, size_t maxlen)
+{
+  (void) maxlen;
+  return strlen(s);
+}
+#endif
+#endif /* GLIBC < 2.10 */
+
 /***************************************************************************/
 static int is_filename_invalid(char *filename)
 {
@@ -256,7 +268,7 @@ canStatus vCanMemo_file_copy_to_device(HandleData *hData, char *hostFileName,
   }
 
   while (!status) {
-    size_t bytes;
+    uint32_t bytes;
 
     memset(&info, 0, sizeof(info));
     bytes = fread(&info.buffer[4], 1, 512, hFile);
