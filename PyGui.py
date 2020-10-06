@@ -444,7 +444,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					#print("direction change",i)
 					self.status[i] = stopping
 					self.sendMsg(i << 3 , (0x88, 0xa))
-				elif (self.axisSpeed[i] !serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00= self.axisOldSpeed[i]) and (self.status[i] == moving):
+				elif (self.axisSpeed[i] != self.axisOldSpeed[i]) and (self.status[i] == moving):
 					#print("changing speed",i,speed,direction)
 					self.sendMsg(i << 3 , (0x59, 0xa, 2, abs(self.axisSpeed[i])))
 				elif (self.status[i] == ready)and (self.axisSpeed[i]!= 0 ) : #and (self.currentPos[i] > dsmax) and (self.currentPos[i] < (max[i]-dsmax)):
