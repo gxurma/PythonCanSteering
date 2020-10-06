@@ -201,11 +201,11 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 
 		# Eigener Joystic Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
-		# self.initJoysticHW()
-		# self.joysticThread = GenericThread(self.handleJoystic)
+		self.initJoysticHW()
+		self.joysticThread = GenericThread(self.handleJoystic)
 		# self.joysticModeThread = GenericThread(self.joysticMode)
 
-		# self.pushButtonJoysticMode.clicked.connect(self.joysticThread.start)
+		self.pushButtonJoysticMode.clicked.connect(self.joysticThread.start)
 		# self.pushButtonJoysticMode.clicked.connect(self.joysticModeThread.start)
 
 
@@ -221,7 +221,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		#start and init serial communication
 
 		try:
-			self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
+			# self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
+			self.sbus = serial.Serial('/dev/pts/0',115200,timeout=0.100)
 		except:
 			print("Foglalt, vagy nincs Smoothie!")
 			exit()
@@ -416,7 +417,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					axis = self.axis_map[number]
 					fvalue = value / 32767.0
 					self.axis_states[axis] = fvalue #store value state
-					#print("%s : %.6f" % (axis, fvalue))
+					print("%s : %.6f" % (axis, fvalue),end="\r")
 		print("Jostic mode off 1")
 
 	def joysticMode(self):
@@ -443,7 +444,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					#print("direction change",i)
 					self.status[i] = stopping
 					self.sendMsg(i << 3 , (0x88, 0xa))
-				elif (self.axisSpeed[i] != self.axisOldSpeed[i]) and (self.status[i] == moving):
+				elif (self.axisSpeed[i] !serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00= self.axisOldSpeed[i]) and (self.status[i] == moving):
 					#print("changing speed",i,speed,direction)
 					self.sendMsg(i << 3 , (0x59, 0xa, 2, abs(self.axisSpeed[i])))
 				elif (self.status[i] == ready)and (self.axisSpeed[i]!= 0 ) : #and (self.currentPos[i] > dsmax) and (self.currentPos[i] < (max[i]-dsmax)):
@@ -712,7 +713,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um einfachere Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
 		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
-		(C) 2018-2019 Martin Gyurkó
+		(C) 2018-2020 Martin Gyurkó
 		''')
 
 	def sendMsg(self, msgid, msg):
@@ -751,13 +752,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def startCANComm(self):
 		self.sendMsg(0x00, (0x82,idX)) #Reset CAN comm
-		self.sendMsg(0x00, (0x82,idX2)) #Reset CAN comm
+		# self.sendMsg(0x00, (0x82,idX2)) #Reset CAN comm
 		self.sendMsg(0x00, (0x82,idY)) #Reset CAN comm
 		self.sendMsg(0x00, (0x82,idZ)) #Reset CAN comm
 		self.sendMsg(0x00, (0x82,idC)) #Reset CAN comm
 		time.sleep(0.5)
 		self.sendMsg(0x00, (0x01,idX)) #Start CAN Comm
-		self.sendMsg(0x00, (0x01,idX2)) #Start CAN Comm
+		# self.sendMsg(0x00, (0x01,idX2)) #Start CAN Comm
 		self.sendMsg(0x00, (0x01,idY)) #Start CAN Comm
 		self.sendMsg(0x00, (0x01,idZ)) #Start CAN Comm
 		self.sendMsg(0x00, (0x01,idC)) #Start CAN Comm
@@ -874,17 +875,28 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 								if x:
 									xVal = float(x[2])
 									print("x: ",xVal)
+									# if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
+									# 	self.X1set.setValue(int(xVal*200.0))
+									# 	self.X2set.setValue(0)
+									# elif (xVal > maximumf[0]) :
+									# 	self.X1set.setValue((xVal-maximumf[4])*200.0)
+									# 	self.X2set.setValue(maximum[4])
+									# else : #(xVal < minimumf[0]) :
+									# 	self.X1set.setValue((xVal-minimumf[4])*200.0)
+									# 	self.X2set.setValue(minimum[4])
+
+									## self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
+
 									if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
 										self.X1set.setValue(int(xVal*200.0))
 										self.X2set.setValue(0)
 									elif (xVal > maximumf[0]) :
-										self.X1set.setValue((xVal-maximumf[4])*200.0)
-										self.X2set.setValue(maximum[4])
+										self.X1set.setValue(int(maximumf[0]*200.0))
+										self.X2set.setValue(0)
 									else : #(xVal < minimumf[0]) :
-										self.X1set.setValue((xVal-minimumf[4])*200.0)
-										self.X2set.setValue(minimum[4])
+										self.X1set.setValue(int(minimumf[0]*200.0))
+										self.X2set.setValue(0)
 
-									# self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
 								if y:
 									self.Yset.setValue(int(float(y[2])*200.0))
 								if z:
