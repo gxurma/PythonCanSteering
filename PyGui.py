@@ -203,15 +203,15 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		# Eigener Joystic Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
 		self.initJoysticHW()
 		self.joysticThread = GenericThread(self.handleJoystic)
-		# self.joysticModeThread = GenericThread(self.joysticMode)
+		self.joysticModeThread = GenericThread(self.joysticMode)
 
 		self.pushButtonJoysticMode.clicked.connect(self.joysticThread.start)
-		# self.pushButtonJoysticMode.clicked.connect(self.joysticModeThread.start)
+		self.pushButtonJoysticMode.clicked.connect(self.joysticModeThread.start)
 
 
 		# self.status = [ready,ready,ready]
-		# self.axisSpeed = [0,0,0]
-		# self.axisOldSpeed = [0,0,0]
+		self.axisSpeed = [0,0,0]
+		self.axisOldSpeed = [0,0,0]
 		#
 		self.currentPos=[0,0,10,0,0]
 		self.StatusReg =[0,0,0,0,0]
@@ -222,7 +222,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 		try:
 			# self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
-			self.sbus = serial.Serial('/dev/pts/0',115200,timeout=0.100)
+			self.sbus = serial.Serial('/dev/pts/2',115200,timeout=0.100)
 		except:
 			print("Foglalt, vagy nincs Smoothie!")
 			exit()
@@ -264,6 +264,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendElmoMsgLong(idY, "MO",0,0 )
 		self.sendElmoMsgLong(idZ, "MO",0,0 )
 		self.sendElmoMsgLong(idC, "MO",0,0 )
+
+	def StopAll(self): # without loosing control stop all
+		self.sendElmoMsgShort(idX, "ST",0 ) # STop
+		self.sendElmoMsgShort(idX2,"ST",0 )
+		self.sendElmoMsgShort(idY, "ST",0 )
+		self.sendElmoMsgShort(idZ, "ST",0 )
+		self.sendElmoMsgShort(idC, "ST",0 )
 
 	def initJoysticHW(self):
 		#Iterate over the joystick devices.
@@ -408,29 +415,31 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					button = self.button_map[number]
 					if button:
 						self.button_states[button] = value
-						if value:
-							print ("%s pressed" % (button))
-						else:
-							print ("%s released" % (button))
+						#if value:
+						#	print ("%s pressed" % (button))
+						#else:
+						#	print ("%s released" % (button))
 
 				if type & 0x02:
 					axis = self.axis_map[number]
-					fvalue = value / 32767.0
+					fvalue = value# / 32767.0
 					self.axis_states[axis] = fvalue #store value state
-					print("%s : %.6f" % (axis, fvalue),end="\r")
+					#print("%s : %.6f" % (axis, fvalue),end="\r")
 		print("Jostic mode off 1")
 
 	def joysticMode(self):
-		self.NotStop() #stop everything first.
-		self.AccChange()
-		self.VelChange() # set all speed and acc params to set max value, we are referencing to that internally
+		self.StopAll() #stop everything first.
+		#self.AccChange()
+		#self.VelChange() # set all speed and acc params to set max value, we are referencing to that internally
 		while self.pushButtonJoysticMode.isChecked() :
 
-			self.axisSpeed[0] = int(self.axis_states['x'] * 64.95)
-			self.axisSpeed[1] = int(self.axis_states['y'] * 64.95)
-			self.axisSpeed[2] = int(self.axis_states['ry'] * 64.95)
+			self.axisSpeed[0] = self.axis_states['x'] / 32767
+			self.axisSpeed[1] = self.axis_states['y'] / 32767
+			self.axisSpeed[2] = self.axis_states['ry'] / 32767
 			print(self.axisSpeed)
-			for i in range(0,3):
+			#for i in range(0,3):
+
+			"""for i in range(0,3):
 				direction=(self.axisSpeed[i]<0)
 				speed = self.vMax * fTabelle[abs(self.axisSpeed[i])]
 				dsmax = (((speed*speed*0.5)/self.aMax)/256) + 1000
@@ -452,13 +461,13 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					self.status[i] = moving
 					self.sendMsg(i << 3 , (0x58, 0xa, direction))
 					self.sendMsg(i << 3 , (0x59, 0xa, 2, abs(self.axisSpeed[i])))
-
+			"""
 			self.axisOldSpeed[0] = self.axisSpeed[0]
 			self.axisOldSpeed[1] = self.axisSpeed[1]
 			self.axisOldSpeed[2] = self.axisSpeed[2]
 
-			time.sleep(0.05) # wait 50ms
-		self.NotStop() #stop everything.
+		time.sleep(0.05) # wait 50ms
+		self.StopAll() #stop everything.
 		print("Jostic mode off 2")
 
 	def readPos(self) :
