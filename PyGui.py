@@ -256,6 +256,26 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		# self.serialTestThread = GenericThread( self.serialTest)
 		# self.serialTestThread.start()
 
+		self.xyStep = 0.001
+		self.zStep = 0.001
+
+		self.verticalSlider_StepsXY.valueChanged.connect(self.AdjustXYStep)
+		self.verticalSlider_StepsZ.valueChanged.connect(self.AdjustZStep)
+
+	def AdjustXYStep(self, value):
+		table = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000]
+		self.xyStep = 0.001 * table[value]
+		self.doubleSpinBox_StepsXY.setValue(self.xyStep)
+
+	def AdjustZStep(self, value):
+		table = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000]
+		self.zStep = 0.001 * table[value]
+		self.doubleSpinBox_StepsZ.setValue(self.zStep)
+		
+
+	def buttonMove(self, axe, direction):
+		pass
+
 	def SetActuator(self,value,OnCommand,OffCommand):
 		if value :
 			data = OnCommand+"\n"
@@ -482,6 +502,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		time.sleep(0.05) # wait 50ms
 		self.StopAll() #stop everything.
 		print("Jostic mode off 2")
+
+
 
 	def readPos(self) :
 		while self.pushButtonReadPos.isChecked()	:

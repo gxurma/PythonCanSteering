@@ -1342,7 +1342,7 @@ Read</string>
          </widget>
         </item>
         <item row="1" column="4">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_StepsXY">
           <property name="decimals">
            <number>3</number>
           </property>
@@ -1352,18 +1352,21 @@ Read</string>
           <property name="maximum">
            <double>100.000000000000000</double>
           </property>
+          <property name="singleStep">
+           <double>0.001000000000000</double>
+          </property>
          </widget>
         </item>
         <item row="1" column="5" rowspan="3">
          <widget class="QSlider" name="verticalSlider_StepsXY">
           <property name="minimum">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="maximum">
-           <number>10</number>
+           <number>15</number>
           </property>
           <property name="pageStep">
-           <number>10</number>
+           <number>5</number>
           </property>
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -1377,7 +1380,7 @@ Read</string>
          </widget>
         </item>
         <item row="2" column="6">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_StepsZ">
           <property name="decimals">
            <number>3</number>
           </property>
@@ -1385,20 +1388,23 @@ Read</string>
            <double>0.001000000000000</double>
           </property>
           <property name="maximum">
-           <double>100.000000000000000</double>
+           <double>50.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.001000000000000</double>
           </property>
          </widget>
         </item>
         <item row="1" column="7" rowspan="3">
          <widget class="QSlider" name="verticalSlider_StepsZ">
           <property name="minimum">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="maximum">
-           <number>10</number>
+           <number>14</number>
           </property>
           <property name="pageStep">
-           <number>10</number>
+           <number>5</number>
           </property>
           <property name="orientation">
            <enum>Qt::Vertical</enum>
