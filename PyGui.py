@@ -370,48 +370,53 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		# Open the joystick device.
 		self.fn = '/dev/input/js0'
 		print('Opening %s...' % self.fn)
-		self.jsdev = open(self.fn, 'rb')
+		try:
+			self.jsdev = open(self.fn, 'rb')
 
-		# Get the device name.
-		#buf = bytearray(63)
-		buf = array.array('B', [0] * 64)
-		ioctl(self.jsdev, 0x80006a13 + (0x10000 * len(buf)), buf) # JSIOCGNAME(len)
-		self.js_name = buf.tostring()
-		print('Device name: %s' % self.js_name)
+			# Get the device name.
+			#buf = bytearray(63)
+			buf = array.array('B', [0] * 64)
+			ioctl(self.jsdev, 0x80006a13 + (0x10000 * len(buf)), buf) # JSIOCGNAME(len)
+			self.js_name = buf.tostring()
+			print('Device name: %s' % self.js_name)
 
-		# Get number of axes and buttons.
-		buf = array.array('B', [0])
-		ioctl(self.jsdev, 0x80016a11, buf) # JSIOCGAXES
-		self.num_axes = buf[0]
+			# Get number of axes and buttons.
+			buf = array.array('B', [0])
+			ioctl(self.jsdev, 0x80016a11, buf) # JSIOCGAXES
+			self.num_axes = buf[0]
 
-		buf = array.array('B', [0])
-		ioctl(self.jsdev, 0x80016a12, buf) # JSIOCGBUTTONS
-		self.num_buttons = buf[0]
+			buf = array.array('B', [0])
+			ioctl(self.jsdev, 0x80016a12, buf) # JSIOCGBUTTONS
+			self.num_buttons = buf[0]
 
-		# Get the axis map.
-		buf = array.array('B', [0] * 0x40)
-		ioctl(self.jsdev, 0x80406a32, buf) # JSIOCGAXMAP
+			# Get the axis map.
+			buf = array.array('B', [0] * 0x40)
+			ioctl(self.jsdev, 0x80406a32, buf) # JSIOCGAXMAP
 
-		for axis in buf[:self.num_axes]:
-			axis_name = self.axis_names.get(axis, 'unknown(0x%02x)' % axis)
-			self.axis_map.append(axis_name)
-			self.axis_states[axis_name] = 0.0
+			for axis in buf[:self.num_axes]:
+				axis_name = self.axis_names.get(axis, 'unknown(0x%02x)' % axis)
+				self.axis_map.append(axis_name)
+				self.axis_states[axis_name] = 0.0
 
-		# Get the button map.
-		buf = array.array('H', [0] * 200)
-		ioctl(self.jsdev, 0x80406a34, buf) # JSIOCGBTNMAP
+			# Get the button map.
+			buf = array.array('H', [0] * 200)
+			ioctl(self.jsdev, 0x80406a34, buf) # JSIOCGBTNMAP
 
-		for btn in buf[:self.num_buttons]:
-			btn_name = self.button_names.get(btn, 'unknown(0x%03x)' % btn)
-			self.button_map.append(btn_name)
-			self.button_states[btn_name] = 0
+			for btn in buf[:self.num_buttons]:
+				btn_name = self.button_names.get(btn, 'unknown(0x%03x)' % btn)
+				self.button_map.append(btn_name)
+				self.button_states[btn_name] = 0
 
-		print ('%d axes found: %s' % (self.num_axes, ', '.join(self.axis_map)))
-		print ('%d buttons found: %s' % (self.num_buttons, ', '.join(self.button_map)))
+			print ('%d axes found: %s' % (self.num_axes, ', '.join(self.axis_map)))
+			print ('%d buttons found: %s' % (self.num_buttons, ', '.join(self.button_map)))
+			self.joysticfound = True
+		except:
+			self.joysticfound = False
+			print("No joystic found")
 
 	# Main Joystic event loop
 	def handleJoystic(self):
-		while self.pushButtonJoysticMode.isChecked():
+		while self.joysticfound and self.pushButtonJoysticMode.isChecked():
 			evbuf = self.jsdev.read(8)
 			if evbuf:
 				timestamp, value, type, number = struct.unpack('IhBB', evbuf)
@@ -439,12 +444,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.StopAll() #stop everything first.
 		#self.AccChange()
 		#self.VelChange() # set all speed and acc params to set max value, we are referencing to that internally
-		while self.pushButtonJoysticMode.isChecked() :
+		while self.joysticfound and self.pushButtonJoysticMode.isChecked() :
 
-			self.axisSpeed[0] = self.axis_states['x'] >> 4 #/ 32767
-			self.axisSpeed[1] = self.axis_states['y'] >> 4 #/ 32767
-			self.axisSpeed[2] = self.axis_states['ry'] >> 4 #/ 32767
-			print(self.axisSpeed, end="                   \r")
+			self.axisSpeed[0] = self.axis_states['x'] #/ 32767
+			self.axisSpeed[1] = self.axis_states['y'] #/ 32767
+			self.axisSpeed[2] = self.axis_states['ry'] #/ 32767
+			print(self.axisSpeed, end="       \r")
 			#for i in range(0,3):
 
 			"""for i in range(0,3):
@@ -820,7 +825,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		while True :
 			time.sleep(0.1)
 			if self.pushButtonReadPos.isChecked()	:
-				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/200.0+self.currentPos[4]/66.66666666666, self.currentPos[1]/200.0, self.currentPos[2]/2000.0-50.0, self.currentPos[3]/11.388888889)
+				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/Xm+self.currentPos[4]/X2m, self.currentPos[1]/Ym, self.currentPos[2]/Zm-50.0, self.currentPos[3]/Cm)
 				print(Color.Magenta+message+Color.end)
 				self.sendTcpQ.put(message)
 			while not self.sendTcpQ.empty() :
@@ -898,33 +903,33 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 									xVal = float(x[2])
 									print("x: ",xVal)
 									# if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
-									# 	self.X1set.setValue(int(xVal*200.0))
+									# 	self.X1set.setValue(int(xVal*Xm))
 									# 	self.X2set.setValue(0)
 									# elif (xVal > maximumf[0]) :
-									# 	self.X1set.setValue((xVal-maximumf[4])*200.0)
+									# 	self.X1set.setValue((xVal-maximumf[4])*Xm)
 									# 	self.X2set.setValue(maximum[4])
 									# else : #(xVal < minimumf[0]) :
-									# 	self.X1set.setValue((xVal-minimumf[4])*200.0)
+									# 	self.X1set.setValue((xVal-minimumf[4])*Xm)
 									# 	self.X2set.setValue(minimum[4])
 
 									## self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
 
 									if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
-										self.X1set.setValue(int(xVal*200.0))
+										self.X1set.setValue(int(xVal*Xm))
 										self.X2set.setValue(0)
 									elif (xVal > maximumf[0]) :
-										self.X1set.setValue(int(maximumf[0]*200.0))
+										self.X1set.setValue(int(maximumf[0]*Xm))
 										self.X2set.setValue(0)
 									else : #(xVal < minimumf[0]) :
-										self.X1set.setValue(int(minimumf[0]*200.0))
+										self.X1set.setValue(int(minimumf[0]*Xm))
 										self.X2set.setValue(0)
 
 								if y:
-									self.Yset.setValue(int(float(y[2])*200.0))
+									self.Yset.setValue(int(float(y[2])*Ym))
 								if z:
-									self.Zset.setValue(100000+int(float(z[2])*2000.0)) #openpnp likes to think it starts at z=0
+									self.Zset.setValue(100000+int(float(z[2])*Zm)) #openpnp likes to think it starts at z=0
 								if c:
-									self.Cset.setValue(int(float(c[2])*11.388888889))	# 4100 steps / 360°
+									self.Cset.setValue(int(float(c[2])*Cm))	# 4100 steps / 360°
 								if f:
 									self.Vmaxset.setValue(int(float(f[2])*10.0))
 								# do 5 dimensional movement
