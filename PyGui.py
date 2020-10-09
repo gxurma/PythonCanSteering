@@ -51,34 +51,39 @@ minimum=[0,0,0,0,0]
 maximumf=[.0,.0,.0,.0,.0]
 minimumf=[.0,.0,.0,.0,.0]
 # X: 200 count / mm
+Xm = 200.0 #multiplikator
 maximum[0] = 16300
 minimum[0] = -16000
-maximumf[0] = maximum[0]/200.0
-minimumf[0] = minimum[0]/200.0
+maximumf[0] = maximum[0]/Xm
+minimumf[0] = minimum[0]/Xm
 
 # Y: 200 count / mm
+Ym = 200.0
 maximum[1] = 22080
 minimum[1] = -19260
-maximumf[1] = maximum[1]/200.0
-minimumf[1] = minimum[1]/200.0
+maximumf[1] = maximum[1]/Ym
+minimumf[1] = minimum[1]/Ym
 
 # Z: 2000 count /mm
+Zm = 2000.0
 maximum[2] = 104000
 minimum[2] = 0
-maximumf[2] = maximum[2]/2000.0
-minimumf[2] = minimum[2]/2000.0
+maximumf[2] = maximum[2]/Zm
+minimumf[2] = minimum[2]/Zm
 
 # C: 2000 count / round
+Cm = 11.388888889
 maximum[3] = 10000
 minimum[3] = -10000
-maximumf[3] = maximum[3]/11.388888889
-minimumf[3] = minimum[3]/11.388888889
+minimumf[3] = minimum[3]/Cm
+maximumf[3] = maximum[3]/Cm
 
 # X2: 200 count / round
+X2m = 66.66666666666666666666666
 maximum[4] = 7500
 minimum[4] = -4600
-maximumf[4] = maximum[4]/66.66666666666666666666666
-minimumf[4] = minimum[4]/66.66666666666666666666666
+maximumf[4] = maximum[4]/X2m
+minimumf[4] = minimum[4]/X2m
 
 maxAcceleration = [200000, 200000, 200000, 50000, 50000]
 maxDeceleration = maxAcceleration
@@ -219,17 +224,20 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.VelErr = [0,0,0,0,0]
 
 		#start and init serial communication
-
+		print("trying serial port to smoothie")
 		try:
-			# self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
-			self.sbus = serial.Serial('/dev/pts/2',115200,timeout=0.100)
+			self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
 		except:
-			print("Foglalt, vagy nincs Smoothie!")
-			exit()
+			print("Smoothie existiert nicht! ich versuche es mit virtuellem serial port")
+			try:
+				self.sbus = serial.Serial('/dev/pts/2',115200,timeout=0.100)
+			except:
+				print("Virtueller port geht nicht. lassen wir es sein für heute...")
+				exit()
 #		try:
 #			self.sbus2 = serial.Serial('/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7533531343735131C1C1-if00',115200,timeout=0.100)
-#		except:
 #			print("na ez szívás... Foglalt, vagy nincs szenzorpanel")
+#		except:
 #			exit()
 
 		print('sbus=',self.sbus.name)
@@ -238,8 +246,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
 
-		self.serialSensorReaderThread = GenericThread( self.serialSensorReader)
 		self.connect( self, QtCore.SIGNAL("analyseSensor"), self.analyseSensorData )
+		self.serialSensorReaderThread = GenericThread( self.serialSensorReader)
 		self.serialSensorReaderThread.start()
 
 		self.serialSenderThread = GenericThread( self.serialSender)
@@ -433,10 +441,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		#self.VelChange() # set all speed and acc params to set max value, we are referencing to that internally
 		while self.pushButtonJoysticMode.isChecked() :
 
-			self.axisSpeed[0] = self.axis_states['x'] / 32767
-			self.axisSpeed[1] = self.axis_states['y'] / 32767
-			self.axisSpeed[2] = self.axis_states['ry'] / 32767
-			print(self.axisSpeed)
+			self.axisSpeed[0] = self.axis_states['x'] >> 4 #/ 32767
+			self.axisSpeed[1] = self.axis_states['y'] >> 4 #/ 32767
+			self.axisSpeed[2] = self.axis_states['ry'] >> 4 #/ 32767
+			print(self.axisSpeed, end="                   \r")
 			#for i in range(0,3):
 
 			"""for i in range(0,3):
@@ -494,22 +502,27 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			if msg.id == idRx+idX :
 				#print("posX :", pos)
 				self.lcdNumberDROPosX.display(pos)
+				self.lcdNumberDROPosXf.display(pos / Xm)
 				self.currentPos[0] = pos
 			if msg.id == idRx+idY :
 				#print("posY :", pos)
 				self.lcdNumberDROPosY.display(pos)
+				self.lcdNumberDROPosYf.display(pos / Ym)
 				self.currentPos[1] = pos
 			if msg.id == idRx+idZ :
 				#print("posZ :", pos)
 				self.lcdNumberDROPosZ.display(pos)
+				self.lcdNumberDROPosZf.display(pos / Zm)
 				self.currentPos[2] = pos
 			if msg.id == idRx+idC :
 				#print("posC :", pos)
 				self.lcdNumberDROPosC.display(pos)
+				self.lcdNumberDROPosCf.display(pos / Cm)
 				self.currentPos[3] = pos
 			if msg.id == idRx+idX2 :
 				#print("posX :", pos)
 				self.lcdNumberDROPosX2.display(pos)
+				self.lcdNumberDROPosX2f.display(pos / X2m)
 				self.currentPos[4] = pos
 		if (msg.msg[0] == 0x56) and (msg.msg[1] == 0x45) : # VE = velocity error for boundary homing
 			VelErr = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)

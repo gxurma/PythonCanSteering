@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>768</width>
-    <height>575</height>
+    <height>501</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <item row="1" column="4">
+      <item row="1" column="6">
        <widget class="QLCDNumber" name="lcdNumberDROPosC">
         <property name="enabled">
          <bool>true</bool>
@@ -41,11 +41,11 @@
          <number>6</number>
         </property>
         <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
+         <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
       </item>
-      <item row="1" column="3">
+      <item row="1" column="5">
        <widget class="QLCDNumber" name="lcdNumberDROPosZ">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -63,11 +63,11 @@
          <number>6</number>
         </property>
         <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
+         <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="1" column="4">
        <widget class="QLCDNumber" name="lcdNumberDROPosY">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -85,11 +85,11 @@
          <number>6</number>
         </property>
         <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
+         <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="1" column="3">
        <widget class="QLCDNumber" name="lcdNumberDROPosX2">
         <property name="enabled">
          <bool>true</bool>
@@ -110,11 +110,11 @@
          <number>6</number>
         </property>
         <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
+         <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="0" column="3">
        <widget class="QLabel" name="label_2">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -127,7 +127,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
+      <item row="0" column="4">
        <widget class="QLabel" name="label_3">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -140,7 +140,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="3">
+      <item row="0" column="5">
        <widget class="QLabel" name="label_4">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -153,7 +153,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="4">
+      <item row="0" column="6">
        <widget class="QLabel" name="label_5">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -166,7 +166,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="5" rowspan="3">
+      <item row="0" column="7" rowspan="3">
        <widget class="QPushButton" name="pushButtonNotStop">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -179,7 +179,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="1" column="1">
        <widget class="QLCDNumber" name="lcdNumberDROPosX">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -197,11 +197,11 @@
          <number>6</number>
         </property>
         <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
+         <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="0" column="1">
        <widget class="QLabel" name="label_6">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -214,7 +214,35 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="2" column="1">
+       <widget class="QLCDNumber" name="lcdNumberDROPosXf">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="smallDecimalPoint">
+         <bool>false</bool>
+        </property>
+        <property name="numDigits">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+        <property name="value" stdset="0">
+         <double>0.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="6">
        <widget class="QLCDNumber" name="lcdNumberDROPosCf">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -232,11 +260,33 @@
          <number>6</number>
         </property>
         <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
+         <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="2" column="5">
+       <widget class="QLCDNumber" name="lcdNumberDROPosZf">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="numDigits">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
        <widget class="QLCDNumber" name="lcdNumberDROPosYf">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -254,7 +304,7 @@
          <number>6</number>
         </property>
         <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
+         <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
       </item>
@@ -279,51 +329,7 @@
          <number>6</number>
         </property>
         <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="4">
-       <widget class="QLCDNumber" name="lcdNumberDROPosXf">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QLCDNumber" name="lcdNumberDROPosZf">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Filled</enum>
+         <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
       </item>
@@ -332,7 +338,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1241,7 +1247,7 @@ Read</string>
         <string>Joystic</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="4" column="6">
+        <item row="3" column="6">
          <widget class="QPushButton" name="pushButton_ZM">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -1254,7 +1260,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="3" colspan="2">
+        <item row="2" column="3" colspan="2">
          <widget class="QPushButton" name="pushButton_XM_2">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -1267,7 +1273,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="2" colspan="2">
+        <item row="3" column="2" colspan="2">
          <widget class="QPushButton" name="pushButton_YM">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -1280,7 +1286,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="2" colspan="2">
+        <item row="1" column="2" colspan="2">
          <widget class="QPushButton" name="pushButton_YP">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -1293,7 +1299,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1" colspan="2">
+        <item row="2" column="1" colspan="2">
          <widget class="QPushButton" name="pushButton_XM">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -1306,7 +1312,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="6">
+        <item row="1" column="6">
          <widget class="QPushButton" name="pushButton_ZP">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -1319,7 +1325,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="1" column="1">
          <widget class="QPushButton" name="pushButtonJoysticMode">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -1335,7 +1341,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="4">
+        <item row="1" column="4">
          <widget class="QDoubleSpinBox" name="doubleSpinBox">
           <property name="decimals">
            <number>3</number>
@@ -1348,7 +1354,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="5" rowspan="3">
+        <item row="1" column="5" rowspan="3">
          <widget class="QSlider" name="verticalSlider_StepsXY">
           <property name="minimum">
            <number>1</number>
@@ -1370,7 +1376,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="6">
+        <item row="2" column="6">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
           <property name="decimals">
            <number>3</number>
@@ -1383,7 +1389,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="7" rowspan="3">
+        <item row="1" column="7" rowspan="3">
          <widget class="QSlider" name="verticalSlider_StepsZ">
           <property name="minimum">
            <number>1</number>
@@ -1412,137 +1418,21 @@ Read</string>
         <string>Positionen</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="1">
-         <widget class="QLabel" name="label_14">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>X</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="2">
-         <widget class="QLabel" name="label_15">
+         <widget class="QPushButton" name="pushButton_Go">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Y</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QLabel" name="label_16">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Z</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="4">
-         <widget class="QLabel" name="label_22">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Speed</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_17">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Park</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_ParkX">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
+           <string>Go</string>
           </property>
          </widget>
         </item>
         <item row="1" column="2">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_ParkY">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_ParkZ">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-50.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>4.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="4">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_ParkSpeed">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="5">
-         <widget class="QPushButton" name="pushButton_CapturePark">
+         <widget class="QPushButton" name="pushButton_Capture">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1554,405 +1444,120 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="6">
-         <widget class="QPushButton" name="pushButton_GoPark">
+        <item row="0" column="0" rowspan="2" colspan="2">
+         <widget class="QTableWidget" name="tableWidget_Positionen">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="text">
-           <string>Go</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_18">
-          <property name="text">
-           <string>Grind</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_GrindX">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_GrindY">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_GrindZ">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-50.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>4.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="4">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_GrindSpeed">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="5">
-         <widget class="QPushButton" name="pushButton_CaptureGrind">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Capture</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="6">
-         <widget class="QPushButton" name="pushButton_GoGrind">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Go</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_21">
-          <property name="text">
-           <string>Polier</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_PolierX">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_PolierY">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_PolierZ">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-50.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>4.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="4">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_PolierSpeed">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="5">
-         <widget class="QPushButton" name="pushButton_CapturePolier">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Capture</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="6">
-         <widget class="QPushButton" name="pushButton_GoPolier">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Go</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_20">
-          <property name="text">
-           <string>Dry</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_DryX">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_DryY">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="3">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_DryZ">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-50.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>4.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="4">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_DrySpeed">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="5">
-         <widget class="QPushButton" name="pushButton_CaptureDry">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Capture</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="6">
-         <widget class="QPushButton" name="pushButton_GoDry">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Go</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_19">
-          <property name="text">
-           <string>Camera</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_CameraX">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_CameraY">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="3">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_CameraZ">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-50.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>4.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="4">
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_CameraSpeed">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="minimum">
-           <double>-200.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>200.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="5">
-         <widget class="QPushButton" name="pushButton_CaptureCamera">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Capture</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="6">
-         <widget class="QPushButton" name="pushButton_GoCamera">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Go</string>
-          </property>
+          <property name="rowCount">
+           <number>15</number>
+          </property>
+          <property name="columnCount">
+           <number>5</number>
+          </property>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Grindfast</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Grindslow</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Polierfast</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Polierslow</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Tupfenfast</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Tupfenslow</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Camera 1</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Camera 2</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Camera 3</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Safe Z</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>ParkenFast</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>X</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Z</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Speed</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Pause</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>
@@ -2150,8 +1755,8 @@ Z hub fahren</string>
      <y>273</y>
     </hint>
     <hint type="destinationlabel">
-     <x>121</x>
-     <y>171</y>
+     <x>140</x>
+     <y>213</y>
     </hint>
    </hints>
   </connection>
@@ -2162,8 +1767,8 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>121</x>
-     <y>171</y>
+     <x>140</x>
+     <y>213</y>
     </hint>
     <hint type="destinationlabel">
      <x>208</x>
@@ -2178,12 +1783,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>791</x>
-     <y>204</y>
+     <x>747</x>
+     <y>247</y>
     </hint>
     <hint type="destinationlabel">
-     <x>745</x>
-     <y>298</y>
+     <x>689</x>
+     <y>350</y>
     </hint>
    </hints>
   </connection>
@@ -2194,12 +1799,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>745</x>
-     <y>298</y>
+     <x>689</x>
+     <y>350</y>
     </hint>
     <hint type="destinationlabel">
-     <x>791</x>
-     <y>204</y>
+     <x>747</x>
+     <y>247</y>
     </hint>
    </hints>
   </connection>
@@ -2210,12 +1815,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>705</x>
-     <y>204</y>
+     <x>661</x>
+     <y>247</y>
     </hint>
     <hint type="destinationlabel">
-     <x>663</x>
-     <y>298</y>
+     <x>606</x>
+     <y>350</y>
     </hint>
    </hints>
   </connection>
@@ -2226,12 +1831,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>663</x>
-     <y>298</y>
+     <x>606</x>
+     <y>350</y>
     </hint>
     <hint type="destinationlabel">
-     <x>705</x>
-     <y>204</y>
+     <x>661</x>
+     <y>247</y>
     </hint>
    </hints>
   </connection>
@@ -2242,12 +1847,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>78</x>
-     <y>337</y>
+     <x>96</x>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
-     <x>192</x>
-     <y>339</y>
+     <x>286</x>
+     <y>387</y>
     </hint>
    </hints>
   </connection>
@@ -2258,12 +1863,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>192</x>
-     <y>339</y>
+     <x>286</x>
+     <y>387</y>
     </hint>
     <hint type="destinationlabel">
-     <x>92</x>
-     <y>337</y>
+     <x>110</x>
+     <y>390</y>
     </hint>
    </hints>
   </connection>
@@ -2274,12 +1879,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>92</x>
-     <y>367</y>
+     <x>110</x>
+     <y>424</y>
     </hint>
     <hint type="destinationlabel">
-     <x>188</x>
-     <y>369</y>
+     <x>282</x>
+     <y>421</y>
     </hint>
    </hints>
   </connection>
@@ -2290,12 +1895,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>192</x>
-     <y>369</y>
+     <x>286</x>
+     <y>421</y>
     </hint>
     <hint type="destinationlabel">
-     <x>92</x>
-     <y>367</y>
+     <x>110</x>
+     <y>424</y>
     </hint>
    </hints>
   </connection>
@@ -2306,12 +1911,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>94</x>
-     <y>424</y>
+     <x>116</x>
+     <y>458</y>
     </hint>
     <hint type="destinationlabel">
-     <x>211</x>
-     <y>424</y>
+     <x>305</x>
+     <y>455</y>
     </hint>
    </hints>
   </connection>
@@ -2322,12 +1927,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>192</x>
-     <y>391</y>
+     <x>286</x>
+     <y>455</y>
     </hint>
     <hint type="destinationlabel">
-     <x>87</x>
-     <y>391</y>
+     <x>109</x>
+     <y>458</y>
     </hint>
    </hints>
   </connection>
@@ -2338,12 +1943,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>801</x>
-     <y>97</y>
+     <x>757</x>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
-     <x>353</x>
-     <y>424</y>
+     <x>334</x>
+     <y>458</y>
     </hint>
    </hints>
   </connection>
@@ -2354,12 +1959,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>801</x>
-     <y>97</y>
+     <x>757</x>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
-     <x>468</x>
-     <y>424</y>
+     <x>443</x>
+     <y>458</y>
     </hint>
    </hints>
   </connection>
@@ -2370,12 +1975,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>801</x>
-     <y>97</y>
+     <x>757</x>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
-     <x>576</x>
-     <y>424</y>
+     <x>544</x>
+     <y>458</y>
     </hint>
    </hints>
   </connection>
@@ -2386,12 +1991,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>801</x>
-     <y>97</y>
+     <x>757</x>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
-     <x>683</x>
-     <y>424</y>
+     <x>645</x>
+     <y>458</y>
     </hint>
    </hints>
   </connection>
@@ -2402,12 +2007,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>801</x>
-     <y>83</y>
+     <x>757</x>
+     <y>115</y>
     </hint>
     <hint type="destinationlabel">
-     <x>791</x>
-     <y>424</y>
+     <x>747</x>
+     <y>458</y>
     </hint>
    </hints>
   </connection>
@@ -2418,8 +2023,8 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>224</x>
-     <y>185</y>
+     <x>232</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
      <x>264</x>
@@ -2434,12 +2039,12 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>198</x>
-     <y>163</y>
+     <x>232</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
-     <x>434</x>
-     <y>243</y>
+     <x>443</x>
+     <y>365</y>
     </hint>
    </hints>
   </connection>
@@ -2450,12 +2055,12 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>240</x>
-     <y>196</y>
+     <x>232</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
-     <x>509</x>
-     <y>251</y>
+     <x>544</x>
+     <y>365</y>
     </hint>
    </hints>
   </connection>
@@ -2466,12 +2071,12 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>243</x>
-     <y>149</y>
+     <x>232</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
-     <x>641</x>
-     <y>252</y>
+     <x>645</x>
+     <y>365</y>
     </hint>
    </hints>
   </connection>
@@ -2482,12 +2087,12 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>173</x>
-     <y>165</y>
+     <x>232</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
-     <x>745</x>
-     <y>272</y>
+     <x>747</x>
+     <y>365</y>
     </hint>
    </hints>
   </connection>
