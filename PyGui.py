@@ -88,6 +88,7 @@ minimumf[4] = minimum[4]/X2m
 maxAcceleration = [200000, 200000, 200000, 50000, 50000]
 maxDeceleration = maxAcceleration
 smoothingFactor = 20
+threshold = 5000
 
 def cmp(a,b):
 	return (a>b)-(a<b)
@@ -271,6 +272,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.pushButton_YP.clicked.connect(lambda: self.ButtonMove(idY, 1))
 		self.pushButton_ZM.clicked.connect(lambda: self.ButtonMove(idZ, -1))
 		self.pushButton_ZP.clicked.connect(lambda: self.ButtonMove(idZ, 1))
+
+		self.axisOldSpeed[0] = 0
+		self.axisOldSpeed[1] = 0
+		self.axisOldSpeed[2] = 0
 
 
 	def AdjustXYStep(self, value):
@@ -488,19 +493,44 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def joysticMode(self):
 		self.StopAll() #stop everything first.
-		#self.AccChange()
-		#self.VelChange() # set all speed and acc params to set max value, we are referencing to that internally
+		self.axisOldSpeed = [0,0,0]
+
 		while self.joysticfound and self.pushButtonJoysticMode.isChecked() :
 
 			self.axisSpeed[0] = self.axis_states['x'] #/ 32767
-			self.axisSpeed[1] = self.axis_states['y'] #/ 32767
-			self.axisSpeed[2] = self.axis_states['ry'] #/ 32767
-			print(self.axisSpeed, end="       \r")
+			self.axisSpeed[1] = -self.axis_states['y'] #/ 32767
+			self.axisSpeed[2] = -self.axis_states['ry'] #/ 32767
+			print(self.axisSpeed, end=" ")
 			#for i in range(0,3):
 
-			"""for i in range(0,3):
-				direction=(self.axisSpeed[i]<0)
-				speed = self.vMax * fTabelle[abs(self.axisSpeed[i])]
+			for i in range(0,3):
+				Speed = self.axisSpeed[i]
+				aSpeed = abs(Speed)
+				if aSpeed < threshold :
+					direction = 0
+					Speed = 0
+				elif Speed > threshold :
+					Speed = Speed - threshold
+					direction = 1
+				elif Speed < -threshold:
+					Speed = Speed + threshold
+					direction = -1
+
+				Speedset = self.Vmaxsetf.value() * Speed / (32767-threshold)
+				print(Speed, Speedset, direction, end=" ")
+				if Speed == 0 and self.axisOldSpeed[i] != 0 :
+					self.sendElmoMsgShort(axes[i], "ST",0 )
+				else:
+					if direction > 0 :
+						self.go(axes[i], maximum[i], aSpeed)
+					elif direction < 0 :
+						self.go(axes[i], minimum[i], aSpeed)
+
+				self.axisOldSpeed[i] = Speed
+
+			print(end="                      \r")
+
+			'''
 				dsmax = (((speed*speed*0.5)/self.aMax)/256) + 1000
 				#print(i, self.axisSpeed[i],self.axisOldSpeed[i])
 				if (direction and (self.currentPos[i] < dsmax)) or ((not direction) and (self.currentPos[i] > (max[i]-dsmax))):
@@ -520,12 +550,11 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					self.status[i] = moving
 					self.sendMsg(i << 3 , (0x58, 0xa, direction))
 					self.sendMsg(i << 3 , (0x59, 0xa, 2, abs(self.axisSpeed[i])))
-			"""
-			self.axisOldSpeed[0] = self.axisSpeed[0]
-			self.axisOldSpeed[1] = self.axisSpeed[1]
-			self.axisOldSpeed[2] = self.axisSpeed[2]
+			'''
 
-		time.sleep(0.05) # wait 50ms
+
+			time.sleep(0.02) # wait 100ms
+
 		self.StopAll() #stop everything.
 		print("Jostic mode off 2")
 
