@@ -262,19 +262,45 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.verticalSlider_StepsXY.valueChanged.connect(self.AdjustXYStep)
 		self.verticalSlider_StepsZ.valueChanged.connect(self.AdjustZStep)
 
+		self.doubleSpinBox_StepsXY.valueChanged.connect(self.SetXYStepValue)
+		self.doubleSpinBox_StepsZ.valueChanged.connect(self.SetZStepValue)
+
+		self.pushButton_XM.clicked.connect(lambda: self.ButtonMove(idX, -1))
+		self.pushButton_XP.clicked.connect(lambda: self.ButtonMove(idX, 1))
+		self.pushButton_YM.clicked.connect(lambda: self.ButtonMove(idY, -1))
+		self.pushButton_YP.clicked.connect(lambda: self.ButtonMove(idY, 1))
+		self.pushButton_ZM.clicked.connect(lambda: self.ButtonMove(idZ, -1))
+		self.pushButton_ZP.clicked.connect(lambda: self.ButtonMove(idZ, 1))
+
+
 	def AdjustXYStep(self, value):
 		table = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000]
-		self.xyStep = 0.001 * table[value]
-		self.doubleSpinBox_StepsXY.setValue(self.xyStep)
+		self.doubleSpinBox_StepsXY.setValue(0.001 * table[value])
 
 	def AdjustZStep(self, value):
 		table = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000]
-		self.zStep = 0.001 * table[value]
-		self.doubleSpinBox_StepsZ.setValue(self.zStep)
-		
+		self.doubleSpinBox_StepsZ.setValue(0.001 * table[value])
 
-	def buttonMove(self, axe, direction):
-		pass
+	def SetXYStepValue(self, value):
+		self.xyStep = value
+		print("new xystep value: ", self.xyStep )
+
+	def SetZStepValue(self, value):
+		self.zStep = value
+		print("new zstep value: ", self.zStep )
+
+	def ButtonMove(self, axe, direction):
+		if axe == idZ:
+			Step = self.zStep * direction * Zm
+			Speed = self.Vmaxsetf.value() / 1000 * Zm
+		if axe == idX:
+			Step = self.xyStep * direction * Xm
+			Speed = self.Vmaxsetf.value() / 1000 * Xm
+		if axe == idY:
+			Step = self.xyStep * direction * Ym
+			Speed = self.Vmaxsetf.value() / 1000 * Ym
+		self.goRelPrepare(axe, int(Step), int(Speed))
+		self.goDo(axe)
 
 	def SetActuator(self,value,OnCommand,OffCommand):
 		if value :
@@ -692,6 +718,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def goPrepare(self, axe, target, speed):
 		self.sendElmoMsgLong(axe, "PA",0,target) #pa = target set position goal to target
+		self.sendElmoMsgLong(axe, "SP",0,speed ) #sp = speed set speed
+
+	def goRelPrepare(self, axe, target, speed):
+		self.sendElmoMsgLong(axe, "PR",0,target) #pr = target set relative position goal to target
 		self.sendElmoMsgLong(axe, "SP",0,speed ) #sp = speed set speed
 
 	def go(self, axe, target, speed):

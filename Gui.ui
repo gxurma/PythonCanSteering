@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>768</width>
-    <height>501</height>
+    <height>486</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -338,7 +338,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1247,101 +1247,7 @@ Read</string>
         <string>Joystic</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="3" column="6">
-         <widget class="QPushButton" name="pushButton_ZM">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>ZM</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3" colspan="2">
-         <widget class="QPushButton" name="pushButton_XM_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>XP</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2" colspan="2">
-         <widget class="QPushButton" name="pushButton_YM">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>YM</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2" colspan="2">
-         <widget class="QPushButton" name="pushButton_YP">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>YP</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1" colspan="2">
-         <widget class="QPushButton" name="pushButton_XM">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>XM</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="6">
-         <widget class="QPushButton" name="pushButton_ZP">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>ZP</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="pushButtonJoysticMode">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Joystic mode</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="4">
+        <item row="0" column="3">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_StepsXY">
           <property name="decimals">
            <number>3</number>
@@ -1357,16 +1263,91 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="5" rowspan="3">
-         <widget class="QSlider" name="verticalSlider_StepsXY">
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Vmax (µm/s)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QPushButton" name="pushButton_YM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Y -</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="5">
+         <widget class="QPushButton" name="pushButton_ZM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Z -</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButton_XM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>X -</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QPushButton" name="pushButton_ZP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Z +</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButton_YP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Y +</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6" rowspan="4">
+         <widget class="QSlider" name="verticalSlider_StepsZ">
           <property name="minimum">
            <number>0</number>
           </property>
           <property name="maximum">
-           <number>15</number>
+           <number>14</number>
           </property>
           <property name="pageStep">
            <number>5</number>
+          </property>
+          <property name="value">
+           <number>0</number>
           </property>
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -1379,7 +1360,45 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="6">
+        <item row="1" column="3">
+         <widget class="QPushButton" name="pushButton_XP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>X +</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4" rowspan="4">
+         <widget class="QSlider" name="verticalSlider_StepsXY">
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>15</number>
+          </property>
+          <property name="pageStep">
+           <number>5</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_StepsZ">
           <property name="decimals">
            <number>3</number>
@@ -1395,25 +1414,60 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="7" rowspan="3">
-         <widget class="QSlider" name="verticalSlider_StepsZ">
-          <property name="minimum">
-           <number>0</number>
+        <item row="4" column="1">
+         <widget class="QSpinBox" name="spinBoxVmaxf">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
           <property name="maximum">
-           <number>14</number>
+           <number>200000</number>
+          </property>
+          <property name="value">
+           <number>20000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="pushButtonJoysticMode">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Joystic mode</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2" colspan="5">
+         <widget class="QSlider" name="Vmaxsetf">
+          <property name="maximum">
+           <number>200000</number>
           </property>
           <property name="pageStep">
-           <number>5</number>
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>20000</number>
+          </property>
+          <property name="sliderPosition">
+           <number>20000</number>
           </property>
           <property name="orientation">
-           <enum>Qt::Vertical</enum>
+           <enum>Qt::Horizontal</enum>
           </property>
           <property name="tickPosition">
            <enum>QSlider::TicksAbove</enum>
           </property>
           <property name="tickInterval">
-           <number>1</number>
+           <number>1000</number>
           </property>
          </widget>
         </item>
@@ -1424,33 +1478,7 @@ Read</string>
         <string>Positionen</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="2">
-         <widget class="QPushButton" name="pushButton_Go">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Go</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="pushButton_Capture">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Capture</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" rowspan="2" colspan="2">
+        <item row="0" column="0" rowspan="4">
          <widget class="QTableWidget" name="tableWidget_Positionen">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1564,6 +1592,61 @@ Read</string>
             <string>Pause</string>
            </property>
           </column>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButton_Start">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Start</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButton_Pause">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Pause</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButton_Go">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="pushButton_Capture">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Capture</string>
+          </property>
          </widget>
         </item>
        </layout>
@@ -1794,7 +1877,7 @@ Z hub fahren</string>
     </hint>
     <hint type="destinationlabel">
      <x>689</x>
-     <y>350</y>
+     <y>306</y>
     </hint>
    </hints>
   </connection>
@@ -1806,7 +1889,7 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>689</x>
-     <y>350</y>
+     <y>306</y>
     </hint>
     <hint type="destinationlabel">
      <x>747</x>
@@ -1826,7 +1909,7 @@ Z hub fahren</string>
     </hint>
     <hint type="destinationlabel">
      <x>606</x>
-     <y>350</y>
+     <y>306</y>
     </hint>
    </hints>
   </connection>
@@ -1838,7 +1921,7 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>606</x>
-     <y>350</y>
+     <y>306</y>
     </hint>
     <hint type="destinationlabel">
      <x>661</x>
@@ -1854,11 +1937,11 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>96</x>
-     <y>390</y>
+     <y>346</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
-     <y>387</y>
+     <y>343</y>
     </hint>
    </hints>
   </connection>
@@ -1870,11 +1953,11 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>286</x>
-     <y>387</y>
+     <y>343</y>
     </hint>
     <hint type="destinationlabel">
      <x>110</x>
-     <y>390</y>
+     <y>346</y>
     </hint>
    </hints>
   </connection>
@@ -1886,11 +1969,11 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>110</x>
-     <y>424</y>
+     <y>380</y>
     </hint>
     <hint type="destinationlabel">
      <x>282</x>
-     <y>421</y>
+     <y>377</y>
     </hint>
    </hints>
   </connection>
@@ -1902,11 +1985,11 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>286</x>
-     <y>421</y>
+     <y>377</y>
     </hint>
     <hint type="destinationlabel">
      <x>110</x>
-     <y>424</y>
+     <y>380</y>
     </hint>
    </hints>
   </connection>
@@ -1918,11 +2001,11 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>116</x>
-     <y>458</y>
+     <y>414</y>
     </hint>
     <hint type="destinationlabel">
      <x>305</x>
-     <y>455</y>
+     <y>411</y>
     </hint>
    </hints>
   </connection>
@@ -1934,11 +2017,11 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>286</x>
-     <y>455</y>
+     <y>411</y>
     </hint>
     <hint type="destinationlabel">
      <x>109</x>
-     <y>458</y>
+     <y>414</y>
     </hint>
    </hints>
   </connection>
@@ -1954,7 +2037,7 @@ Z hub fahren</string>
     </hint>
     <hint type="destinationlabel">
      <x>334</x>
-     <y>458</y>
+     <y>414</y>
     </hint>
    </hints>
   </connection>
@@ -1970,7 +2053,7 @@ Z hub fahren</string>
     </hint>
     <hint type="destinationlabel">
      <x>443</x>
-     <y>458</y>
+     <y>414</y>
     </hint>
    </hints>
   </connection>
@@ -1986,7 +2069,7 @@ Z hub fahren</string>
     </hint>
     <hint type="destinationlabel">
      <x>544</x>
-     <y>458</y>
+     <y>414</y>
     </hint>
    </hints>
   </connection>
@@ -2002,7 +2085,7 @@ Z hub fahren</string>
     </hint>
     <hint type="destinationlabel">
      <x>645</x>
-     <y>458</y>
+     <y>414</y>
     </hint>
    </hints>
   </connection>
@@ -2018,7 +2101,7 @@ Z hub fahren</string>
     </hint>
     <hint type="destinationlabel">
      <x>747</x>
-     <y>458</y>
+     <y>414</y>
     </hint>
    </hints>
   </connection>
@@ -2030,7 +2113,7 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>232</x>
-     <y>272</y>
+     <y>257</y>
     </hint>
     <hint type="destinationlabel">
      <x>264</x>
@@ -2046,11 +2129,11 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>232</x>
-     <y>272</y>
+     <y>257</y>
     </hint>
     <hint type="destinationlabel">
      <x>443</x>
-     <y>365</y>
+     <y>336</y>
     </hint>
    </hints>
   </connection>
@@ -2062,11 +2145,11 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>232</x>
-     <y>272</y>
+     <y>257</y>
     </hint>
     <hint type="destinationlabel">
      <x>544</x>
-     <y>365</y>
+     <y>336</y>
     </hint>
    </hints>
   </connection>
@@ -2078,11 +2161,11 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>232</x>
-     <y>272</y>
+     <y>257</y>
     </hint>
     <hint type="destinationlabel">
      <x>645</x>
-     <y>365</y>
+     <y>336</y>
     </hint>
    </hints>
   </connection>
@@ -2094,11 +2177,43 @@ Z hub fahren</string>
    <hints>
     <hint type="sourcelabel">
      <x>232</x>
-     <y>272</y>
+     <y>257</y>
     </hint>
     <hint type="destinationlabel">
      <x>747</x>
-     <y>365</y>
+     <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxVmaxf</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Vmaxsetf</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>100</x>
+     <y>399</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>168</x>
+     <y>404</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Vmaxsetf</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxVmaxf</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>514</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>112</x>
+     <y>389</y>
     </hint>
    </hints>
   </connection>
