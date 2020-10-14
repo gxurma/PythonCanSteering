@@ -66,7 +66,7 @@ minimumf[1] = minimum[1]/Ym
 
 # Z: 2000 count /mm
 Zm = 2000.0
-maximum[2] = 104000
+maximum[2] = 102000
 minimum[2] = 0
 maximumf[2] = maximum[2]/Zm
 minimumf[2] = minimum[2]/Zm
@@ -594,7 +594,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			if msg.id == idRx+idZ :
 				#print("posZ :", pos)
 				self.lcdNumberDROPosZ.display(pos)
-				self.lcdNumberDROPosZf.display(pos / Zm)
+				self.lcdNumberDROPosZf.display(-50.0+pos / Zm)
 				self.currentPos[2] = pos
 			if msg.id == idRx+idC :
 				#print("posC :", pos)
