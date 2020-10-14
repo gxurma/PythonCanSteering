@@ -516,15 +516,15 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 					Speed = Speed + threshold
 					direction = -1
 
-				Speedset = self.Vmaxsetf.value() * Speed / (32767-threshold)
+				Speedset = int(self.Vmaxsetf.value() * abs(Speed) / (32767-threshold))
 				print(Speed, Speedset, direction, end=" ")
 				if Speed == 0 and self.axisOldSpeed[i] != 0 :
 					self.sendElmoMsgShort(axes[i], "ST",0 )
 				else:
 					if direction > 0 :
-						self.go(axes[i], maximum[i], aSpeed)
+						self.go(axes[i], maximum[i], Speedset)
 					elif direction < 0 :
-						self.go(axes[i], minimum[i], aSpeed)
+						self.go(axes[i], minimum[i], Speedset)
 
 				self.axisOldSpeed[i] = Speed
 
