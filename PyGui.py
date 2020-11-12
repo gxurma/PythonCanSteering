@@ -309,8 +309,20 @@ class PyGuiApp(QMainWindow):
 		self.pushButton_Load.clicked.connect(self.PrgLaden)
 		self.pushButton_Save.clicked.connect(self.PrgSpeichern)
 		
+		self.
+		
 	def StartPosProgram(self) :
 		print("starte position program")
+
+"""		
+	def doSimulation(self,value):
+		if value == True:
+			self.simulation.start()
+		else :
+			self.simulation.stop()
+			self.sendCommand("1")
+			self.oldSpeed = 0
+"""
 
 	def PausePosProgram(self, value) :
 		# if self.pushButton_Pause.isChecked():
@@ -327,19 +339,80 @@ class PyGuiApp(QMainWindow):
 
 	def CapturePos(self) :
 		print("capturing current position: ")
+		
+		
 
 	def ZeileEinfügen(self) :
 		print("ZeileEinfügen in: ")
+		if self.simulation.SimulationRunning == False :
+			row = self.tableWidget_Positionen.currentRow()
+			rowcount = self.tableWidget_Positionen.rowCount()
+			if row > -1 :
+				print("Füge Zeile ein über Zeile", row)
+				self.tableWidget_Positionen.insertRow(row)
+			else :
+				print("Füge Zeile ans Ende ein")
+				self.tableWidget_Positionen.insertRow(rowcount)
+		else:
+			print("Nicht wenn grade BewegungsProgramm läuft!")
 
 	def ZeileEntfernen(self) :
 		print("ZeileEntfernen von")
-
-	def PrgLaden(self) :
-		print("PrgLaden")
+		if self.simulation.SimulationRunning == False :
+			row = self.tableWidget_Positionen.currentRow()
+			rowcount = self.tableWidget_Positionen.rowCount()
+			if row > -1 :
+				print("Entferne Zeile", row)
+				self.tableWidget_Positionen.removeRow(row)
+			else :
+				print("Entferne letzte Zeile")
+				self.tableWidget_Positionen.removeRow(rowcount-1)
+		else:
+			print("Nicht wenn grade Simulation läuft!")
+		
 
 	def PrgSpeichern(self) :
 		print("PrgSpeichern")
+		saveFileName, extension = QtWidgets.QFileDialog.getSaveFileName(self, 'Save Speed Program',  self.lastpath ,'*.csv')
+		print(saveFileName)
+		if saveFileName:
+			self.lastpath = os.path.dirname(self.fileName)
+			with open(saveFileName,'w', newline='') as f:
+				fieldnames = [ "X", "Y", "Z", "Speed","Pause"]
+				writer = csv.DictWriter(f,fieldnames=fieldnames, delimiter='\t')
+				writer.writeheader()
+				for row in range(self.tableWidget_Positionen.rowCount()):
+					writer.writerow({"X":self.tableWidget_Positionen.item(row,0).text(), "Y":self.tableWidget_Positionen.item(row,1).text(), "Z": self.tableWidget_Positionen.item(row,2).text(), "Speed": self.tableWidget_Positionen.item(row,3).text(), "Pause": self.tableWidget_Positionen.item(row,4).text()})
+				f.close()
 		
+	def PrgLaden(self) :
+		print("PrgLaden")
+		fileName , extension = QtWidgets.QFileDialog.getOpenFileName(self, 'Load Speed Program',  self.lastpath ,'*.csv')
+		if fileName:
+			self.lastpath = os.path.dirname(self.fileName)
+			print (fileName)
+			with open(fileName,'r', newline='') as f:
+				programreader = csv.DictReader(f, delimiter='\t')
+				self.tableWidget_Positionen.setRowCount(0)
+				rowcount=0
+				self.tableWidget_Positionen.setSortingEnabled(False)
+				for row in programreader :
+					print(row)
+					print(row['X'], row['Y'], row['Z'], row['Speed'], row['Pause'])
+					self.tableWidget_Positionen.insertRow(rowcount)
+					self.tableWidget_Positionen.setItem(rowcount, 0, QtWidgets.QTableWidgetItem(row['X']))
+					self.tableWidget_Positionen.setItem(rowcount, 1, QtWidgets.QTableWidgetItem(row['Y']))
+					self.tableWidget_Positionen.setItem(rowcount, 2, QtWidgets.QTableWidgetItem(row['Z']))
+					self.tableWidget_Positionen.setItem(rowcount, 3, QtWidgets.QTableWidgetItem(row['Speed']))
+					self.tableWidget_Positionen.setItem(rowcount, 4, QtWidgets.QTableWidgetItem(row['Pause']))
+					rowcount = rowcount + 1
+				# self.tableWidget_Positionen.setRowCount(rowcount)
+				self.tableWidget_Positionen.sortByColumn(-1, Qt.AscendingOrder)
+				self.tableWidget_Positionen.setSortingEnabled(True)
+			f.close()
+		# print (self.parameters)
+
+
 	
 
 	def AdjustXYStep(self, value):
@@ -880,7 +953,7 @@ class PyGuiApp(QMainWindow):
 		self.oldx2	= x2
 
 	def aboutBox(self):
-		QtGui.QMessageBox.about(self,"Über dieses Programm", '''
+		QtWidgets.QMessageBox.about(self,"Über dieses Programm", '''
 		Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern und Smoothieware.
 		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um einfachere Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
@@ -1133,7 +1206,7 @@ class PyGuiApp(QMainWindow):
 
 
 def main():
-	app = QtGui.QApplication(sys.argv)  # A new instance of QApplication
+	app = QtWidgets.QApplication(sys.argv)  # A new instance of QApplication
 	form = PyGuiApp()  # We set the form to be our PyGuiApp (design)
 	form.show()  # Show the form
 	sys.exit(app.exec_())  # and execute the app and exit after it is finished
