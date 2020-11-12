@@ -338,9 +338,16 @@ class PyGuiApp(QMainWindow):
 		print("Going to position: ")
 
 	def CapturePos(self) :
-		print("capturing current position: ")
-		
-		
+		print("capturing current position to current row: ")
+		row = self.tableWidget_Positionen.currentRow()
+		if row > -1 :
+			self.tableWidget_Positionen.setItem(row, 0, QtWidgets.QTableWidgetItem(currentPos[0]))
+			self.tableWidget_Positionen.setItem(row, 1, QtWidgets.QTableWidgetItem(currentPos[1]))
+			self.tableWidget_Positionen.setItem(row, 2, QtWidgets.QTableWidgetItem(currentPos[2]))
+			self.tableWidget_Positionen.setItem(row, 3, QtWidgets.QTableWidgetItem(100))
+			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem(2000))			
+		else :
+			print("wohin? wähle Zeile aus!")
 
 	def ZeileEinfügen(self) :
 		print("ZeileEinfügen in: ")
