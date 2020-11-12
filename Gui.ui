@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>768</width>
-    <height>486</height>
+    <width>607</width>
+    <height>443</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,11 +20,8 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <item row="1" column="6">
-       <widget class="QLCDNumber" name="lcdNumberDROPosC">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
+      <item row="2" column="1">
+       <widget class="QLCDNumber" name="lcdNumberDROPosXf">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -37,16 +34,35 @@
           <height>46</height>
          </size>
         </property>
-        <property name="numDigits">
+        <property name="smallDecimalPoint">
+         <bool>false</bool>
+        </property>
+        <property name="digitCount">
          <number>6</number>
         </property>
         <property name="segmentStyle">
          <enum>QLCDNumber::Flat</enum>
         </property>
+        <property name="value" stdset="0">
+         <double>0.000000000000000</double>
+        </property>
        </widget>
       </item>
-      <item row="1" column="5">
-       <widget class="QLCDNumber" name="lcdNumberDROPosZ">
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>X2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLCDNumber" name="lcdNumberDROPosX">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -59,7 +75,7 @@
           <height>46</height>
          </size>
         </property>
-        <property name="numDigits">
+        <property name="digitCount">
          <number>6</number>
         </property>
         <property name="segmentStyle">
@@ -81,62 +97,11 @@
           <height>46</height>
          </size>
         </property>
-        <property name="numDigits">
+        <property name="digitCount">
          <number>6</number>
         </property>
         <property name="segmentStyle">
          <enum>QLCDNumber::Flat</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QLCDNumber" name="lcdNumberDROPosX2">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Flat</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLabel" name="label_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>X2</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QLabel" name="label_3">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Y</string>
         </property>
        </widget>
       </item>
@@ -150,139 +115,6 @@
         </property>
         <property name="text">
          <string>Z</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="6">
-       <widget class="QLabel" name="label_5">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>C</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="7" rowspan="3">
-       <widget class="QPushButton" name="pushButtonNotStop">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Not Stop</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLCDNumber" name="lcdNumberDROPosX">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Flat</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_6">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>X</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLCDNumber" name="lcdNumberDROPosXf">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="smallDecimalPoint">
-         <bool>false</bool>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Flat</enum>
-        </property>
-        <property name="value" stdset="0">
-         <double>0.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="6">
-       <widget class="QLCDNumber" name="lcdNumberDROPosCf">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Flat</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="5">
-       <widget class="QLCDNumber" name="lcdNumberDROPosZf">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>46</height>
-         </size>
-        </property>
-        <property name="numDigits">
-         <number>6</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
       </item>
@@ -300,11 +132,24 @@
           <height>46</height>
          </size>
         </property>
-        <property name="numDigits">
+        <property name="digitCount">
          <number>6</number>
         </property>
         <property name="segmentStyle">
          <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLabel" name="label_5">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>C</string>
         </property>
        </widget>
       </item>
@@ -325,7 +170,162 @@
           <height>46</height>
          </size>
         </property>
-        <property name="numDigits">
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_6">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>X</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLCDNumber" name="lcdNumberDROPosX2">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="label_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Y</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7" rowspan="3">
+       <widget class="QPushButton" name="pushButtonNotStop">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Not Stop</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5">
+       <widget class="QLCDNumber" name="lcdNumberDROPosZf">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="6">
+       <widget class="QLCDNumber" name="lcdNumberDROPosCf">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QLCDNumber" name="lcdNumberDROPosC">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
+         <number>6</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLCDNumber" name="lcdNumberDROPosZ">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>46</height>
+         </size>
+        </property>
+        <property name="digitCount">
          <number>6</number>
         </property>
         <property name="segmentStyle">
@@ -338,7 +338,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1478,7 +1478,7 @@ Read</string>
         <string>Positionen</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="0" rowspan="4">
+        <item row="0" column="0" rowspan="8">
          <widget class="QTableWidget" name="tableWidget_Positionen">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1624,7 +1624,7 @@ Read</string>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QPushButton" name="pushButton_Go">
+         <widget class="QPushButton" name="pushButton_Go2">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1639,7 +1639,7 @@ Read</string>
         <item row="3" column="1">
          <widget class="QPushButton" name="pushButton_Capture">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -1649,98 +1649,59 @@ Read</string>
           </property>
          </widget>
         </item>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="pushButton_ZeileP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>+ Zeile</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QPushButton" name="pushButton_ZeileM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>- Zeile</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QPushButton" name="pushButton_Load">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Laden</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QPushButton" name="pushButton_Save">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Speichern</string>
+          </property>
+         </widget>
+        </item>
        </layout>
-      </widget>
-      <widget class="QWidget" name="tab_4">
-       <attribute name="title">
-        <string>Bewegungsprogramme</string>
-       </attribute>
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>30</y>
-          <width>151</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Schleifen mit 
-Z hub fahren</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>90</y>
-          <width>151</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tupfen</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>150</y>
-          <width>151</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Foto machen</string>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
-        <property name="geometry">
-         <rect>
-          <x>200</x>
-          <y>50</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>50</y>
-          <width>91</width>
-          <height>31</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_23">
-        <property name="geometry">
-         <rect>
-          <x>200</x>
-          <y>30</y>
-          <width>59</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Delta</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_24">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>30</y>
-          <width>59</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Speed</string>
-        </property>
-       </widget>
       </widget>
      </widget>
     </item>
@@ -1751,8 +1712,8 @@ Z hub fahren</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>768</width>
-     <height>22</height>
+     <width>607</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1844,8 +1805,8 @@ Z hub fahren</string>
      <y>273</y>
     </hint>
     <hint type="destinationlabel">
-     <x>140</x>
-     <y>213</y>
+     <x>114</x>
+     <y>193</y>
     </hint>
    </hints>
   </connection>
@@ -1856,8 +1817,8 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>140</x>
-     <y>213</y>
+     <x>114</x>
+     <y>193</y>
     </hint>
     <hint type="destinationlabel">
      <x>208</x>
@@ -1872,12 +1833,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>747</x>
-     <y>247</y>
+     <x>584</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
-     <x>689</x>
-     <y>306</y>
+     <x>548</x>
+     <y>295</y>
     </hint>
    </hints>
   </connection>
@@ -1888,12 +1849,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>689</x>
-     <y>306</y>
+     <x>548</x>
+     <y>295</y>
     </hint>
     <hint type="destinationlabel">
-     <x>747</x>
-     <y>247</y>
+     <x>584</x>
+     <y>219</y>
     </hint>
    </hints>
   </connection>
@@ -1904,12 +1865,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>661</x>
-     <y>247</y>
+     <x>515</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
-     <x>606</x>
-     <y>306</y>
+     <x>481</x>
+     <y>295</y>
     </hint>
    </hints>
   </connection>
@@ -1920,12 +1881,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>306</y>
+     <x>481</x>
+     <y>295</y>
     </hint>
     <hint type="destinationlabel">
-     <x>661</x>
-     <y>247</y>
+     <x>515</x>
+     <y>219</y>
     </hint>
    </hints>
   </connection>
@@ -1936,12 +1897,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>96</x>
-     <y>346</y>
+     <x>110</x>
+     <y>330</y>
     </hint>
     <hint type="destinationlabel">
-     <x>286</x>
-     <y>343</y>
+     <x>354</x>
+     <y>334</y>
     </hint>
    </hints>
   </connection>
@@ -1952,12 +1913,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>286</x>
-     <y>343</y>
+     <x>354</x>
+     <y>334</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>346</y>
+     <x>114</x>
+     <y>330</y>
     </hint>
    </hints>
   </connection>
@@ -1968,12 +1929,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>110</x>
-     <y>380</y>
+     <x>114</x>
+     <y>363</y>
     </hint>
     <hint type="destinationlabel">
-     <x>282</x>
-     <y>377</y>
+     <x>350</x>
+     <y>367</y>
     </hint>
    </hints>
   </connection>
@@ -1984,12 +1945,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>286</x>
-     <y>377</y>
+     <x>354</x>
+     <y>367</y>
     </hint>
     <hint type="destinationlabel">
-     <x>110</x>
-     <y>380</y>
+     <x>114</x>
+     <y>363</y>
     </hint>
    </hints>
   </connection>
@@ -2000,12 +1961,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>116</x>
-     <y>414</y>
+     <x>114</x>
+     <y>396</y>
     </hint>
     <hint type="destinationlabel">
-     <x>305</x>
-     <y>411</y>
+     <x>373</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>
@@ -2016,12 +1977,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>286</x>
-     <y>411</y>
+     <x>354</x>
+     <y>400</y>
     </hint>
     <hint type="destinationlabel">
-     <x>109</x>
-     <y>414</y>
+     <x>114</x>
+     <y>396</y>
     </hint>
    </hints>
   </connection>
@@ -2032,12 +1993,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>757</x>
-     <y>129</y>
+     <x>596</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>334</x>
-     <y>414</y>
+     <x>259</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>
@@ -2048,12 +2009,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>757</x>
-     <y>129</y>
+     <x>596</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>443</x>
-     <y>414</y>
+     <x>340</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>
@@ -2064,12 +2025,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>757</x>
-     <y>129</y>
+     <x>596</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>544</x>
-     <y>414</y>
+     <x>422</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>
@@ -2080,12 +2041,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>757</x>
-     <y>129</y>
+     <x>596</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>645</x>
-     <y>414</y>
+     <x>503</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>
@@ -2096,12 +2057,12 @@ Z hub fahren</string>
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>757</x>
-     <y>115</y>
+     <x>596</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>747</x>
-     <y>414</y>
+     <x>584</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>
@@ -2112,12 +2073,12 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>232</x>
-     <y>257</y>
+     <x>178</x>
+     <y>245</y>
     </hint>
     <hint type="destinationlabel">
-     <x>264</x>
-     <y>288</y>
+     <x>259</x>
+     <y>322</y>
     </hint>
    </hints>
   </connection>
@@ -2128,12 +2089,12 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>232</x>
-     <y>257</y>
+     <x>178</x>
+     <y>245</y>
     </hint>
     <hint type="destinationlabel">
-     <x>443</x>
-     <y>336</y>
+     <x>340</x>
+     <y>322</y>
     </hint>
    </hints>
   </connection>
@@ -2144,12 +2105,12 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>232</x>
-     <y>257</y>
+     <x>178</x>
+     <y>245</y>
     </hint>
     <hint type="destinationlabel">
-     <x>544</x>
-     <y>336</y>
+     <x>422</x>
+     <y>322</y>
     </hint>
    </hints>
   </connection>
@@ -2160,12 +2121,12 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>232</x>
-     <y>257</y>
+     <x>178</x>
+     <y>245</y>
     </hint>
     <hint type="destinationlabel">
-     <x>645</x>
-     <y>336</y>
+     <x>503</x>
+     <y>322</y>
     </hint>
    </hints>
   </connection>
@@ -2176,12 +2137,12 @@ Z hub fahren</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>232</x>
-     <y>257</y>
+     <x>178</x>
+     <y>245</y>
     </hint>
     <hint type="destinationlabel">
-     <x>747</x>
-     <y>336</y>
+     <x>584</x>
+     <y>322</y>
     </hint>
    </hints>
   </connection>
@@ -2192,12 +2153,12 @@ Z hub fahren</string>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>100</x>
-     <y>399</y>
+     <x>111</x>
+     <y>396</y>
     </hint>
     <hint type="destinationlabel">
-     <x>168</x>
-     <y>404</y>
+     <x>290</x>
+     <y>400</y>
     </hint>
    </hints>
   </connection>

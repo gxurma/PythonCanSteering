@@ -7,10 +7,14 @@
 # decide if the X2 axis has to be moved to reach to the other side of the table,
 # and send the CAN bus commands to the appropriate drives
 
-from PyQt4 import QtCore, QtGui
+# from PyQt4 import QtCore, QtGui
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
+# from PyQt4.uic import loadUi
+from PyQt5.uic import loadUi
 import sys
 #from Gui import *
-import Gui
+# import Gui
 #talking to kvaser
 import canlib
 import time
@@ -90,6 +94,21 @@ maxDeceleration = maxAcceleration
 smoothingFactor = 20
 threshold = 5000
 
+
+# This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
+class GenericThread(QtCore.QThread):
+	def __init__(self, function, *args, **kwargs):
+		QtCore.QThread.__init__(self)
+		self.function = function
+		self.args = args
+		self.kwargs = kwargs
+	def __del__(self):
+		self.wait()
+	def run(self):
+		self.function(*self.args,**self.kwargs)
+		return
+
+
 def cmp(a,b):
 	return (a>b)-(a<b)
 
@@ -125,14 +144,17 @@ class canMsg():
 		self.timestamp = timestamp
 
 
-class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
+# class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
+class PyGuiApp(QMainWindow):
 	def __init__(self):
 		# Explaining super is out of the scope of this article
 		# So please google it if you're not familar with it
 		# Simple reason why we use it here is that it allows us to
 		# access variables, methods etc in the design.py file
 		super(self.__class__, self).__init__()
-		self.setupUi(self)  # This is defined in design.py file automatically
+		# self.setupUi(self)  # This is defined in design.py file automatically
+		loadUI("Gui.ui",self)
+		
 		self.actionAbout.triggered.connect(self.aboutBox)
 		self.pushButtonGoX0Y0.clicked.connect(self.goX0Y0)
 		self.pushButtonGoZmax.clicked.connect(self.goZmax)
@@ -1067,19 +1089,6 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		data = "P\n"
 		self.sendSensQ.put(data.encode("utf-8"))
 
-
-# This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
-class GenericThread(QtCore.QThread):
-	def __init__(self, function, *args, **kwargs):
-		QtCore.QThread.__init__(self)
-		self.function = function
-		self.args = args
-		self.kwargs = kwargs
-	def __del__(self):
-		self.wait()
-	def run(self):
-		self.function(*self.args,**self.kwargs)
-		return
 
 def main():
 	app = QtGui.QApplication(sys.argv)  # A new instance of QApplication
