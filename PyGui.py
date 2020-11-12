@@ -298,7 +298,49 @@ class PyGuiApp(QMainWindow):
 		self.axisOldSpeed[0] = 0
 		self.axisOldSpeed[1] = 0
 		self.axisOldSpeed[2] = 0
+		
+		self.pushButton_Start.clicked.connect(self.StartPosProgram)
+		self.pushButton_Pause.toggled.connect(self.PausePosProgram)
+		self.pushButton_Stop.clicked.connect(self.StopPosProgram)
+		self.pushButton_GoToPos.clicked.connect(self.DoGoPos)
+		self.pushButton_Capture.clicked.connect(self.CapturePos)
+		self.pushButton_ZeileP.clicked.connect(self.ZeileEinfügen)
+		self.pushButton_ZeileM.clicked.connect(self.ZeileEntfernen)
+		self.pushButton_Load.clicked.connect(self.PrgLaden)
+		self.pushButton_Save.clicked.connect(self.PrgSpeichern)
+		
+	def StartPosProgram(self) :
+		print("starte position program")
 
+	def PausePosProgram(self, value) :
+		# if self.pushButton_Pause.isChecked():
+		if value:
+			print("Pause position program")
+		else:
+			print("Resume position program")
+	
+	def StopPosProgram(self) :
+		print("stop position program and park to safe z")
+		
+	def DoGoPos(self) :
+		print("Going to position: ")
+
+	def CapturePos(self) :
+		print("capturing current position: ")
+
+	def ZeileEinfügen(self) :
+		print("ZeileEinfügen in: ")
+
+	def ZeileEntfernen(self) :
+		print("ZeileEntfernen von")
+
+	def PrgLaden(self) :
+		print("PrgLaden")
+
+	def PrgSpeichern(self) :
+		print("PrgSpeichern")
+		
+	
 
 	def AdjustXYStep(self, value):
 		table = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000]
