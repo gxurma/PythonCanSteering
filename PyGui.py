@@ -13,7 +13,11 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 # from PyQt4.uic import loadUi
 from PyQt5.uic import loadUi
+from PyQt5.QtCore import Qt
+
 import sys
+import csv
+
 #from Gui import *
 # import Gui
 #talking to kvaser
@@ -258,7 +262,7 @@ class PyGuiApp(QMainWindow):
 		except:
 			print("Smoothie existiert nicht! ich versuche es mit virtuellem serial port")
 			try:
-				self.sbus = serial.Serial('/dev/pts/2',115200,timeout=0.100)
+				self.sbus = serial.Serial('/dev/pts/7',115200,timeout=0.100)
 			except:
 				print("Virtueller port geht nicht. lassen wir es sein für heute...")
 				exit()
@@ -312,16 +316,17 @@ class PyGuiApp(QMainWindow):
 		self.pushButton_Stop.clicked.connect(self.StopPosProgram)
 		self.pushButton_GoToPos.clicked.connect(self.DoGoPos)
 		self.pushButton_Capture.clicked.connect(self.CapturePos)
-		self.pushButton_ZeileP.clicked.connect(self.ZeileEinfügen)
+		self.pushButton_ZeileP.clicked.connect(self.ZeileEinfugen)
 		self.pushButton_ZeileM.clicked.connect(self.ZeileEntfernen)
 		self.pushButton_Load.clicked.connect(self.PrgLaden)
 		self.pushButton_Save.clicked.connect(self.PrgSpeichern)
 
-
+		self.PrgRunning = False
+		self.lastpath = '.'
 
 	def StartPosProgram(self) :
 		print("starte position program")
-
+		self.PrgRunning = True
 		"""
 	def doSimulation(self,value):
 		if value == True:
@@ -341,25 +346,35 @@ class PyGuiApp(QMainWindow):
 
 	def StopPosProgram(self) :
 		print("stop position program and park to safe z")
+		self.PrgRunning = False
 
 	def DoGoPos(self) :
-		print("Going to position: ")
+		row = self.tableWidget_Positionen.currentRow()
+		if row == -1 : row = 0
+		print("Going to position laut Zeile: ", row)
+		X = float(self.tableWidget_Positionen.item(row,0).text())
+		Y = float(self.tableWidget_Positionen.item(row,1).text())
+		Z = float(self.tableWidget_Positionen.item(row,2).text())
+		Speed = float(self.tableWidget_Positionen.item(row,3).text())
+		Pause = float(self.tableWidget_Positionen.item(row,4).text())
+		print( X,Y,Z,Speed, Pause)
 
 	def CapturePos(self) :
-		print("capturing current position to current row: ")
 		row = self.tableWidget_Positionen.currentRow()
+		print("capturing current position to current row: ", row)
+		print(self.currentPos)
 		if row > -1 :
-			self.tableWidget_Positionen.setItem(row, 0, QtWidgets.QTableWidgetItem(currentPos[0]))
-			self.tableWidget_Positionen.setItem(row, 1, QtWidgets.QTableWidgetItem(currentPos[1]))
-			self.tableWidget_Positionen.setItem(row, 2, QtWidgets.QTableWidgetItem(currentPos[2]))
-			self.tableWidget_Positionen.setItem(row, 3, QtWidgets.QTableWidgetItem(100))
-			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem(2000))
+			self.tableWidget_Positionen.setItem(row, 0, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[0])))
+			self.tableWidget_Positionen.setItem(row, 1, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[1])))
+			self.tableWidget_Positionen.setItem(row, 2, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[2])))
+			self.tableWidget_Positionen.setItem(row, 3, QtWidgets.QTableWidgetItem("100"))
+			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem("2000"))
 		else :
 			print("wohin? wähle Zeile aus!")
 
-	def ZeileEinfügen(self) :
+	def ZeileEinfugen(self) :
 		print("ZeileEinfügen in: ")
-		if self.simulation.SimulationRunning == False :
+		if self.PrgRunning == False :
 			row = self.tableWidget_Positionen.currentRow()
 			rowcount = self.tableWidget_Positionen.rowCount()
 			if row > -1 :
@@ -373,7 +388,7 @@ class PyGuiApp(QMainWindow):
 
 	def ZeileEntfernen(self) :
 		print("ZeileEntfernen von")
-		if self.simulation.SimulationRunning == False :
+		if self.PrgRunning == False :
 			row = self.tableWidget_Positionen.currentRow()
 			rowcount = self.tableWidget_Positionen.rowCount()
 			if row > -1 :
@@ -391,7 +406,7 @@ class PyGuiApp(QMainWindow):
 		saveFileName, extension = QtWidgets.QFileDialog.getSaveFileName(self, 'Save Speed Program',  self.lastpath ,'*.csv')
 		print(saveFileName)
 		if saveFileName:
-			self.lastpath = os.path.dirname(self.fileName)
+			self.lastpath = os.path.dirname(saveFileName)
 			with open(saveFileName,'w', newline='') as f:
 				fieldnames = [ "X", "Y", "Z", "Speed","Pause"]
 				writer = csv.DictWriter(f,fieldnames=fieldnames, delimiter='\t')
@@ -404,7 +419,7 @@ class PyGuiApp(QMainWindow):
 		print("PrgLaden")
 		fileName , extension = QtWidgets.QFileDialog.getOpenFileName(self, 'Load Speed Program',  self.lastpath ,'*.csv')
 		if fileName:
-			self.lastpath = os.path.dirname(self.fileName)
+			self.lastpath = os.path.dirname(fileName)
 			print (fileName)
 			with open(fileName,'r', newline='') as f:
 				programreader = csv.DictReader(f, delimiter='\t')
@@ -651,7 +666,7 @@ class PyGuiApp(QMainWindow):
 
 			self.axisSpeed[0] = self.axis_states['x'] #/ 32767
 			self.axisSpeed[1] = -self.axis_states['y'] #/ 32767
-			self.axisSpeed[2] = -self.axis_states['ry'] #/ 32767
+			self.axisSpeed[2] = -self.axis_states['rz'] #/ 32767
 			print(self.axisSpeed, end=" ")
 			#for i in range(0,3):
 
