@@ -311,6 +311,8 @@ class PyGuiApp(QMainWindow):
 		self.axisOldSpeed[1] = 0
 		self.axisOldSpeed[2] = 0
 
+		self.PosProgramThread = GenericThread(self.PosProgram)
+
 		self.pushButton_Start.clicked.connect(self.StartPosProgram)
 		self.pushButton_Pause.toggled.connect(self.PausePosProgram)
 		self.pushButton_Stop.clicked.connect(self.StopPosProgram)
@@ -324,18 +326,17 @@ class PyGuiApp(QMainWindow):
 		self.PrgRunning = False
 		self.lastpath = '.'
 
+	def PosProgram(self) :
+		self.PrgRunning = True
+		for row in range(self.tableWidget_Positionen.rowCount()):
+			self.tableWidget_Positionen.setCurrentCell(row,0)
+			self.DoGoPos()
+
+
 	def StartPosProgram(self) :
 		print("starte position program")
-		self.PrgRunning = True
-		"""
-	def doSimulation(self,value):
-		if value == True:
-			self.simulation.start()
-		else :
-			self.simulation.stop()
-			self.sendCommand("1")
-			self.oldSpeed = 0
-		"""
+		self.PosProgramThread.start()
+
 
 	def PausePosProgram(self, value) :
 		# if self.pushButton_Pause.isChecked():
@@ -357,7 +358,9 @@ class PyGuiApp(QMainWindow):
 		Z = float(self.tableWidget_Positionen.item(row,2).text())
 		Speed = float(self.tableWidget_Positionen.item(row,3).text())
 		Pause = float(self.tableWidget_Positionen.item(row,4).text())
-		print( X,Y,Z,Speed, Pause)
+		data = "G1 X%0.3f Y%0.3f Z%0.3f F%0.3f\nM400\n"%(X,Y,Z,Speed)
+		print(data)
+		self.analyseSocketData(data.encode("utf-8"))
 
 	def CapturePos(self) :
 		row = self.tableWidget_Positionen.currentRow()
