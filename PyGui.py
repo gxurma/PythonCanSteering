@@ -8,7 +8,8 @@
 # and send the CAN bus commands to the appropriate drives
 
 # from PyQt4 import QtCore, QtGui
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 # from PyQt4.uic import loadUi
 from PyQt5.uic import loadUi
@@ -146,6 +147,8 @@ class canMsg():
 
 # class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 class PyGuiApp(QMainWindow):
+	nachricht = pyqtSignal(canMsg)
+	analyseSensor = pyqtSignal()
 	def __init__(self):
 		# Explaining super is out of the scope of this article
 		# So please google it if you're not familar with it
@@ -153,8 +156,8 @@ class PyGuiApp(QMainWindow):
 		# access variables, methods etc in the design.py file
 		super(self.__class__, self).__init__()
 		# self.setupUi(self)  # This is defined in design.py file automatically
-		loadUI("Gui.ui",self)
-		
+		loadUi("Gui.ui",self)
+
 		self.actionAbout.triggered.connect(self.aboutBox)
 		self.pushButtonGoX0Y0.clicked.connect(self.goX0Y0)
 		self.pushButtonGoZmax.clicked.connect(self.goZmax)
@@ -187,8 +190,10 @@ class PyGuiApp(QMainWindow):
 		self.oldx2 = 0
 
 		# Eigener Lese Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
+
 		self.readThread = GenericThread(self.readMsg)
-		self.connect( self, QtCore.SIGNAL("analyse(PyQt_PyObject)"), self.analyseCANMsg ) # Verbinde readMsg mit Analysefunktion
+		self.nachricht.connect(self.analyseCANMsg)
+		# self.connect( self, QtCore.SIGNAL("analyse(PyQt_PyObject)"), self.analyseCANMsg ) # Verbinde readMsg mit Analysefunktion
 		self.readThread.start()
 		# Eigener pos lese Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
 		self.readPosThread = GenericThread(self.readPos)
@@ -269,7 +274,10 @@ class PyGuiApp(QMainWindow):
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
 
-		self.connect( self, QtCore.SIGNAL("analyseSensor"), self.analyseSensorData )
+
+		# self.connect( self, QtCore.SIGNAL("analyseSensor"), self.analyseSensorData )
+		self.analyseSensor.connect(self.analyseSensorData)
+
 		self.serialSensorReaderThread = GenericThread( self.serialSensorReader)
 		self.serialSensorReaderThread.start()
 
@@ -298,7 +306,7 @@ class PyGuiApp(QMainWindow):
 		self.axisOldSpeed[0] = 0
 		self.axisOldSpeed[1] = 0
 		self.axisOldSpeed[2] = 0
-		
+
 		self.pushButton_Start.clicked.connect(self.StartPosProgram)
 		self.pushButton_Pause.toggled.connect(self.PausePosProgram)
 		self.pushButton_Stop.clicked.connect(self.StopPosProgram)
@@ -308,13 +316,13 @@ class PyGuiApp(QMainWindow):
 		self.pushButton_ZeileM.clicked.connect(self.ZeileEntfernen)
 		self.pushButton_Load.clicked.connect(self.PrgLaden)
 		self.pushButton_Save.clicked.connect(self.PrgSpeichern)
-		
-		self.
-		
+
+
+
 	def StartPosProgram(self) :
 		print("starte position program")
 
-"""		
+		"""
 	def doSimulation(self,value):
 		if value == True:
 			self.simulation.start()
@@ -322,7 +330,7 @@ class PyGuiApp(QMainWindow):
 			self.simulation.stop()
 			self.sendCommand("1")
 			self.oldSpeed = 0
-"""
+		"""
 
 	def PausePosProgram(self, value) :
 		# if self.pushButton_Pause.isChecked():
@@ -330,10 +338,10 @@ class PyGuiApp(QMainWindow):
 			print("Pause position program")
 		else:
 			print("Resume position program")
-	
+
 	def StopPosProgram(self) :
 		print("stop position program and park to safe z")
-		
+
 	def DoGoPos(self) :
 		print("Going to position: ")
 
@@ -345,7 +353,7 @@ class PyGuiApp(QMainWindow):
 			self.tableWidget_Positionen.setItem(row, 1, QtWidgets.QTableWidgetItem(currentPos[1]))
 			self.tableWidget_Positionen.setItem(row, 2, QtWidgets.QTableWidgetItem(currentPos[2]))
 			self.tableWidget_Positionen.setItem(row, 3, QtWidgets.QTableWidgetItem(100))
-			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem(2000))			
+			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem(2000))
 		else :
 			print("wohin? wähle Zeile aus!")
 
@@ -375,8 +383,8 @@ class PyGuiApp(QMainWindow):
 				print("Entferne letzte Zeile")
 				self.tableWidget_Positionen.removeRow(rowcount-1)
 		else:
-			print("Nicht wenn grade Simulation läuft!")
-		
+			print("Nicht wenn grade BewegungsProgramm läuft!")
+
 
 	def PrgSpeichern(self) :
 		print("PrgSpeichern")
@@ -391,7 +399,7 @@ class PyGuiApp(QMainWindow):
 				for row in range(self.tableWidget_Positionen.rowCount()):
 					writer.writerow({"X":self.tableWidget_Positionen.item(row,0).text(), "Y":self.tableWidget_Positionen.item(row,1).text(), "Z": self.tableWidget_Positionen.item(row,2).text(), "Speed": self.tableWidget_Positionen.item(row,3).text(), "Pause": self.tableWidget_Positionen.item(row,4).text()})
 				f.close()
-		
+
 	def PrgLaden(self) :
 		print("PrgLaden")
 		fileName , extension = QtWidgets.QFileDialog.getOpenFileName(self, 'Load Speed Program',  self.lastpath ,'*.csv')
@@ -420,7 +428,7 @@ class PyGuiApp(QMainWindow):
 		# print (self.parameters)
 
 
-	
+
 
 	def AdjustXYStep(self, value):
 		table = [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000]
@@ -791,7 +799,8 @@ class PyGuiApp(QMainWindow):
 			try:
 				idr, msgr, dlc, flg, timestamp = self.handle1.read(int(1))
 				canmsg = canMsg(idr, msgr, dlc, flg, timestamp)
-				self.emit( QtCore.SIGNAL("analyse(PyQt_PyObject)"), canmsg )
+				# self.emit( QtCore.SIGNAL("analyse(PyQt_PyObject)"), canmsg )
+				self.nachricht.emit(canmsg)
 			except (canlib.canNoMsg) as ex:
 				None
 			except (canlib.canError) as ex:
@@ -1189,7 +1198,8 @@ class PyGuiApp(QMainWindow):
 				print(Color.Cyan+repr(data)+Color.end)
 				self.sendTcpQ.put(data.decode('utf-8')) #copy data to OpenPNP
 				self.recSensQ.put(data.decode('utf-8')) #lets also use the sensed data here
-				self.emit( QtCore.SIGNAL("analyseSensor"))
+				# self.emit( QtCore.SIGNAL("analyseSensor"))
+				self.analyseSensor.emit()
 			# time.sleep(0.05)
 
 
