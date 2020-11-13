@@ -666,7 +666,7 @@ class PyGuiApp(QMainWindow):
 
 			self.axisSpeed[0] = self.axis_states['x'] #/ 32767
 			self.axisSpeed[1] = -self.axis_states['y'] #/ 32767
-			self.axisSpeed[2] = -self.axis_states['rz'] #/ 32767
+			self.axisSpeed[2] = -self.axis_states['ry'] #/ 32767
 			print(self.axisSpeed, end=" ")
 			#for i in range(0,3):
 
