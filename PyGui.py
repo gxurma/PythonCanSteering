@@ -367,9 +367,9 @@ class PyGuiApp(QMainWindow):
 		print("capturing current position to current row: ", row)
 		print(self.currentPos)
 		if row > -1 :
-			self.tableWidget_Positionen.setItem(row, 0, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[0])))
-			self.tableWidget_Positionen.setItem(row, 1, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[1])))
-			self.tableWidget_Positionen.setItem(row, 2, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[2])))
+			self.tableWidget_Positionen.setItem(row, 0, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[0]/Xm)))
+			self.tableWidget_Positionen.setItem(row, 1, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[1]/Ym)))
+			self.tableWidget_Positionen.setItem(row, 2, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[2]/Zm-50.0)))
 			self.tableWidget_Positionen.setItem(row, 3, QtWidgets.QTableWidgetItem("100"))
 			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem("2000"))
 		else :
