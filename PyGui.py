@@ -325,13 +325,24 @@ class PyGuiApp(QMainWindow):
 
 		self.PrgRunning = False
 		self.lastpath = '.'
+		self.PrgPaused = False
 
 	def PosProgram(self) :
 		self.PrgRunning = True
 		for row in range(self.tableWidget_Positionen.rowCount()):
+			if self.PrgRunning == False:
+				break
+			waiting = 0
+			while self.PrgPaused == True :
+				waiting = waiting + 1
+				if waiting % 10 == 0 :
+					print("waiting %05d"%(waiting/10), end="\r")
+				time.sleep(0.1)
+			else :
+				print("Finished waiting")
 			self.tableWidget_Positionen.setCurrentCell(row,0)
 			self.DoGoPos()
-
+		self.PrgRunning = False
 
 	def StartPosProgram(self) :
 		print("starte position program")
@@ -342,12 +353,15 @@ class PyGuiApp(QMainWindow):
 		# if self.pushButton_Pause.isChecked():
 		if value:
 			print("Pause position program")
+			self.PrgPaused = True
 		else:
 			print("Resume position program")
+			self.PrgPaused = False
 
 	def StopPosProgram(self) :
-		print("stop position program and park to safe z")
+		print("stop position program")
 		self.PrgRunning = False
+		self.StopAll()
 
 	def DoGoPos(self) :
 		row = self.tableWidget_Positionen.currentRow()
@@ -358,9 +372,19 @@ class PyGuiApp(QMainWindow):
 		Z = float(self.tableWidget_Positionen.item(row,2).text())
 		Speed = float(self.tableWidget_Positionen.item(row,3).text())
 		Pause = float(self.tableWidget_Positionen.item(row,4).text())
-		data = "G1 X%0.3f Y%0.3f Z%0.3f F%0.3f\nM400\n"%(X,Y,Z,Speed)
+		data = "G1 Z%0.3f F%0.3f\nM400\n"%(Z,Speed)   # first move Z to avoid collision
 		print(data)
 		self.analyseSocketData(data.encode("utf-8"))
+		data = "G1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
+		print(data)
+		self.analyseSocketData(data.encode("utf-8"))
+
+		if Pause == -1 :
+			self.PrgPaused = True
+			self.pushButton_Pause.setChecked(True)
+		if Pause >= 2 :
+			time.sleep(Pause/1000)
+
 
 	def CapturePos(self) :
 		row = self.tableWidget_Positionen.currentRow()
@@ -370,8 +394,8 @@ class PyGuiApp(QMainWindow):
 			self.tableWidget_Positionen.setItem(row, 0, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[0]/Xm)))
 			self.tableWidget_Positionen.setItem(row, 1, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[1]/Ym)))
 			self.tableWidget_Positionen.setItem(row, 2, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[2]/Zm-50.0)))
-			self.tableWidget_Positionen.setItem(row, 3, QtWidgets.QTableWidgetItem("100"))
-			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem("2000"))
+			self.tableWidget_Positionen.setItem(row, 3, QtWidgets.QTableWidgetItem("2000"))
+			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem("-1")) # default is we pause at every movement
 		else :
 			print("wohin? wähle Zeile aus!")
 
@@ -992,7 +1016,7 @@ class PyGuiApp(QMainWindow):
 		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um einfachere Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
 		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
-		(C) 2018-2020 Martin Gyurkó
+		(C) 2018-2021 Martin Gyurkó
 		''')
 
 	def sendMsg(self, msgid, msg):
@@ -1119,7 +1143,7 @@ class PyGuiApp(QMainWindow):
 								moving = 999
 
 								ts = time.time()
-								while moving and ((time.time()-ts) < 10): # we dont want to wait endlessly
+								while moving and ((time.time()-ts) < 30): # we dont want to wait endlessly
 									for axe in axes :
 										self.sendElmoMsgShort(axe,"MS", 0 ) #ask for the motion status of each axis
 									time.sleep(0.1) # wait for processing of request
