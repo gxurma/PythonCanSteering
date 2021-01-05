@@ -167,7 +167,8 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonGoZmax.clicked.connect(self.goZmax)
 		self.pushButtonGoC0.clicked.connect(self.goC0)
 		self.pushButtonGoX20.clicked.connect(self.goX20)
-		self.pushButtonGo.clicked.connect(self.goTo)
+		self.pushButtonGo.clicked.connect(self.betterGoTo)
+
 
 		self.pushButtonMotorXAus.clicked.connect(lambda: self.MotorAus(idX, self.pushButtonMotorXAus.isChecked()))
 		self.pushButtonMotorX2Aus.clicked.connect(lambda: self.MotorAus(idX2, self.pushButtonMotorX2Aus.isChecked()))
@@ -262,7 +263,7 @@ class PyGuiApp(QMainWindow):
 		except:
 			print("Smoothie existiert nicht! ich versuche es mit virtuellem serial port")
 			try:
-				self.sbus = serial.Serial('/dev/pts/7',115200,timeout=0.100)
+				self.sbus = serial.Serial('/dev/pts/5',115200,timeout=0.100)
 			except:
 				print("Virtueller port geht nicht. lassen wir es sein für heute...")
 				exit()
@@ -314,9 +315,13 @@ class PyGuiApp(QMainWindow):
 		self.PosProgramThread = GenericThread(self.PosProgram)
 
 		self.pushButton_Start.clicked.connect(self.StartPosProgram)
+
 		self.pushButton_Pause.toggled.connect(self.PausePosProgram)
 		self.pushButton_Stop.clicked.connect(self.StopPosProgram)
-		self.pushButton_GoToPos.clicked.connect(self.DoGoPos)
+
+		self.DoGoPosThread = GenericThread(self.DoGoPos)
+		self.pushButton_GoToPos.clicked.connect(self.DoGoPosThread.start)
+
 		self.pushButton_Capture.clicked.connect(self.CapturePos)
 		self.pushButton_ZeileP.clicked.connect(self.ZeileEinfugen)
 		self.pushButton_ZeileM.clicked.connect(self.ZeileEntfernen)
@@ -326,6 +331,10 @@ class PyGuiApp(QMainWindow):
 		self.PrgRunning = False
 		self.lastpath = '.'
 		self.PrgPaused = False
+
+	def betterGoTo(self):
+		self.captureOldPos()
+		self.goTo()
 
 	def PosProgram(self) :
 		self.PrgRunning = True
@@ -340,13 +349,17 @@ class PyGuiApp(QMainWindow):
 				time.sleep(0.1)
 			else :
 				print("Finished waiting")
-			self.tableWidget_Positionen.setCurrentCell(row,0)
-			self.DoGoPos()
+			if self.PrgRunning : #Still running?
+				self.tableWidget_Positionen.setCurrentCell(row,0)
+				self.DoGoPos()
 		self.PrgRunning = False
 
 	def StartPosProgram(self) :
-		print("starte position program")
-		self.PosProgramThread.start()
+		if not self.PrgRunning:
+			print("starte position program")
+			self.PosProgramThread.start()
+		else:
+			print("Programm läuft schon!")
 
 
 	def PausePosProgram(self, value) :
@@ -1210,9 +1223,16 @@ class PyGuiApp(QMainWindow):
 									self.Vmaxset.setValue(int(float(f[2])*10.0))
 								# do 5 dimensional movement
 								if x or y or z or c :
-									self.goTo()
+									self.betterGoTo()
 							self.sendTcpQ.put("ok\r\n")
 							print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
+
+	def captureOldPos(self):
+		self.oldx	= self.currentPos[0]
+		self.oldy	= self.currentPos[1]
+		self.oldz	= self.currentPos[2]
+		self.oldc	= self.currentPos[3]
+		self.oldx2	= self.currentPos[4]
 
 	def analyseSensorData(self):
 		while not self.recSensQ.empty() :

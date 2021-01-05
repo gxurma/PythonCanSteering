@@ -1,10 +1,10 @@
-* Positionen müssen alle überall über PosTesting Sets gehen
-* freezing Gui bei Bewegung
+* [*] Positionen müssen alle überall über PosTesting Sets gehen
+* [*] freezing Gui bei Bewegung
 
-Getrennte xy und Z bewegung zur  Sicherheit.
-
-Pause einbauen
-
+* [*] Getrennte xy und Z bewegung zur  Sicherheit.
+* [*] Pause einbauen
+* [*] GotoPos freezes Gui, Bekommt Rückmeldung erst nachdem While fertig wegen timeout
+* [ ] Stop macht irgendwas. Nicht immer konsistent.
 
 
 * Patentanwalt: Kanzlei Friedrich Bauer Rosenheim Adelzreiter Str 11
