@@ -1145,7 +1145,7 @@ class PyGuiApp(QMainWindow):
 						x = re.search('(X)([-0-9.]+)', d, re.I)
 						y = re.search('(Y)([-0-9.]+)', d, re.I)
 						z = re.search('(Z)([-0-9.]+)', d, re.I)
-						c = re.search('(E)([-0-9.]+)', d, re.I)
+						c = re.search('(C)([-0-9.]+)', d, re.I)
 						f = re.search('(F)([-0-9.]+)', d, re.I)
 						# print(Color.Green+repr(g)+Color.end)
 						if m:
@@ -1186,7 +1186,11 @@ class PyGuiApp(QMainWindow):
 								self.Init(idY)
 								self.Init(idC)
 								self.Init(idZ)
-								self.pushButtonHomeAll.click()
+								self.pushButtonHomeZ.click()
+								self.pushButtonHomeX.click()
+								self.pushButtonHomeY.click()
+								self.pushButtonHomeC.click()
+								self.pushButtonHomeX2.click()
 							if (g == 0) or (g == 1) :
 								if x:
 									xVal = float(x[2])
