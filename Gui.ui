@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
+    <width>681</width>
     <height>560</height>
    </rect>
   </property>
@@ -338,7 +338,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1017,7 +1017,34 @@
         <string>Actuators, Sensors</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="4">
+        <item row="0" column="7">
+         <widget class="QPushButton" name="pushButtonTouchDownRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Touch
+Down
+Read</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
          <widget class="QPushButton" name="pushButtonToolTipVac">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1041,14 +1068,14 @@ Vac</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="3" column="1">
          <widget class="QLabel" name="label">
           <property name="text">
            <string>Touchdown</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="0" column="2">
          <widget class="QPushButton" name="pushButtonUplight">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1071,7 +1098,7 @@ Light</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="5">
+        <item row="0" column="6">
          <widget class="QPushButton" name="pushButtonToolTipVacRead">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1099,7 +1126,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
+        <item row="0" column="3">
          <widget class="QPushButton" name="pushButtonDownlight">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1122,7 +1149,7 @@ Light</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
+        <item row="0" column="4">
          <widget class="QPushButton" name="pushButtonToolChangerVac">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1146,7 +1173,7 @@ Changer
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
+        <item row="0" column="1">
          <widget class="QPushButton" name="pushButtonPump">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1168,15 +1195,8 @@ Changer
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>Tip Vac Pressure</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="6">
-         <widget class="QPushButton" name="pushButtonTouchDownRead">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButtonJet">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1184,25 +1204,20 @@ Changer
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Touch
-Down
-Read</string>
+           <string>Jet</string>
           </property>
           <property name="checkable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="checked">
            <bool>false</bool>
-          </property>
-          <property name="autoRepeat">
-           <bool>true</bool>
           </property>
           <property name="default">
            <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item row="2" column="0" colspan="7">
+        <item row="2" column="0" colspan="8">
          <widget class="QProgressBar" name="progressBarToolTipVacRead">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1221,7 +1236,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="0" colspan="7">
+        <item row="4" column="0" colspan="8">
          <widget class="QProgressBar" name="progressBarTouchDownRead">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1237,6 +1252,13 @@ Read</string>
           </property>
           <property name="format">
            <string>%p%</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Tip Vac Pressure</string>
           </property>
          </widget>
         </item>
@@ -1283,7 +1305,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="5">
+        <item row="3" column="6">
          <widget class="QPushButton" name="pushButton_ZM">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -1309,7 +1331,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="5">
+        <item row="0" column="6">
          <widget class="QPushButton" name="pushButton_ZP">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -1335,7 +1357,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="6" rowspan="4">
+        <item row="0" column="8" rowspan="4">
          <widget class="QSlider" name="verticalSlider_StepsZ">
           <property name="minimum">
            <number>0</number>
@@ -1398,7 +1420,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="5">
+        <item row="1" column="6">
          <widget class="QDoubleSpinBox" name="doubleSpinBox_StepsZ">
           <property name="decimals">
            <number>3</number>
@@ -1446,7 +1468,7 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="2" colspan="5">
+        <item row="4" column="2" colspan="7">
          <widget class="QSlider" name="Vmaxsetf">
           <property name="maximum">
            <number>200000</number>
@@ -1468,6 +1490,32 @@ Read</string>
           </property>
           <property name="tickInterval">
            <number>1000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="QPushButton" name="pushButton_CM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>C -</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="7">
+         <widget class="QPushButton" name="pushButton_CP">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>C+</string>
           </property>
          </widget>
         </item>
@@ -1725,8 +1773,8 @@ Read</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>653</width>
-     <height>21</height>
+     <width>681</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
