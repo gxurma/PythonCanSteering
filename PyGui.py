@@ -224,6 +224,7 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonDownlight.clicked.connect(lambda: self.SetActuator(self.pushButtonDownlight.isChecked(), "M810", "M811" ))
 		self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
 		self.pushButtonPump.clicked.connect(lambda: self.SetActuator(self.pushButtonPump.isChecked(), "M808", "M809" ))
+		self.pushButtonJet.clicked.connect(lambda: self.SetActuator(self.pushButtonPump.isChecked(), "M804", "M805" ))
 
 
 		self.sendTcpQ = queue.Queue()  #from middleware to openpnp
@@ -307,6 +308,8 @@ class PyGuiApp(QMainWindow):
 		self.pushButton_YP.clicked.connect(lambda: self.ButtonMove(idY, 1))
 		self.pushButton_ZM.clicked.connect(lambda: self.ButtonMove(idZ, -1))
 		self.pushButton_ZP.clicked.connect(lambda: self.ButtonMove(idZ, 1))
+		self.pushButton_CM.clicked.connect(lambda: self.ButtonMove(idC, -1))
+		self.pushButton_CP.clicked.connect(lambda: self.ButtonMove(idC, 1))
 
 		self.axisOldSpeed[0] = 0
 		self.axisOldSpeed[1] = 0
@@ -499,12 +502,15 @@ class PyGuiApp(QMainWindow):
 
 	def SetZStepValue(self, value):
 		self.zStep = value
-		print("new zstep value: ", self.zStep )
+		print("new zcstep value: ", self.zStep )
 
 	def ButtonMove(self, axe, direction):
 		if axe == idZ:
 			Step = self.zStep * direction * Zm
 			Speed = self.Vmaxsetf.value() / 1000 * Zm
+		if axe == idC:
+			Step = self.zStep * direction * Cm
+			Speed = self.Vmaxsetf.value() / 1000 * Cm
 		if axe == idX:
 			Step = self.xyStep * direction * Xm
 			Speed = self.Vmaxsetf.value() / 1000 * Xm
@@ -707,10 +713,11 @@ class PyGuiApp(QMainWindow):
 			self.axisSpeed[0] = self.axis_states['x'] #/ 32767
 			self.axisSpeed[1] = -self.axis_states['y'] #/ 32767
 			self.axisSpeed[2] = -self.axis_states['ry'] #/ 32767
+			self.axisSpeed[3] = -self.axis_states['rx'] #/ 32767
 			print(self.axisSpeed, end=" ")
 			#for i in range(0,3):
 
-			for i in range(0,3):
+			for i in range(0,4):
 				Speed = self.axisSpeed[i]
 				aSpeed = abs(Speed)
 				if aSpeed < threshold :
@@ -735,7 +742,7 @@ class PyGuiApp(QMainWindow):
 
 				self.axisOldSpeed[i] = Speed
 
-			print(end="                      \r")
+			# print(end="                      \r")
 
 			'''
 				dsmax = (((speed*speed*0.5)/self.aMax)/256) + 1000
@@ -760,7 +767,7 @@ class PyGuiApp(QMainWindow):
 			'''
 
 
-			time.sleep(0.02) # wait 100ms
+			time.sleep(0.02) # wait 20ms
 
 		self.StopAll() #stop everything.
 		print("Jostic mode off 2")
