@@ -212,12 +212,13 @@ class PyGuiApp(QMainWindow):
 		self.homeYThread	= GenericThread(lambda:self.Home(idY,	1,		0,	4096,	-4096,		0,8192, self.pushButtonHomeY))
 		self.homeZThread	= GenericThread(lambda:self.Home(idZ,	0, 100000,	4096,	-4096,	100000,8192, self.pushButtonHomeZ))
 		self.homeCThread	= GenericThread(lambda:self.Home(idC,	0,		744,	0,		-4096,		0,8192, self.pushButtonHomeC))
+		self.homeAllThread	= GenericThread(self.homeAll)
 		self.pushButtonHomeX.clicked.connect(self.homeXThread.start)
 		self.pushButtonHomeX2.clicked.connect(self.homeX2Thread.start)
 		self.pushButtonHomeY.clicked.connect(self.homeYThread.start)
 		self.pushButtonHomeZ.clicked.connect(self.homeZThread.start)
 		self.pushButtonHomeC.clicked.connect(self.homeCThread.start)
-
+		self.pushButtonHomeAll.clicked.connect(self.homAllThread.start)
 
 		self.pushButtonToolTipVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolTipVac.isChecked(), "M800", "M801" ))
 		self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
@@ -744,29 +745,6 @@ class PyGuiApp(QMainWindow):
 
 			# print(end="                      \r")
 
-			'''
-				dsmax = (((speed*speed*0.5)/self.aMax)/256) + 1000
-				#print(i, self.axisSpeed[i],self.axisOldSpeed[i])
-				if (direction and (self.currentPos[i] < dsmax)) or ((not direction) and (self.currentPos[i] > (max[i]-dsmax))):
-					#print ("need to stop here", i, dsmax, self.currentPos[i])
-					self.status[i] = stopping
-					#self.sendMsg(i << 3 , (0x59, 0xa, 2, 0))
-					self.sendMsg(i << 3 , (0x88, 0xa))
-				elif (cmp(self.axisSpeed[i],0) != cmp(self.axisOldSpeed[i],0)) and (self.status[i] == moving):
-					#print("direction change",i)
-					self.status[i] = stopping
-					self.sendMsg(i << 3 , (0x88, 0xa))
-				elif (self.axisSpeed[i] != self.axisOldSpeed[i]) and (self.status[i] == moving):
-					#print("changing speed",i,speed,direction)
-					self.sendMsg(i << 3 , (0x59, 0xa, 2, abs(self.axisSpeed[i])))
-				elif (self.status[i] == ready)and (self.axisSpeed[i]!= 0 ) : #and (self.currentPos[i] > dsmax) and (self.currentPos[i] < (max[i]-dsmax)):
-					#print("starting",i)
-					self.status[i] = moving
-					self.sendMsg(i << 3 , (0x58, 0xa, direction))
-					self.sendMsg(i << 3 , (0x59, 0xa, 2, abs(self.axisSpeed[i])))
-			'''
-
-
 			time.sleep(0.02) # wait 20ms
 
 		self.StopAll() #stop everything.
@@ -1187,17 +1165,17 @@ class PyGuiApp(QMainWindow):
 							g = float(g[2])
 							if g == 28:
 								print(Color.Green+'Init and Homing all axes'+Color.end)
-								self.Init(idZ)
-								self.Init(idX)
-								self.Init(idX2)
-								self.Init(idY)
-								self.Init(idC)
-								self.Init(idZ)
-								self.pushButtonHomeZ.click()
-								self.pushButtonHomeX.click()
-								self.pushButtonHomeY.click()
-								self.pushButtonHomeC.click()
-								self.pushButtonHomeX2.click()
+								# self.Init(idZ)
+								# self.Init(idX)
+								# self.Init(idX2)
+								# self.Init(idY)
+								# self.Init(idC)
+								# self.Init(idZ)
+								# self.pushButtonHomeZ.click()
+								# self.pushButtonHomeX.click()
+								# self.pushButtonHomeY.click()
+								# self.pushButtonHomeC.click()
+								# self.pushButtonHomeX2.click()
 							if (g == 0) or (g == 1) :
 								if x:
 									xVal = float(x[2])
