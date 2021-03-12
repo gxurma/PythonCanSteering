@@ -218,14 +218,14 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonHomeY.clicked.connect(self.homeYThread.start)
 		self.pushButtonHomeZ.clicked.connect(self.homeZThread.start)
 		self.pushButtonHomeC.clicked.connect(self.homeCThread.start)
-		self.pushButtonHomeAll.clicked.connect(self.homAllThread.start)
+		self.pushButtonHomeAll.clicked.connect(self.homeAllThread.start)
 
 		self.pushButtonToolTipVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolTipVac.isChecked(), "M800", "M801" ))
 		self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
 		self.pushButtonDownlight.clicked.connect(lambda: self.SetActuator(self.pushButtonDownlight.isChecked(), "M810", "M811" ))
 		self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
 		self.pushButtonPump.clicked.connect(lambda: self.SetActuator(self.pushButtonPump.isChecked(), "M808", "M809" ))
-		self.pushButtonJet.clicked.connect(lambda: self.SetActuator(self.pushButtonPump.isChecked(), "M804", "M805" ))
+		self.pushButtonJet.clicked.connect(lambda: self.SetActuator(self.pushButtonJet.isChecked(), "M804", "M805" ))
 
 
 		self.sendTcpQ = queue.Queue()  #from middleware to openpnp
@@ -250,8 +250,8 @@ class PyGuiApp(QMainWindow):
 
 
 		# self.status = [ready,ready,ready]
-		self.axisSpeed = [0,0,0]
-		self.axisOldSpeed = [0,0,0]
+		self.axisSpeed = [0,0,0,0]
+		self.axisOldSpeed = [0,0,0,0]
 		#
 		self.currentPos=[0,0,10,0,0]
 		self.StatusReg =[0,0,0,0,0]
@@ -335,6 +335,20 @@ class PyGuiApp(QMainWindow):
 		self.PrgRunning = False
 		self.lastpath = '.'
 		self.PrgPaused = False
+
+	def homeAll(self):
+		self.pushButtonHomeZ.click()
+		while self.pushButtonHomeZ.isChecked():
+			print("waiting for z to finish ")
+			time.sleep(1)
+		self.pushButtonHomeX.click()
+		#self.pushButtonHomeX2.setChecked(True)
+		self.pushButtonHomeY.click()
+		self.pushButtonHomeC.click()
+		while self.pushButtonHomeX.isChecked() or self.pushButtonHomeY.isChecked() or self.pushButtonHomeC.isChecked():
+			print("waiting for rest to finish ")
+			time.sleep(1)
+
 
 	def betterGoTo(self):
 		self.captureOldPos()
@@ -707,7 +721,7 @@ class PyGuiApp(QMainWindow):
 
 	def joysticMode(self):
 		self.StopAll() #stop everything first.
-		self.axisOldSpeed = [0,0,0]
+		self.axisOldSpeed = [0,0,0,0]
 
 		while self.joysticfound and self.pushButtonJoysticMode.isChecked() :
 
