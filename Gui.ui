@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>681</width>
+    <width>762</width>
     <height>560</height>
    </rect>
   </property>
@@ -1017,33 +1017,6 @@
         <string>Actuators, Sensors</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="7">
-         <widget class="QPushButton" name="pushButtonTouchDownRead">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Touch
-Down
-Read</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="autoRepeat">
-           <bool>true</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="5">
          <widget class="QPushButton" name="pushButtonToolTipVac">
           <property name="sizePolicy">
@@ -1068,66 +1041,8 @@ Vac</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Touchdown</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="pushButtonUplight">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Up
-Light</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="6">
-         <widget class="QPushButton" name="pushButtonToolTipVacRead">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Tool
-Tip
-Vac
-Read</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <property name="autoRepeat">
-           <bool>true</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="3">
-         <widget class="QPushButton" name="pushButtonDownlight">
+         <widget class="QPushButton" name="pushButtonLight">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1135,8 +1050,7 @@ Read</string>
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Down
-Light</string>
+           <string>Light</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -1174,7 +1088,7 @@ Changer
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QPushButton" name="pushButtonPump">
+         <widget class="QPushButton" name="pushButtonJetterDown">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1182,7 +1096,7 @@ Changer
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Pump</string>
+           <string>Jetter down</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -1217,26 +1131,57 @@ Changer
           </property>
          </widget>
         </item>
-        <item row="2" column="0" colspan="8">
-         <widget class="QProgressBar" name="progressBarToolTipVacRead">
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButtonToolTipVacRead">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="maximum">
-           <number>1000</number>
+          <property name="text">
+           <string>Tool
+Tip
+Vac
+Read</string>
           </property>
-          <property name="value">
-           <number>950</number>
+          <property name="checkable">
+           <bool>false</bool>
           </property>
-          <property name="format">
-           <string>%v mBar</string>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item row="4" column="0" colspan="8">
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButtonZClampOff">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Z Clamp Off</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" colspan="7">
          <widget class="QProgressBar" name="progressBarTouchDownRead">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1255,10 +1200,49 @@ Changer
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QLabel" name="label_13">
+        <item row="4" column="0">
+         <widget class="QPushButton" name="pushButtonTouchDownRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
-           <string>Tip Vac Pressure</string>
+           <string>Touch
+Down
+Read</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="7">
+         <widget class="QProgressBar" name="progressBarToolTipVacRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>1000</number>
+          </property>
+          <property name="value">
+           <number>950</number>
+          </property>
+          <property name="format">
+           <string>%v mBar</string>
           </property>
          </widget>
         </item>
@@ -1773,7 +1757,7 @@ Changer
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>681</width>
+     <width>762</width>
      <height>22</height>
     </rect>
    </property>
@@ -1894,12 +1878,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>584</x>
-     <y>219</y>
+     <x>741</x>
+     <y>235</y>
     </hint>
     <hint type="destinationlabel">
-     <x>548</x>
-     <y>295</y>
+     <x>708</x>
+     <y>391</y>
     </hint>
    </hints>
   </connection>
@@ -1910,12 +1894,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>548</x>
-     <y>295</y>
+     <x>708</x>
+     <y>391</y>
     </hint>
     <hint type="destinationlabel">
-     <x>584</x>
-     <y>219</y>
+     <x>741</x>
+     <y>235</y>
     </hint>
    </hints>
   </connection>
@@ -1926,12 +1910,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>515</x>
-     <y>219</y>
+     <x>668</x>
+     <y>235</y>
     </hint>
     <hint type="destinationlabel">
-     <x>481</x>
-     <y>295</y>
+     <x>638</x>
+     <y>391</y>
     </hint>
    </hints>
   </connection>
@@ -1942,12 +1926,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>481</x>
-     <y>295</y>
+     <x>638</x>
+     <y>391</y>
     </hint>
     <hint type="destinationlabel">
-     <x>515</x>
-     <y>219</y>
+     <x>668</x>
+     <y>235</y>
     </hint>
    </hints>
   </connection>
@@ -1958,12 +1942,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>110</x>
-     <y>330</y>
+     <x>122</x>
+     <y>432</y>
     </hint>
     <hint type="destinationlabel">
-     <x>354</x>
-     <y>334</y>
+     <x>430</x>
+     <y>437</y>
     </hint>
    </hints>
   </connection>
@@ -1974,12 +1958,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>354</x>
-     <y>334</y>
+     <x>430</x>
+     <y>437</y>
     </hint>
     <hint type="destinationlabel">
-     <x>114</x>
-     <y>330</y>
+     <x>122</x>
+     <y>432</y>
     </hint>
    </hints>
   </connection>
@@ -1990,12 +1974,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>114</x>
-     <y>363</y>
+     <x>122</x>
+     <y>472</y>
     </hint>
     <hint type="destinationlabel">
-     <x>350</x>
-     <y>367</y>
+     <x>426</x>
+     <y>477</y>
     </hint>
    </hints>
   </connection>
@@ -2006,12 +1990,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>354</x>
-     <y>367</y>
+     <x>430</x>
+     <y>477</y>
     </hint>
     <hint type="destinationlabel">
-     <x>114</x>
-     <y>363</y>
+     <x>122</x>
+     <y>472</y>
     </hint>
    </hints>
   </connection>
@@ -2022,12 +2006,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>114</x>
-     <y>396</y>
+     <x>122</x>
+     <y>512</y>
     </hint>
     <hint type="destinationlabel">
-     <x>373</x>
-     <y>400</y>
+     <x>449</x>
+     <y>517</y>
     </hint>
    </hints>
   </connection>
@@ -2038,12 +2022,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>354</x>
-     <y>400</y>
+     <x>430</x>
+     <y>517</y>
     </hint>
     <hint type="destinationlabel">
-     <x>114</x>
-     <y>396</y>
+     <x>122</x>
+     <y>512</y>
     </hint>
    </hints>
   </connection>
@@ -2054,12 +2038,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>596</x>
-     <y>135</y>
+     <x>751</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel">
-     <x>259</x>
-     <y>400</y>
+     <x>325</x>
+     <y>517</y>
     </hint>
    </hints>
   </connection>
@@ -2070,12 +2054,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>596</x>
-     <y>135</y>
+     <x>751</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel">
-     <x>340</x>
-     <y>400</y>
+     <x>429</x>
+     <y>517</y>
     </hint>
    </hints>
   </connection>
@@ -2086,12 +2070,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>596</x>
-     <y>135</y>
+     <x>751</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel">
-     <x>422</x>
-     <y>400</y>
+     <x>533</x>
+     <y>517</y>
     </hint>
    </hints>
   </connection>
@@ -2102,12 +2086,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>596</x>
-     <y>135</y>
+     <x>751</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel">
-     <x>503</x>
-     <y>400</y>
+     <x>637</x>
+     <y>517</y>
     </hint>
    </hints>
   </connection>
@@ -2118,92 +2102,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>596</x>
-     <y>135</y>
+     <x>751</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel">
-     <x>584</x>
-     <y>400</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonHomeAll</sender>
-   <signal>clicked()</signal>
-   <receiver>pushButtonHomeX</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>178</x>
-     <y>245</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>259</x>
-     <y>322</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonHomeAll</sender>
-   <signal>clicked()</signal>
-   <receiver>pushButtonHomeX2</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>178</x>
-     <y>245</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>340</x>
-     <y>322</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonHomeAll</sender>
-   <signal>clicked()</signal>
-   <receiver>pushButtonHomeY</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>178</x>
-     <y>245</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>422</x>
-     <y>322</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonHomeAll</sender>
-   <signal>clicked()</signal>
-   <receiver>pushButtonHomeZ</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>178</x>
-     <y>245</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>503</x>
-     <y>322</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonHomeAll</sender>
-   <signal>clicked()</signal>
-   <receiver>pushButtonHomeC</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>178</x>
-     <y>245</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>584</x>
-     <y>322</y>
+     <x>741</x>
+     <y>517</y>
     </hint>
    </hints>
   </connection>
@@ -2214,12 +2118,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>111</x>
-     <y>396</y>
+     <x>121</x>
+     <y>512</y>
     </hint>
     <hint type="destinationlabel">
-     <x>290</x>
-     <y>400</y>
+     <x>398</x>
+     <y>517</y>
     </hint>
    </hints>
   </connection>
@@ -2230,12 +2134,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>514</x>
-     <y>395</y>
+     <x>622</x>
+     <y>517</y>
     </hint>
     <hint type="destinationlabel">
-     <x>112</x>
-     <y>389</y>
+     <x>121</x>
+     <y>512</y>
     </hint>
    </hints>
   </connection>

@@ -220,12 +220,21 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonHomeC.clicked.connect(self.homeCThread.start)
 		self.pushButtonHomeAll.clicked.connect(self.homeAllThread.start)
 
+		# self.pushButtonToolTipVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolTipVac.isChecked(), "M800", "M801" ))
+		# self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
+		# self.pushButtonLight.clicked.connect(lambda: self.SetActuator(self.pushButtonLight.isChecked(), "M808", "M809" ))
+		# # self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
+		# self.pushButtonJetterDown.clicked.connect(lambda: self.SetActuator(self.pushButtonJetterDown.isChecked(), "M810", "M811" ))
+		# self.pushButtonJet.clicked.connect(lambda: self.SetActuator(self.pushButtonJet.isChecked(), "M804", "M805" ))
+		# self.pushButtonZClampOff.clicked.connect(lambda: self.SetActuator(self.pushButtonZClampOff.isChecked(), "M806", "M807" ))
+
 		self.pushButtonToolTipVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolTipVac.isChecked(), "M800", "M801" ))
-		self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
-		self.pushButtonDownlight.clicked.connect(lambda: self.SetActuator(self.pushButtonDownlight.isChecked(), "M810", "M811" ))
-		self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
-		self.pushButtonPump.clicked.connect(lambda: self.SetActuator(self.pushButtonPump.isChecked(), "M808", "M809" ))
+		# self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
+		self.pushButtonLight.clicked.connect(lambda: self.SetActuator(self.pushButtonLight.isChecked(), "M802", "M803" ))
+		# self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
+		self.pushButtonJetterDown.clicked.connect(lambda: self.SetActuator(self.pushButtonJetterDown.isChecked(), "M806", "M807" ))
 		self.pushButtonJet.clicked.connect(lambda: self.SetActuator(self.pushButtonJet.isChecked(), "M804", "M805" ))
+		# self.pushButtonZClampOff.clicked.connect(lambda: self.SetActuator(self.pushButtonZClampOff.isChecked(), "M806", "M807" ))
 
 
 		self.sendTcpQ = queue.Queue()  #from middleware to openpnp
@@ -261,11 +270,12 @@ class PyGuiApp(QMainWindow):
 		#start and init serial communication
 		print("trying serial port to smoothie")
 		try:
-			self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
+			# self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
+			self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_03FFA006AF2784085A4EDA47F50020C3-if00',115200,timeout=0.100)
 		except:
 			print("Smoothie existiert nicht! ich versuche es mit virtuellem serial port")
 			try:
-				self.sbus = serial.Serial('/dev/pts/5',115200,timeout=0.100)
+				self.sbus = serial.Serial('/dev/pts/2',115200,timeout=0.100)
 			except:
 				print("Virtueller port geht nicht. lassen wir es sein für heute...")
 				exit()
