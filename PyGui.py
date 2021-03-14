@@ -236,6 +236,8 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonJet.clicked.connect(lambda: self.SetActuator(self.pushButtonJet.isChecked(), "M804", "M805" ))
 		# self.pushButtonZClampOff.clicked.connect(lambda: self.SetActuator(self.pushButtonZClampOff.isChecked(), "M806", "M807" ))
 
+		self.pushButtonReadSwitches.clicked.connect(self.readSwitches)
+
 
 		self.sendTcpQ = queue.Queue()  #from middleware to openpnp
 		self.recTcpQ = queue.Queue()	#from openpnp to middleware
@@ -279,14 +281,14 @@ class PyGuiApp(QMainWindow):
 			except:
 				print("Virtueller port geht nicht. lassen wir es sein für heute...")
 				exit()
-#		try:
-#			self.sbus2 = serial.Serial('/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7533531343735131C1C1-if00',115200,timeout=0.100)
-#			print("na ez szívás... Foglalt, vagy nincs szenzorpanel")
-#		except:
-#			exit()
+		try:
+			self.sbus2 = serial.Serial('/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7533531343735131C1C1-if00',115200,timeout=0.100)
+		except:
+			print("Na, wen haste denn dein Sensorpanel verliehen?")
+			exit()
 
 		print('sbus=',self.sbus.name)
-#		print('sbus2=',self.sbus2.name)
+		print('sbus2=',self.sbus2.name)
 
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
@@ -345,6 +347,10 @@ class PyGuiApp(QMainWindow):
 		self.PrgRunning = False
 		self.lastpath = '.'
 		self.PrgPaused = False
+
+	def readSwitches(self):
+		data = "M119\n"
+		self.sendSerQ.put(data.encode("utf-8"))
 
 	def homeAll(self):
 		self.pushButtonHomeZ.click()
@@ -1264,12 +1270,40 @@ class PyGuiApp(QMainWindow):
 			if data:
 				print(Color.Blue+repr(data)+Color.end)
 				self.sendTcpQ.put(data.decode('utf-8'))
+				self.analyseSerialData(data)
 			# time.sleep(0.05)
+
+	def analyseSerialData(self,data):
+		d = data.decode('utf-8')
+		# print (d)
+		m = re.search("(P1.24:)([-0-9.]+)", d, re.I)
+		if m :
+			m = int(m[2])
+			print("jettertouch:",m, end="")
+			self.checkBoxJetterTouch.setChecked(m)
+
+		m = re.search("(P1.29:)([-0-9.]+)", d, re.I)
+		if m :
+			m = not int(m[2])
+			print(" jetterUp:",m, end="")
+			self.checkBoxJetterUp.setChecked(m)
+
+		m = re.search("(P1.28:)([-0-9.]+)", d, re.I)
+		if m :
+			m = not int(m[2])
+			print(" jetterDown:",m, end="")
+			self.checkBoxJetterDown.setChecked(m)
+
+		m = re.search("(P1.26:)([-0-9.]+)", d, re.I)
+		if m :
+			m = int(m[2])
+			print(" Touch:",m)
+			self.checkBoxTipTouch.setChecked(m)
 
 	def serialSensorReader(self):
 		while True:
-#			data = self.sbus2.readline()  # Should be ready
-			data = "" #self.sbus2.readline()  # Should be ready
+			data = self.sbus2.readline()  # Should be ready
+			# data = "" #self.sbus2.readline()  # Should be ready
 			if data:
 				print(Color.Cyan+repr(data)+Color.end)
 				self.sendTcpQ.put(data.decode('utf-8')) #copy data to OpenPNP
@@ -1288,9 +1322,9 @@ class PyGuiApp(QMainWindow):
 			while not self.sendSensQ.empty() :
 				message = self.sendSensQ.get()
 				print(Color.cyan+repr(message)+Color.end)
-#				self.sbus2.write(message)
+				self.sbus2.write(message)
 			self.sbus.flush()
-#			self.sbus2.flush()
+			self.sbus2.flush()
 			time.sleep(0.05)
 
 	def requestSensValue(self) :

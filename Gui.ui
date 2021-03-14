@@ -338,7 +338,7 @@
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1080,7 +1080,7 @@ Changer
            <number>100</number>
           </property>
           <property name="value">
-           <number>50</number>
+           <number>0</number>
           </property>
           <property name="format">
            <string>%p%</string>
@@ -1268,7 +1268,7 @@ Read</string>
          </widget>
         </item>
         <item row="1" column="0" rowspan="3">
-         <widget class="QPushButton" name="pushButtonTouchDownRead_2">
+         <widget class="QPushButton" name="pushButtonReadSwitches">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1288,13 +1288,16 @@ Switches</string>
           <property name="autoRepeat">
            <bool>true</bool>
           </property>
+          <property name="autoRepeatInterval">
+           <number>100</number>
+          </property>
           <property name="default">
            <bool>false</bool>
           </property>
          </widget>
         </item>
         <item row="2" column="2">
-         <widget class="QCheckBox" name="checkBoxJetterTouch_2">
+         <widget class="QCheckBox" name="checkBoxTipTouch">
           <property name="text">
            <string>Tool Touch</string>
           </property>
@@ -1826,7 +1829,7 @@ Switches</string>
      <x>0</x>
      <y>0</y>
      <width>875</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
