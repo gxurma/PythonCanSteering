@@ -1,0 +1,13 @@
+* [*] Positionen müssen alle überall über PosTesting Sets gehen
+* [*] freezing Gui bei Bewegung
+
+* [*] Getrennte xy und Z bewegung zur  Sicherheit.
+* [*] Pause einbauen
+* [*] GotoPos freezes Gui, Bekommt Rückmeldung erst nachdem While fertig wegen timeout
+* [ ] Stop macht irgendwas. Nicht immer konsistent.
+* [ ] Safe Z programmierbar Spalte einbauen
+* [ ] Start grinding prozess Spalte einbauen
+* [ ] Z Detection
+
+* Patentanwalt: Kanzlei Friedrich Bauer Rosenheim Adelzreiter Str 11
+    +498031 20 540

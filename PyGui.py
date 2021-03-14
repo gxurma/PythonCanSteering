@@ -7,10 +7,19 @@
 # decide if the X2 axis has to be moved to reach to the other side of the table,
 # and send the CAN bus commands to the appropriate drives
 
-from PyQt4 import QtCore, QtGui
+# from PyQt4 import QtCore, QtGui
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
+# from PyQt4.uic import loadUi
+from PyQt5.uic import loadUi
+from PyQt5.QtCore import Qt
+
 import sys
+import csv
+
 #from Gui import *
-import Gui
+# import Gui
 #talking to kvaser
 import canlib
 import time
@@ -90,6 +99,21 @@ maxDeceleration = maxAcceleration
 smoothingFactor = 20
 threshold = 5000
 
+
+# This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
+class GenericThread(QtCore.QThread):
+	def __init__(self, function, *args, **kwargs):
+		QtCore.QThread.__init__(self)
+		self.function = function
+		self.args = args
+		self.kwargs = kwargs
+	def __del__(self):
+		self.wait()
+	def run(self):
+		self.function(*self.args,**self.kwargs)
+		return
+
+
 def cmp(a,b):
 	return (a>b)-(a<b)
 
@@ -125,20 +149,26 @@ class canMsg():
 		self.timestamp = timestamp
 
 
-class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
+# class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
+class PyGuiApp(QMainWindow):
+	nachricht = pyqtSignal(canMsg)
+	analyseSensor = pyqtSignal()
 	def __init__(self):
 		# Explaining super is out of the scope of this article
 		# So please google it if you're not familar with it
 		# Simple reason why we use it here is that it allows us to
 		# access variables, methods etc in the design.py file
 		super(self.__class__, self).__init__()
-		self.setupUi(self)  # This is defined in design.py file automatically
+		# self.setupUi(self)  # This is defined in design.py file automatically
+		loadUi("Gui.ui",self)
+
 		self.actionAbout.triggered.connect(self.aboutBox)
 		self.pushButtonGoX0Y0.clicked.connect(self.goX0Y0)
 		self.pushButtonGoZmax.clicked.connect(self.goZmax)
 		self.pushButtonGoC0.clicked.connect(self.goC0)
 		self.pushButtonGoX20.clicked.connect(self.goX20)
-		self.pushButtonGo.clicked.connect(self.goTo)
+		self.pushButtonGo.clicked.connect(self.betterGoTo)
+
 
 		self.pushButtonMotorXAus.clicked.connect(lambda: self.MotorAus(idX, self.pushButtonMotorXAus.isChecked()))
 		self.pushButtonMotorX2Aus.clicked.connect(lambda: self.MotorAus(idX2, self.pushButtonMotorX2Aus.isChecked()))
@@ -165,8 +195,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.oldx2 = 0
 
 		# Eigener Lese Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
+
 		self.readThread = GenericThread(self.readMsg)
-		self.connect( self, QtCore.SIGNAL("analyse(PyQt_PyObject)"), self.analyseCANMsg ) # Verbinde readMsg mit Analysefunktion
+		self.nachricht.connect(self.analyseCANMsg)
+		# self.connect( self, QtCore.SIGNAL("analyse(PyQt_PyObject)"), self.analyseCANMsg ) # Verbinde readMsg mit Analysefunktion
 		self.readThread.start()
 		# Eigener pos lese Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
 		self.readPosThread = GenericThread(self.readPos)
@@ -180,18 +212,29 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.homeYThread	= GenericThread(lambda:self.Home(idY,	1,		0,	4096,	-4096,		0,8192, self.pushButtonHomeY))
 		self.homeZThread	= GenericThread(lambda:self.Home(idZ,	0, 100000,	4096,	-4096,	100000,8192, self.pushButtonHomeZ))
 		self.homeCThread	= GenericThread(lambda:self.Home(idC,	0,		744,	0,		-4096,		0,8192, self.pushButtonHomeC))
+		self.homeAllThread	= GenericThread(self.homeAll)
 		self.pushButtonHomeX.clicked.connect(self.homeXThread.start)
 		self.pushButtonHomeX2.clicked.connect(self.homeX2Thread.start)
 		self.pushButtonHomeY.clicked.connect(self.homeYThread.start)
 		self.pushButtonHomeZ.clicked.connect(self.homeZThread.start)
 		self.pushButtonHomeC.clicked.connect(self.homeCThread.start)
+		self.pushButtonHomeAll.clicked.connect(self.homeAllThread.start)
 
+		# self.pushButtonToolTipVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolTipVac.isChecked(), "M800", "M801" ))
+		# self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
+		# self.pushButtonLight.clicked.connect(lambda: self.SetActuator(self.pushButtonLight.isChecked(), "M808", "M809" ))
+		# # self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
+		# self.pushButtonJetterDown.clicked.connect(lambda: self.SetActuator(self.pushButtonJetterDown.isChecked(), "M810", "M811" ))
+		# self.pushButtonJet.clicked.connect(lambda: self.SetActuator(self.pushButtonJet.isChecked(), "M804", "M805" ))
+		# self.pushButtonZClampOff.clicked.connect(lambda: self.SetActuator(self.pushButtonZClampOff.isChecked(), "M806", "M807" ))
 
 		self.pushButtonToolTipVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolTipVac.isChecked(), "M800", "M801" ))
-		self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
-		self.pushButtonDownlight.clicked.connect(lambda: self.SetActuator(self.pushButtonDownlight.isChecked(), "M810", "M811" ))
-		self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
-		self.pushButtonPump.clicked.connect(lambda: self.SetActuator(self.pushButtonPump.isChecked(), "M808", "M809" ))
+		# self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
+		self.pushButtonLight.clicked.connect(lambda: self.SetActuator(self.pushButtonLight.isChecked(), "M802", "M803" ))
+		# self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
+		self.pushButtonJetterDown.clicked.connect(lambda: self.SetActuator(self.pushButtonJetterDown.isChecked(), "M806", "M807" ))
+		self.pushButtonJet.clicked.connect(lambda: self.SetActuator(self.pushButtonJet.isChecked(), "M804", "M805" ))
+		# self.pushButtonZClampOff.clicked.connect(lambda: self.SetActuator(self.pushButtonZClampOff.isChecked(), "M806", "M807" ))
 
 
 		self.sendTcpQ = queue.Queue()  #from middleware to openpnp
@@ -216,8 +259,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 
 		# self.status = [ready,ready,ready]
-		self.axisSpeed = [0,0,0]
-		self.axisOldSpeed = [0,0,0]
+		self.axisSpeed = [0,0,0,0]
+		self.axisOldSpeed = [0,0,0,0]
 		#
 		self.currentPos=[0,0,10,0,0]
 		self.StatusReg =[0,0,0,0,0]
@@ -227,7 +270,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		#start and init serial communication
 		print("trying serial port to smoothie")
 		try:
-			self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
+			# self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_18FF9019AE1C8C2951EBAC3BF5001E43-if00',115200,timeout=0.100)
+			self.sbus = serial.Serial('/dev/serial/by-id/usb-Uberclock_Smoothieboard_03FFA006AF2784085A4EDA47F50020C3-if00',115200,timeout=0.100)
 		except:
 			print("Smoothie existiert nicht! ich versuche es mit virtuellem serial port")
 			try:
@@ -247,7 +291,10 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.serialReaderThread = GenericThread( self.serialReader)
 		self.serialReaderThread.start()
 
-		self.connect( self, QtCore.SIGNAL("analyseSensor"), self.analyseSensorData )
+
+		# self.connect( self, QtCore.SIGNAL("analyseSensor"), self.analyseSensorData )
+		self.analyseSensor.connect(self.analyseSensorData)
+
 		self.serialSensorReaderThread = GenericThread( self.serialSensorReader)
 		self.serialSensorReaderThread.start()
 
@@ -272,10 +319,198 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.pushButton_YP.clicked.connect(lambda: self.ButtonMove(idY, 1))
 		self.pushButton_ZM.clicked.connect(lambda: self.ButtonMove(idZ, -1))
 		self.pushButton_ZP.clicked.connect(lambda: self.ButtonMove(idZ, 1))
+		self.pushButton_CM.clicked.connect(lambda: self.ButtonMove(idC, -1))
+		self.pushButton_CP.clicked.connect(lambda: self.ButtonMove(idC, 1))
 
 		self.axisOldSpeed[0] = 0
 		self.axisOldSpeed[1] = 0
 		self.axisOldSpeed[2] = 0
+
+		self.PosProgramThread = GenericThread(self.PosProgram)
+
+		self.pushButton_Start.clicked.connect(self.StartPosProgram)
+
+		self.pushButton_Pause.toggled.connect(self.PausePosProgram)
+		self.pushButton_Stop.clicked.connect(self.StopPosProgram)
+
+		self.DoGoPosThread = GenericThread(self.DoGoPos)
+		self.pushButton_GoToPos.clicked.connect(self.DoGoPosThread.start)
+
+		self.pushButton_Capture.clicked.connect(self.CapturePos)
+		self.pushButton_ZeileP.clicked.connect(self.ZeileEinfugen)
+		self.pushButton_ZeileM.clicked.connect(self.ZeileEntfernen)
+		self.pushButton_Load.clicked.connect(self.PrgLaden)
+		self.pushButton_Save.clicked.connect(self.PrgSpeichern)
+
+		self.PrgRunning = False
+		self.lastpath = '.'
+		self.PrgPaused = False
+
+	def homeAll(self):
+		self.pushButtonHomeZ.click()
+		while self.pushButtonHomeZ.isChecked():
+			print("waiting for z to finish ")
+			time.sleep(1)
+		self.pushButtonHomeX.click()
+		#self.pushButtonHomeX2.setChecked(True)
+		self.pushButtonHomeY.click()
+		self.pushButtonHomeC.click()
+		while self.pushButtonHomeX.isChecked() or self.pushButtonHomeY.isChecked() or self.pushButtonHomeC.isChecked():
+			print("waiting for rest to finish ")
+			time.sleep(1)
+
+
+	def betterGoTo(self):
+		self.captureOldPos()
+		self.goTo()
+
+	def PosProgram(self) :
+		self.PrgRunning = True
+		for row in range(self.tableWidget_Positionen.rowCount()):
+			if self.PrgRunning == False:
+				break
+			waiting = 0
+			while self.PrgPaused == True :
+				waiting = waiting + 1
+				if waiting % 10 == 0 :
+					print("waiting %05d"%(waiting/10), end="\r")
+				time.sleep(0.1)
+			else :
+				print("Finished waiting")
+			if self.PrgRunning : #Still running?
+				self.tableWidget_Positionen.setCurrentCell(row,0)
+				self.DoGoPos()
+		self.PrgRunning = False
+
+	def StartPosProgram(self) :
+		if not self.PrgRunning:
+			print("starte position program")
+			self.PosProgramThread.start()
+		else:
+			print("Programm läuft schon!")
+
+
+	def PausePosProgram(self, value) :
+		# if self.pushButton_Pause.isChecked():
+		if value:
+			print("Pause position program")
+			self.PrgPaused = True
+		else:
+			print("Resume position program")
+			self.PrgPaused = False
+
+	def StopPosProgram(self) :
+		print("stop position program")
+		self.PrgRunning = False
+		self.StopAll()
+
+	def DoGoPos(self) :
+		row = self.tableWidget_Positionen.currentRow()
+		if row == -1 : row = 0
+		print("Going to position laut Zeile: ", row)
+		X = float(self.tableWidget_Positionen.item(row,0).text())
+		Y = float(self.tableWidget_Positionen.item(row,1).text())
+		Z = float(self.tableWidget_Positionen.item(row,2).text())
+		Speed = float(self.tableWidget_Positionen.item(row,3).text())
+		Pause = float(self.tableWidget_Positionen.item(row,4).text())
+		data = "G1 Z%0.3f F%0.3f\nM400\n"%(Z,Speed)   # first move Z to avoid collision
+		print(data)
+		self.analyseSocketData(data.encode("utf-8"))
+		data = "G1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
+		print(data)
+		self.analyseSocketData(data.encode("utf-8"))
+
+		if Pause == -1 :
+			self.PrgPaused = True
+			self.pushButton_Pause.setChecked(True)
+		if Pause >= 2 :
+			time.sleep(Pause/1000)
+
+
+	def CapturePos(self) :
+		row = self.tableWidget_Positionen.currentRow()
+		print("capturing current position to current row: ", row)
+		print(self.currentPos)
+		if row > -1 :
+			self.tableWidget_Positionen.setItem(row, 0, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[0]/Xm)))
+			self.tableWidget_Positionen.setItem(row, 1, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[1]/Ym)))
+			self.tableWidget_Positionen.setItem(row, 2, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[2]/Zm-50.0)))
+			self.tableWidget_Positionen.setItem(row, 3, QtWidgets.QTableWidgetItem("2000"))
+			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem("-1")) # default is we pause at every movement
+		else :
+			print("wohin? wähle Zeile aus!")
+
+	def ZeileEinfugen(self) :
+		print("ZeileEinfügen in: ")
+		if self.PrgRunning == False :
+			row = self.tableWidget_Positionen.currentRow()
+			rowcount = self.tableWidget_Positionen.rowCount()
+			if row > -1 :
+				print("Füge Zeile ein über Zeile", row)
+				self.tableWidget_Positionen.insertRow(row)
+			else :
+				print("Füge Zeile ans Ende ein")
+				self.tableWidget_Positionen.insertRow(rowcount)
+		else:
+			print("Nicht wenn grade BewegungsProgramm läuft!")
+
+	def ZeileEntfernen(self) :
+		print("ZeileEntfernen von")
+		if self.PrgRunning == False :
+			row = self.tableWidget_Positionen.currentRow()
+			rowcount = self.tableWidget_Positionen.rowCount()
+			if row > -1 :
+				print("Entferne Zeile", row)
+				self.tableWidget_Positionen.removeRow(row)
+			else :
+				print("Entferne letzte Zeile")
+				self.tableWidget_Positionen.removeRow(rowcount-1)
+		else:
+			print("Nicht wenn grade BewegungsProgramm läuft!")
+
+
+	def PrgSpeichern(self) :
+		print("PrgSpeichern")
+		saveFileName, extension = QtWidgets.QFileDialog.getSaveFileName(self, 'Save Speed Program',  self.lastpath ,'*.csv')
+		print(saveFileName)
+		if saveFileName:
+			self.lastpath = os.path.dirname(saveFileName)
+			with open(saveFileName,'w', newline='') as f:
+				fieldnames = [ "X", "Y", "Z", "Speed","Pause"]
+				writer = csv.DictWriter(f,fieldnames=fieldnames, delimiter='\t')
+				writer.writeheader()
+				for row in range(self.tableWidget_Positionen.rowCount()):
+					writer.writerow({"X":self.tableWidget_Positionen.item(row,0).text(), "Y":self.tableWidget_Positionen.item(row,1).text(), "Z": self.tableWidget_Positionen.item(row,2).text(), "Speed": self.tableWidget_Positionen.item(row,3).text(), "Pause": self.tableWidget_Positionen.item(row,4).text()})
+				f.close()
+
+	def PrgLaden(self) :
+		print("PrgLaden")
+		fileName , extension = QtWidgets.QFileDialog.getOpenFileName(self, 'Load Speed Program',  self.lastpath ,'*.csv')
+		if fileName:
+			self.lastpath = os.path.dirname(fileName)
+			print (fileName)
+			with open(fileName,'r', newline='') as f:
+				programreader = csv.DictReader(f, delimiter='\t')
+				self.tableWidget_Positionen.setRowCount(0)
+				rowcount=0
+				self.tableWidget_Positionen.setSortingEnabled(False)
+				for row in programreader :
+					print(row)
+					print(row['X'], row['Y'], row['Z'], row['Speed'], row['Pause'])
+					self.tableWidget_Positionen.insertRow(rowcount)
+					self.tableWidget_Positionen.setItem(rowcount, 0, QtWidgets.QTableWidgetItem(row['X']))
+					self.tableWidget_Positionen.setItem(rowcount, 1, QtWidgets.QTableWidgetItem(row['Y']))
+					self.tableWidget_Positionen.setItem(rowcount, 2, QtWidgets.QTableWidgetItem(row['Z']))
+					self.tableWidget_Positionen.setItem(rowcount, 3, QtWidgets.QTableWidgetItem(row['Speed']))
+					self.tableWidget_Positionen.setItem(rowcount, 4, QtWidgets.QTableWidgetItem(row['Pause']))
+					rowcount = rowcount + 1
+				# self.tableWidget_Positionen.setRowCount(rowcount)
+				self.tableWidget_Positionen.sortByColumn(-1, Qt.AscendingOrder)
+				self.tableWidget_Positionen.setSortingEnabled(True)
+			f.close()
+		# print (self.parameters)
+
+
 
 
 	def AdjustXYStep(self, value):
@@ -292,12 +527,15 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def SetZStepValue(self, value):
 		self.zStep = value
-		print("new zstep value: ", self.zStep )
+		print("new zcstep value: ", self.zStep )
 
 	def ButtonMove(self, axe, direction):
 		if axe == idZ:
 			Step = self.zStep * direction * Zm
 			Speed = self.Vmaxsetf.value() / 1000 * Zm
+		if axe == idC:
+			Step = self.zStep * direction * Cm
+			Speed = self.Vmaxsetf.value() / 1000 * Cm
 		if axe == idX:
 			Step = self.xyStep * direction * Xm
 			Speed = self.Vmaxsetf.value() / 1000 * Xm
@@ -493,17 +731,18 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 	def joysticMode(self):
 		self.StopAll() #stop everything first.
-		self.axisOldSpeed = [0,0,0]
+		self.axisOldSpeed = [0,0,0,0]
 
 		while self.joysticfound and self.pushButtonJoysticMode.isChecked() :
 
 			self.axisSpeed[0] = self.axis_states['x'] #/ 32767
 			self.axisSpeed[1] = -self.axis_states['y'] #/ 32767
 			self.axisSpeed[2] = -self.axis_states['ry'] #/ 32767
+			self.axisSpeed[3] = -self.axis_states['rx'] #/ 32767
 			print(self.axisSpeed, end=" ")
 			#for i in range(0,3):
 
-			for i in range(0,3):
+			for i in range(0,4):
 				Speed = self.axisSpeed[i]
 				aSpeed = abs(Speed)
 				if aSpeed < threshold :
@@ -528,32 +767,9 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 
 				self.axisOldSpeed[i] = Speed
 
-			print(end="                      \r")
+			# print(end="                      \r")
 
-			'''
-				dsmax = (((speed*speed*0.5)/self.aMax)/256) + 1000
-				#print(i, self.axisSpeed[i],self.axisOldSpeed[i])
-				if (direction and (self.currentPos[i] < dsmax)) or ((not direction) and (self.currentPos[i] > (max[i]-dsmax))):
-					#print ("need to stop here", i, dsmax, self.currentPos[i])
-					self.status[i] = stopping
-					#self.sendMsg(i << 3 , (0x59, 0xa, 2, 0))
-					self.sendMsg(i << 3 , (0x88, 0xa))
-				elif (cmp(self.axisSpeed[i],0) != cmp(self.axisOldSpeed[i],0)) and (self.status[i] == moving):
-					#print("direction change",i)
-					self.status[i] = stopping
-					self.sendMsg(i << 3 , (0x88, 0xa))
-				elif (self.axisSpeed[i] != self.axisOldSpeed[i]) and (self.status[i] == moving):
-					#print("changing speed",i,speed,direction)
-					self.sendMsg(i << 3 , (0x59, 0xa, 2, abs(self.axisSpeed[i])))
-				elif (self.status[i] == ready)and (self.axisSpeed[i]!= 0 ) : #and (self.currentPos[i] > dsmax) and (self.currentPos[i] < (max[i]-dsmax)):
-					#print("starting",i)
-					self.status[i] = moving
-					self.sendMsg(i << 3 , (0x58, 0xa, direction))
-					self.sendMsg(i << 3 , (0x59, 0xa, 2, abs(self.axisSpeed[i])))
-			'''
-
-
-			time.sleep(0.02) # wait 100ms
+			time.sleep(0.02) # wait 20ms
 
 		self.StopAll() #stop everything.
 		print("Jostic mode off 2")
@@ -647,7 +863,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 			try:
 				idr, msgr, dlc, flg, timestamp = self.handle1.read(int(1))
 				canmsg = canMsg(idr, msgr, dlc, flg, timestamp)
-				self.emit( QtCore.SIGNAL("analyse(PyQt_PyObject)"), canmsg )
+				# self.emit( QtCore.SIGNAL("analyse(PyQt_PyObject)"), canmsg )
+				self.nachricht.emit(canmsg)
 			except (canlib.canNoMsg) as ex:
 				None
 			except (canlib.canError) as ex:
@@ -816,12 +1033,12 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.oldx2	= x2
 
 	def aboutBox(self):
-		QtGui.QMessageBox.about(self,"Über dieses Programm", '''
+		QtWidgets.QMessageBox.about(self,"Über dieses Programm", '''
 		Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern und Smoothieware.
 		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um einfachere Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
 		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
-		(C) 2018-2020 Martin Gyurkó
+		(C) 2018-2021 Martin Gyurkó
 		''')
 
 	def sendMsg(self, msgid, msg):
@@ -937,7 +1154,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 						x = re.search('(X)([-0-9.]+)', d, re.I)
 						y = re.search('(Y)([-0-9.]+)', d, re.I)
 						z = re.search('(Z)([-0-9.]+)', d, re.I)
-						c = re.search('(E)([-0-9.]+)', d, re.I)
+						c = re.search('(C)([-0-9.]+)', d, re.I)
 						f = re.search('(F)([-0-9.]+)', d, re.I)
 						# print(Color.Green+repr(g)+Color.end)
 						if m:
@@ -948,7 +1165,7 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 								moving = 999
 
 								ts = time.time()
-								while moving and ((time.time()-ts) < 10): # we dont want to wait endlessly
+								while moving and ((time.time()-ts) < 30): # we dont want to wait endlessly
 									for axe in axes :
 										self.sendElmoMsgShort(axe,"MS", 0 ) #ask for the motion status of each axis
 									time.sleep(0.1) # wait for processing of request
@@ -972,13 +1189,17 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 							g = float(g[2])
 							if g == 28:
 								print(Color.Green+'Init and Homing all axes'+Color.end)
-								self.Init(idZ)
-								self.Init(idX)
-								self.Init(idX2)
-								self.Init(idY)
-								self.Init(idC)
-								self.Init(idZ)
-								self.pushButtonHomeAll.click()
+								# self.Init(idZ)
+								# self.Init(idX)
+								# self.Init(idX2)
+								# self.Init(idY)
+								# self.Init(idC)
+								# self.Init(idZ)
+								# self.pushButtonHomeZ.click()
+								# self.pushButtonHomeX.click()
+								# self.pushButtonHomeY.click()
+								# self.pushButtonHomeC.click()
+								# self.pushButtonHomeX2.click()
 							if (g == 0) or (g == 1) :
 								if x:
 									xVal = float(x[2])
@@ -1015,9 +1236,16 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 									self.Vmaxset.setValue(int(float(f[2])*10.0))
 								# do 5 dimensional movement
 								if x or y or z or c :
-									self.goTo()
+									self.betterGoTo()
 							self.sendTcpQ.put("ok\r\n")
 							print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
+
+	def captureOldPos(self):
+		self.oldx	= self.currentPos[0]
+		self.oldy	= self.currentPos[1]
+		self.oldz	= self.currentPos[2]
+		self.oldc	= self.currentPos[3]
+		self.oldx2	= self.currentPos[4]
 
 	def analyseSensorData(self):
 		while not self.recSensQ.empty() :
@@ -1045,7 +1273,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 				print(Color.Cyan+repr(data)+Color.end)
 				self.sendTcpQ.put(data.decode('utf-8')) #copy data to OpenPNP
 				self.recSensQ.put(data.decode('utf-8')) #lets also use the sensed data here
-				self.emit( QtCore.SIGNAL("analyseSensor"))
+				# self.emit( QtCore.SIGNAL("analyseSensor"))
+				self.analyseSensor.emit()
 			# time.sleep(0.05)
 
 
@@ -1068,21 +1297,8 @@ class PyGuiApp(QtGui.QMainWindow, Gui.Ui_MainWindow):
 		self.sendSensQ.put(data.encode("utf-8"))
 
 
-# This is the threding class. See beginning of PyGuiApp how to set up and use it or how to connect it to buttons and start it as a reaction
-class GenericThread(QtCore.QThread):
-	def __init__(self, function, *args, **kwargs):
-		QtCore.QThread.__init__(self)
-		self.function = function
-		self.args = args
-		self.kwargs = kwargs
-	def __del__(self):
-		self.wait()
-	def run(self):
-		self.function(*self.args,**self.kwargs)
-		return
-
 def main():
-	app = QtGui.QApplication(sys.argv)  # A new instance of QApplication
+	app = QtWidgets.QApplication(sys.argv)  # A new instance of QApplication
 	form = PyGuiApp()  # We set the form to be our PyGuiApp (design)
 	form.show()  # Show the form
 	sys.exit(app.exec_())  # and execute the app and exit after it is finished
