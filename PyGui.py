@@ -211,7 +211,7 @@ class PyGuiApp(QMainWindow):
 		self.homeX2Thread	= GenericThread(lambda:self.Home(idX2,	1,	-4000, -1792,	512,		0,8192, self.pushButtonHomeX2))
 		self.homeYThread	= GenericThread(lambda:self.Home(idY,	1,		0,	4096,	-4096,		0,8192, self.pushButtonHomeY))
 		self.homeZThread	= GenericThread(lambda:self.Home(idZ,	0, 100000,	4096,	-4096,	100000,8192, self.pushButtonHomeZ))
-		self.homeCThread	= GenericThread(lambda:self.Home(idC,	0,		744,	0,		-4096,		0,8192, self.pushButtonHomeC))
+		self.homeCThread	= GenericThread(lambda:self.Home(idC,	0,	744,	0,		-4096,		0,8192, self.pushButtonHomeC))
 		self.homeAllThread	= GenericThread(self.homeAll)
 		self.pushButtonHomeX.clicked.connect(self.homeXThread.start)
 		self.pushButtonHomeX2.clicked.connect(self.homeX2Thread.start)
@@ -1189,6 +1189,7 @@ class PyGuiApp(QMainWindow):
 							g = float(g[2])
 							if g == 28:
 								print(Color.Green+'Init and Homing all axes'+Color.end)
+								self.homeAllThread.start()
 								# self.Init(idZ)
 								# self.Init(idX)
 								# self.Init(idX2)

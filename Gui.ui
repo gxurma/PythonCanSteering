@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>762</width>
-    <height>560</height>
+    <width>875</width>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1017,8 +1017,8 @@
         <string>Actuators, Sensors</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="5">
-         <widget class="QPushButton" name="pushButtonToolTipVac">
+        <item row="6" column="0">
+         <widget class="QPushButton" name="pushButtonTouchDownRead">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1026,37 +1026,18 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Tool
-Tip
-Vac</string>
+           <string>Touch
+Down
+Read</string>
           </property>
           <property name="checkable">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="checked">
            <bool>false</bool>
           </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QPushButton" name="pushButtonLight">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Light</string>
-          </property>
-          <property name="checkable">
+          <property name="autoRepeat">
            <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
           </property>
           <property name="default">
            <bool>false</bool>
@@ -1081,6 +1062,54 @@ Changer
           </property>
           <property name="checked">
            <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1" colspan="7">
+         <widget class="QProgressBar" name="progressBarTouchDownRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+          <property name="format">
+           <string>%p%</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QCheckBox" name="checkBoxJetterTouch">
+          <property name="text">
+           <string>Jetter Touch</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="pushButtonLight">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Light</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
           </property>
           <property name="default">
            <bool>false</bool>
@@ -1131,7 +1160,57 @@ Changer
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="4" column="1" colspan="7">
+         <widget class="QProgressBar" name="progressBarToolTipVacRead">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>1000</number>
+          </property>
+          <property name="value">
+           <number>950</number>
+          </property>
+          <property name="format">
+           <string>%v mBar</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QPushButton" name="pushButtonToolTipVac">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Tool
+Tip
+Vac</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="checkBoxJetterDown">
+          <property name="text">
+           <string>Jetter down</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
          <widget class="QPushButton" name="pushButtonToolTipVacRead">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1181,27 +1260,15 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="1" colspan="7">
-         <widget class="QProgressBar" name="progressBarTouchDownRead">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximum">
-           <number>100</number>
-          </property>
-          <property name="value">
-           <number>50</number>
-          </property>
-          <property name="format">
-           <string>%p%</string>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="checkBoxJetterUp">
+          <property name="text">
+           <string>Jetter Up</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QPushButton" name="pushButtonTouchDownRead">
+        <item row="1" column="0" rowspan="3">
+         <widget class="QPushButton" name="pushButtonTouchDownRead_2">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1209,9 +1276,8 @@ Read</string>
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Touch
-Down
-Read</string>
+           <string>Read
+Switches</string>
           </property>
           <property name="checkable">
            <bool>false</bool>
@@ -1227,22 +1293,24 @@ Read</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1" colspan="7">
-         <widget class="QProgressBar" name="progressBarToolTipVacRead">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item row="2" column="2">
+         <widget class="QCheckBox" name="checkBoxJetterTouch_2">
+          <property name="text">
+           <string>Tool Touch</string>
           </property>
-          <property name="maximum">
-           <number>1000</number>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QCheckBox" name="checkBoxZClampBack">
+          <property name="text">
+           <string>Zclamp Back</string>
           </property>
-          <property name="value">
-           <number>950</number>
-          </property>
-          <property name="format">
-           <string>%v mBar</string>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QCheckBox" name="checkBoxZClampFront">
+          <property name="text">
+           <string>Zclamp Front</string>
           </property>
          </widget>
         </item>
@@ -1757,8 +1825,8 @@ Read</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>762</width>
-     <height>22</height>
+     <width>875</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
