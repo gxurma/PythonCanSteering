@@ -344,7 +344,7 @@ second_usb_serial_enable                     false            # This enables a s
 
 # Kill button maybe assigned to a different pin, set to the onboard pin by default
 # See http://smoothieware.org/killbutton
-kill_button_enable                           true             # Set to true to enable a kill button
+kill_button_enable                           false             # Set to true to enable a kill button
 kill_button_pin                              2.12             # Kill button pin. default is same as pause button 2.12 (2.11 is another good choice)
 
 #msd_disable                                 false            # Disable the MSD (USB SDCARD), see http://smoothieware.org/troubleshooting#disable-msd
@@ -354,29 +354,45 @@ kill_button_pin                              2.12             # Kill button pin.
 # See http://smoothieware.org/currentcontrol
 currentcontrol_module_enable                 true             # Control stepper motor current via the configuration file
 
-switch.n1_vac.enable                         true
-switch.n1_vac.input_on_command               M800
-switch.n1_vac.input_off_command              M801
-switch.n1_vac.output_pin                     2.7
-switch.n1_vac.output_type                    digital
+switch.tip_vac.enable                         true
+switch.tip_vac.input_on_command               M800
+switch.tip_vac.input_off_command              M801
+switch.tip_vac.output_pin                     2.7
+switch.tip_vac.output_type                    digital
 
-switch.n1_exh.enable                         true
-switch.n1_exh.input_on_command               M802
-switch.n1_exh.input_off_command              M803
-switch.n1_exh.output_pin                     2.5
-switch.n1_exh.output_type                    digital
+switch.light.enable                         true
+switch.light.input_on_command               M802
+switch.light.input_off_command              M803
+switch.light.output_pin                     2.5
+switch.light.output_type                    digital
 
-switch.n2_vac.enable                         true
-switch.n2_vac.input_on_command               M804
-switch.n2_vac.input_off_command              M805
-switch.n2_vac.output_pin                     2.4
-switch.n2_vac.output_type                    digital
+switch.jetter.enable                         true
+switch.jetter.input_on_command               M804
+switch.jetter.input_off_command              M805
+switch.jetter.output_pin                     2.4
+switch.jetter.output_type                    digital
 
-switch.n2_exh.enable                         true
-switch.n2_exh.input_on_command               M806
-switch.n2_exh.input_off_command              M807
-switch.n2_exh.output_pin                     2.6
-switch.n2_exh.output_type                    digital
+switch.jetter_z.enable                         true
+switch.jetter_z.input_on_command               M806
+switch.jetter_z.input_off_command              M807
+switch.jetter_z.output_pin                     2.6
+switch.jetter_z.output_type                    digital
 
+switch.z_clamp.enable                            true
+switch.z_clamp.input_on_command                  M808
+switch.z_clamp.input_off_command                 M809
+switch.z_clamp.output_pin                        1.22
+switch.z_clamp.output_type                       digital
 
+switch.toolchanger.enable                            true
+switch.toolchanger.input_on_command                  M810
+switch.toolchanger.input_off_command                 M811
+switch.toolchanger.output_pin                        1.23
+switch.toolchanger.output_type                       digital
+
+switch.chuck_vac.enable                            true
+switch.chuck_vac.input_on_command                  M812
+switch.chuck_vac.input_off_command                 M813
+switch.chuck_vac.output_pin                        2.12
+switch.chuck_vac.output_type                       digital
 

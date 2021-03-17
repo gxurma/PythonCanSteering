@@ -229,12 +229,12 @@ class PyGuiApp(QMainWindow):
 		# self.pushButtonZClampOff.clicked.connect(lambda: self.SetActuator(self.pushButtonZClampOff.isChecked(), "M806", "M807" ))
 
 		self.pushButtonToolTipVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolTipVac.isChecked(), "M800", "M801" ))
-		# self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M803", "M802" ))
 		self.pushButtonLight.clicked.connect(lambda: self.SetActuator(self.pushButtonLight.isChecked(), "M802", "M803" ))
-		# self.pushButtonUplight.clicked.connect(lambda: self.SetActuator(self.pushButtonUplight.isChecked(), "M806", "M807" ))
-		self.pushButtonJetterDown.clicked.connect(lambda: self.SetActuator(self.pushButtonJetterDown.isChecked(), "M806", "M807" ))
 		self.pushButtonJet.clicked.connect(lambda: self.SetActuator(self.pushButtonJet.isChecked(), "M804", "M805" ))
-		# self.pushButtonZClampOff.clicked.connect(lambda: self.SetActuator(self.pushButtonZClampOff.isChecked(), "M806", "M807" ))
+		self.pushButtonJetterDown.clicked.connect(lambda: self.SetActuator(self.pushButtonJetterDown.isChecked(), "M806", "M807" ))
+		self.pushButtonZClampOff.clicked.connect(lambda: self.SetActuator(self.pushButtonZClampOff.isChecked(), "M808", "M809" ))
+		self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M810", "M811" ))
+		self.pushButtonChuck.clicked.connect(lambda: self.SetActuator(self.pushButtonChuck.isChecked(), "M812", "M813" ))
 
 		self.pushButtonReadSwitches.clicked.connect(self.readSwitches)
 
@@ -1041,7 +1041,7 @@ class PyGuiApp(QMainWindow):
 	def aboutBox(self):
 		QtWidgets.QMessageBox.about(self,"Über dieses Programm", '''
 		Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern und Smoothieware.
-		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um einfachere Pick and Place Aufgaben zu lösen.
+		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
 		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
 		(C) 2018-2021 Martin Gyurkó
@@ -1110,6 +1110,7 @@ class PyGuiApp(QMainWindow):
 						data = conn.recv(1024)
 						if not data:
 							print("got hangup message")
+							self.NotStop()
 							break
 						print(data)
 						# if self.pushButtonSocketlog.isChecked():
@@ -1195,7 +1196,8 @@ class PyGuiApp(QMainWindow):
 							g = float(g[2])
 							if g == 28:
 								print(Color.Green+'Init and Homing all axes'+Color.end)
-								self.homeAllThread.start()
+								print(Color.Red+'No. just kidding. Would be too dangerous. You have to home yourself!'+Color.end)
+								#self.homeAllThread.start()
 								# self.Init(idZ)
 								# self.Init(idX)
 								# self.Init(idX2)
