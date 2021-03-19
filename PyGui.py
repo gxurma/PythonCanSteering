@@ -778,10 +778,21 @@ class PyGuiApp(QMainWindow):
 			time.sleep(0.02) # wait 20ms
 
 		self.StopAll() #stop everything.
+		self.readPos()
+		time.sleep(0.3)
+		self.updateSetPos()
+		
 		print("Jostic mode off 2")
 
 
-
+	def updateSetPos(self):
+		self.X1set.setValue(self.currentPos[0])
+		self.Yset.setValue(self.currentPos[1])
+		self.Zset.setValue(self.currentPos[2])
+		self.Cset.setValue(self.currentPos[3])
+		self.X2set.setValue(self.currentPos[4])
+		
+		
 	def readPos(self) :
 		while self.pushButtonReadPos.isChecked()	:
 			self.sendElmoMsgShort(idX, "PX",0)# get pos
@@ -856,6 +867,7 @@ class PyGuiApp(QMainWindow):
 				self.StatusReg[3] = StatusReg
 			if msg.id == idRx+idX2 :
 				self.StatusReg[4] = StatusReg
+				
 		if (msg.msg[0] == 0x4D) and (msg.msg[1] == 0x53) : # MS = Motion Status
 			motionStatus = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
 			print("Motion Status: ", motionStatus)
@@ -932,7 +944,7 @@ class PyGuiApp(QMainWindow):
 				self.sendElmoMsgShort(axe, "VE",0 ) #VE = ?
 				# self.sendMsg(idTx+axe, (0x56,0x45,0,0 )) #VE = ?
 				print ("velocity error :", abs(self.VelErr[self.whichAxe(axe)]), end="   ")
-				if abs(self.VelErr[self.whichAxe(axe)]) >= 1000 :
+				if abs(self.VelErr[self.whichAxe(axe)]) >= 1500 :
 					break
 
 			self.sendElmoMsgShort(axe, "ST",0 ) #STop
@@ -1042,8 +1054,9 @@ class PyGuiApp(QMainWindow):
 		QtWidgets.QMessageBox.about(self,"Über dieses Programm", '''
 		Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern und Smoothieware.
 		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um Pick and Place Aufgaben zu lösen.
-		Dieses Programm basiert massiv auf manche Beispiele von Kvaser, Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
+		Dieses Programm basiert massiv auf manche Beispiele von Kvaser Canlib, Elmo Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
 		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
+		Canlib ist geistiges Eigentum von Kvaser. 
 		(C) 2018-2021 Martin Gyurkó
 		''')
 
@@ -1188,6 +1201,14 @@ class PyGuiApp(QMainWindow):
 							elif m == 401 :   # get vacuum pressure
 								print(Color.Green+'Vacuum?'+Color.end)
 								self.requestSensValue()
+							elif m == 114 :
+								print(Color.Green+'Position?'+Color.end)
+								self.readPos()
+								time.sleep(0.3)
+								message = "ok X:%02.3f Y:%02.3f Z:%02.3f C:%02.3f\n" %(self.currentPos[0]/Xm+self.currentPos[4]/X2m, self.currentPos[1]/Ym, self.currentPos[2]/Zm-50.0, self.currentPos[3]/Cm)
+								print(Color.Magenta+message+Color.end)
+								self.sendTcpQ.put(message)
+								
 							else :
 								print(Color.Green+'m'+Color.end , m)
 								self.sendSerQ.put(d.encode("ascii")+b'\n')
@@ -1196,7 +1217,7 @@ class PyGuiApp(QMainWindow):
 							g = float(g[2])
 							if g == 28:
 								print(Color.Green+'Init and Homing all axes'+Color.end)
-								print(Color.Red+'No. just kidding. Would be too dangerous. You have to home yourself!'+Color.end)
+								print(Color.Red+'No. just kidding. Would be too dangerous. You have to home Z yourself!'+Color.end)
 								#self.homeAllThread.start()
 								# self.Init(idZ)
 								# self.Init(idX)
