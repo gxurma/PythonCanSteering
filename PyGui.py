@@ -1302,6 +1302,18 @@ class PyGuiApp(QMainWindow):
 			print(" Touch:",m)
 			self.checkBoxTipTouch.setChecked(m)
 
+		m = re.search("(P1.27:)([-0-9.]+)", d, re.I)
+		if m :
+			m = not int(m[2])
+			print(" Zclamp back:",m)
+			self.checkBoxZClampBack.setChecked(m)
+
+		m = re.search("(P1.25:)([-0-9.]+)", d, re.I)
+		if m :
+			m = not int(m[2])
+			print(" Zclamp front:",m)
+			self.checkBoxZClampFront.setChecked(m)
+
 	def serialSensorReader(self):
 		while True:
 			data = self.sbus2.readline()  # Should be ready
