@@ -94,7 +94,7 @@ minimum[4] = -4600
 maximumf[4] = maximum[4]/X2m
 minimumf[4] = minimum[4]/X2m
 
-maxAcceleration = [200000, 200000, 200000, 50000, 50000]
+maxAcceleration = [100000, 100000, 100000, 50000, 50000]
 maxDeceleration = maxAcceleration
 smoothingFactor = 20
 threshold = 5000
@@ -367,6 +367,8 @@ class PyGuiApp(QMainWindow):
 
 
 	def betterGoTo(self):
+		self.readPosOnce()
+		time.sleep(0.2)
 		self.captureOldPos()
 		self.goTo()
 
@@ -778,10 +780,10 @@ class PyGuiApp(QMainWindow):
 			time.sleep(0.02) # wait 20ms
 
 		self.StopAll() #stop everything.
-		self.readPos()
+		self.readPosOnce()
 		time.sleep(0.3)
 		self.updateSetPos()
-		
+
 		print("Jostic mode off 2")
 
 
@@ -791,16 +793,18 @@ class PyGuiApp(QMainWindow):
 		self.Zset.setValue(self.currentPos[2])
 		self.Cset.setValue(self.currentPos[3])
 		self.X2set.setValue(self.currentPos[4])
-		
-		
+
+	def readPosOnce(self) :
+		self.sendElmoMsgShort(idX, "PX",0)# get pos
+		self.sendElmoMsgShort(idX2,"PX",0)# get pos
+		self.sendElmoMsgShort(idY, "PX",0)# get pos
+		self.sendElmoMsgShort(idZ, "PX",0)# get pos
+		self.sendElmoMsgShort(idC, "PX",0)# get pos
+		time.sleep(0.25)
+
 	def readPos(self) :
 		while self.pushButtonReadPos.isChecked()	:
-			self.sendElmoMsgShort(idX, "PX",0)# get pos
-			self.sendElmoMsgShort(idX2,"PX",0)# get pos
-			self.sendElmoMsgShort(idY, "PX",0)# get pos
-			self.sendElmoMsgShort(idZ, "PX",0)# get pos
-			self.sendElmoMsgShort(idC, "PX",0)# get pos
-			time.sleep(0.25)
+			self.readPosOnce()
 
 	def analyseCANMsg(self,msg):
 #		if self.pushButtonCanlog.isChecked() :
@@ -867,7 +871,7 @@ class PyGuiApp(QMainWindow):
 				self.StatusReg[3] = StatusReg
 			if msg.id == idRx+idX2 :
 				self.StatusReg[4] = StatusReg
-				
+
 		if (msg.msg[0] == 0x4D) and (msg.msg[1] == 0x53) : # MS = Motion Status
 			motionStatus = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
 			print("Motion Status: ", motionStatus)
@@ -944,7 +948,7 @@ class PyGuiApp(QMainWindow):
 				self.sendElmoMsgShort(axe, "VE",0 ) #VE = ?
 				# self.sendMsg(idTx+axe, (0x56,0x45,0,0 )) #VE = ?
 				print ("velocity error :", abs(self.VelErr[self.whichAxe(axe)]), end="   ")
-				if abs(self.VelErr[self.whichAxe(axe)]) >= 1500 :
+				if abs(self.VelErr[self.whichAxe(axe)]) >= 3000 :
 					break
 
 			self.sendElmoMsgShort(axe, "ST",0 ) #STop
@@ -1056,7 +1060,7 @@ class PyGuiApp(QMainWindow):
 		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser Canlib, Elmo Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
 		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
-		Canlib ist geistiges Eigentum von Kvaser. 
+		Canlib ist geistiges Eigentum von Kvaser.
 		(C) 2018-2021 Martin Gyurkó
 		''')
 
@@ -1120,7 +1124,10 @@ class PyGuiApp(QMainWindow):
 				with conn:
 					print('Connected by', addr)
 					while True:
-						data = conn.recv(1024)
+						try:
+							data = conn.recv(1024)
+						except:
+							print("He? closed connection?")
 						if not data:
 							print("got hangup message")
 							self.NotStop()
@@ -1142,10 +1149,11 @@ class PyGuiApp(QMainWindow):
 		print("started sending")
 		while True :
 			time.sleep(0.1)
-			if self.pushButtonReadPos.isChecked()	:
-				message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/Xm+self.currentPos[4]/X2m, self.currentPos[1]/Ym, self.currentPos[2]/Zm-50.0, self.currentPos[3]/Cm)
-				print(Color.Magenta+message+Color.end)
-				self.sendTcpQ.put(message)
+			# if self.pushButtonReadPos.isChecked()	:
+			# 	message = "<Idle,MPos:%02.3f,%02.3f,%02.3f,%02.3f>\n" %(self.currentPos[0]/Xm+self.currentPos[4]/X2m, self.currentPos[1]/Ym, self.currentPos[2]/Zm-50.0, self.currentPos[3]/Cm)
+			# 	# message = "X:%02.3f Y:%02.3f Z:%02.3f C:%02.3f\n" %(self.currentPos[0]/Xm+self.currentPos[4]/X2m, self.currentPos[1]/Ym, self.currentPos[2]/Zm-50.0, self.currentPos[3]/Cm)
+			# 	print(Color.Magenta+message+Color.end)
+			# 	self.sendTcpQ.put(message)
 			while not self.sendTcpQ.empty() :
 				message = self.sendTcpQ.get()
 				print("to openpnp:",message)
@@ -1203,12 +1211,12 @@ class PyGuiApp(QMainWindow):
 								self.requestSensValue()
 							elif m == 114 :
 								print(Color.Green+'Position?'+Color.end)
-								self.readPos()
+								self.readPosOnce()
 								time.sleep(0.3)
 								message = "ok X:%02.3f Y:%02.3f Z:%02.3f C:%02.3f\n" %(self.currentPos[0]/Xm+self.currentPos[4]/X2m, self.currentPos[1]/Ym, self.currentPos[2]/Zm-50.0, self.currentPos[3]/Cm)
 								print(Color.Magenta+message+Color.end)
 								self.sendTcpQ.put(message)
-								
+
 							else :
 								print(Color.Green+'m'+Color.end , m)
 								self.sendSerQ.put(d.encode("ascii")+b'\n')
