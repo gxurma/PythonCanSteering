@@ -1,0 +1,55 @@
+<openpnp-board version="1.1" name="wafflepackJet.board.xml">
+   <dimensions units="Millimeters" x="50.1" y="54.15" z="0.0" rotation="0.0"/>
+   <fiducials/>
+   <placements>
+      <placement version="1.4" id="Fid1" side="Top" part-id="FiducialPunktPart" type="Fiducial" enabled="true">
+         <location units="Millimeters" x="-5.902158054711251" y="-0.5112455516014265" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="Fid2" side="Top" part-id="FiducialPunktPart" type="Fiducial" enabled="true">
+         <location units="Millimeters" x="42.650999741149306" y="-38.320215989938426" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r11" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r12" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="9.0" y="0.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r13" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="18.0" y="0.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r14" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="27.0" y="0.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r15" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="36.0" y="0.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r16" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="0.0" y="-9.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r17" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="9.0" y="-9.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r18" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="18.0" y="-9.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r19" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="27.0" y="-9.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="r20" side="Top" part-id="virtJetpart" type="Placement" enabled="true">
+         <location units="Millimeters" x="36.0" y="-9.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+   </placements>
+   <solder-paste-pads/>
+</openpnp-board>

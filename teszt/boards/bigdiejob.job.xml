@@ -1,0 +1,14 @@
+<openpnp-job>
+   <panels/>
+   <board-locations>
+      <board-location side="Top" board-file="bigdie.board.xml" panel-id="Panel1" check-fiducials="false" enabled="true">
+         <location units="Millimeters" x="-16.143139015251364" y="34.194949229933" z="-20.199" rotation="0.0"/>
+         <placed class="java.util.HashMap">
+            <entry>
+               <string>r1</string>
+               <boolean>false</boolean>
+            </entry>
+         </placed>
+      </board-location>
+   </board-locations>
+</openpnp-job>

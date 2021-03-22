@@ -1,0 +1,11 @@
+<openpnp-board version="1.1" name="bigdie.board.xml">
+   <dimensions units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
+   <fiducials/>
+   <placements>
+      <placement version="1.4" id="r1" side="Top" part-id="bigdiepart" type="Placement" enabled="true">
+         <location units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+   </placements>
+   <solder-paste-pads/>
+</openpnp-board>
