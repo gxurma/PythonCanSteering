@@ -6,3 +6,37 @@
 ZClamp automatisch front fahren bei 100000 Ziel.
 Sobald z beginnt Zclamp back.
 Wenn Zylinder nicht ausfahren kann, dann fehler, weil nicht richtig in home
+
+"Touch down read" macht nix. RCA!
+
+C macht Schwingungs-Geräusche, Teaching?
+
+Eingänge
+
+zclamp in
+zclamp out
+jetter up
+jetter down
+jetter touch
+tool touch
+
+vacuum druck i2c oder spi
+
+
+
+Ausgänge
+
+Licht
+Jetter jetting
+Jetter up
+vakuum chuck
+vakuum toolchange
+vakuum pick
+zclamp 
+
+
+todo:
+dispenser valve on
+Dispenser vac on
+
+touch in? 
