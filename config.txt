@@ -390,9 +390,20 @@ switch.toolchanger.input_off_command                 M811
 switch.toolchanger.output_pin                        1.23
 switch.toolchanger.output_type                       digital
 
-switch.chuck_vac.enable                            true
-switch.chuck_vac.input_on_command                  M812
-switch.chuck_vac.input_off_command                 M813
-switch.chuck_vac.output_pin                        2.12
-switch.chuck_vac.output_type                       digital
+switch.dispenser1.enable                            true
+switch.dispenser1.input_on_command                  M812
+switch.dispenser1.input_off_command                 M813
+switch.dispenser1.output_pin                        2.12
+switch.dispenser1.output_type                       digital
 
+switch.dispenser2.enable                            true
+switch.dispenser2.input_on_command                  M814
+switch.dispenser2.input_off_command                 M815
+switch.dispenser2.output_pin                        2.11
+switch.dispenser2.output_type                       digital
+
+switch.dispenservac.enable                            true
+switch.dispenservac.input_on_command                  M816
+switch.dispenservac.input_off_command                 M817
+switch.dispenservac.output_pin                        4.28
+switch.dispenservac.output_type                       digital

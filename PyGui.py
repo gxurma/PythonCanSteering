@@ -234,7 +234,9 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonJetterDown.clicked.connect(lambda: self.SetActuator(self.pushButtonJetterDown.isChecked(), "M806", "M807" ))
 		self.pushButtonZClampOff.clicked.connect(lambda: self.SetActuator(self.pushButtonZClampOff.isChecked(), "M808", "M809" ))
 		self.pushButtonToolChangerVac.clicked.connect(lambda: self.SetActuator(self.pushButtonToolChangerVac.isChecked(), "M810", "M811" ))
-		self.pushButtonChuck.clicked.connect(lambda: self.SetActuator(self.pushButtonChuck.isChecked(), "M812", "M813" ))
+		self.pushButtonDispens1.clicked.connect(lambda: self.SetActuator(self.pushButtonDispens1.isChecked(), "M812", "M813" ))
+		self.pushButtonDispens2.clicked.connect(lambda: self.SetActuator(self.pushButtonDispens2.isChecked(), "M814", "M815" ))
+		self.pushButtonDispensVac.clicked.connect(lambda: self.SetActuator(self.pushButtonDispensVac.isChecked(), "M816", "M817" ))
 
 		self.pushButtonReadSwitches.clicked.connect(self.readSwitches)
 
