@@ -1,0 +1,5 @@
+micromechanics contact: https://www.micro-mechanics.com/contact-us/
+
+https://www.mouser.at/ProductDetail/358-SC0915
+
+https://github.com/KevinOConnor/can2040/tree/master
