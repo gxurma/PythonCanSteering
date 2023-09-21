@@ -378,60 +378,21 @@ switch.jetter_z.input_off_command              M807
 switch.jetter_z.output_pin                     2.6
 switch.jetter_z.output_type                    digital
 
-###################################################################################
-# For some reason Makerbase 1.3 does not or can not use all of the pins.
-# 
-# Attention, when using pins 1.22, 1.23, 2.12, it was not booting. seems, it is a boot select pin or similar.
-#
-# not working pins: 0.27, 0.8, 0.7, 0.9
-# working pins with 4,7V output: 0.28, 0.15, 0.16, 0.18
-# Farbe:			Orange, Grün, Blau, Braun
-# working pins with 3,3V putput: 3.25, 3.26, 1.30, 1.31
-
 switch.z_clamp.enable                            true
 switch.z_clamp.input_on_command                  M808
 switch.z_clamp.input_off_command                 M809
-switch.z_clamp.output_pin                        0.28
+switch.z_clamp.output_pin                        1.22
 switch.z_clamp.output_type                       digital
 
 switch.toolchanger.enable                            true
-switch.toolchanger.input_on_command                  M810 
-switch.toolchanger.input_off_command                 M811 
-switch.toolchanger.output_pin                        0.15
+switch.toolchanger.input_on_command                  M810
+switch.toolchanger.input_off_command                 M811
+switch.toolchanger.output_pin                        1.23
 switch.toolchanger.output_type                       digital
 
-switch.dispenser1.enable                            true
-switch.dispenser1.input_on_command                  M812 
-switch.dispenser1.input_off_command                 M813
-switch.dispenser1.output_pin                        0.16
-switch.dispenser1.output_type                       digital
+switch.chuck_vac.enable                            true
+switch.chuck_vac.input_on_command                  M812
+switch.chuck_vac.input_off_command                 M813
+switch.chuck_vac.output_pin                        2.12
+switch.chuck_vac.output_type                       digital
 
-switch.dispenser2.enable                            true
-switch.dispenser2.input_on_command                  M814
-switch.dispenser2.input_off_command                 M815
-switch.dispenser2.output_pin                        0.18
-switch.dispenser2.output_type                       digital
-
-switch.dispenservac1.enable                            true
-switch.dispenservac1.input_on_command                  M816
-switch.dispenservac1.input_off_command                 M817
-switch.dispenservac1.output_pin                        3.25
-switch.dispenservac1.output_type                       digital
-
-switch.dispenservac2.enable                            true
-switch.dispenservac2.input_on_command                  M818
-switch.dispenservac2.input_off_command                 M819
-switch.dispenservac2.output_pin                        3.26
-switch.dispenservac2.output_type                       digital
-
-switch.workingvac.enable                            true
-switch.workingvac.input_on_command                  M820
-switch.workingvac.input_off_command                 M821
-switch.workingvac.output_pin                        1.31
-switch.workingvac.output_type                       digital
-
-switch.P130.enable                            true
-switch.P130.input_on_command                  M822 
-switch.P130.input_off_command                 M823
-switch.P130.output_pin                        1.30
-switch.P130.output_type                       digital
