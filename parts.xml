@@ -1,12 +1,49 @@
 <openpnp-parts>
    <part id="FIDUCIAL-1X2-FIDUCIAL1X2" height-units="Millimeters" height="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
-   <part id="R0805-1K" height-units="Millimeters" height="0.5" package-id="R0805" speed="1.0" pick-retry-count="0"/>
-   <part id="R0201-1K" height-units="Millimeters" height="0.25" package-id="R0201" speed="1.0" pick-retry-count="0"/>
-   <part id="R0402-1K" height-units="Millimeters" height="0.5" package-id="R0402" speed="1.0" pick-retry-count="0"/>
-   <part id="R0603-1K" height-units="Millimeters" height="0.5" package-id="R0603" speed="1.0" pick-retry-count="0"/>
-   <part id="FIDUCIAL-HOME" height-units="Millimeters" height="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
    <part id="Fiducial-Plus" height-units="Millimeters" height="0.0" package-id="Fiducialplus" speed="1.0" pick-retry-count="0"/>
-   <part id="virtJetpart" height-units="Millimeters" height="2.0" package-id="virtJet" speed="1.0" pick-retry-count="0"/>
+   <part id="virtJetpart" height-units="Millimeters" height="0.5" package-id="virtJet" speed="1.0" pick-retry-count="0"/>
    <part id="FiducialPunktPart" height-units="Millimeters" height="0.0" package-id="FiducialPunkt" speed="1.0" pick-retry-count="0"/>
-   <part id="bigdiepart" height-units="Millimeters" height="0.0" package-id="bigdie" speed="1.0" pick-retry-count="0"/>
+   <part id="bigdiepart" height-units="Millimeters" height="0.8" package-id="bigdie" speed="1.0" pick-retry-count="0"/>
+   <part id="220kOhmR0805" height-units="Millimeters" height="0.0" package-id="R0805" speed="1.0" pick-retry-count="0"/>
+   <part id="C_0201_0603Metric" height-units="Millimeters" height="0.0" package-id="virtJet" speed="1.0" pick-retry-count="0"/>
+   <part id="C_0201_0603Metric-Conn_01x01_Male" height-units="Millimeters" height="2.0" package-id="C_0201_0603Metric" speed="1.0" pick-retry-count="0"/>
+   <part id="FidPadPackagePart" height-units="Millimeters" height="0.0" package-id="FidPadPackage" speed="1.0" pick-retry-count="0"/>
+   <part id="STM32K6" height-units="Millimeters" height="1.5" package-id="TQFP32-0" speed="1.0" pick-retry-count="0"/>
+   <part id="FidLPart" height-units="Millimeters" height="0.0" package-id="FidL" speed="1.0" pick-retry-count="0"/>
+   <part id="FidLPart-0" height-units="Millimeters" height="0.0" package-id="FidL-0" speed="1.0" pick-retry-count="0"/>
+   <part id="Test component" height-units="Millimeters" height="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
+   <part id="5x5component" height-units="Millimeters" height="0.3" package-id="5x5component" speed="1.0" pick-retry-count="0"/>
+   <part bottom-vision-id="BVS178569f9c4740321" id="virtJetpart-virtJetpart" height-units="Millimeters" height="0.001" package-id="virtJetpart" speed="1.0" pick-retry-count="0"/>
+   <part id="Kupfer Punkt" height-units="Millimeters" height="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
+   <part bottom-vision-id="BVS_Default" id="5x5component-5x5component" name="" height-units="Millimeters" height="0.0" package-id="5x5component" speed="1.0" pick-retry-count="0"/>
+   <part id="11x4component" height-units="Millimeters" height="0.5" package-id="11x4component" speed="1.0" pick-retry-count="0"/>
+   <part fiducial-vision-id="FVS178569f9b69bd88b" id="black dot" height-units="Millimeters" height="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
+   <part id="Fiducial_PCB-Bosch" height-units="Millimeters" height="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
+   <part id="NICHICON_A-10uF" height-units="Millimeters" height="0.0" package-id="NICHICON_A" speed="1.0" pick-retry-count="0"/>
+   <part id="CAP0603-1uF" height-units="Millimeters" height="0.0" package-id="CAP0603" speed="1.0" pick-retry-count="0"/>
+   <part id="CAP0603-0.1uF" height-units="Millimeters" height="0.0" package-id="CAP0603" speed="1.0" pick-retry-count="0"/>
+   <part id="SOD123-1N5819HW" height-units="Millimeters" height="0.0" package-id="SOD123" speed="1.0" pick-retry-count="0"/>
+   <part id="INDNRS5020-INDNRS5020" height-units="Millimeters" height="0.0" package-id="INDNRS5020" speed="1.0" pick-retry-count="0"/>
+   <part id="RES0603-10kOHM" height-units="Millimeters" height="0.0" package-id="RES0603" speed="1.0" pick-retry-count="0"/>
+   <part id="RES0603-10OHM" height-units="Millimeters" height="0.0" package-id="RES0603" speed="1.0" pick-retry-count="0"/>
+   <part id="RES0603-51OHM" height-units="Millimeters" height="0.0" package-id="RES0603" speed="1.0" pick-retry-count="0"/>
+   <part id="TSOT-23-5-MP3302" height-units="Millimeters" height="0.0" package-id="TSOT-23-5" speed="1.0" pick-retry-count="0"/>
+   <part id="52207-0460-52207-0460" height-units="Millimeters" height="0.0" package-id="52207-0460" speed="1.0" pick-retry-count="0"/>
+   <part id="S08-Si4532DY" height-units="Millimeters" height="0.0" package-id="S08" speed="1.0" pick-retry-count="0"/>
+   <part id="R0603-ZeroOhm" height-units="Millimeters" height="0.0" package-id="R0603" speed="1.0" pick-retry-count="0"/>
+   <part id="TSSOP16_.65P_TI-TSC2046" height-units="Millimeters" height="0.0" package-id="TSSOP16_.65P_TI" speed="1.0" pick-retry-count="0"/>
+   <part id="SOT-223-LM1117MPX" height-units="Millimeters" height="0.0" package-id="SOT-223" speed="1.0" pick-retry-count="0"/>
+   <part id="CAP0603-0.01uF" height-units="Millimeters" height="0.0" package-id="CAP0603" speed="1.0" pick-retry-count="0"/>
+   <part id="virtJetpart--" height-units="Millimeters" height="0.0" package-id="virtJetpart" speed="1.0" pick-retry-count="0"/>
+   <part id="virtJetpart-" height-units="Millimeters" height="0.0" package-id="virtJetpart" speed="1.0" pick-retry-count="0"/>
+   <part id="SymSys_NFC-Chip" height-units="Millimeters" height="1.25" package-id="SymSys_NFC-Chip_SOIC-8Pin" speed="1.0" pick-retry-count="0"/>
+   <part id="SymSys_LED" height-units="Millimeters" height="0.5" package-id="SymSys_LED" speed="1.0" pick-retry-count="0"/>
+   <part id="SymSys_R1" height-units="Millimeters" height="0.1" package-id="SymSys_R1" speed="1.0" pick-retry-count="0"/>
+   <part fiducial-vision-id="FVS178569f9a9f9e1a5" id="FiducialPunktTexHypeOLED" height-units="Millimeters" height="0.0" package-id="FiducialPunkt" speed="1.0" pick-retry-count="0"/>
+   <part id="TEX-hype_OLED" height-units="Millimeters" height="2.0" package-id="TEX-hype_OLED" speed="1.0" pick-retry-count="0"/>
+   <part bottom-vision-id="BVS178569f9c4740321" fiducial-vision-id="FVS178569f9b3396625" id="FiducialPunktTexHypeOLED_RO" height-units="Millimeters" height="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
+   <part id="TEX-hype_heartRateSensor" height-units="Millimeters" height="1.0" package-id="TEX-hype_HeartRateSensor" speed="1.0" pick-retry-count="0"/>
+   <part id="TEX-hype_breathSensor" height-units="Millimeters" height="1.7" package-id="SSOP16" speed="1.0" pick-retry-count="0"/>
+   <part id="TEX-hype_AccelSensor" height-units="Millimeters" height="0.7" package-id="LGA-16" speed="1.0" pick-retry-count="0"/>
+   <part id="TEX-hype_NXP-chip" height-units="Millimeters" height="0.1" package-id="TEX-hype_NXP-chip" speed="1.0" pick-retry-count="0"/>
 </openpnp-parts>
