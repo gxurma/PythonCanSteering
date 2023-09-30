@@ -1220,10 +1220,15 @@ class PyGuiApp(QMainWindow):
 								message = "ok X:%02.3f Y:%02.3f Z:%02.3f C:%02.3f\n" %(self.currentPos[0]/Xm+self.currentPos[4]/X2m, self.currentPos[1]/Ym, self.currentPos[2]/Zm-50.0, self.currentPos[3]/Cm)
 								print(Color.Magenta+message+Color.end)
 								self.sendTcpQ.put(message)
-
 							else :
 								print(Color.Green+'m'+Color.end , m)
 								self.sendSerQ.put(d.encode("ascii")+b'\n')
+								if m == 810 :
+									self.pushButtonToolChangerVac.setChecked(True)
+								if m == 811 :
+									self.pushButtonToolChangerVac.setChecked(False)
+
+
 							# return
 						if g:
 							g = float(g[2])
