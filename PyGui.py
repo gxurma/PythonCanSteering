@@ -1223,11 +1223,50 @@ class PyGuiApp(QMainWindow):
 							else :
 								print(Color.Green+'m'+Color.end , m)
 								self.sendSerQ.put(d.encode("ascii")+b'\n')
+								if m == 804 :
+									self.pushButtonJet.setChecked(True)
+								if m == 805 :
+									self.pushButtonJet.setChecked(False)
+								if m == 806 :
+									self.pushButtonJetterDown.setChecked(True)
+								if m == 807 :
+									self.pushButtonJetterDown.setChecked(False)
+								if m == 808 :
+									self.pushButtonZClampOff.setChecked(True)
+								if m == 809 :
+									self.pushButtonZClampOff.setChecked(False)
+								if m == 802 :
+									self.pushButtonLight.setChecked(True)
+								if m == 803 :
+									self.pushButtonLight.setChecked(False)
 								if m == 810 :
 									self.pushButtonToolChangerVac.setChecked(True)
 								if m == 811 :
 									self.pushButtonToolChangerVac.setChecked(False)
-
+								if m == 800 :
+									self.pushButtonToolTipVac.setChecked(True)
+								if m == 801 :
+									self.pushButtonToolTipVac.setChecked(False)
+								if m == 812 :
+									self.pushButtonDispens1.setChecked(True)
+								if m == 813 :
+									self.pushButtonDispens1.setChecked(False)
+								if m == 814 :
+									self.pushButtonDispens2.setChecked(True)
+								if m == 815 :
+									self.pushButtonDispens2.setChecked(False)
+								if m == 820 :
+									self.pushButtonWorkingVac.setChecked(True)
+								if m == 821 :
+									self.pushButtonWorkingVac.setChecked(False)
+								if m == 816 :
+									self.pushButtonDispensVac1.setChecked(True)
+								if m == 817 :
+									self.pushButtonDispensVac1.setChecked(False)
+								if m == 818 :
+									self.pushButtonDispensVac2.setChecked(True)
+								if m == 819 :
+									self.pushButtonDispensVac2.setChecked(False)
 
 							# return
 						if g:
