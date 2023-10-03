@@ -1,2 +1,1 @@
-/home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/usbcanII/usbcanHWIf.o
-
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/usbcanII/usbcanHWIf.o

@@ -1,5 +1,5 @@
 /*
-**             Copyright 2017 by Kvaser AB, Molndal, Sweden
+**             Copyright 2023 by Kvaser AB, Molndal, Sweden
 **                         http://www.kvaser.com
 **
 ** This software is dual licensed under the following two licenses:
@@ -67,127 +67,157 @@
  */
 
 #include <canlib.h>
+#include <canstat.h>
 #include <stdio.h>
 #include <signal.h>
 #include <errno.h>
 #include <unistd.h>
-#include "vcanevt.h"
 
-
-static void check(char* id, canStatus stat)
+static void check(char *id, canStatus stat)
 {
-  if (stat != canOK) {
-    char buf[50];
-    buf[0] = '\0';
-    canGetErrorText(stat, buf, sizeof(buf));
-    printf("%s: failed, stat=%d (%s)\n", id, (int)stat, buf);
-  }
+    if (stat != canOK) {
+        char buf[50];
+        buf[0] = '\0';
+        canGetErrorText(stat, buf, sizeof(buf));
+        printf("%s: failed, stat=%d (%s)\n", id, (int)stat, buf);
+    }
 }
 
 static void printUsageAndExit(char *prgName)
 {
-  printf("Usage: '%s <channel>'\n", prgName);
-  exit(1);
+    printf("Usage: '%s <channel>'\n", prgName);
+    exit(1);
 }
 
-static char* busStatToStr(const unsigned long flag) {
-    char* tempStr = NULL;
-    #define MACRO2STR(x) case x: tempStr = #x; break
+static void sighand(int sig, siginfo_t *info, void *ucontext)
+{
+    (void)sig;
+    (void)info;
+    (void)ucontext;
+}
+
+static const char *busStatToStr(const unsigned long flag)
+{
     switch (flag) {
-        MACRO2STR( CHIPSTAT_BUSOFF        );
-        MACRO2STR( CHIPSTAT_ERROR_PASSIVE );
-        MACRO2STR( CHIPSTAT_ERROR_WARNING );
-        MACRO2STR( CHIPSTAT_ERROR_ACTIVE  );
-        default: tempStr = ""; break;
+    case canSTAT_ERROR_PASSIVE:
+        return "canSTAT_ERROR_PASSIVE";
+
+    case canSTAT_BUS_OFF:
+        return "canSTAT_BUS_OFF";
+
+    case canSTAT_ERROR_WARNING:
+        return "canSTAT_ERROR_WARNING";
+
+    case canSTAT_ERROR_ACTIVE:
+        return "canSTAT_ERROR_ACTIVE";
+
+    default:
+        return "";
     }
-    #undef MACRO2STR
-    return tempStr;
 }
 
-void notifyCallback(canNotifyData *data) {
-  switch (data->eventType) {
-  case canEVENT_STATUS:
-    printf("CAN Status Event: %s\n", busStatToStr(data->info.status.busStatus));
-    break;
-  case canEVENT_ERROR:
-    printf("CAN Error Event\n");
-    break;
-  case canEVENT_TX:
-    printf("CAN Tx Event\n");
-    break;
-  case canEVENT_RX:
-    printf("CAN Rx Event\n");
-    break;
-  }
-  return;
+void notifyCallback(canNotifyData *data)
+{
+    switch (data->eventType) {
+    case canEVENT_STATUS:
+        printf("CAN Status Event: %s\n", busStatToStr(data->info.status.busStatus));
+        break;
+
+    case canEVENT_ERROR:
+        printf("CAN Error Event\n");
+        break;
+
+    case canEVENT_TX:
+        printf("CAN Tx Event\n");
+        break;
+
+    case canEVENT_RX:
+        printf("CAN Rx Event\n");
+        break;
+    }
+    return;
 }
 
 int main(int argc, char *argv[])
 {
-  canHandle hnd;
-  canStatus stat;
-  int channel;
+    canHandle hnd;
+    canStatus stat;
+    int channel;
+    struct sigaction sigact;
 
-  if (argc != 2) {
-    printUsageAndExit(argv[0]);
-  }
-
-  {
-    char *endPtr = NULL;
-    errno = 0;
-    channel = strtol(argv[1], &endPtr, 10);
-    if ( (errno != 0) || ((channel == 0) && (endPtr == argv[1])) ) {
-      printUsageAndExit(argv[0]);
+    if (argc != 2) {
+        printUsageAndExit(argv[0]);
     }
-  }
 
-  printf("Sending a message on channel %d\n", channel);
+    {
+        char *endPtr = NULL;
+        errno = 0;
+        channel = strtol(argv[1], &endPtr, 10);
+        if ((errno != 0) || ((channel == 0) && (endPtr == argv[1]))) {
+            printUsageAndExit(argv[0]);
+        }
+    }
 
-  canInitializeLibrary();
+    /* Use sighand and allow SIGINT to interrupt syscalls */
+    sigact.sa_flags = SA_SIGINFO;
+    sigemptyset(&sigact.sa_mask);
+    sigact.sa_sigaction = sighand;
+    if (sigaction(SIGINT, &sigact, NULL) != 0) {
+        perror("sigaction SIGINT failed");
+        return -1;
+    }
 
-  /* Open channel, set parameters and go on bus */
-  hnd = canOpenChannel(channel, canOPEN_EXCLUSIVE | canOPEN_REQUIRE_EXTENDED | canOPEN_ACCEPT_VIRTUAL);
-  if (hnd < 0) {
-    printf("canOpenChannel %d", channel);
-    check("", hnd);
-    return -1;
-  }
+    printf("Sending a CAN message on channel %d\n", channel);
 
-  stat = canSetBusParams(hnd, canBITRATE_1M, 0, 0, 0, 0, 0);
-  check("canSetBusParams", stat);
-  if (stat != canOK) {
-    goto ErrorExit;
-  }
+    canInitializeLibrary();
 
-  stat = canSetNotify(hnd, notifyCallback, canNOTIFY_RX | canNOTIFY_TX | canNOTIFY_ERROR | canNOTIFY_STATUS | canNOTIFY_ENVVAR, (char*)0);
-  check("canSetNotify", stat);
+    /* Open channel, set parameters and go on bus */
+    hnd = canOpenChannel(channel,
+                         canOPEN_EXCLUSIVE | canOPEN_REQUIRE_EXTENDED | canOPEN_ACCEPT_VIRTUAL);
+    if (hnd < 0) {
+        printf("canOpenChannel %d", channel);
+        check("", hnd);
+        return -1;
+    }
 
-  stat = canBusOn(hnd);
-  check("canBusOn", stat);
-  if (stat != canOK) {
-    goto ErrorExit;
-  }
+    stat = canSetBusParams(hnd, canBITRATE_1M, 0, 0, 0, 0, 0);
+    check("canSetBusParams", stat);
+    if (stat != canOK) {
+        goto ErrorExit;
+    }
 
-  stat = canWrite(hnd, 10000, "Kvaser!", 8, 0);
-  check("canWrite", stat);
-  if (stat != canOK) {
-    goto ErrorExit;
-  }
-  stat = canWriteSync(hnd, 1000);
-  check("canWriteSync", stat);
-  if (stat != canOK) {
-    goto ErrorExit;
-  }
+    stat = canSetNotify(hnd, notifyCallback,
+                        canNOTIFY_RX | canNOTIFY_TX | canNOTIFY_ERROR | canNOTIFY_STATUS |
+                            canNOTIFY_ENVVAR,
+                        (char *)0);
+    check("canSetNotify", stat);
+
+    stat = canBusOn(hnd);
+    check("canBusOn", stat);
+    if (stat != canOK) {
+        goto ErrorExit;
+    }
+
+    stat = canWrite(hnd, 10000, "Kvaser!", 8, 0);
+    check("canWrite", stat);
+    if (stat != canOK) {
+        goto ErrorExit;
+    }
+    stat = canWriteSync(hnd, 1000);
+    check("canWriteSync", stat);
+    if (stat != canOK) {
+        goto ErrorExit;
+    }
 
 ErrorExit:
 
-  stat = canBusOff(hnd);
-  check("canBusOff", stat);
-  usleep(50*1000); // Sleep just to get the last notification.
-  stat = canClose(hnd);
-  check("canClose", stat);
-  stat = canUnloadLibrary();
-  check("canUnloadLibrary", stat);
+    stat = canBusOff(hnd);
+    check("canBusOff", stat);
+    usleep(50 * 1000); // Sleep just to get the last notification.
+    stat = canClose(hnd);
+    check("canClose", stat);
+    stat = canUnloadLibrary();
+    check("canUnloadLibrary", stat);
 
-  return 0;
+    return 0;
 }

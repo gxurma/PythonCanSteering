@@ -1,5 +1,5 @@
 #
-#             Copyright 2017 by Kvaser AB, Molndal, Sweden
+#             Copyright 2023 by Kvaser AB, Molndal, Sweden
 #                         http://www.kvaser.com
 #
 #  This software is dual licensed under the following two licenses:
@@ -74,7 +74,7 @@ INCLUDES := $(src)/../include/
 # source files
 SRCS := leafHWIf.c
 
-ifneq ($(KERNELRELEASE),)
+ifneq ($(src),)
 	RUNDIR := $(src)
 else
 	RUNDIR := $(PWD)

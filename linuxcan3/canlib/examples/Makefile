@@ -1,5 +1,5 @@
 #
-#             Copyright 2017 by Kvaser AB, Molndal, Sweden
+#             Copyright 2023 by Kvaser AB, Molndal, Sweden
 #                         http://www.kvaser.com
 #
 #  This software is dual licensed under the following two licenses:
@@ -63,12 +63,15 @@
 
 # Kvaser Linux Canlib Examples Makefile
 
+include ../../make/gflags.mk
+
 CC ?= gcc
 CFLAGS = -Wall -Wextra -Werror -O2  -D_REENTRANT $(XTRA_CFLAGS) -I../../include
+CFLAGS += -DLINUX
 LDFLAGS = -L..
 LDLIBS = -lcanlib -lpthread -lm
 OBJS =\
-	busparms\
+	busparams\
 	cancount\
 	canmonitor\
 	canfdmonitor\
@@ -78,10 +81,12 @@ OBJS =\
 	simplewrite\
 	timedomains\
 	writeloop\
+	canfdwrite_loop\
 	busstat\
+	getch\
 
 ifeq ($(KV_DEBUG_ON),1)
-  KV_XTRA_CFLAGS_DEBUG= -D_DEBUG=1 -DDEBUG=1
+  KV_XTRA_CFLAGS_DEBUG= -D_DEBUG=1 -DDEBUG=1 -O0 -g
   IS_DEBUG=Debug: $(KV_XTRA_CFLAGS_DEBUG)
   CFLAGS += $(KV_XTRA_CFLAGS_DEBUG)
 else
@@ -100,19 +105,19 @@ all: sub
 
 install:
 	@echo --------------------------------------------------------------------
-	@echo "Installing examples into /usr/doc/canlib/examples"
+	@echo "Installing examples into $(DESTDIR)$(prefix)/doc/canlib/examples"
 	@echo --------------------------------------------------------------------
-	mkdir -p /usr/doc/canlib/examples
-	cp $(OBJS) /usr/doc/canlib/examples/.
+	mkdir -p $(DESTDIR)$(prefix)/doc/canlib/examples
+	cp -r . $(DESTDIR)$(prefix)/doc/canlib/examples
 
 uninstall:
-	rm -rf /usr/doc/canlib/examples
+	rm -rf $(DESTDIR)$(prefix)/doc/canlib/examples
 
 clean:
 	rm -f $(OBJS) *.o *~ $(CHECKLOG_FILE)
 
 check:
 	@echo --------------------------------------------------------------------
-	cppcheck -I ../../include/ -I ../../../tmp  -I /usr/include -I /usr/include/linux --enable=all --suppress=toomanyconfigs . > $(CHECKLOG_FILE) 2>&1
+	cppcheck -I ../../include/ -I /usr/include -I /usr/include/linux --enable=all --suppress=toomanyconfigs . > $(CHECKLOG_FILE) 2>&1
 	@cat $(CHECKLOG_FILE)
 	@echo --------------------------------------------------------------------

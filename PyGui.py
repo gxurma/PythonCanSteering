@@ -21,7 +21,7 @@ import csv
 #from Gui import *
 # import Gui
 #talking to kvaser
-import canlib
+from canlib import canlib
 import time
 #import random
 import math
@@ -1060,12 +1060,13 @@ class PyGuiApp(QMainWindow):
 
 	def aboutBox(self):
 		QtWidgets.QMessageBox.about(self,"Über dieses Programm", '''
-		Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern und Smoothieware.
-		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um Pick and Place Aufgaben zu lösen.
+		Dies ist ein Programm zum Testen und Benutzen einer PnP Maschine mit Elmo Motion Cello Controllern und Smoothieware.
+		Die Maschine besteht aus X, (X2), Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser Canlib, Elmo Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
-		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
+		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. 
+		Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
 		Canlib ist geistiges Eigentum von Kvaser.
-		(C) 2018-2021 Martin Gyurkó
+		(C) 2018-2023 Martin Gyurkó
 		''')
 
 	def sendMsg(self, msgid, msg):
@@ -1073,7 +1074,7 @@ class PyGuiApp(QMainWindow):
 		for j in range(len(msg)) :
 			print( " %02x" % ( msg[j] ), end="")
 		print( ". ")
-		self.handle1.write(msgid, msg)
+		self.handle1.write_raw(msgid, msg)
 		time.sleep(0.01)
 
 	def sendElmoMsgShort(self, axeId, command, index):
@@ -1090,13 +1091,13 @@ class PyGuiApp(QMainWindow):
 
 	def initCAN(self):
 
-		self.cl = canlib.canlib()
+		self.cl = canlib
 
-		print("canlib version: %s" % self.cl.getVersion())
+		print("canlib version: " ,self.cl.dllversion())
 
 		channel = 0
 		self.handle1 = self.cl.openChannel(channel, canlib.canOPEN_ACCEPT_VIRTUAL)
-		print( "Using channel: %s, EAN: %s" % (self.handle1.getChannelData_Name(), self.handle1.getChannelData_EAN()))
+		print( "Using channel: %s, EAN: %s" % (self.handle1.channel_data.channel_name, self.handle1.channel_data.card_upc_no))
 
 		self.handle1.setBusOutputControl(canlib.canDRIVER_NORMAL)
 		self.handle1.setBusParams(canlib.canBITRATE_1M)

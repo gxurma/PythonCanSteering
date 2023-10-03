@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['list_20can_20channels',['List CAN channels',['../page_example_c_channeldata.html',1,'page_user_guide_canlib_samples']]],
-  ['loading_20a_20can_20database',['Loading a CAN database',['../page_kvadblib_example_load_database.html',1,'page_kvadblib']]],
-  ['license_20and_20copyright',['License and Copyright',['../page_license_and_copyright.html',1,'']]],
-  ['lin_20bus_20api_20_28linlib_29',['LIN bus API (LINlib)',['../page_linlib.html',1,'']]]
+  ['introduction',['Introduction',['../kvlclib_introduction.html',1,'page_kvlclib']]],
+  ['installation',['Installation',['../page_installing.html',1,'']]],
+  ['introduction',['Introduction',['../page_kvadblib_user_guide_intro.html',1,'page_kvadblib']]],
+  ['initialization',['Initialization',['../page_user_guide_init.html',1,'page_canlib']]],
+  ['introduction',['Introduction',['../page_user_guide_intro.html',1,'page_canlib']]],
+  ['i_2fo_20pin_20handling',['I/O Pin Handling',['../page_user_guide_kviopin.html',1,'page_canlib']]],
+  ['installing_20on_20linux',['Installing on Linux',['../section_install_linux.html',1,'page_installing']]],
+  ['installing_20on_20windows',['Installing on Windows',['../section_install_windows.html',1,'page_installing']]]
 ];

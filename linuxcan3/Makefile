@@ -1,5 +1,5 @@
 #
-#             Copyright 2017 by Kvaser AB, Molndal, Sweden
+#             Copyright 2023 by Kvaser AB, Molndal, Sweden
 #                         http://www.kvaser.com
 #
 #  This software is dual licensed under the following two licenses:
@@ -91,20 +91,37 @@ SUBDIRS   = $(USERLIBS) $(DRIVERS)
 
 reverse=$(if $(1),$(call reverse,$(wordlist 2,$(words $(1)),$(1)))) $(firstword $(1))
 
-KDIR ?= /lib/modules/`uname -r`/build
+KV_KERNEL_VERSION ?= `uname -r`
+KDIR ?= /lib/modules/$(KV_KERNEL_VERSION)/build
+
+this-makefile := $(lastword $(MAKEFILE_LIST))
+abs_srctree := $(realpath $(dir $(this-makefile)))
 define print_versions
 	echo '$1 building linuxcan v'`sed -n 's/^version=//g; s/_/./g; s/\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\).\(beta\)\?/\1 \2/p' moduleinfo.txt`
 	echo '  User    : '$(USER)
 	echo '  System  : '`uname -a`
 	echo '  CC      : '$(CC)
-	echo '  CC ver. : '`$(CC) -dumpversion`
+	echo '  CC ver. : '`$(CC) -dumpfullversion -dumpversion`
 	echo '  KDIR    : '$(KDIR)
+	echo '  Kernel  : '$(KV_KERNEL_VERSION)
 	echo ''
 endef
 
+KV_DKMS_MODULE = $(shell sed -n 's/^PACKAGE_NAME="\(.*\)"/\1/p' dkms/dkms.conf)
+KV_DKMS_VERSION = $(shell sed -n 's/^PACKAGE_VERSION="\(.*\)"/\1/p' dkms/dkms.conf)
+KV_DKMS_TARBALL = $(KV_DKMS_MODULE)-$(KV_DKMS_VERSION)-source-only.dkms.tar.gz
+KV_DKMS_TMP = kv_dkms_tmp
+KV_DKMS_TMP_SRC = $(KV_DKMS_TMP)/src_tmp
+KV_DKMS_TMP_SRC_LINUXCAN = $(KV_DKMS_TMP_SRC)/$(KV_DKMS_MODULE)-$(KV_DKMS_VERSION)
+KV_DKMS_TMP_DKMSTREE = $(KV_DKMS_TMP)/dkmstree_tmp
+
+# Select if the kernel modules should only be installed or both installed and loaded:
+KV_DKMS_INSTALL_TARGET = load
+# KV_DKMS_INSTALL_TARGET = install
+
 #---------------------------------------------------------------------------
 # RULES
-.PHONY: print_versions_start canlib linlib common leaf mhydra pcican pcican2 usbcanII virtualcan pciefd install uninstall clean check load
+.PHONY: print_versions_start canlib linlib common leaf mhydra pcican pcican2 usbcanII virtualcan pciefd kvflash install uninstall clean check load dkms dkms_install dkms_load
 
 all: print_versions_start $(SUBDIRS)
 	@echo
@@ -117,13 +134,16 @@ print_versions_start:
 	@$(call check_for_kvaser_usb_devices)
 	@$(call check_for_secure_boot)
 
+check_srctree_path:
+	@$(call check_space_or_colon_in_abs_srctree)
+
 canlib:
-	$(MAKE) -C canlib examples
+	$(MAKE) -C canlib
 
 linlib: canlib
 	$(MAKE) -C linlib
 
-common:
+common: check_srctree_path
 	@cd ./common; $(MAKE) kv_module
 
 pcican: common
@@ -147,6 +167,9 @@ virtualcan: common
 pciefd: common
 	@cd ./pciefd; $(MAKE) kv_module
 
+kvflash: canlib
+	$(MAKE) -C kvflash
+
 install:
 	@for dir in $(DRIVERS) ; do cd $$dir; echo Installing $$dir;./installscript.sh || exit 1; cd ..; done
 	$(MAKE) -C canlib install
@@ -156,15 +179,11 @@ uninstall:
 	@for dir in $(call reverse,$(DRIVERS)) ; do cd $$dir; echo Uninstalling $$dir;./uninstallscript.sh || exit 1; cd ..; done
 	$(MAKE) -C canlib uninstall
 	$(MAKE) -C linlib uninstall
-	rm -f /etc/udev/rules.d/10-kvaser.rules
-	rm -f /etc/modules-load.d/kvaser.conf
 
 purge:
 	@for dir in $(call reverse,$(DRIVERS)) ; do cd $$dir; echo Uninstalling $$dir;./uninstallscript.sh -p || exit 1; cd ..; done
 	$(MAKE) -C canlib uninstall
 	$(MAKE) -C linlib uninstall
-	rm -f /etc/udev/rules.d/10-kvaser.rules
-	rm -f /etc/modules-load.d/kvaser.conf
 
 load:
 	@for dir in $(DRIVERS) ; do cd $$dir; echo Installing $$dir;./installscript.sh load || exit 1; cd ..; done
@@ -177,9 +196,18 @@ check:
 
 clean:
 	@for dir in $(SUBDIRS) ; do cd $$dir; $(MAKE) clean; cd ..; done
-	rm -f modules.order Module.symvers
-	rm -rf .tmp_versions
+	rm -f modules.order Module.symvers $(KV_DKMS_TARBALL)
+	rm -rf .tmp_versions $(KV_DKMS_TMP)
 	find . -name "checklog.txt"|xargs rm -f
+
+
+define check_space_or_colon_in_abs_srctree
+	if test $(words $(subst :, ,$(abs_srctree))) -ne 1 ; then \
+		echo ''; \
+		echo 'Error: Source directory cannot contain spaces or colons: "$(abs_srctree)"'; \
+		exit 1; \
+	fi
+endef
 
 
 define check_for_kvaser_usb_devices
@@ -240,4 +268,45 @@ define check_for_secure_boot
 		fi \
 	fi
 endef
+
+$(KV_DKMS_TARBALL):
+	@echo Build DKMS tarball, with install target: $(KV_DKMS_INSTALL_TARGET)
+	rm -rf $(KV_DKMS_TMP)
+	mkdir -p $(KV_DKMS_TMP)/src_tmp/$(KV_DKMS_MODULE)-$(KV_DKMS_VERSION)
+	mkdir -p $(KV_DKMS_TMP_DKMSTREE)
+	@for dir in $(DRIVERS) ; do cp -r $$dir $(KV_DKMS_TMP_SRC_LINUXCAN)/. ; done
+ifdef KV_NO_PCI
+	# make the non-pci dkms.conf
+	cp dkms/dkms-no-pci.conf $(KV_DKMS_TMP_SRC_LINUXCAN)/dkms.conf
+else
+	cp dkms/dkms.conf $(KV_DKMS_TMP_SRC_LINUXCAN)/dkms.conf
+endif
+	cp dkms/Makefile dkms/kv_dkms_script.sh moduleinfo.txt config.mak README COPYING COPYING.BSD COPYING.GPL $(KV_DKMS_TMP_SRC_LINUXCAN)/.
+	cp -r include common $(KV_DKMS_TMP_SRC_LINUXCAN)/.
+	sed -i 's/^KV_INSTALL_TARGET=none/KV_INSTALL_TARGET=$(KV_DKMS_INSTALL_TARGET)/g' $(KV_DKMS_TMP_SRC_LINUXCAN)/dkms.conf
+	fakeroot dkms add --verbose --sourcetree "$(CURDIR)/$(KV_DKMS_TMP_SRC)" --dkmstree "$(CURDIR)/$(KV_DKMS_TMP_DKMSTREE)" $(KV_DKMS_MODULE)/$(KV_DKMS_VERSION)
+	dkms mktarball --verbose --dkmstree $(KV_DKMS_TMP_DKMSTREE) --source-only $(KV_DKMS_MODULE)/$(KV_DKMS_VERSION)
+	cp $(KV_DKMS_TMP_DKMSTREE)/$(KV_DKMS_MODULE)/$(KV_DKMS_VERSION)/tarball/$(KV_DKMS_TARBALL) .
+	rm -rf $(KV_DKMS_TMP)
+
+dkms: print_versions_start $(USERLIBS) $(KV_DKMS_TARBALL)
+	@$(call print_versions, Done)
+	@$(call check_for_kvaser_usb_devices)
+	@$(call check_for_secure_boot)
+
+dkms_install dkms_load: $(KV_DKMS_TARBALL)
+	$(MAKE) -C canlib install
+	$(MAKE) -C linlib install
+	dkms status $(KV_DKMS_MODULE) | sed 's|,|/|g' | cut -d'/' -f 2 | cut -d':' -f 1 | xargs -I theversion dkms remove $(KV_DKMS_MODULE)/theversion --all
+	dkms add $(KV_DKMS_TARBALL)
+	dkms install $(KV_DKMS_MODULE)/$(KV_DKMS_VERSION) -k $(KV_KERNEL_VERSION)
+	dkms status
+
+dkms_uninstall:
+	$(MAKE) -C canlib uninstall
+	$(MAKE) -C linlib uninstall
+	dkms status
+	-dkms remove $(KV_DKMS_MODULE)/$(KV_DKMS_VERSION) --all
+	rm -rf /usr/src/$(KV_DKMS_MODULE)-$(KV_DKMS_VERSION)
+	dkms status
 

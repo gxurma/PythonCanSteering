@@ -64,10 +64,7 @@
 #ifndef _MODULE_VERSIONING_H_
 #define _MODULE_VERSIONING_H_
 
-
-// Module versioning
-#define EXPORT_SYMTAB
-
+#include <linux/bitops.h>
 #include <linux/version.h>
 
 // Check that CONFIG_* macros are included
@@ -80,15 +77,6 @@
 #endif
 #endif
 
-#if defined(CONFIG_MODVERSIONS) && !defined(MODVERSIONS)
-#   define MODVERSIONS
-#endif
-
-#ifdef MODVERSIONS
-#include <config/modversions.h>
-#endif
 #include <linux/module.h>
 
-
 #endif //_MODULE_VERSIONING_H_
-

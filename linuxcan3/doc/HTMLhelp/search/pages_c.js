@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['tutorials',['Tutorials',['../page_tutorial.html',1,'']]],
-  ['t_20programming',['t Programming',['../page_user_guide_kvscript.html',1,'page_canlib']]],
-  ['time_20measurement',['Time Measurement',['../page_user_guide_time.html',1,'page_canlib']]]
+  ['plain_20text_20_28r_2fw_29',['Plain text (R/W)',['../kvlclib_format__p_l_a_i_n__a_s_c.html',1,'kvlclib_formats']]],
+  ['properties',['Properties',['../kvlclib_properties.html',1,'page_kvlclib']]]
 ];

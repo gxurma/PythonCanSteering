@@ -1,5 +1,5 @@
 /*
-**             Copyright 2017 by Kvaser AB, Molndal, Sweden
+**             Copyright 2023 by Kvaser AB, Molndal, Sweden
 **                         http://www.kvaser.com
 **
 ** This software is dual licensed under the following two licenses:
@@ -69,8 +69,8 @@
 
 #define CANLIB_PRODUCT_MAJOR_VERSION (8 - 3)
 #define CANLIB_MAJOR_VERSION 8
-#define CANLIB_MINOR_VERSION 34
-#define CANLIB_BUILD_VERSION 317
+#define CANLIB_MINOR_VERSION 43
+#define CANLIB_BUILD_VERSION 472
 #define CANLIB_BETA 0
 
 #endif

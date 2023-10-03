@@ -1,5 +1,5 @@
 #
-#             Copyright 2017 by Kvaser AB, Molndal, Sweden
+#             Copyright 2023 by Kvaser AB, Molndal, Sweden
 #                         http://www.kvaser.com
 #
 #  This software is dual licensed under the following two licenses:
@@ -65,15 +65,20 @@
 
 include version.mk
 
+include ../make/gflags.mk
+
 LIBRARY := $(LIBNAME).$(MAJOR).$(MINOR).$(BUILD)
 SONAME  := $(LIBNAME).$(MAJOR)
 
 CFLAGS  += -Wall -DLINLIB_NAME_STRING=\"$(LIBRARY)\" -O2 -fomit-frame-pointer $(XTRA_CFLAGS) -pthread
 CFLAGS  += -I. -I../include
+CFLAGS  += -DLINUX
 
 # Flags for  reentrant, position independent code
 LIBCFLAGS = $(CFLAGS) -D_REENTRANT -fPIC
 LDFLAGS = -lc -pthread -L../canlib -lcanlib
+
+OBJDIR = $(CURDIR)
 
 SRCS := linlib.c
 
@@ -83,7 +88,7 @@ DEPS := $(patsubst %.c, %.d, $(SRCS))
 
 
 ifeq ($(KV_DEBUG_ON),1)
-  KV_XTRA_CFLAGS_DEBUG= -D_DEBUG=1 -DDEBUG=1
+  KV_XTRA_CFLAGS_DEBUG= -D_DEBUG=1 -DDEBUG=1 -O0 -g
   IS_DEBUG=Debug: $(KV_XTRA_CFLAGS_DEBUG)
   CFLAGS += $(KV_XTRA_CFLAGS_DEBUG)
 else
@@ -113,24 +118,27 @@ $(LIBRARY): $(DEPS) $(OTHERDEPS) $(OBJS)
 	$(CC) -M $(CFLAGS) $< > $@
 	$(CC) -M $(CFLAGS) $< | sed s/\\.o/.d/> $@
 
-install: linlib
-	rm -f /usr/lib/$(LIBNAME)
-	rm -f /usr/lib/$(SONAME)
-	install  -m 644 $(LIBRARY) /usr/lib/
-	ln -sf $(LIBRARY) /usr/lib/$(LIBNAME)
-	ln -sf $(LIBRARY) /usr/lib/$(SONAME)
-	/sbin/ldconfig -X
-	install -m 644 ../include/linlib.h /usr/include
+install:
+	rm -f $(DESTDIR)$(libdir)/$(LIBNAME)
+	rm -f $(DESTDIR)$(libdir)/$(SONAME)
+	rm -f $(DESTDIR)$(libdir)/$(LIBRARY)
+	$(INSTALL_LIB) -D $(OBJDIR)/$(LIBRARY) $(DESTDIR)$(libdir)/$(LIBRARY)
+	ln -sf $(LIBRARY) $(DESTDIR)$(libdir)/$(LIBNAME)
+	ln -sf $(LIBRARY) $(DESTDIR)$(libdir)/$(SONAME)
+	$(LDCONFIG) -X
+	$(INSTALL_DATA) -D ../include/linlib.h $(DESTDIR)$(includedir)/linlib.h
 
 uninstall:
-	rm -f /usr/lib/$(LIBNAME)   \
-	      /usr/lib/$(SONAME)    \
-	      /usr/lib/$(LIBRARY)   \
-	      /usr/include/linlib.h
+	rm -f $(DESTDIR)$(libdir)/$(LIBNAME)   \
+	      $(DESTDIR)$(libdir)/$(SONAME)    \
+	      $(DESTDIR)$(libdir)/$(LIBRARY)   \
+	      $(DESTDIR)$(includedir)/linlib.h
 
 clean:
 	rm -f $(OBJS) $(LIBRARY) $(DEPS) $(LIBNAME) $(LIBRARY) $(SONAME) $(TARBALL) *~
 
 depend: $(DEPS)
+
+include ../make/pkgconfig.mk
 
 -include $DEPS
