@@ -1275,21 +1275,10 @@ class PyGuiApp(QMainWindow):
 								print(Color.Green+'Init and Homing all axes'+Color.end)
 								print(Color.Red+'No. just kidding. Would be too dangerous. You have to home Z yourself!'+Color.end)
 								#self.homeAllThread.start()
-								# self.Init(idZ)
-								# self.Init(idX)
-								# self.Init(idX2)
-								# self.Init(idY)
-								# self.Init(idC)
-								# self.Init(idZ)
-								# self.pushButtonHomeZ.click()
-								# self.pushButtonHomeX.click()
-								# self.pushButtonHomeY.click()
-								# self.pushButtonHomeC.click()
-								# self.pushButtonHomeX2.click()
 							if (g == 0) or (g == 1) :
 								if x:
 									xVal = float(x[2])
-									print("x: ",xVal)
+									# print("x: ",xVal)
 									# if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
 									# 	self.X1set.setValue(int(xVal*Xm))
 									# 	self.X2set.setValue(0)
@@ -1301,16 +1290,18 @@ class PyGuiApp(QMainWindow):
 									# 	self.X2set.setValue(minimum[4])
 
 									## self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
-
-									if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
-										self.X1set.setValue(int(xVal*Xm))
-										self.X2set.setValue(0)
-									elif (xVal > maximumf[0]) :
-										self.X1set.setValue(int(maximumf[0]*Xm))
-										self.X2set.setValue(0)
-									else : #(xVal < minimumf[0]) :
-										self.X1set.setValue(int(minimumf[0]*Xm))
-										self.X2set.setValue(0)
+###
+									# if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
+										# self.X1set.setValue(int(xVal*Xm))
+										# self.X2set.setValue(0)
+									# elif (xVal > maximumf[0]) :
+										# self.X1set.setValue(int(maximumf[0]*Xm))
+										# self.X2set.setValue(0)
+									# else : #(xVal < minimumf[0]) :
+										# self.X1set.setValue(int(minimumf[0]*Xm))
+										# self.X2set.setValue(0)
+									
+									self.X1set.setValue(int(xVal*Xm))
 
 								if y:
 									self.Yset.setValue(int(float(y[2])*Ym))
