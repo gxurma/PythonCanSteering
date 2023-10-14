@@ -1,2 +1,1 @@
-/home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/virtualcan/virtualcan.o
-
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/virtualcan/virtualcan.o

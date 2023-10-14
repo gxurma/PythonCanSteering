@@ -1,0 +1,3 @@
+module=pycanlib
+version=1_24_935
+git_id=3e0462505079

@@ -91,7 +91,6 @@ $(document).ready(function(){initNavTree('canlib_8h.html','');});
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="canstat_8h_source.html">canstat.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="bus__params__tq_8h_source.html">bus_params_tq.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="obsolete_8h_source.html">obsolete.h</a>&quot;</code><br />
 </div>
 <p><a href="canlib_8h_source.html">Go to the source code of this file.</a></p>
@@ -99,6 +98,8 @@ $(document).ready(function(){initNavTree('canlib_8h.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcan_notify_data.html">canNotifyData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_clock_info.html">kvClockInfo</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,10 +212,16 @@ Macros</h2></td></tr>
 <tr class="separator:a3a93c64ba76ebe3c5e525d4dfa4ade8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f21214c84dbb6f5f37eb27520ecc162"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a9f21214c84dbb6f5f37eb27520ecc162">canFD_BITRATE_2M_80P</a>&#160;&#160;&#160;(-1002)</td></tr>
 <tr class="separator:a9f21214c84dbb6f5f37eb27520ecc162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a945c8003af92915e03c730aabaff29f6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a945c8003af92915e03c730aabaff29f6">canFD_BITRATE_2M_60P</a>&#160;&#160;&#160;(-1007)</td></tr>
+<tr class="separator:a945c8003af92915e03c730aabaff29f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa643e5939f0d4d5fff21747e55c76153"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aa643e5939f0d4d5fff21747e55c76153">canFD_BITRATE_4M_80P</a>&#160;&#160;&#160;(-1003)</td></tr>
 <tr class="separator:aa643e5939f0d4d5fff21747e55c76153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1d8bd40554b1433f00e4f1bca3f7a8e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ac1d8bd40554b1433f00e4f1bca3f7a8e">canFD_BITRATE_8M_60P</a>&#160;&#160;&#160;(-1004)</td></tr>
 <tr class="separator:ac1d8bd40554b1433f00e4f1bca3f7a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1692cfa2b92bf18a666aa040171f5a27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a1692cfa2b92bf18a666aa040171f5a27">canFD_BITRATE_8M_80P</a>&#160;&#160;&#160;(-1005)</td></tr>
+<tr class="separator:a1692cfa2b92bf18a666aa040171f5a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e16a689103d649b9566bfe2546944ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a6e16a689103d649b9566bfe2546944ad">canFD_BITRATE_8M_70P</a>&#160;&#160;&#160;(-1006)</td></tr>
+<tr class="separator:a6e16a689103d649b9566bfe2546944ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0a3340ea8fe8c3be9881bf03bddc23e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#af0a3340ea8fe8c3be9881bf03bddc23e">BAUD_1M</a>&#160;&#160;&#160;(-1)</td></tr>
 <tr class="separator:af0a3340ea8fe8c3be9881bf03bddc23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9067c488b198464dc4e635eec21bf6c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ac9067c488b198464dc4e635eec21bf6c">BAUD_500K</a>&#160;&#160;&#160;(-2)</td></tr>
@@ -474,6 +481,9 @@ Macros</h2></td></tr>
 <tr class="memitem:ab943def3563eb89a526ecd8f3b489768"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ab943def3563eb89a526ecd8f3b489768">canHWTYPE_U100</a>&#160;&#160;&#160;88</td></tr>
 <tr class="memdesc:ab943def3563eb89a526ecd8f3b489768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kvaser U100 and variants.  <a href="#ab943def3563eb89a526ecd8f3b489768">More...</a><br /></td></tr>
 <tr class="separator:ab943def3563eb89a526ecd8f3b489768"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad24fe9abf4424a071ec79b535e49ec4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aad24fe9abf4424a071ec79b535e49ec4">canHWTYPE_LEAF3</a>&#160;&#160;&#160;90</td></tr>
+<tr class="memdesc:aad24fe9abf4424a071ec79b535e49ec4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kvaser Kvaser Leaf v3 and variants.  <a href="#aad24fe9abf4424a071ec79b535e49ec4">More...</a><br /></td></tr>
+<tr class="separator:aad24fe9abf4424a071ec79b535e49ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">canCHANNEL_CAP_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canCHANNEL_CAP_xxx"></a> Channel capabilities. </p>
 </div></td></tr>
@@ -537,9 +547,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a116f1a9d0623257d2b1865669054d0b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a116f1a9d0623257d2b1865669054d0b7">canCHANNEL_CAP_IO_API</a>&#160;&#160;&#160;0x08000000L</td></tr>
 <tr class="memdesc:a116f1a9d0623257d2b1865669054d0b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has IO API capabilities.  <a href="#a116f1a9d0623257d2b1865669054d0b7">More...</a><br /></td></tr>
 <tr class="separator:a116f1a9d0623257d2b1865669054d0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0651695dbca39a7c1ed81c96079551ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a0651695dbca39a7c1ed81c96079551ad">canCHANNEL_CAP_DIAGNOSTICS</a>&#160;&#160;&#160;0x10000000L</td></tr>
-<tr class="memdesc:a0651695dbca39a7c1ed81c96079551ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has diagnostic capabilities.  <a href="#a0651695dbca39a7c1ed81c96079551ad">More...</a><br /></td></tr>
-<tr class="separator:a0651695dbca39a7c1ed81c96079551ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cc8a1a1960813e55b753943274d1006"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a8cc8a1a1960813e55b753943274d1006">canCHANNEL_CAP_CANTEGRITY</a>&#160;&#160;&#160;0x10000000L</td></tr>
+<tr class="memdesc:a8cc8a1a1960813e55b753943274d1006"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has CANtegrity capabilities.  <a href="#a8cc8a1a1960813e55b753943274d1006">More...</a><br /></td></tr>
+<tr class="separator:a8cc8a1a1960813e55b753943274d1006"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">canCHANNEL_CAP_EX_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canCHANNEL_CAP_EX_xxx"></a> Channel extended capabilities. </p>
 </div></td></tr>
@@ -653,6 +663,8 @@ Macros</h2></td></tr>
 <tr class="separator:ab5abee158dc1d1872a75dd9483a699b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8462fab97248430a1a349c1ccbaa3911"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a8462fab97248430a1a349c1ccbaa3911">canIOCTL_LIN_MODE</a>&#160;&#160;&#160;45</td></tr>
 <tr class="separator:a8462fab97248430a1a349c1ccbaa3911"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc0a26043013ca3fa9d0b339544b12f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#adc0a26043013ca3fa9d0b339544b12f4">canIOCTL_SET_LOCAL_TXACK</a>&#160;&#160;&#160;46</td></tr>
+<tr class="separator:adc0a26043013ca3fa9d0b339544b12f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">canVERSION_CANLIB32_xxx</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p><a class="anchor" id="canVERSION_CANLIB32_xxx"></a> Item codes for <a class="el" href="group__can__general.html#ga0803bc56e8695150563a48df2c14db5f">canGetVersionEx()</a>. </p>
 </div></td></tr>
@@ -939,6 +951,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:a75f2e3a4c7b1e47c8c6b25b76975b510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58db5be8859c14cd8a0c0f6963c64f26"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcan_notify_data.html">canNotifyData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a58db5be8859c14cd8a0c0f6963c64f26">canNotifyData</a></td></tr>
 <tr class="separator:a58db5be8859c14cd8a0c0f6963c64f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga55095b4ff633151ac4ccf06b1f3df1da"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga55095b4ff633151ac4ccf06b1f3df1da">kvBusParamsTq</a></td></tr>
+<tr class="separator:ga55095b4ff633151ac4ccf06b1f3df1da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfa6eceefcd36704a04b99b8af669528"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structkv_clock_info.html">kvClockInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#acfa6eceefcd36704a04b99b8af669528">kvClockInfo</a></td></tr>
 <tr class="separator:acfa6eceefcd36704a04b99b8af669528"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af504af7b3820af8ec1ec997f3b0333d3"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structkv_bus_param_limits.html">kvBusParamLimits</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#af504af7b3820af8ec1ec997f3b0333d3">kvBusParamLimits</a></td></tr>
@@ -1016,6 +1030,10 @@ Functions</h2></td></tr>
 <tr class="separator:gaa1229ae7635c051a8f7fe545d9d8007a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf38b95fce4930347d9986887ec046e13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gaf38b95fce4930347d9986887ec046e13">canTranslateBaud</a> (long *const freq, unsigned int *const tseg1, unsigned int *const tseg2, unsigned int *const sjw, unsigned int *const nosamp, unsigned int *const syncMode)</td></tr>
 <tr class="separator:gaf38b95fce4930347d9986887ec046e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa666085d9544b2c8db002599595edc37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gaa666085d9544b2c8db002599595edc37">kvBitrateToBusParamsTq</a> (const <a class="el" href="canlib_8h.html#ae3d1b041d62207d5336f93c089cd5b65">canHandle</a> hnd, int freq, <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *nominal)</td></tr>
+<tr class="separator:gaa666085d9544b2c8db002599595edc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga03be920624427856a9fde821ef3f9136"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga03be920624427856a9fde821ef3f9136">kvBitrateToBusParamsFdTq</a> (const <a class="el" href="canlib_8h.html#ae3d1b041d62207d5336f93c089cd5b65">canHandle</a> hnd, int freqA, int freqD, <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *arbitration, <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *data)</td></tr>
+<tr class="separator:ga03be920624427856a9fde821ef3f9136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga01a7a415c95c579750bcdd95a1d245c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#ga01a7a415c95c579750bcdd95a1d245c4">canGetErrorText</a> (<a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a> err, char *buf, unsigned int bufsiz)</td></tr>
 <tr class="separator:ga01a7a415c95c579750bcdd95a1d245c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafb5688859c56ecb6f8d85705d3ec2f14"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#gafb5688859c56ecb6f8d85705d3ec2f14">canGetVersion</a> (void)</td></tr>
@@ -1080,6 +1098,8 @@ Functions</h2></td></tr>
 <tr class="separator:gaf7358e5ef5143e39c10b46d9cb592485"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8d78ccbef4e6038ff63662f06b7cde65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga8d78ccbef4e6038ff63662f06b7cde65">canGetBusStatistics</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, <a class="el" href="canlib_8h.html#a2bb3bba2f57c8222ace214f3f005c39c">canBusStatistics</a> *stat, size_t bufsiz)</td></tr>
 <tr class="separator:ga8d78ccbef4e6038ff63662f06b7cde65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1c6db083e9def9c4d38b4a5226b5f77c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#ga1c6db083e9def9c4d38b4a5226b5f77c">kvAnnounceIdentityEx</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int type, void *buf, size_t bufsiz)</td></tr>
+<tr class="separator:ga1c6db083e9def9c4d38b4a5226b5f77c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga909e5c14b09fe76bad280475138d503e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga909e5c14b09fe76bad280475138d503e">canGetHandleData</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int item, void *buffer, size_t bufsize)</td></tr>
 <tr class="separator:ga909e5c14b09fe76bad280475138d503e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaef2b34a7cd8ab01fc140aabe3a5f5539"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___time_domain_handling.html#gaef2b34a7cd8ab01fc140aabe3a5f5539">kvTimeDomainCreate</a> (<a class="el" href="canlib_8h.html#a48bb105cf654887225e6c1eadb144314">kvTimeDomain</a> *domain)</td></tr>
@@ -1138,20 +1158,20 @@ Functions</h2></td></tr>
 <tr class="separator:gafe38fc6634a1743f404001def0ffa392"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga442c63a2cddbf96ffa0a100e9d9e4283"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga442c63a2cddbf96ffa0a100e9d9e4283">kvScriptTxeGetData</a> (const char *filePathOnPC, int item, void *buffer, unsigned int *bufsize)</td></tr>
 <tr class="separator:ga442c63a2cddbf96ffa0a100e9d9e4283"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga17b1093e1d294442635e5899120c548e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga17b1093e1d294442635e5899120c548e">kvFileCopyToDevice</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, char *hostFileName, char *deviceFileName)</td></tr>
-<tr class="separator:ga17b1093e1d294442635e5899120c548e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga95f4a1383f8be77e74ff48d8be71aecf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga95f4a1383f8be77e74ff48d8be71aecf">kvFileCopyFromDevice</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, char *deviceFileName, char *hostFileName)</td></tr>
-<tr class="separator:ga95f4a1383f8be77e74ff48d8be71aecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5430e6449f86509bb380672ee4183cc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga5430e6449f86509bb380672ee4183cc9">kvFileDelete</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, char *deviceFileName)</td></tr>
-<tr class="separator:ga5430e6449f86509bb380672ee4183cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad6ffe54a4c22dbdde855e5c8dd0634fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#gad6ffe54a4c22dbdde855e5c8dd0634fa">kvFileGetName</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int fileNo, char *name, int namelen)</td></tr>
-<tr class="separator:gad6ffe54a4c22dbdde855e5c8dd0634fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6f7e3b5d2faf2556a40ec7818cd74c47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga6f7e3b5d2faf2556a40ec7818cd74c47">kvFileGetCount</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int *count)</td></tr>
-<tr class="separator:ga6f7e3b5d2faf2556a40ec7818cd74c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa5c82841a46a9ed78605120edb98cf23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#gaa5c82841a46a9ed78605120edb98cf23">kvFileGetSystemData</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int itemCode, int *result)</td></tr>
-<tr class="separator:gaa5c82841a46a9ed78605120edb98cf23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga40ce4dc39d01e0d33f4a1a8590e60a9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__t_script.html#ga40ce4dc39d01e0d33f4a1a8590e60a9d">kvFileDiskFormat</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd)</td></tr>
-<tr class="separator:ga40ce4dc39d01e0d33f4a1a8590e60a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17b1093e1d294442635e5899120c548e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a17b1093e1d294442635e5899120c548e">kvFileCopyToDevice</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, char *hostFileName, char *deviceFileName)</td></tr>
+<tr class="separator:a17b1093e1d294442635e5899120c548e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95f4a1383f8be77e74ff48d8be71aecf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a95f4a1383f8be77e74ff48d8be71aecf">kvFileCopyFromDevice</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, char *deviceFileName, char *hostFileName)</td></tr>
+<tr class="separator:a95f4a1383f8be77e74ff48d8be71aecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5430e6449f86509bb380672ee4183cc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a5430e6449f86509bb380672ee4183cc9">kvFileDelete</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, char *deviceFileName)</td></tr>
+<tr class="separator:a5430e6449f86509bb380672ee4183cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ffe54a4c22dbdde855e5c8dd0634fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#ad6ffe54a4c22dbdde855e5c8dd0634fa">kvFileGetName</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int fileNo, char *name, int namelen)</td></tr>
+<tr class="separator:ad6ffe54a4c22dbdde855e5c8dd0634fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f7e3b5d2faf2556a40ec7818cd74c47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a6f7e3b5d2faf2556a40ec7818cd74c47">kvFileGetCount</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int *count)</td></tr>
+<tr class="separator:a6f7e3b5d2faf2556a40ec7818cd74c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5c82841a46a9ed78605120edb98cf23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#aa5c82841a46a9ed78605120edb98cf23">kvFileGetSystemData</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int itemCode, int *result)</td></tr>
+<tr class="separator:aa5c82841a46a9ed78605120edb98cf23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40ce4dc39d01e0d33f4a1a8590e60a9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canlib_8h.html#a40ce4dc39d01e0d33f4a1a8590e60a9d">kvFileDiskFormat</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd)</td></tr>
+<tr class="separator:a40ce4dc39d01e0d33f4a1a8590e60a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8ec3c64b63e50ff210294001bdbad7c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#ga8ec3c64b63e50ff210294001bdbad7c3">kvDeviceSetMode</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int mode)</td></tr>
 <tr class="separator:ga8ec3c64b63e50ff210294001bdbad7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2f80c456dd1653ffe8a9062de3e1ad76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__can__general.html#ga2f80c456dd1653ffe8a9062de3e1ad76">kvDeviceGetMode</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, int *result)</td></tr>
@@ -1369,7 +1389,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gac34c1577cae55385250e7412513c8cbd">canSetBusParamsC200()</a>. Indicate a bitrate of 1 Mbit/s. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a8">cancount.c</a>, <a class="el" href="canmonitor_8c-example.html#a22">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a16">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a8">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a8">cancount.c</a>, <a class="el" href="canmonitor_8c-example.html#a26">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a20">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a8">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -1385,7 +1405,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gac34c1577cae55385250e7412513c8cbd">canSetBusParamsC200()</a>. Indicate a bitrate of 250 kbit/s. </p>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a9">tutorial/c/MonitorCanChannel.c</a>, and <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a6">tutorial/c/SendMessage.c</a>.</dd>
+</dl>
 </div>
 </div>
 <a id="ae72ee3c12379c4817de3b53c7cc6d89c"></a>
@@ -1497,19 +1518,19 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0651695dbca39a7c1ed81c96079551ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0651695dbca39a7c1ed81c96079551ad">&#9670;&nbsp;</a></span>canCHANNEL_CAP_DIAGNOSTICS</h2>
+<a id="a8cc8a1a1960813e55b753943274d1006"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cc8a1a1960813e55b753943274d1006">&#9670;&nbsp;</a></span>canCHANNEL_CAP_CANTEGRITY</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define canCHANNEL_CAP_DIAGNOSTICS&#160;&#160;&#160;0x10000000L</td>
+          <td class="memname">#define canCHANNEL_CAP_CANTEGRITY&#160;&#160;&#160;0x10000000L</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has diagnostic capabilities. </p>
+<p>Used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>. Channel has CANtegrity capabilities. </p>
 
 </div>
 </div>
@@ -2186,8 +2207,7 @@ Functions</h2></td></tr>
 <p><em>buffer</em> points to an area which receives a zero-terminated string with a clear-text name of the channel.</p>
 <dl class="section note"><dt>Note</dt><dd>Use of this item code is no longer recommended. The returned channel name doesn't contain the exact hardware type (it just contains the device family) and uses zero-based channel numbering, which is not user friendly. Instead, use e.g. <a class="el" href="canlib_8h.html#afc7edc82e3d370444c3b83c66a9c6479">canCHANNELDATA_DEVDESCR_ASCII</a> and <a class="el" href="canlib_8h.html#a4e0823a649d26191cde50f2c4fa5a65d">canCHANNELDATA_CHAN_NO_ON_CARD</a> to build your own channel name.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="canlib_8h.html#af401a271df81c288ca1ba3a18eddd5ec">canCHANNELDATA_DEVNAME_ASCII</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a10">listChannels.c</a>.</dd>
-</dl>
+
 </div>
 </div>
 <a id="a33a8b6d6acfa69bc65b3efd171aa0990"></a>
@@ -2255,7 +2275,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to a buffer which receives the product name of the device as a zero-terminated ASCII string. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2list_channels_8c-example.html#a4">how-to/c/listChannels.c</a>, and <a class="el" href="list_channels_8c-example.html#a9">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="how-to_2c_2list_channels_8c-example.html#a4">how-to/c/listChannels.c</a>, and <a class="el" href="list_channels_8c-example.html#a10">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2342,7 +2362,7 @@ Functions</h2></td></tr>
 <li>2: The minor revision number </li>
 <li>3: The major revision number </li>
 </ul>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a8">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a9">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2430,7 +2450,7 @@ Functions</h2></td></tr>
 <p>This define is used in <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <em>buffer</em> mentioned below refers to this functions argument.</p>
 <p><em>buffer</em> points to a buffer which receives the name of the device driver (e.g. "kcanl") as a zero-terminated ASCII string.</p>
 <dl class="section note"><dt>Note</dt><dd>The device driver names have no special meanings and may change from a release to another. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a7">listChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="list_channels_8c-example.html#a8">listChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2876,6 +2896,21 @@ Not implemented in linux. </dd></dl>
 </dl>
 </div>
 </div>
+<a id="a945c8003af92915e03c730aabaff29f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a945c8003af92915e03c730aabaff29f6">&#9670;&nbsp;</a></span>canFD_BITRATE_2M_60P</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canFD_BITRATE_2M_60P&#160;&#160;&#160;(-1007)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd()</a> when using the CAN FD protocol. Indicates a bitrate of 2.0 Mbit/s and sampling point at 60%. </p>
+
+</div>
+</div>
 <a id="a9f21214c84dbb6f5f37eb27520ecc162"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f21214c84dbb6f5f37eb27520ecc162">&#9670;&nbsp;</a></span>canFD_BITRATE_2M_80P</h2>
 
@@ -2935,6 +2970,36 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd()</a> when using the CAN FD protocol. Indicates a bitrate of 8.0 Mbit/s and sampling point at 60%. </p>
+
+</div>
+</div>
+<a id="a6e16a689103d649b9566bfe2546944ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e16a689103d649b9566bfe2546944ad">&#9670;&nbsp;</a></span>canFD_BITRATE_8M_70P</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canFD_BITRATE_8M_70P&#160;&#160;&#160;(-1006)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd()</a> when using the CAN FD protocol. Indicates a bitrate of 8.0 Mbit/s and sampling point at 70%. </p>
+
+</div>
+</div>
+<a id="a1692cfa2b92bf18a666aa040171f5a27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1692cfa2b92bf18a666aa040171f5a27">&#9670;&nbsp;</a></span>canFD_BITRATE_8M_80P</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canFD_BITRATE_8M_80P&#160;&#160;&#160;(-1005)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Used in <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a> and <a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd()</a> when using the CAN FD protocol. Indicates a bitrate of 8.0 Mbit/s and sampling point at 80%. </p>
 
 </div>
 </div>
@@ -3248,6 +3313,22 @@ Not implemented in linux. </dd></dl>
 </div><div class="memdoc">
 
 <p>Kvaser Leaf Pro HS v2 and variants. </p>
+
+</div>
+</div>
+<a id="aad24fe9abf4424a071ec79b535e49ec4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad24fe9abf4424a071ec79b535e49ec4">&#9670;&nbsp;</a></span>canHWTYPE_LEAF3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canHWTYPE_LEAF3&#160;&#160;&#160;90</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kvaser Kvaser Leaf v3 and variants. </p>
 
 </div>
 </div>
@@ -3977,7 +4058,7 @@ Not implemented in linux. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>Use <a class="el" href="canlib_8h.html#a668aff1bb8e1ff96d50c8bded8706d48">canIOCTL_GET_THROTTLE_SCALED</a> instead</dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000004">Deprecated:</a></b></dt><dd>Use <a class="el" href="canlib_8h.html#a668aff1bb8e1ff96d50c8bded8706d48">canIOCTL_GET_THROTTLE_SCALED</a> instead</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -4060,7 +4141,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> and <em>buflen</em> refers to this functions arguments.</p>
-<p>Tells CANlib to "prefer" extended identifiers; that is, if you send a message with <a class="el" href="group___c_a_n.html#ga62c185329d6741c90102511e2f37983e">canWrite()</a> and don't specify <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> nor <a class="el" href="canstat_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a>, <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> will be assumed and the most significant bits of the identifier will be cut off. The contents of <em>buf</em> and <em>buflen</em> is ignored. <a class="el" href="group___c_a_n.html#ga157d49a9343dea68ac953145e02266d8">canRead()</a> et al will set <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="canstat_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a> as usual and are not affected by this call.</p>
+<p>Tells CANlib to "prefer" extended identifiers; that is, if you send a message with <a class="el" href="group___c_a_n.html#ga62c185329d6741c90102511e2f37983e">canWrite()</a> and don't specify <a class="el" href="kva_db_lib_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> nor <a class="el" href="kva_db_lib_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a>, <a class="el" href="kva_db_lib_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> will be assumed and the most significant bits of the identifier will be cut off. The contents of <em>buf</em> and <em>buflen</em> is ignored. <a class="el" href="group___c_a_n.html#ga157d49a9343dea68ac953145e02266d8">canRead()</a> et al will set <a class="el" href="kva_db_lib_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="kva_db_lib_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a> as usual and are not affected by this call.</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -4077,7 +4158,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> and <em>buflen</em> refers to this functions arguments.</p>
-<p>Tells CANlib to "prefer" standard identifiers; that is, if you send a message with <a class="el" href="group___c_a_n.html#ga62c185329d6741c90102511e2f37983e">canWrite()</a> and don't specify <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> nor <a class="el" href="canstat_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a>, <a class="el" href="canstat_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a> will be assumed. The contents of <em>buf</em> and <em>buflen</em> are ignored. <a class="el" href="group___c_a_n.html#ga157d49a9343dea68ac953145e02266d8">canRead()</a> et al will set <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="canstat_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a> as usual and are not affected by this call.</p>
+<p>Tells CANlib to "prefer" standard identifiers; that is, if you send a message with <a class="el" href="group___c_a_n.html#ga62c185329d6741c90102511e2f37983e">canWrite()</a> and don't specify <a class="el" href="kva_db_lib_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> nor <a class="el" href="kva_db_lib_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a>, <a class="el" href="kva_db_lib_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a> will be assumed. The contents of <em>buf</em> and <em>buflen</em> are ignored. <a class="el" href="group___c_a_n.html#ga157d49a9343dea68ac953145e02266d8">canRead()</a> et al will set <a class="el" href="kva_db_lib_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="kva_db_lib_8h.html#a56000a3f22f1408c26db4dc731aa4a9e">canMSG_STD</a> as usual and are not affected by this call.</p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -4186,6 +4267,28 @@ Not implemented in linux. </dd></dl>
 
 </div>
 </div>
+<a id="adc0a26043013ca3fa9d0b339544b12f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc0a26043013ca3fa9d0b339544b12f4">&#9670;&nbsp;</a></span>canIOCTL_SET_LOCAL_TXACK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define canIOCTL_SET_LOCAL_TXACK&#160;&#160;&#160;46</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to an argument of that function.</p>
+<p>Enable reception of canMSG_LOCAL_TXACK When Local transmit acknowledge on a handle is enabled, the handle will receive messages with the canMSG_LOCAL_TXACK flag set every time a message is successfully transmitted on the bus by another handle using the same channel. It will not be received if it is sent on the same handle.</p>
+<p><em>buf</em> points to an unsigned int which contains</p>
+<ul>
+<li>0: to turn Local Transmit Acknowledges off. </li>
+<li>1: to turn Local Transmit Acknowledges on.</li>
+</ul>
+<p>The default value is 0, Local Transmit Acknowledge is off. </p>
+
+</div>
+</div>
 <a id="a86f7ce6c809f30983b69ead49d793689"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a86f7ce6c809f30983b69ead49d793689">&#9670;&nbsp;</a></span>canIOCTL_SET_LOCAL_TXECHO</h2>
 
@@ -4273,7 +4376,7 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p>The timer scale determines how precisely the channel's timestamps will be displayed without changing the accuracy of the clock. <em>buf</em> points to a DWORD which contains the desired time-stamp clock resolution in microseconds. The default value is 1000 microseconds, i.e. one millisecond.</p>
+<p>The timer scale determines how precisely the channel's timestamps will be displayed without changing the accuracy of the clock. <em>buf</em> points to a DWORD which contains the desired time-stamp clock resolution in microseconds. If you want to change the resolution to 10 microseconds, set the value to 10. The default value is 1000, i.e. one millisecond.</p>
 <dl class="section note"><dt>Note</dt><dd>The accuracy of the clock isn't affected. </dd></dl>
 
 </div>
@@ -4290,11 +4393,12 @@ Not implemented in linux. </dd></dl>
       </table>
 </div><div class="memdoc">
 <p>This define is used in <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a>, <em>buf</em> mentioned below refers to this functions argument.</p>
-<p>Enabling transmit Acknowledges on a channel results in that channel receiving a message with the TXACK flag enabled every time a message is successfully transmitted.</p>
+<p>Enabling transmit Acknowledges on a channel results in that channel receiving a message with the TXACK flag enabled every time a message is successfully transmitted on the bus.</p>
 <p><em>buf</em> points to a DWORD which contains</p>
 <ul>
 <li>0: to turn Transmit Acknowledges off. </li>
-<li>1: to turn Transmit Acknowledges on. </li>
+<li>1: to turn Transmit Acknowledges on. <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd></dd></dl>
+</li>
 <li>2: to turn Transmit Acknowledges off, even for the driver's internal usage. This might enhance performance but will cause some other APIs to stop working (for example, the current size of the transmit queue can not be read when this mode is active.)</li>
 </ul>
 <p>The default value is 0, Transmit Acknowledge is off. </p>
@@ -4350,7 +4454,7 @@ Not implemented in linux. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd>Use <a class="el" href="canlib_8h.html#a209b1bfbe11114d7b1b72d447672bcb4">canIOCTL_SET_THROTTLE_SCALED</a> instead.</dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>Use <a class="el" href="canlib_8h.html#a209b1bfbe11114d7b1b72d447672bcb4">canIOCTL_SET_THROTTLE_SCALED</a> instead.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Not implemented in linux. </dd></dl>
 
 </div>
@@ -4486,7 +4590,7 @@ Not implemented in linux. </dd></dl>
 <p>Allow opening of virtual channels as well as physical channels.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_device_and_channel.html#section_user_guide_virtual">Virtual Channels</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a6">cancount.c</a>, <a class="el" href="canmonitor_8c-example.html#a14">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a14">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a7">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a4">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a6">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a6">cancount.c</a>, <a class="el" href="canmonitor_8c-example.html#a18">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a18">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a7">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a4">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a6">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -4503,7 +4607,7 @@ Not implemented in linux. </dd></dl>
 </div><div class="memdoc">
 <p>The channel will use the CAN FD protocol, ISO compliant. This also means that messages with <a class="el" href="canstat_8h.html#canFDMSG_xxx">canFDMSG_xxx</a> flags can now be used.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdmonitor_8c-example.html#a4">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a4">canfdwrite.c</a>, and <a class="el" href="how-to_2c_2open_channels_8c-example.html#a5">how-to/c/openChannels.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdmonitor_8c-example.html#a4">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a4">canfdwrite.c</a>, <a class="el" href="example_2c_2busparams_tq_8c-example.html#a6">example/c/busparams_tq.c</a>, and <a class="el" href="how-to_2c_2open_channels_8c-example.html#a5">how-to/c/openChannels.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -4539,10 +4643,10 @@ Not implemented in linux. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Don't allow sharing of this CANlib channel between applications.</p>
-<p>Two or more applications can share the same CAN channel. You can, for example, have one application send messages on the bus and another application that just monitors the bus. If this is not desired (for performance or other reasons) you can open an exclusive handle to a channel. This means that no other application can open a handle to the same channel. Do this by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
+<p>Don't allow sharing of this CANlib channel.</p>
+<p>Two or more threads or applications can share the same CAN channel by opening multiple handles to the same CANlib channel. If this is not desired you can open a single exclusive handle to a channel which is done by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>. If a handle to the CANlib channel is already open, the call to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> will fail.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparms_8c-example.html#a4">busparms.c</a>, <a class="el" href="cancount_8c-example.html#a4">cancount.c</a>, <a class="el" href="canfdwrite_8c-example.html#a5">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a12">canmonitor.c</a>, <a class="el" href="how-to_2c_2open_channels_8c-example.html#a6">how-to/c/openChannels.c</a>, <a class="el" href="simplewrite_8c-example.html#a12">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a4">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparams_8c-example.html#a4">busparams.c</a>, <a class="el" href="cancount_8c-example.html#a4">cancount.c</a>, <a class="el" href="canfdwrite_8c-example.html#a5">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a16">canmonitor.c</a>, <a class="el" href="how-to_2c_2open_channels_8c-example.html#a6">how-to/c/openChannels.c</a>, <a class="el" href="simplewrite_8c-example.html#a16">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a4">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -4615,7 +4719,7 @@ Not implemented in linux. </dd></dl>
 <li>If no frame-type flag is specified in a call to <a class="el" href="group___c_a_n.html#ga62c185329d6741c90102511e2f37983e">canWrite</a>, it is assumed that extended CAN should be used.</li>
 </ul>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>. </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparms_8c-example.html#a5">busparms.c</a>, <a class="el" href="cancount_8c-example.html#a5">cancount.c</a>, <a class="el" href="canfdwrite_8c-example.html#a6">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a13">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a13">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a5">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparams_8c-example.html#a5">busparams.c</a>, <a class="el" href="cancount_8c-example.html#a5">cancount.c</a>, <a class="el" href="canfdwrite_8c-example.html#a6">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a17">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a17">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a5">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -4822,8 +4926,8 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Don't allow sharing of this CANlib channel between applications.</p>
-<p>Two or more applications can share the same CAN channel. You can, for example, have one application send messages on the bus and another application that just monitors the bus. If this is not desired (for performance or other reasons) you can open an exclusive handle to a channel. This means that no other application can open a handle to the same channel. Do this by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
+<p>Don't allow sharing of this CANlib channel.</p>
+<p>Two or more threads or applications can share the same CAN channel by opening multiple handles to the same CANlib channel. If this is not desired you can open a single exclusive handle to a channel which is done by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>. If a handle to the CANlib channel is already open, the call to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> will fail.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> </p>
 
 </div>
@@ -4839,8 +4943,8 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Don't allow sharing of this CANlib channel between applications.</p>
-<p>Two or more applications can share the same CAN channel. You can, for example, have one application send messages on the bus and another application that just monitors the bus. If this is not desired (for performance or other reasons) you can open an exclusive handle to a channel. This means that no other application can open a handle to the same channel. Do this by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
+<p>Don't allow sharing of this CANlib channel.</p>
+<p>Two or more threads or applications can share the same CAN channel by opening multiple handles to the same CANlib channel. If this is not desired you can open a single exclusive handle to a channel which is done by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>. If a handle to the CANlib channel is already open, the call to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> will fail.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> </p>
 
 </div>
@@ -4856,8 +4960,8 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Don't allow sharing of this CANlib channel between applications.</p>
-<p>Two or more applications can share the same CAN channel. You can, for example, have one application send messages on the bus and another application that just monitors the bus. If this is not desired (for performance or other reasons) you can open an exclusive handle to a channel. This means that no other application can open a handle to the same channel. Do this by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>.</p>
+<p>Don't allow sharing of this CANlib channel.</p>
+<p>Two or more threads or applications can share the same CAN channel by opening multiple handles to the same CANlib channel. If this is not desired you can open a single exclusive handle to a channel which is done by passing the <a class="el" href="canlib_8h.html#afacd9e186d273d0dc24956ea0d433822">canOPEN_EXCLUSIVE</a> flag in the flags argument to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>. If a handle to the CANlib channel is already open, the call to <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> will fail.</p>
 <p>This define is used in <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a> </p>
 
 </div>
@@ -6264,7 +6368,9 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
 </div><div class="memdoc">
 <p>Returned when using <a class="el" href="canlib_8h.html#ad4a719c4336ae1ec409bc835a9321f05">canCHANNELDATA_BUS_PARAM_LIMITS</a></p>
 <p>This struct shows the low level limits of the parameters.</p>
-<p>Note that seg1 = prop + phase1 and seg2 = phase2 </p>
+<p>The tq field is always zero for both min/max arbitration/data, and is reserved for possible other uses in future releases.</p>
+<p>If prop is zero for both min and max values, that means that the unit does not distinguish between phase segment one and the propagation segment, i.e. the limit applies to (phase1 + prop).</p>
+<dl class="section note"><dt>Note</dt><dd>This is only intended for internal use. </dd></dl>
 
 </div>
 </div>
@@ -6280,12 +6386,17 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
       </table>
 </div><div class="memdoc">
 <p><a class="el" href="canlib_8h.html#a7e926c0359a2caa6b9a663a333bab78d">kvCallback_t</a> is used by the function <a class="el" href="group__can__general.html#ga99976c5b8e2c534b27bf9ec2e715d8d3">kvSetNotifyCallback()</a></p>
-<p>The callback function is called with the following arguments: </p><ul>
+<p>The callback function, on Windows required to be a <code>__stdcall</code> function, should be called with the following arguments:</p>
+<ul>
 <li>hnd - the handle of the CAN channel where the event happened. </li>
 <li>context - the context pointer you passed to <a class="el" href="group__can__general.html#ga99976c5b8e2c534b27bf9ec2e715d8d3">kvSetNotifyCallback()</a>. </li>
 <li>notifyEvent - one of the <a class="el" href="canstat_8h.html#canNOTIFY_xxx">canNOTIFY_xxx</a> notification codes.</li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>It is really the <a class="el" href="canstat_8h.html#canNOTIFY_xxx">canNOTIFY_xxx</a> codes, and not the <a class="el" href="canstat_8h.html#canEVENT_xxx">canEVENT_xxx</a> codes that the <a class="el" href="group___c_a_n.html#gaa5dd0f277c7059169055321fbda87486">canSetNotify()</a> API is using. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>It is really the <a class="el" href="canstat_8h.html#canNOTIFY_xxx">canNOTIFY_xxx</a> codes, and not the <a class="el" href="canstat_8h.html#canEVENT_xxx">canEVENT_xxx</a> codes that the <a class="el" href="group___c_a_n.html#gaa5dd0f277c7059169055321fbda87486">canSetNotify()</a> API is using.</dd>
+<dd>
+The default calling convention for C/C++ programs on Windows is <code>__cdecl</code>. <br />
+On Linux, the default calling convention is used.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_send_recv_asynch_not.html#section_user_guide_send_recv_asynch_callback">Receiving Using Callback Function</a> </dd></dl>
 
 </div>
 </div>
@@ -6394,8 +6505,313 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
       </table>
 </div><div class="memdoc">
 <dl class="section warning"><dt>Warning</dt><dd>Obsolete! <a class="el" href="group__can__general.html#ga0671078a6184ab2b73287946a49763f2">kvReadTimer()</a> should be used instead. </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="read_timer_test_8c-example.html#a4">readTimerTest.c</a>.</dd>
+
+</div>
+</div>
+<a id="a95f4a1383f8be77e74ff48d8be71aecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95f4a1383f8be77e74ff48d8be71aecf">&#9670;&nbsp;</a></span>kvFileCopyFromDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a> kvFileCopyFromDevice </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a>&#160;</td>
+          <td class="paramname"><em>hnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>deviceFileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>hostFileName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The <a class="el" href="canlib_8h.html#a95f4a1383f8be77e74ff48d8be71aecf">kvFileCopyFromDevice()</a> function copies an arbitrary file from the device to the host.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hnd</td><td>An open handle to a CAN channel. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deviceFileName</td><td>The device file name; a pointer to a <code>NULL</code> terminated array of chars. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">hostFileName</td><td>The target host file name; a pointer to a <code>NULL</code> terminated array of chars.</td></tr>
+  </table>
+  </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) if success </dd>
+<dd>
+<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="canlib_8h.html#a17b1093e1d294442635e5899120c548e">kvFileCopyToDevice()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a17b1093e1d294442635e5899120c548e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17b1093e1d294442635e5899120c548e">&#9670;&nbsp;</a></span>kvFileCopyToDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a> kvFileCopyToDevice </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a>&#160;</td>
+          <td class="paramname"><em>hnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>hostFileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>deviceFileName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The <a class="el" href="canlib_8h.html#a17b1093e1d294442635e5899120c548e">kvFileCopyToDevice()</a> function copies an arbitrary file from the host to the device.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hnd</td><td>An open handle to a CAN channel. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">hostFileName</td><td>The host file name; a pointer to a <code>NULL</code> terminated array of chars. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deviceFileName</td><td>The target device file name; a pointer to a <code>NULL</code> terminated array of chars.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) if success </dd>
+<dd>
+<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="canlib_8h.html#a95f4a1383f8be77e74ff48d8be71aecf">kvFileCopyFromDevice()</a>, <a class="el" href="canlib_8h.html#a5430e6449f86509bb380672ee4183cc9">kvFileDelete()</a> </dd>
+<dd>
+<a class="el" href="page_user_guide_kvfile.html#section_user_guide_kvfile_copying_files_to_device">Copying files from / to device</a> </dd></dl>
+
+</div>
+</div>
+<a id="a5430e6449f86509bb380672ee4183cc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5430e6449f86509bb380672ee4183cc9">&#9670;&nbsp;</a></span>kvFileDelete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a> kvFileDelete </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a>&#160;</td>
+          <td class="paramname"><em>hnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>deviceFileName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The <a class="el" href="canlib_8h.html#a5430e6449f86509bb380672ee4183cc9">kvFileDelete()</a> function deletes a file on the device.</p>
+<dl class="section note"><dt>Note</dt><dd>Deleting system files is not recommended.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hnd</td><td>An open handle to a CAN channel. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">deviceFileName</td><td>The file on the device to delete; a pointer to a <code>NULL</code> terminated array of chars.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) if success </dd>
+<dd>
+<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="canlib_8h.html#a17b1093e1d294442635e5899120c548e">kvFileCopyToDevice()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a40ce4dc39d01e0d33f4a1a8590e60a9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40ce4dc39d01e0d33f4a1a8590e60a9d">&#9670;&nbsp;</a></span>kvFileDiskFormat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a> kvFileDiskFormat </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a>&#160;</td>
+          <td class="paramname"><em>hnd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The <a class="el" href="canlib_8h.html#a40ce4dc39d01e0d33f4a1a8590e60a9d">kvFileDiskFormat()</a> function is used for formating the disk, back to FAT32.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hnd</td><td>An open handle to a CAN channel.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) if success </dd>
+<dd>
+<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure </dd></dl>
+
+</div>
+</div>
+<a id="a6f7e3b5d2faf2556a40ec7818cd74c47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f7e3b5d2faf2556a40ec7818cd74c47">&#9670;&nbsp;</a></span>kvFileGetCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a> kvFileGetCount </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a>&#160;</td>
+          <td class="paramname"><em>hnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The <a class="el" href="canlib_8h.html#a6f7e3b5d2faf2556a40ec7818cd74c47">kvFileGetCount()</a> function returns the number of files.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hnd</td><td>An open handle to a CAN channel. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">count</td><td>A pointer to a 32-bit integer that will receive the file count.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) if success </dd>
+<dd>
+<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="canlib_8h.html#ad6ffe54a4c22dbdde855e5c8dd0634fa">kvFileGetName()</a>, <a class="el" href="canlib_8h.html#aa5c82841a46a9ed78605120edb98cf23">kvFileGetSystemData()</a> </dd></dl>
+
+</div>
+</div>
+<a id="ad6ffe54a4c22dbdde855e5c8dd0634fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6ffe54a4c22dbdde855e5c8dd0634fa">&#9670;&nbsp;</a></span>kvFileGetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a> kvFileGetName </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a>&#160;</td>
+          <td class="paramname"><em>hnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fileNo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>namelen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The <a class="el" href="canlib_8h.html#ad6ffe54a4c22dbdde855e5c8dd0634fa">kvFileGetName()</a> function returns the name of the file with number <em>fileNo</em>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hnd</td><td>An open handle to a CAN channel. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileNo</td><td>The number of the file. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">name</td><td>A buffer that will contain the name of the file. The name is a zero-terminated ASCII string. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">namelen</td><td>The length, in bytes, of the <em>name</em> buffer.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) if success </dd>
+<dd>
+<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="canlib_8h.html#a6f7e3b5d2faf2556a40ec7818cd74c47">kvFileGetCount()</a>, <a class="el" href="canlib_8h.html#aa5c82841a46a9ed78605120edb98cf23">kvFileGetSystemData()</a> </dd></dl>
+
+</div>
+</div>
+<a id="aa5c82841a46a9ed78605120edb98cf23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5c82841a46a9ed78605120edb98cf23">&#9670;&nbsp;</a></span>kvFileGetSystemData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">kvStatus</a> kvFileGetSystemData </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a>&#160;</td>
+          <td class="paramname"><em>hnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>itemCode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The <a class="el" href="canlib_8h.html#aa5c82841a46a9ed78605120edb98cf23">kvFileGetSystemData()</a> function is used for reading disk parameters, e.g. size, max number of (user) files, etc.</p>
+<dl class="section note"><dt>Note</dt><dd>Not yet implemented</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hnd</td><td>An open handle to a CAN channel. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">itemCode</td><td>The item we want information on. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">result</td><td>A pointer to a 32-bit integer that will receive the result.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) if success </dd>
+<dd>
+<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -6405,7 +6821,7 @@ reporting" by calling <a class="el" href="group__can__general.html#gaeaa24db97af
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a class="el" href="dir_b077c42d920d220d4fe5af62a68f598c.html">src</a></li><li class="navelem"><a class="el" href="canlib_8h.html">canlib.h</a></li>
-    <li class="footer"> (canlib 5.34) Wed Sep 9 2020</li>
+    <li class="footer"> (canlib 5.43) Wed Sep 13 2023</li>
   </ul>
 </div>
 </body>

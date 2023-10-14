@@ -1,12 +1,19 @@
 #include <linux/module.h>
+#define INCLUDE_VERMAGIC
+#include <linux/build-salt.h>
+#include <linux/elfnote-lto.h>
+#include <linux/export-internal.h>
 #include <linux/vermagic.h>
 #include <linux/compiler.h>
+
+BUILD_SALT;
+BUILD_LTO_INFO;
 
 MODULE_INFO(vermagic, VERMAGIC_STRING);
 MODULE_INFO(name, KBUILD_MODNAME);
 
 __visible struct module __this_module
-__attribute__((section(".gnu.linkonce.this_module"))) = {
+__section(".gnu.linkonce.this_module") = {
 	.name = KBUILD_MODNAME,
 	.init = init_module,
 #ifdef CONFIG_MODULE_UNLOAD
@@ -19,76 +26,124 @@ __attribute__((section(".gnu.linkonce.this_module"))) = {
 MODULE_INFO(retpoline, "Y");
 #endif
 
+SYMBOL_CRC(vCanTime, 0x84f435c1, "");
+SYMBOL_CRC(kv_do_gettimeofday, 0x88c2dbba, "");
+SYMBOL_CRC(vCanCalc_dt, 0x118238a0, "");
+SYMBOL_CRC(vCanSupportsBusParamsTq, 0xe6c6764e, "");
+SYMBOL_CRC(vCanFlushSendBuffer, 0x828398ff, "");
+SYMBOL_CRC(vCanGetCardInfo, 0x166163ff, "");
+SYMBOL_CRC(vCanGetCardInfo2, 0xec8d96be, "");
+SYMBOL_CRC(vCanAddCardChannel, 0x1eaab143, "");
+SYMBOL_CRC(vCanRemoveCardChannel, 0x0afec5d3, "");
+SYMBOL_CRC(vCanDispatchEvent, 0xffd473e4, "");
+SYMBOL_CRC(vCanDispatchPrintfEvent, 0x2dc3d54c, "");
+SYMBOL_CRC(vCanInitData, 0xb5385e3c, "");
+SYMBOL_CRC(vCanInit, 0x1229cb50, "");
+SYMBOL_CRC(vCanCleanup, 0x86204941, "");
+SYMBOL_CRC(queue_reinit, 0x55555880, "");
+SYMBOL_CRC(queue_init, 0xfe2fd6f8, "");
+SYMBOL_CRC(queue_irq_lock, 0x206ebad6, "");
+SYMBOL_CRC(queue_length, 0xa02aea3a, "");
+SYMBOL_CRC(queue_empty, 0x679e43d1, "");
+SYMBOL_CRC(queue_back, 0x244ab863, "");
+SYMBOL_CRC(queue_push, 0x6782eeca, "");
+SYMBOL_CRC(queue_front, 0xfaa20ff6, "");
+SYMBOL_CRC(queue_pop, 0x220f6eb0, "");
+SYMBOL_CRC(queue_release, 0x30372d96, "");
+SYMBOL_CRC(queue_add_wait_for_space, 0x87d7787f, "");
+SYMBOL_CRC(queue_remove_wait_for_space, 0x10fa71db, "");
+SYMBOL_CRC(queue_wakeup_on_space, 0xe6cf5658, "");
+SYMBOL_CRC(calculateCRC32, 0x235ea4c1, "");
+SYMBOL_CRC(packed_EAN_to_BCD_with_csum, 0xfd06f019, "");
+SYMBOL_CRC(get_usb_root_hub_id, 0x9a8e7a78, "");
+SYMBOL_CRC(softSyncLoc2Glob, 0x0b3939f9, "");
+SYMBOL_CRC(softSyncHandleTRef, 0xf5b634f0, "");
+SYMBOL_CRC(softSyncAddMember, 0x1dfbaca0, "");
+SYMBOL_CRC(softSyncRemoveMember, 0x87451115, "");
+SYMBOL_CRC(softSyncGetTRefList, 0xbf8182fa, "");
+SYMBOL_CRC(set_capability_value, 0x4a379bbf, "");
+SYMBOL_CRC(set_capability_mask, 0x30d1029a, "");
+SYMBOL_CRC(convert_vcan_to_hydra_cmd, 0x15388bbc, "");
+SYMBOL_CRC(card_has_capability, 0x358a4e46, "");
+SYMBOL_CRC(card_has_capability_ex, 0x204683ad, "");
+SYMBOL_CRC(set_capability_ex_value, 0x803ad55b, "");
+SYMBOL_CRC(set_capability_ex_mask, 0xb0d3a1c6, "");
+SYMBOL_CRC(convert_vcan_ex_to_hydra_cmd, 0x752b9cc1, "");
+SYMBOL_CRC(dlc_bytes_to_dlc_fd, 0xbfaf25a3, "");
+SYMBOL_CRC(dlc_dlc_to_bytes_fd, 0x63fbdd18, "");
+SYMBOL_CRC(dlc_is_dlc_ok, 0xab1ad228, "");
+SYMBOL_CRC(dlc_dlc_to_bytes_classic, 0xede295c6, "");
+SYMBOL_CRC(ticks_init, 0x2289f050, "");
+SYMBOL_CRC(ticks_to_64bit_ns, 0x6adf812a, "");
+
 static const struct modversion_info ____versions[]
-__used
-__attribute__((section("__versions"))) = {
-	{ 0x7ef2b274, __VMLINUX_SYMBOL_STR(module_layout) },
-	{ 0xd3d9c965, __VMLINUX_SYMBOL_STR(cdev_del) },
-	{ 0x5773238, __VMLINUX_SYMBOL_STR(kmalloc_caches) },
-	{ 0xd2b09ce5, __VMLINUX_SYMBOL_STR(__kmalloc) },
-	{ 0xef4c5632, __VMLINUX_SYMBOL_STR(cdev_init) },
-	{ 0x1ed8b599, __VMLINUX_SYMBOL_STR(__x86_indirect_thunk_r8) },
-	{ 0x672edad8, __VMLINUX_SYMBOL_STR(pv_lock_ops) },
-	{ 0x2bba8c19, __VMLINUX_SYMBOL_STR(single_open) },
-	{ 0x43a53735, __VMLINUX_SYMBOL_STR(__alloc_workqueue_key) },
-	{ 0xf9696887, __VMLINUX_SYMBOL_STR(remove_wait_queue) },
-	{ 0xa9e08275, __VMLINUX_SYMBOL_STR(_raw_spin_lock_bh) },
-	{ 0xad27f361, __VMLINUX_SYMBOL_STR(__warn_printk) },
-	{ 0xab3d033d, __VMLINUX_SYMBOL_STR(remove_proc_entry) },
-	{ 0x6729d3df, __VMLINUX_SYMBOL_STR(__get_user_4) },
-	{ 0xc29957c3, __VMLINUX_SYMBOL_STR(__x86_indirect_thunk_rcx) },
-	{ 0x7485e15e, __VMLINUX_SYMBOL_STR(unregister_chrdev_region) },
-	{ 0x167e7f9d, __VMLINUX_SYMBOL_STR(__get_user_1) },
-	{ 0x6b0a3963, __VMLINUX_SYMBOL_STR(seq_read) },
-	{ 0xa6682fdd, __VMLINUX_SYMBOL_STR(__init_waitqueue_head) },
-	{ 0xb44ad4b3, __VMLINUX_SYMBOL_STR(_copy_to_user) },
-	{ 0xd13df821, __VMLINUX_SYMBOL_STR(PDE_DATA) },
-	{ 0xb1904934, __VMLINUX_SYMBOL_STR(wait_for_completion) },
-	{ 0xb8e7ce2c, __VMLINUX_SYMBOL_STR(__put_user_8) },
-	{ 0xfb578fc5, __VMLINUX_SYMBOL_STR(memset) },
-	{ 0xe966901, __VMLINUX_SYMBOL_STR(_raw_spin_unlock_irqrestore) },
-	{ 0x9b65a65f, __VMLINUX_SYMBOL_STR(current_task) },
-	{ 0x27e1a049, __VMLINUX_SYMBOL_STR(printk) },
-	{ 0xa1c76e0a, __VMLINUX_SYMBOL_STR(_cond_resched) },
-	{ 0x9166fada, __VMLINUX_SYMBOL_STR(strncpy) },
-	{ 0xc3aaf0a9, __VMLINUX_SYMBOL_STR(__put_user_1) },
-	{ 0x8c03d20c, __VMLINUX_SYMBOL_STR(destroy_workqueue) },
-	{ 0xfe487975, __VMLINUX_SYMBOL_STR(init_wait_entry) },
-	{ 0x32989da9, __VMLINUX_SYMBOL_STR(cdev_add) },
-	{ 0xb601be4c, __VMLINUX_SYMBOL_STR(__x86_indirect_thunk_rdx) },
-	{ 0xb2fd5ceb, __VMLINUX_SYMBOL_STR(__put_user_4) },
-	{ 0xe201c4e4, __VMLINUX_SYMBOL_STR(_raw_spin_unlock_bh) },
-	{ 0xdb7305a1, __VMLINUX_SYMBOL_STR(__stack_chk_fail) },
-	{ 0x1000e51, __VMLINUX_SYMBOL_STR(schedule) },
-	{ 0x8ddd8aad, __VMLINUX_SYMBOL_STR(schedule_timeout) },
-	{ 0xa202a8e5, __VMLINUX_SYMBOL_STR(kmalloc_order_trace) },
-	{ 0x6d334118, __VMLINUX_SYMBOL_STR(__get_user_8) },
-	{ 0x2ea2c95c, __VMLINUX_SYMBOL_STR(__x86_indirect_thunk_rax) },
-	{ 0x211f68f1, __VMLINUX_SYMBOL_STR(getnstimeofday64) },
-	{ 0xbdfb6dbb, __VMLINUX_SYMBOL_STR(__fentry__) },
-	{ 0xbeee391, __VMLINUX_SYMBOL_STR(kmem_cache_alloc_trace) },
-	{ 0x56321ae2, __VMLINUX_SYMBOL_STR(_raw_spin_lock) },
-	{ 0x7e8d43c6, __VMLINUX_SYMBOL_STR(_raw_spin_lock_irqsave) },
-	{ 0xfe768495, __VMLINUX_SYMBOL_STR(__wake_up) },
-	{ 0x237a015a, __VMLINUX_SYMBOL_STR(prepare_to_wait_event) },
-	{ 0x844b4a3d, __VMLINUX_SYMBOL_STR(proc_create_data) },
-	{ 0x11f13787, __VMLINUX_SYMBOL_STR(add_wait_queue) },
-	{ 0x6acbfc5d, __VMLINUX_SYMBOL_STR(seq_lseek) },
-	{ 0x37a0cba, __VMLINUX_SYMBOL_STR(kfree) },
-	{ 0xd4fa5c30, __VMLINUX_SYMBOL_STR(finish_wait) },
-	{ 0x2e0d2f7f, __VMLINUX_SYMBOL_STR(queue_work_on) },
-	{ 0x19cf472b, __VMLINUX_SYMBOL_STR(complete) },
-	{ 0xe95b9765, __VMLINUX_SYMBOL_STR(seq_release) },
-	{ 0x7f02188f, __VMLINUX_SYMBOL_STR(__msecs_to_jiffies) },
-	{ 0x362ef408, __VMLINUX_SYMBOL_STR(_copy_from_user) },
-	{ 0x88db9f48, __VMLINUX_SYMBOL_STR(__check_object_size) },
-	{ 0x29537c9e, __VMLINUX_SYMBOL_STR(alloc_chrdev_region) },
+__used __section("__versions") = {
+	{ 0xe3ec2f2b, "alloc_chrdev_region" },
+	{ 0x88db9f48, "__check_object_size" },
+	{ 0x49cd25ed, "alloc_workqueue" },
+	{ 0xeea3c1d8, "__class_create" },
+	{ 0x13c49cc2, "_copy_from_user" },
+	{ 0x7f02188f, "__msecs_to_jiffies" },
+	{ 0xa6257a2f, "complete" },
+	{ 0xc5b6f236, "queue_work_on" },
+	{ 0x608741b5, "__init_swait_queue_head" },
+	{ 0x92540fbf, "finish_wait" },
+	{ 0x6a2dd7c, "class_destroy" },
+	{ 0x37a0cba, "kfree" },
+	{ 0xf72e8c06, "pcpu_hot" },
+	{ 0x4afb2238, "add_wait_queue" },
+	{ 0x8c26d495, "prepare_to_wait_event" },
+	{ 0xe2964344, "__wake_up" },
+	{ 0x34db050b, "_raw_spin_lock_irqsave" },
+	{ 0xba8fbd64, "_raw_spin_lock" },
+	{ 0xbdfb6dbb, "__fentry__" },
+	{ 0x65487097, "__x86_indirect_thunk_rax" },
+	{ 0x122c3a7e, "_printk" },
+	{ 0x6d334118, "__get_user_8" },
+	{ 0x1000e51, "schedule" },
+	{ 0x8ddd8aad, "schedule_timeout" },
+	{ 0xa19b956, "__stack_chk_fail" },
+	{ 0xe46021ca, "_raw_spin_unlock_bh" },
+	{ 0x7682ba4e, "__copy_overflow" },
+	{ 0xb2fd5ceb, "__put_user_4" },
+	{ 0x6383b27c, "__x86_indirect_thunk_rdx" },
+	{ 0x87a21cb3, "__ubsan_handle_out_of_bounds" },
+	{ 0x2dcc02c1, "cdev_add" },
+	{ 0xfe487975, "init_wait_entry" },
+	{ 0x4c0ac327, "device_create" },
+	{ 0x8c03d20c, "destroy_workqueue" },
+	{ 0xc3aaf0a9, "__put_user_1" },
+	{ 0x9166fada, "strncpy" },
+	{ 0x9ec6ca96, "ktime_get_real_ts64" },
+	{ 0x9ed12e20, "kmalloc_large" },
+	{ 0xd35cce70, "_raw_spin_unlock_irqrestore" },
+	{ 0xfb578fc5, "memset" },
+	{ 0xb8e7ce2c, "__put_user_8" },
+	{ 0x25974000, "wait_for_completion" },
+	{ 0x5b8239ca, "__x86_return_thunk" },
+	{ 0x6b10bee1, "_copy_to_user" },
+	{ 0xd9a5ea54, "__init_waitqueue_head" },
+	{ 0xfb384d37, "kasprintf" },
+	{ 0xa648e561, "__ubsan_handle_shift_out_of_bounds" },
+	{ 0x167e7f9d, "__get_user_1" },
+	{ 0x6091b333, "unregister_chrdev_region" },
+	{ 0x66cca4f9, "__x86_indirect_thunk_rcx" },
+	{ 0x6729d3df, "__get_user_4" },
+	{ 0x7e38d25d, "device_destroy" },
+	{ 0xc3690fc, "_raw_spin_lock_bh" },
+	{ 0x37110088, "remove_wait_queue" },
+	{ 0x850e6a88, "kmalloc_trace" },
+	{ 0xb5b54b34, "_raw_spin_unlock" },
+	{ 0xf90a1e85, "__x86_indirect_thunk_r8" },
+	{ 0x32ab4392, "cdev_init" },
+	{ 0xeb233a45, "__kmalloc" },
+	{ 0xe2c17b5d, "__SCT__might_resched" },
+	{ 0xad6d045f, "kmalloc_caches" },
+	{ 0xf7fb9e48, "cdev_del" },
+	{ 0x453e7dc, "module_layout" },
 };
 
-static const char __module_depends[]
-__used
-__attribute__((section(".modinfo"))) =
-"depends=";
+MODULE_INFO(depends, "");
 
 
-MODULE_INFO(srcversion, "BAF8F2125A4AD270DD36557");
+MODULE_INFO(srcversion, "C83F17716F4E29A0D587420");

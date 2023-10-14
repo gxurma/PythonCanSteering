@@ -1,5 +1,5 @@
 #
-#             Copyright 2017 by Kvaser AB, Molndal, Sweden
+#             Copyright 2023 by Kvaser AB, Molndal, Sweden
 #                         http://www.kvaser.com
 #
 #  This software is dual licensed under the following two licenses:
@@ -81,7 +81,7 @@ SRCS += capabilities.c
 SRCS += dlc.c
 SRCS += ticks.c
 
-ifneq ($(KERNELRELEASE),)
+ifneq ($(src),)
 	RUNDIR := $(src)
 else
 	RUNDIR := $(PWD)
@@ -91,5 +91,5 @@ CHECK_SUPPRESS = suppressions.txt
 
 include $(RUNDIR)/../config.mak
 
-KV_XTRA_CFLAGS       += -Wframe-larger-than=8192
-KV_XTRA_CFLAGS_DEBUG += -Wframe-larger-than=8192
+KV_XTRA_CFLAGS       += -Wframe-larger-than=1024
+KV_XTRA_CFLAGS_DEBUG += -Wframe-larger-than=1024

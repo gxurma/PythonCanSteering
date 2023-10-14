@@ -1,2 +1,20 @@
-/home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pciefd/pciefd_hwif.o /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pciefd/altera/HAL/src/pciefd.o /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pciefd/altera/HAL/src/pciefd_packet.o /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pciefd/altera/HAL/src/pciefd_rx_fifo.o /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pciefd/altera/HAL/src/altera_avalon_epcs_flash_controller.o /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pciefd/altera/HAL/src/altera_avalon_spi.o /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pciefd/altera/HAL/src/epcs_commands.o /home/gyurma/Dokumentumok/git/PythonCanSteering/linuxcan3/pciefd/altera/HAL/src/pwm_util.o
-
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/pciefd_hwif.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/hw/pciefd_altera.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/hw/pciefd_sf2.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/hw/pciefd_xilinx.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/pwm/pwm_util.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/pciefd/pciefd.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/pciefd/pciefd_packet.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/pciefd/pciefd_rx_fifo.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/altera/HAL/src/altera_avalon_epcs_flash_controller.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/altera/HAL/src/altera_avalon_spi.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/altera/HAL/src/epcs_commands.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/spi/sf2_spi/sf2_spi.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/xilinx/spi/src/xspi.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/xilinx/spi/src/xspi_options.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/spi_flash/spi_flash.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/spi_flash/spi_flash_altera.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/spi_flash/spi_flash_sf2.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/spi_flash/spi_flash_xilinx.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/spi_flash/spi_flash_dummy.o
+/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pciefd/drivers/kvaser/hydra_flash/hydra_flash.o

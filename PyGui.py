@@ -21,7 +21,7 @@ import csv
 #from Gui import *
 # import Gui
 #talking to kvaser
-import canlib
+from canlib import canlib
 import time
 #import random
 import math
@@ -1060,12 +1060,13 @@ class PyGuiApp(QMainWindow):
 
 	def aboutBox(self):
 		QtWidgets.QMessageBox.about(self,"Über dieses Programm", '''
-		Dies ist ein Programm zum Testen und Benutzen einer CNC Maschine mit Elmo Motion Cello Controllern und Smoothieware.
-		Die Maschine besteht aus X, X2, Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um Pick and Place Aufgaben zu lösen.
+		Dies ist ein Programm zum Testen und Benutzen einer PnP Maschine mit Elmo Motion Cello Controllern und Smoothieware.
+		Die Maschine besteht aus X, (X2), Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser Canlib, Elmo Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
-		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
+		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. 
+		Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
 		Canlib ist geistiges Eigentum von Kvaser.
-		(C) 2018-2021 Martin Gyurkó
+		(C) 2018-2023 Martin Gyurkó
 		''')
 
 	def sendMsg(self, msgid, msg):
@@ -1073,7 +1074,7 @@ class PyGuiApp(QMainWindow):
 		for j in range(len(msg)) :
 			print( " %02x" % ( msg[j] ), end="")
 		print( ". ")
-		self.handle1.write(msgid, msg)
+		self.handle1.write_raw(msgid, msg)
 		time.sleep(0.01)
 
 	def sendElmoMsgShort(self, axeId, command, index):
@@ -1090,13 +1091,13 @@ class PyGuiApp(QMainWindow):
 
 	def initCAN(self):
 
-		self.cl = canlib.canlib()
+		self.cl = canlib
 
-		print("canlib version: %s" % self.cl.getVersion())
+		print("canlib version: " ,self.cl.dllversion())
 
 		channel = 0
 		self.handle1 = self.cl.openChannel(channel, canlib.canOPEN_ACCEPT_VIRTUAL)
-		print( "Using channel: %s, EAN: %s" % (self.handle1.getChannelData_Name(), self.handle1.getChannelData_EAN()))
+		print( "Using channel: %s, EAN: %s" % (self.handle1.channel_data.channel_name, self.handle1.channel_data.card_upc_no))
 
 		self.handle1.setBusOutputControl(canlib.canDRIVER_NORMAL)
 		self.handle1.setBusParams(canlib.canBITRATE_1M)
@@ -1223,11 +1224,50 @@ class PyGuiApp(QMainWindow):
 							else :
 								print(Color.Green+'m'+Color.end , m)
 								self.sendSerQ.put(d.encode("ascii")+b'\n')
+								if m == 804 :
+									self.pushButtonJet.setChecked(True)
+								if m == 805 :
+									self.pushButtonJet.setChecked(False)
+								if m == 806 :
+									self.pushButtonJetterDown.setChecked(True)
+								if m == 807 :
+									self.pushButtonJetterDown.setChecked(False)
+								if m == 808 :
+									self.pushButtonZClampOff.setChecked(True)
+								if m == 809 :
+									self.pushButtonZClampOff.setChecked(False)
+								if m == 802 :
+									self.pushButtonLight.setChecked(True)
+								if m == 803 :
+									self.pushButtonLight.setChecked(False)
 								if m == 810 :
 									self.pushButtonToolChangerVac.setChecked(True)
 								if m == 811 :
 									self.pushButtonToolChangerVac.setChecked(False)
-
+								if m == 800 :
+									self.pushButtonToolTipVac.setChecked(True)
+								if m == 801 :
+									self.pushButtonToolTipVac.setChecked(False)
+								if m == 812 :
+									self.pushButtonDispens1.setChecked(True)
+								if m == 813 :
+									self.pushButtonDispens1.setChecked(False)
+								if m == 814 :
+									self.pushButtonDispens2.setChecked(True)
+								if m == 815 :
+									self.pushButtonDispens2.setChecked(False)
+								if m == 820 :
+									self.pushButtonWorkingVac.setChecked(True)
+								if m == 821 :
+									self.pushButtonWorkingVac.setChecked(False)
+								if m == 816 :
+									self.pushButtonDispensVac1.setChecked(True)
+								if m == 817 :
+									self.pushButtonDispensVac1.setChecked(False)
+								if m == 818 :
+									self.pushButtonDispensVac2.setChecked(True)
+								if m == 819 :
+									self.pushButtonDispensVac2.setChecked(False)
 
 							# return
 						if g:
@@ -1236,21 +1276,10 @@ class PyGuiApp(QMainWindow):
 								print(Color.Green+'Init and Homing all axes'+Color.end)
 								print(Color.Red+'No. just kidding. Would be too dangerous. You have to home Z yourself!'+Color.end)
 								#self.homeAllThread.start()
-								# self.Init(idZ)
-								# self.Init(idX)
-								# self.Init(idX2)
-								# self.Init(idY)
-								# self.Init(idC)
-								# self.Init(idZ)
-								# self.pushButtonHomeZ.click()
-								# self.pushButtonHomeX.click()
-								# self.pushButtonHomeY.click()
-								# self.pushButtonHomeC.click()
-								# self.pushButtonHomeX2.click()
 							if (g == 0) or (g == 1) :
 								if x:
 									xVal = float(x[2])
-									print("x: ",xVal)
+									# print("x: ",xVal)
 									# if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
 									# 	self.X1set.setValue(int(xVal*Xm))
 									# 	self.X2set.setValue(0)
@@ -1262,16 +1291,18 @@ class PyGuiApp(QMainWindow):
 									# 	self.X2set.setValue(minimum[4])
 
 									## self.X1set.setValue(int(float(x[2])*200.0+.5))		# constants are for conversion btw mm to step
-
-									if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
-										self.X1set.setValue(int(xVal*Xm))
-										self.X2set.setValue(0)
-									elif (xVal > maximumf[0]) :
-										self.X1set.setValue(int(maximumf[0]*Xm))
-										self.X2set.setValue(0)
-									else : #(xVal < minimumf[0]) :
-										self.X1set.setValue(int(minimumf[0]*Xm))
-										self.X2set.setValue(0)
+###
+									# if (minimumf[0] <= xVal) and (xVal <= maximumf[0]) :
+										# self.X1set.setValue(int(xVal*Xm))
+										# self.X2set.setValue(0)
+									# elif (xVal > maximumf[0]) :
+										# self.X1set.setValue(int(maximumf[0]*Xm))
+										# self.X2set.setValue(0)
+									# else : #(xVal < minimumf[0]) :
+										# self.X1set.setValue(int(minimumf[0]*Xm))
+										# self.X2set.setValue(0)
+									
+									self.X1set.setValue(int(xVal*Xm))
 
 								if y:
 									self.Yset.setValue(int(float(y[2])*Ym))

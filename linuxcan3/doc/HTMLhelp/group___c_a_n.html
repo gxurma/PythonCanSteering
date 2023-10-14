@@ -77,7 +77,8 @@ $(document).ready(function(){initNavTree('group___c_a_n.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#files">Files</a> &#124;
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">CAN<div class="ingroups"><a class="el" href="group__grp__canlib.html">CANlib</a></div></div>  </div>
@@ -87,11 +88,15 @@ $(document).ready(function(){initNavTree('group___c_a_n.html','');});
 <p>CAN related functions.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:bus__params__tq_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bus__params__tq_8h.html">bus_params_tq.h</a></td></tr>
-<tr class="memdesc:bus__params__tq_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definitions for the CANLIB API. <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga55095b4ff633151ac4ccf06b1f3df1da"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga55095b4ff633151ac4ccf06b1f3df1da">kvBusParamsTq</a></td></tr>
+<tr class="separator:ga55095b4ff633151ac4ccf06b1f3df1da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -149,6 +154,10 @@ Functions</h2></td></tr>
 <tr class="separator:gaa1229ae7635c051a8f7fe545d9d8007a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf38b95fce4930347d9986887ec046e13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gaf38b95fce4930347d9986887ec046e13">canTranslateBaud</a> (long *const freq, unsigned int *const tseg1, unsigned int *const tseg2, unsigned int *const sjw, unsigned int *const nosamp, unsigned int *const syncMode)</td></tr>
 <tr class="separator:gaf38b95fce4930347d9986887ec046e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa666085d9544b2c8db002599595edc37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gaa666085d9544b2c8db002599595edc37">kvBitrateToBusParamsTq</a> (const <a class="el" href="canlib_8h.html#ae3d1b041d62207d5336f93c089cd5b65">canHandle</a> hnd, int freq, <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *nominal)</td></tr>
+<tr class="separator:gaa666085d9544b2c8db002599595edc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga03be920624427856a9fde821ef3f9136"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#ga03be920624427856a9fde821ef3f9136">kvBitrateToBusParamsFdTq</a> (const <a class="el" href="canlib_8h.html#ae3d1b041d62207d5336f93c089cd5b65">canHandle</a> hnd, int freqA, int freqD, <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *arbitration, <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *data)</td></tr>
+<tr class="separator:ga03be920624427856a9fde821ef3f9136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac377d182232fb4ec2fed881c2b9ab300"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel</a> (int channel, int flags)</td></tr>
 <tr class="separator:gac377d182232fb4ec2fed881c2b9ab300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac34c1577cae55385250e7412513c8cbd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___c_a_n.html#gac34c1577cae55385250e7412513c8cbd">canSetBusParamsC200</a> (const <a class="el" href="canlib_8h.html#a75f2e3a4c7b1e47c8c6b25b76975b510">CanHandle</a> hnd, unsigned char btr0, unsigned char btr1)</td></tr>
@@ -178,6 +187,40 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>CAN related functions. </p>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ga55095b4ff633151ac4ccf06b1f3df1da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga55095b4ff633151ac4ccf06b1f3df1da">&#9670;&nbsp;</a></span>kvBusParamsTq</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a>  <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><b>Constraints</b> </p><pre class="fragment">Constraints that must be fulfilled when opening channel in classic CAN Mode:
+
+  tq         = 1 + prop + phase1 + phase2
+  tq        &gt;= 3
+  sjw       &lt;= min(phase1, phase2)
+  prescaler &gt;= 1
+</pre><pre class="fragment">  Constraints that must be fulfilled when opening channel in CAN FD Mode:
+
+  arbitration.tq         = 1 + arbitration.prop + arbitration.phase1 + arbitration.phase2
+  arbitration.tq        &gt;= 3
+  arbitration.sjw       &lt;= min(arbitration.phase1, arbitration.phase2)
+  arbitration.prescaler &gt;= 1  (&lt;=2 will enable Transmitter Delay Compensation Mechanism)
+
+  data.tq         = 1 + data.phase1 + data.phase2
+  data.tq        &gt;= 3
+  data.sjw       &lt;= min(data.phase1, data.phase2)
+  data.prop       = 0
+  data.prescaler  = arbitration.prescaler
+</pre><p>Used in <a class="el" href="group___c_a_n.html#ga50f169c6f9dd6df93b17c322e8e4fd00">canSetBusParamsTq</a>, <a class="el" href="group___c_a_n.html#ga4beeb28ede2e21a2988076e66f873723">canSetBusParamsFdTq</a>, <a class="el" href="group___c_a_n.html#gae517a9c243c446e040f6f8898d09a677">canGetBusParamsTq</a> and <a class="el" href="group___c_a_n.html#gae517a9c243c446e040f6f8898d09a677">canGetBusParamsTq</a> </p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="gaa4ffd2fad1932ad5763c2c923a1a12d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaa4ffd2fad1932ad5763c2c923a1a12d8">&#9670;&nbsp;</a></span>canAccept()</h2>
@@ -264,7 +307,7 @@ Not all CAN boards support different masks for standard and extended CAN identif
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_send_recv.html#section_user_guide_send_recv_bus_on_off">Bus On / Bus Off</a> </dd>
 <dd>
 <a class="el" href="group___c_a_n.html#ga99c7c99cc71580f8099a1407f4f9ea1a">canBusOn()</a>, <a class="el" href="group___c_a_n.html#gaecc8b56e75cf68548af53b2d432079af">canResetBus()</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a16">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a16">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a17">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a26">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a26">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a11">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a10">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a12">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a16">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a16">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a17">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a30">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a30">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a11">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a10">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a12">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -297,7 +340,7 @@ Not all CAN boards support different masks for standard and extended CAN identif
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_send_recv.html#section_user_guide_send_recv_bus_on_off">Bus On / Bus Off</a> </dd>
 <dd>
 <a class="el" href="group___c_a_n.html#gaf1786cfbfd542b18b9c599d278837bd9">canBusOff()</a>, <a class="el" href="group___c_a_n.html#gaecc8b56e75cf68548af53b2d432079af">canResetBus()</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a9">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a9">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a11">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a23">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a23">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a10">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a7">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a9">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a9">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a9">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a11">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a27">canmonitor.c</a>, <a class="el" href="simplewrite_8c-example.html#a27">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a10">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a7">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a9">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -330,7 +373,7 @@ Not all CAN boards support different masks for standard and extended CAN identif
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_chips_channels.html#section_user_guide_init_sel_channel_close">Close Channel</a> </dd>
 <dd>
 <a class="el" href="group___c_a_n.html#gac377d182232fb4ec2fed881c2b9ab300">canOpenChannel()</a>, <a class="el" href="group___c_a_n.html#ga99c7c99cc71580f8099a1407f4f9ea1a">canBusOn()</a>, <a class="el" href="group___c_a_n.html#gaf1786cfbfd542b18b9c599d278837bd9">canBusOff()</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a17">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a17">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a18">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a27">canmonitor.c</a>, <a class="el" href="read_timer_test_8c-example.html#a5">readTimerTest.c</a>, <a class="el" href="simplewrite_8c-example.html#a27">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a12">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a11">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a13">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a17">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a17">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a18">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a31">canmonitor.c</a>, <a class="el" href="example_2c_2busparams_tq_8c-example.html#a16">example/c/busparams_tq.c</a>, <a class="el" href="read_timer_test_8c-example.html#a5">readTimerTest.c</a>, <a class="el" href="simplewrite_8c-example.html#a31">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a12">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a11">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a13">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -514,7 +557,7 @@ Silent Mode is not supported by all CAN controllers.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_chips_channels.html#section_user_guide_init_bit_rate_can">Set CAN Bitrate</a>, <a class="el" href="page_user_guide_chips_channels.html#section_user_guide_init_bit_rate_can">Set CAN Bitrate</a> </dd>
 <dd>
 <a class="el" href="group___c_a_n.html#ga7eb8c2e92cfae57e7ec5031818524301">canSetBusParams()</a>, <a class="el" href="group___c_a_n.html#gac34c1577cae55385250e7412513c8cbd">canSetBusParamsC200()</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparms_8c-example.html#a7">busparms.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparams_8c-example.html#a7">busparams.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -620,7 +663,8 @@ Silent Mode is not supported by all CAN controllers.</dd></dl>
   </dd>
 </dl>
 <p>return canOK (zero) if success return canERR_xxx (negative) if failure </p>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="example_2c_2busparams_tq_8c-example.html#a15">example/c/busparams_tq.c</a>.</dd>
+</dl>
 </div>
 </div>
 <a id="gae517a9c243c446e040f6f8898d09a677"></a>
@@ -658,7 +702,8 @@ Silent Mode is not supported by all CAN controllers.</dd></dl>
   </dd>
 </dl>
 <p>return canOK (zero) if success return canERR_xxx (negative) if failure </p>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="example_2c_2busparams_tq_8c-example.html#a8">example/c/busparams_tq.c</a>.</dd>
+</dl>
 </div>
 </div>
 <a id="ga8d78ccbef4e6038ff63662f06b7cde65"></a>
@@ -904,7 +949,7 @@ Silent Mode is not supported by all CAN controllers.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_chips_channels.html">Open Channel</a>, <a class="el" href="page_user_guide_device_and_channel.html#section_user_guide_virtual">Virtual Channels</a> </dd>
 <dd>
 <a class="el" href="group___c_a_n.html#ga49525373a4d08d93c651ec10f79dd36b">canClose()</a>, <a class="el" href="group__can__general.html#ga65169ca633cd30aa92b8a80e28a5378b">canGetNumberOfChannels()</a>, <a class="el" href="group__can__general.html#gab9552d1a588b0dbc144b097acba017b2">canGetChannelData()</a>, <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparms_8c-example.html#a3">busparms.c</a>, <a class="el" href="cancount_8c-example.html#a3">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a3">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a3">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a11">canmonitor.c</a>, <a class="el" href="how-to_2c_2open_channels_8c-example.html#a2">how-to/c/openChannels.c</a>, <a class="el" href="read_timer_test_8c-example.html#a3">readTimerTest.c</a>, <a class="el" href="simplewrite_8c-example.html#a11">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a6">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a3">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a3">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparams_8c-example.html#a3">busparams.c</a>, <a class="el" href="cancount_8c-example.html#a3">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a3">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a3">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a15">canmonitor.c</a>, <a class="el" href="example_2c_2busparams_tq_8c-example.html#a4">example/c/busparams_tq.c</a>, <a class="el" href="how-to_2c_2open_channels_8c-example.html#a2">how-to/c/openChannels.c</a>, <a class="el" href="read_timer_test_8c-example.html#a3">readTimerTest.c</a>, <a class="el" href="simplewrite_8c-example.html#a15">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a6">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a3">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a3">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -967,7 +1012,7 @@ Silent Mode is not supported by all CAN controllers.</dd></dl>
     <tr><td class="paramdir">[out]</td><td class="paramname">msg</td><td>Pointer to the buffer which receives the message data. This buffer must be large enough (i.e. 8 bytes for classic CAN and up to 64 bytes for CAN FD). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">dlc</td><td>Pointer to a buffer which receives the message length. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">flag</td><td>Pointer to a buffer which receives the message flags, which is a combination of the <a class="el" href="canstat_8h.html#canMSG_xxx">canMSG_xxx</a> (including <a class="el" href="canstat_8h.html#canFDMSG_xxx">canFDMSG_xxx</a> if the CAN FD protocol is enabled) and <a class="el" href="canstat_8h.html#canMSGERR_xxx">canMSGERR_xxx</a> values. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">time</td><td>Pointer to a buffer which receives the message time stamp.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">time</td><td>Pointer to a buffer which receives the message time stamp. The unit of the time stamp is configurable using <a class="el" href="canlib_8h.html#a5b5d43fc8968aa77e48ef8c8d3036c36">canIOCTL_SET_TIMER_SCALE</a>, default is 1 ms.</td></tr>
   </table>
   </dd>
 </dl>
@@ -978,7 +1023,7 @@ Silent Mode is not supported by all CAN controllers.</dd></dl>
 <a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_send_recv.html#section_user_guide_send_recv_reading">Reading Messages</a>, <a class="el" href="page_user_guide_send_recv_mailboxes.html">Message Mailboxes</a>, <a class="el" href="page_user_guide_send_recv.html#section_user_guide_send_recv_reading">Reading Messages</a> page_user_guide_time Time Measurement</dd>
 <dd>
-<a class="el" href="group___c_a_n.html#gafb5e475233ef14ccf9084f610caba560">canReadSpecific()</a>, <a class="el" href="group___c_a_n.html#ga0eecb6695653d4dc6a4c0bb884a1b261">canReadSpecificSkip()</a>, <a class="el" href="group___c_a_n.html#ga16356f4d646240ff2e640773d21f4d76">canReadSync()</a>, <a class="el" href="group___c_a_n.html#ga4b21a0e2547c1435c378d13e6803acef">canReadSyncSpecific()</a>, <a class="el" href="group___c_a_n.html#gac01f98e282609b5f6aaf2b1eabfb83ec">canReadWait()</a> </dd></dl>
+<a class="el" href="group___c_a_n.html#gafb5e475233ef14ccf9084f610caba560">canReadSpecific()</a>, <a class="el" href="group___c_a_n.html#ga0eecb6695653d4dc6a4c0bb884a1b261">canReadSpecificSkip()</a>, <a class="el" href="group___c_a_n.html#ga16356f4d646240ff2e640773d21f4d76">canReadSync()</a>, <a class="el" href="group___c_a_n.html#ga4b21a0e2547c1435c378d13e6803acef">canReadSyncSpecific()</a>, <a class="el" href="group___c_a_n.html#gac01f98e282609b5f6aaf2b1eabfb83ec">canReadWait()</a>, <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a> </dd></dl>
 
 </div>
 </div>
@@ -1387,7 +1432,7 @@ Silent Mode is not supported by all CAN controllers.</dd></dl>
     <tr><td class="paramdir">[out]</td><td class="paramname">msg</td><td>Pointer to the buffer which receives the message data. This buffer must be large enough (i.e. 8 bytes for classic CAN and up to 64 bytes for CAN FD). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">dlc</td><td>Pointer to a buffer which receives the message length. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">flag</td><td>Pointer to a buffer which receives the message flags, which is a combination of the <a class="el" href="canstat_8h.html#canMSG_xxx">canMSG_xxx</a> (including <a class="el" href="canstat_8h.html#canFDMSG_xxx">canFDMSG_xxx</a> if the CAN FD protocol is enabled) and <a class="el" href="canstat_8h.html#canMSGERR_xxx">canMSGERR_xxx</a> values. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">time</td><td>Pointer to a buffer which receives the message time stamp. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">time</td><td>Pointer to a buffer which receives the message time stamp. The unit of the time stamp is configurable using <a class="el" href="canlib_8h.html#a5b5d43fc8968aa77e48ef8c8d3036c36">canIOCTL_SET_TIMER_SCALE</a>, default is 1 ms. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">timeout</td><td>If no message is immediately available, this parameter gives the number of milliseconds to wait for a message before returning. 0xFFFFFFFF gives an infinite timeout.</td></tr>
   </table>
   </dd>
@@ -1397,10 +1442,10 @@ Silent Mode is not supported by all CAN controllers.</dd></dl>
 <a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a734089f351bc421c230bf8b6cd9b1e8e">canERR_NOMSG</a> (negative) if there was no message available. </dd>
 <dd>
 <a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group___c_a_n.html#ga157d49a9343dea68ac953145e02266d8">canRead()</a>, <a class="el" href="group___c_a_n.html#gafb5e475233ef14ccf9084f610caba560">canReadSpecific()</a>, <a class="el" href="group___c_a_n.html#ga0eecb6695653d4dc6a4c0bb884a1b261">canReadSpecificSkip()</a>, <a class="el" href="group___c_a_n.html#ga4b21a0e2547c1435c378d13e6803acef">canReadSyncSpecific()</a>, <a class="el" href="group___c_a_n.html#ga16356f4d646240ff2e640773d21f4d76">canReadSync()</a></dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group___c_a_n.html#ga157d49a9343dea68ac953145e02266d8">canRead()</a>, <a class="el" href="group___c_a_n.html#gafb5e475233ef14ccf9084f610caba560">canReadSpecific()</a>, <a class="el" href="group___c_a_n.html#ga0eecb6695653d4dc6a4c0bb884a1b261">canReadSpecificSkip()</a>, <a class="el" href="group___c_a_n.html#ga4b21a0e2547c1435c378d13e6803acef">canReadSyncSpecific()</a>, <a class="el" href="group___c_a_n.html#ga16356f4d646240ff2e640773d21f4d76">canReadSync()</a>, <a class="el" href="group__can__general.html#gaeaa24db97af22478ca51d48636c7bb12">canIoCtl()</a></dd>
 <dd>
 <a class="el" href="page_user_guide_time.html">Time Measurement</a> Time Measurement </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a10">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a10">canfdmonitor.c</a>, <a class="el" href="canmonitor_8c-example.html#a24">canmonitor.c</a>, and <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a2">tutorial/c/MonitorCanChannel.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="cancount_8c-example.html#a10">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a10">canfdmonitor.c</a>, <a class="el" href="canmonitor_8c-example.html#a28">canmonitor.c</a>, and <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a2">tutorial/c/MonitorCanChannel.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -1696,7 +1741,7 @@ Not implemented in linux.</dd></dl>
 <a class="el" href="group___c_a_n.html#gafcd85fbac103dcb123f4cd609be6fa14">canSetBusParamsFd()</a>, <a class="el" href="group___c_a_n.html#gac34c1577cae55385250e7412513c8cbd">canSetBusParamsC200()</a>, <a class="el" href="group___c_a_n.html#gaf2a734c0486030610389331685a3827a">canGetBusParams()</a> </dd>
 <dd>
 <a class="el" href="group___c_a_n.html#ga50f169c6f9dd6df93b17c322e8e4fd00">canSetBusParamsTq()</a>, <a class="el" href="group___c_a_n.html#ga4beeb28ede2e21a2988076e66f873723">canSetBusParamsFdTq()</a>, <a class="el" href="group___c_a_n.html#gae517a9c243c446e040f6f8898d09a677">canGetBusParamsTq()</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparms_8c-example.html#a6">busparms.c</a>, <a class="el" href="cancount_8c-example.html#a7">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a5">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a7">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a21">canmonitor.c</a>, <a class="el" href="how-to_2c_2open_channels_8c-example.html#a3">how-to/c/openChannels.c</a>, <a class="el" href="simplewrite_8c-example.html#a15">simplewrite.c</a>, and <a class="el" href="writeloop_8c-example.html#a7">writeloop.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="busparams_8c-example.html#a6">busparams.c</a>, <a class="el" href="cancount_8c-example.html#a7">cancount.c</a>, <a class="el" href="canfdmonitor_8c-example.html#a5">canfdmonitor.c</a>, <a class="el" href="canfdwrite_8c-example.html#a7">canfdwrite.c</a>, <a class="el" href="canmonitor_8c-example.html#a25">canmonitor.c</a>, <a class="el" href="how-to_2c_2open_channels_8c-example.html#a3">how-to/c/openChannels.c</a>, <a class="el" href="simplewrite_8c-example.html#a19">simplewrite.c</a>, <a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a8">tutorial/c/MonitorCanChannel.c</a>, <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a5">tutorial/c/SendMessage.c</a>, and <a class="el" href="writeloop_8c-example.html#a7">writeloop.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -1867,7 +1912,8 @@ Not implemented in linux.</dd></dl>
   </dd>
 </dl>
 <p>return canOK (zero) if success return canERR_xxx (negative) if failure </p>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="example_2c_2busparams_tq_8c-example.html#a7">example/c/busparams_tq.c</a>.</dd>
+</dl>
 </div>
 </div>
 <a id="ga50f169c6f9dd6df93b17c322e8e4fd00"></a>
@@ -1907,7 +1953,7 @@ Not implemented in linux.</dd></dl>
   </dd>
 </dl>
 <p>return canOK (zero) if success return canERR_xxx (negative) if failure </p>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="tutorial_2c_2_monitor_can_channel_8c-example.html#a9">tutorial/c/MonitorCanChannel.c</a>, and <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a6">tutorial/c/SendMessage.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="example_2c_2busparams_tq_8c-example.html#a5">example/c/busparams_tq.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2011,7 +2057,7 @@ Not implemented in linux.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) if success </dd>
 <dd>
 <a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canmonitor_8c-example.html#a15">canmonitor.c</a>, and <a class="el" href="simplewrite_8c-example.html#a17">simplewrite.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canmonitor_8c-example.html#a19">canmonitor.c</a>, and <a class="el" href="simplewrite_8c-example.html#a21">simplewrite.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2126,7 +2172,7 @@ Not implemented in linux.</dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function sends a CAN message. The call returns immediately after queuing the message to the driver.</p>
+<p>This function sends a CAN message. The call returns immediately after queuing the message to the driver so the message has not necessarily been transmitted.</p>
 <p>If you are using the same channel via multiple handles, note that the default behaviour is that the different handles will "hear" each other just as if each handle referred to a channel of its own. If you open, say, channel 0 from thread A and thread B and then send a message from thread A, it will be "received" by thread B. This behaviour can be changed using <a class="el" href="canlib_8h.html#a86f7ce6c809f30983b69ead49d793689">canIOCTL_SET_LOCAL_TXECHO</a>.</p>
 <dl class="section note"><dt>Note</dt><dd>The message has been queued for transmission when this calls return. It has not necessarily been sent.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -2137,7 +2183,7 @@ Not implemented in linux.</dd></dl>
     <tr><td class="paramdir">[in]</td><td class="paramname">dlc</td><td>The length of the message in bytes.<br />
  For Classic CAN dlc can be at most 8, unless <a class="el" href="canlib_8h.html#a933708eecbae36802f143ee06126301d">canOPEN_ACCEPT_LARGE_DLC</a> is used.<br />
  For CAN FD dlc can be one of the following 0-8, 12, 16, 20, 24, 32, 48, 64. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">flag</td><td>A combination of message flags, <a class="el" href="canstat_8h.html#canMSG_xxx">canMSG_xxx</a> (including <a class="el" href="canstat_8h.html#canFDMSG_xxx">canFDMSG_xxx</a> if the CAN FD protocol is enabled). Use this parameter to send extended (29-bit) frames and/or remote frames. Use <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="canstat_8h.html#a687df04559a9995e0bec503655454eb3">canMSG_RTR</a> for this purpose.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flag</td><td>A combination of message flags, <a class="el" href="canstat_8h.html#canMSG_xxx">canMSG_xxx</a> (including <a class="el" href="canstat_8h.html#canFDMSG_xxx">canFDMSG_xxx</a> if the CAN FD protocol is enabled). Use this parameter to send extended (29-bit) frames and/or remote frames. Use <a class="el" href="kva_db_lib_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="canstat_8h.html#a687df04559a9995e0bec503655454eb3">canMSG_RTR</a> for this purpose.</td></tr>
   </table>
   </dd>
 </dl>
@@ -2147,7 +2193,7 @@ Not implemented in linux.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="page_user_guide_send_recv.html#section_user_guide_send_recv_sending">Sending Messages</a> </dd>
 <dd>
 <a class="el" href="group___c_a_n.html#ga304cb3a7bc2874c1f8ad361a911bcd5f">canWriteSync()</a>, <a class="el" href="group___c_a_n.html#ga47d03bfcc31e290284e65211b61f15f3">canWriteWait()</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdwrite_8c-example.html#a12">canfdwrite.c</a>, <a class="el" href="simplewrite_8c-example.html#a24">simplewrite.c</a>, and <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a8">tutorial/c/SendMessage.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdwrite_8c-example.html#a12">canfdwrite.c</a>, <a class="el" href="simplewrite_8c-example.html#a28">simplewrite.c</a>, and <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a8">tutorial/c/SendMessage.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2192,7 +2238,7 @@ Not implemented in linux.</dd></dl>
 <dd>
 <a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group___c_a_n.html#ga62c185329d6741c90102511e2f37983e">canWrite()</a>, <a class="el" href="group___c_a_n.html#ga47d03bfcc31e290284e65211b61f15f3">canWriteWait()</a> </dd></dl>
-<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdwrite_8c-example.html#a16">canfdwrite.c</a>, <a class="el" href="simplewrite_8c-example.html#a25">simplewrite.c</a>, and <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a9">tutorial/c/SendMessage.c</a>.</dd>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="canfdwrite_8c-example.html#a16">canfdwrite.c</a>, <a class="el" href="simplewrite_8c-example.html#a29">simplewrite.c</a>, and <a class="el" href="tutorial_2c_2_send_message_8c-example.html#a9">tutorial/c/SendMessage.c</a>.</dd>
 </dl>
 </div>
 </div>
@@ -2245,7 +2291,7 @@ Not implemented in linux.</dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This function sends a CAN message. It returns when the message is sent, or the timeout expires.</p>
+<p>This function sends a CAN message and returns when the message has been successfully transmitted, or the timeout expires.</p>
 <p>This is a convenience function that combines <a class="el" href="group___c_a_n.html#ga62c185329d6741c90102511e2f37983e">canWrite()</a> and <a class="el" href="group___c_a_n.html#ga304cb3a7bc2874c1f8ad361a911bcd5f">canWriteSync()</a>.</p>
 <p>If you are using the same channel via multiple handles, note that the default behaviour is that the different handles will "hear" each other just as if each handle referred to a channel of its own. If you open, say, channel 0 from thread A and thread B and then send a message from thread A, it will be "received" by thread B. This behaviour can be changed using <a class="el" href="canlib_8h.html#a86f7ce6c809f30983b69ead49d793689">canIOCTL_SET_LOCAL_TXECHO</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -2256,16 +2302,110 @@ Not implemented in linux.</dd></dl>
     <tr><td class="paramdir">[in]</td><td class="paramname">dlc</td><td>The length of the message in bytes.<br />
  For Classic CAN dlc can be at most 8, unless <a class="el" href="canlib_8h.html#a933708eecbae36802f143ee06126301d">canOPEN_ACCEPT_LARGE_DLC</a> is used.<br />
  For CAN FD dlc can be one of the following 0-8, 12, 16, 20, 24, 32, 48, 64. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">flag</td><td>A combination of message flags, <a class="el" href="canstat_8h.html#canMSG_xxx">canMSG_xxx</a>. Use this parameter to send extended (29-bit) frames and/or remote frames. Use <a class="el" href="canstat_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="canstat_8h.html#a687df04559a9995e0bec503655454eb3">canMSG_RTR</a> for this purpose. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flag</td><td>A combination of message flags, <a class="el" href="canstat_8h.html#canMSG_xxx">canMSG_xxx</a>. Use this parameter to send extended (29-bit) frames and/or remote frames. Use <a class="el" href="kva_db_lib_8h.html#ade936f23b4b303d64187b4c6589c9c10">canMSG_EXT</a> and/or <a class="el" href="canstat_8h.html#a687df04559a9995e0bec503655454eb3">canMSG_RTR</a> for this purpose. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">timeout</td><td>The timeout, in milliseconds. 0xFFFFFFFF gives an infinite timeout.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) if success </dd>
 <dd>
-<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure </dd></dl>
+<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="canlib_8h.html#af74b97adce24c13d8ecc3388aee6e891">canIOCTL_SET_TXACK</a> </dd></dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="writeloop_8c-example.html#a10">writeloop.c</a>.</dd>
 </dl>
+</div>
+</div>
+<a id="ga03be920624427856a9fde821ef3f9136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga03be920624427856a9fde821ef3f9136">&#9670;&nbsp;</a></span>kvBitrateToBusParamsFdTq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a> kvBitrateToBusParamsFdTq </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="canlib_8h.html#ae3d1b041d62207d5336f93c089cd5b65">canHandle</a>&#160;</td>
+          <td class="paramname"><em>hnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>freqA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>freqD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *&#160;</td>
+          <td class="paramname"><em>arbitration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gaa666085d9544b2c8db002599595edc37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa666085d9544b2c8db002599595edc37">&#9670;&nbsp;</a></span>kvBitrateToBusParamsTq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7">canStatus</a> kvBitrateToBusParamsTq </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="canlib_8h.html#ae3d1b041d62207d5336f93c089cd5b65">canHandle</a>&#160;</td>
+          <td class="paramname"><em>hnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>freq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a> *&#160;</td>
+          <td class="paramname"><em>nominal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function translates the <a class="el" href="canlib_8h.html#canBITRATE_xxx">canBITRATE_xxx</a> constants to corresponding bus parameter values. At return <em>nominal</em> contains parameter values for the specified <em>freq</em>. If the channel is opened in CAN FD mode, see <a class="el" href="group___c_a_n.html#ga03be920624427856a9fde821ef3f9136">kvBitrateToBusParamsFdTq()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">hnd</td><td>A handle to an open circuit. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">freq</td><td>Bitrate constant, <a class="el" href="canlib_8h.html#canBITRATE_xxx">canBITRATE_xxx</a>. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">nominal</td><td>A pointer to a <a class="el" href="structkv_bus_params_tq.html">kvBusParamsTq</a>, upon return receives the bus busparamters specified by <em>freq</em>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="canstat_8h.html#a52b5e5c71832b0bd3c6a5b1fd48583e7a49743d0d438957118b9c6af2e831b209">canOK</a> (zero) is success </dd>
+<dd>
+<a class="el" href="canstat_8h.html#canERR_xxx">canERR_xxx</a> (negative) if failure</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group___c_a_n.html#ga50f169c6f9dd6df93b17c322e8e4fd00">canSetBusParamsTq()</a>, <a class="el" href="group___c_a_n.html#ga03be920624427856a9fde821ef3f9136">kvBitrateToBusParamsFdTq()</a> </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -2274,7 +2414,7 @@ Not implemented in linux.</dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"> (canlib 5.34) Wed Sep 9 2020</li>
+    <li class="footer"> (canlib 5.43) Wed Sep 13 2023</li>
   </ul>
 </div>
 </body>

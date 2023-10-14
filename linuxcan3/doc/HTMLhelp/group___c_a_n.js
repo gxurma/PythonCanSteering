@@ -1,6 +1,14 @@
 var group___c_a_n =
 [
-    [ "bus_params_tq.h", "bus__params__tq_8h.html", null ],
+    [ "kvBusParamsTq", "structkv_bus_params_tq.html", [
+      [ "phase1", "structkv_bus_params_tq.html#aa8c2aacf694615ddaff84e31b31ae0ff", null ],
+      [ "phase2", "structkv_bus_params_tq.html#a87167f9802ef5563e4236d5710e1b65b", null ],
+      [ "prescaler", "structkv_bus_params_tq.html#af263c600d546b48e74f8f7ac7a891533", null ],
+      [ "prop", "structkv_bus_params_tq.html#a4a8f6c91eefb9c6bf448592aac44153d", null ],
+      [ "sjw", "structkv_bus_params_tq.html#a3b769dc9a0e203dea3cc931bdb304377", null ],
+      [ "tq", "structkv_bus_params_tq.html#a4559f9255ccc9f785a33412fe5496d1a", null ]
+    ] ],
+    [ "kvBusParamsTq", "group___c_a_n.html#ga55095b4ff633151ac4ccf06b1f3df1da", null ],
     [ "canAccept", "group___c_a_n.html#gaa4ffd2fad1932ad5763c2c923a1a12d8", null ],
     [ "canBusOff", "group___c_a_n.html#gaf1786cfbfd542b18b9c599d278837bd9", null ],
     [ "canBusOn", "group___c_a_n.html#ga99c7c99cc71580f8099a1407f4f9ea1a", null ],
@@ -40,5 +48,7 @@ var group___c_a_n =
     [ "canTranslateBaud", "group___c_a_n.html#gaf38b95fce4930347d9986887ec046e13", null ],
     [ "canWrite", "group___c_a_n.html#ga62c185329d6741c90102511e2f37983e", null ],
     [ "canWriteSync", "group___c_a_n.html#ga304cb3a7bc2874c1f8ad361a911bcd5f", null ],
-    [ "canWriteWait", "group___c_a_n.html#ga47d03bfcc31e290284e65211b61f15f3", null ]
+    [ "canWriteWait", "group___c_a_n.html#ga47d03bfcc31e290284e65211b61f15f3", null ],
+    [ "kvBitrateToBusParamsFdTq", "group___c_a_n.html#ga03be920624427856a9fde821ef3f9136", null ],
+    [ "kvBitrateToBusParamsTq", "group___c_a_n.html#gaa666085d9544b2c8db002599595edc37", null ]
 ];
