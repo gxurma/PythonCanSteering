@@ -210,7 +210,7 @@ class PyGuiApp(QMainWindow):
 		self.homeXThread	= GenericThread(lambda:self.Home(idX,	1,		0,	4096,	-4096,		0,8192, self.pushButtonHomeX))
 		self.homeX2Thread	= GenericThread(lambda:self.Home(idX2,	1,	-4000, -1792,	512,		0,8192, self.pushButtonHomeX2))
 		self.homeYThread	= GenericThread(lambda:self.Home(idY,	1,		0,	4096,	-4096,		0,8192, self.pushButtonHomeY))
-		self.homeZThread	= GenericThread(lambda:self.Home(idZ,	0, 100000,	4096,	-4096,	100000,8192, self.pushButtonHomeZ))
+		self.homeZThread	= GenericThread(lambda:self.Home(idZ,	0, 100000,	2000,	-4096,	100000,8192, self.pushButtonHomeZ))
 		self.homeCThread	= GenericThread(lambda:self.Home(idC,	0,	744,	0,		-4096,		0,8192, self.pushButtonHomeC))
 		self.homeAllThread	= GenericThread(self.homeAll)
 		self.pushButtonHomeX.clicked.connect(self.homeXThread.start)
@@ -952,7 +952,7 @@ class PyGuiApp(QMainWindow):
 				self.sendElmoMsgShort(axe, "VE",0 ) #VE = ?
 				# self.sendMsg(idTx+axe, (0x56,0x45,0,0 )) #VE = ?
 				print ("velocity error :", abs(self.VelErr[self.whichAxe(axe)]), end="   ")
-				if abs(self.VelErr[self.whichAxe(axe)]) >= 3000 :
+				if abs(self.VelErr[self.whichAxe(axe)]) >= jogSpeed :
 					break
 
 			self.sendElmoMsgShort(axe, "ST",0 ) #STop
