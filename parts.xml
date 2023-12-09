@@ -46,4 +46,5 @@
    <part id="TEX-hype_breathSensor" height-units="Millimeters" height="1.7" package-id="SSOP16" speed="1.0" pick-retry-count="0"/>
    <part id="TEX-hype_AccelSensor" height-units="Millimeters" height="0.7" package-id="LGA-16" speed="1.0" pick-retry-count="0"/>
    <part id="TEX-hype_NXP-chip" height-units="Millimeters" height="0.1" package-id="TEX-hype_NXP-chip" speed="1.0" pick-retry-count="0"/>
+   <part id="VirtDispenserPart1" height-units="Millimeters" height="0.5" package-id="VirtDispenserPart" speed="1.0" pick-retry-count="0"/>
 </openpnp-parts>
