@@ -113,19 +113,16 @@ laser_module_pwm_pin                          2.5             # This pin will be
 # See http://smoothieware.org/temperaturecontrol
 
 # First hotend configuration
-temperature_control.hotend.enable            true             # Whether to activate this ( "hotend" ) module at all.
+#temperature_control.hotend.enable            false             # Whether to activate this ( "hotend" ) module at all.
 temperature_control.hotend.thermistor_pin    0.23             # Pin for the thermistor to read
-temperature_control.hotend.heater_pin        1.30              # Pin that controls the heater, set to nc if a readonly thermistor is being defined
+temperature_control.hotend.heater_pin        2.7              # Pin that controls the heater, set to nc if a readonly thermistor is being defined
 temperature_control.hotend.thermistor        EPCOS100K        # See http://smoothieware.org/temperaturecontrol#toc5
 #temperature_control.hotend.beta             4066             # Or set the beta value
 temperature_control.hotend.set_m_code        104              # M-code to set the temperature for this module
 temperature_control.hotend.set_and_wait_m_code 109            # M-code to set-and-wait for this module
 temperature_control.hotend.designator        T                # Designator letter for this module
-temperature_control.hotend.max_temp         300              # Set maximum temperature - Will prevent heating above 300 by default
-temperature_control.hotend.min_temp         0                # Set minimum temperature - Will prevent heating below if set
-temperature_control.hotend.bang_bang         true             # Set to true to use bang bang control rather than PID
-temperature_control.hoted.hysteresis         1.0              # Set to the temperature in degrees C to use as hysteresis
-
+#temperature_control.hotend.max_temp         300              # Set maximum temperature - Will prevent heating above 300 by default
+#temperature_control.hotend.min_temp         0                # Set minimum temperature - Will prevent heating below if set
 
 # Safety control is enabled by default and can be overidden here, the values show the defaults
 # See http://smoothieware.org/temperaturecontrol#runaway
@@ -433,8 +430,8 @@ switch.workingvac.input_off_command                 M821
 switch.workingvac.output_pin                        1.31
 switch.workingvac.output_type                       digital
 
-#switch.P130.enable                            true
-#switch.P130.input_on_command                  M822 
-#switch.P130.input_off_command                 M823
-#switch.P130.output_pin                        1.30
-#switch.P130.output_type                       digital
+switch.P130.enable                            true
+switch.P130.input_on_command                  M822 
+switch.P130.input_off_command                 M823
+switch.P130.output_pin                        1.30
+switch.P130.output_type                       digital
