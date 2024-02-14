@@ -1,0 +1,19 @@
+<openpnp-board version="1.1" name="Dispensertest.board.xml">
+   <dimensions units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
+   <fiducials/>
+   <placements>
+      <placement version="1.4" id="Fid1" side="Top" part-id="FIDUCIAL-1X2-FIDUCIAL1X2" type="Fiducial" enabled="true">
+         <location units="Millimeters" x="0.0" y="0.0" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="Fid2" side="Top" part-id="FIDUCIAL-1X2-FIDUCIAL1X2" type="Fiducial" enabled="true">
+         <location units="Millimeters" x="26.705" y="29.985" z="0.0" rotation="0.0"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+      <placement version="1.4" id="IC1" side="Top" part-id="VirtDispenserPart1" type="Placement" enabled="true">
+         <location units="Millimeters" x="7.251428015530905" y="18.19708179092968" z="0.0" rotation="-1.734723475976807E-18"/>
+         <error-handling>Alert</error-handling>
+      </placement>
+   </placements>
+   <solder-paste-pads/>
+</openpnp-board>
