@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1155</width>
-    <height>533</height>
+    <width>1114</width>
+    <height>472</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -2208,7 +2208,7 @@ Changer
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1155</width>
+     <width>1114</width>
      <height>21</height>
     </rect>
    </property>
@@ -2264,13 +2264,94 @@ Changer
   </action>
  </widget>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
+  <tabstop>pushButtonReadPos</tabstop>
+  <tabstop>pushButtonHomeAll</tabstop>
   <tabstop>pushButtonInitX</tabstop>
+  <tabstop>pushButtonInitX2</tabstop>
   <tabstop>pushButtonInitY</tabstop>
   <tabstop>pushButtonInitZ</tabstop>
+  <tabstop>pushButtonInitC</tabstop>
+  <tabstop>pushButtonGoX0Y0</tabstop>
+  <tabstop>pushButtonGoZmax</tabstop>
   <tabstop>pushButtonHomeX</tabstop>
+  <tabstop>pushButtonHomeX2</tabstop>
   <tabstop>pushButtonHomeY</tabstop>
   <tabstop>pushButtonHomeZ</tabstop>
+  <tabstop>pushButtonHomeC</tabstop>
+  <tabstop>pushButtonGoX20</tabstop>
+  <tabstop>pushButtonGoC0</tabstop>
+  <tabstop>pushButtonMotorXAus</tabstop>
+  <tabstop>pushButtonMotorX2Aus</tabstop>
+  <tabstop>pushButtonMotorYAus</tabstop>
+  <tabstop>pushButtonMotorZAus</tabstop>
+  <tabstop>pushButtonMotorCAus</tabstop>
+  <tabstop>pushButtonNotStop</tabstop>
+  <tabstop>spinBoxC</tabstop>
+  <tabstop>Cset</tabstop>
+  <tabstop>spinBoxY</tabstop>
+  <tabstop>Yset</tabstop>
+  <tabstop>spinBoxZ</tabstop>
+  <tabstop>Zset</tabstop>
+  <tabstop>spinBoxX</tabstop>
+  <tabstop>X1set</tabstop>
+  <tabstop>spinBoxX2</tabstop>
+  <tabstop>X2set</tabstop>
+  <tabstop>spinBoxVmax</tabstop>
+  <tabstop>Vmaxset</tabstop>
+  <tabstop>pushButtonGo</tabstop>
+  <tabstop>pushButtonJet</tabstop>
+  <tabstop>pushButtonJetterDown</tabstop>
+  <tabstop>pushButtonZClampOff</tabstop>
+  <tabstop>pushButtonLight</tabstop>
+  <tabstop>pushButtonToolChangerVac</tabstop>
+  <tabstop>pushButtonToolTipVac</tabstop>
+  <tabstop>pushButtonDispens1</tabstop>
+  <tabstop>pushButtonDispens1Shot</tabstop>
+  <tabstop>pushButtonDispens2</tabstop>
+  <tabstop>pushButtonDispens2Shot</tabstop>
+  <tabstop>pushButtonWorkingVac</tabstop>
+  <tabstop>pushButtonDispensVac1</tabstop>
+  <tabstop>pushButtonDispensVac2</tabstop>
+  <tabstop>pushButtonThermodeAn</tabstop>
+  <tabstop>pushButtonBettAn</tabstop>
+  <tabstop>pushButtonReadSwitches</tabstop>
+  <tabstop>pushButtonToolTipVacRead</tabstop>
+  <tabstop>checkBoxJetterUp</tabstop>
+  <tabstop>checkBoxJetterDown</tabstop>
+  <tabstop>checkBoxJetterTouch</tabstop>
+  <tabstop>checkBoxTipTouch</tabstop>
+  <tabstop>checkBoxZClampBack</tabstop>
+  <tabstop>checkBoxZClampFront</tabstop>
+  <tabstop>spinBoxDispensTime1</tabstop>
+  <tabstop>spinBoxDispensTime2</tabstop>
+  <tabstop>spinBoxThermodeSoll</tabstop>
+  <tabstop>spinBoxBettSoll</tabstop>
+  <tabstop>pushButton_YP</tabstop>
+  <tabstop>doubleSpinBox_StepsXY</tabstop>
+  <tabstop>verticalSlider_StepsXY</tabstop>
+  <tabstop>pushButton_ZP</tabstop>
+  <tabstop>verticalSlider_StepsZ</tabstop>
+  <tabstop>pushButton_XM</tabstop>
+  <tabstop>pushButtonJoysticMode</tabstop>
+  <tabstop>pushButton_XP</tabstop>
+  <tabstop>pushButton_YM</tabstop>
+  <tabstop>pushButton_CM</tabstop>
+  <tabstop>doubleSpinBox_StepsZ</tabstop>
+  <tabstop>pushButton_CP</tabstop>
+  <tabstop>pushButton_ZM</tabstop>
+  <tabstop>spinBoxVmaxf</tabstop>
+  <tabstop>Vmaxsetf</tabstop>
+  <tabstop>tableWidget_Positionen</tabstop>
+  <tabstop>pushButton_Start</tabstop>
+  <tabstop>pushButton_Pause</tabstop>
+  <tabstop>pushButton_Stop</tabstop>
+  <tabstop>pushButton_GoToPos</tabstop>
+  <tabstop>pushButton_Capture</tabstop>
+  <tabstop>pushButton_ZeileP</tabstop>
+  <tabstop>pushButton_ZeileM</tabstop>
+  <tabstop>pushButton_Load</tabstop>
+  <tabstop>pushButton_Save</tabstop>
+  <tabstop>tabWidget</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -2329,12 +2410,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>741</x>
-     <y>235</y>
+     <x>1091</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
-     <x>708</x>
-     <y>391</y>
+     <x>1055</x>
+     <y>324</y>
     </hint>
    </hints>
   </connection>
@@ -2345,12 +2426,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>708</x>
-     <y>391</y>
+     <x>1055</x>
+     <y>324</y>
     </hint>
     <hint type="destinationlabel">
-     <x>741</x>
-     <y>235</y>
+     <x>1091</x>
+     <y>219</y>
     </hint>
    </hints>
   </connection>
@@ -2361,12 +2442,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>668</x>
-     <y>235</y>
+     <x>1022</x>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
-     <x>638</x>
-     <y>391</y>
+     <x>988</x>
+     <y>324</y>
     </hint>
    </hints>
   </connection>
@@ -2377,12 +2458,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>638</x>
-     <y>391</y>
+     <x>988</x>
+     <y>324</y>
     </hint>
     <hint type="destinationlabel">
-     <x>668</x>
-     <y>235</y>
+     <x>1022</x>
+     <y>219</y>
     </hint>
    </hints>
   </connection>
@@ -2393,12 +2474,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>122</x>
-     <y>432</y>
+     <x>114</x>
+     <y>359</y>
     </hint>
     <hint type="destinationlabel">
-     <x>430</x>
-     <y>437</y>
+     <x>498</x>
+     <y>363</y>
     </hint>
    </hints>
   </connection>
@@ -2409,12 +2490,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>430</x>
-     <y>437</y>
+     <x>498</x>
+     <y>363</y>
     </hint>
     <hint type="destinationlabel">
-     <x>122</x>
-     <y>432</y>
+     <x>114</x>
+     <y>359</y>
     </hint>
    </hints>
   </connection>
@@ -2425,12 +2506,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>122</x>
-     <y>472</y>
+     <x>114</x>
+     <y>392</y>
     </hint>
     <hint type="destinationlabel">
-     <x>426</x>
-     <y>477</y>
+     <x>494</x>
+     <y>396</y>
     </hint>
    </hints>
   </connection>
@@ -2441,12 +2522,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>430</x>
-     <y>477</y>
+     <x>498</x>
+     <y>396</y>
     </hint>
     <hint type="destinationlabel">
-     <x>122</x>
-     <y>472</y>
+     <x>114</x>
+     <y>392</y>
     </hint>
    </hints>
   </connection>
@@ -2457,12 +2538,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>122</x>
-     <y>512</y>
+     <x>114</x>
+     <y>425</y>
     </hint>
     <hint type="destinationlabel">
-     <x>449</x>
-     <y>517</y>
+     <x>517</x>
+     <y>429</y>
     </hint>
    </hints>
   </connection>
@@ -2473,12 +2554,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>430</x>
-     <y>517</y>
+     <x>498</x>
+     <y>429</y>
     </hint>
     <hint type="destinationlabel">
-     <x>122</x>
-     <y>512</y>
+     <x>114</x>
+     <y>425</y>
     </hint>
    </hints>
   </connection>
@@ -2489,12 +2570,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>751</x>
-     <y>137</y>
+     <x>1103</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>325</x>
-     <y>517</y>
+     <x>475</x>
+     <y>429</y>
     </hint>
    </hints>
   </connection>
@@ -2505,12 +2586,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>751</x>
-     <y>137</y>
+     <x>1103</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>429</x>
-     <y>517</y>
+     <x>629</x>
+     <y>429</y>
     </hint>
    </hints>
   </connection>
@@ -2521,12 +2602,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>751</x>
-     <y>137</y>
+     <x>1103</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>533</x>
-     <y>517</y>
+     <x>783</x>
+     <y>429</y>
     </hint>
    </hints>
   </connection>
@@ -2537,12 +2618,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>751</x>
-     <y>137</y>
+     <x>1103</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>637</x>
-     <y>517</y>
+     <x>937</x>
+     <y>429</y>
     </hint>
    </hints>
   </connection>
@@ -2553,12 +2634,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>751</x>
-     <y>137</y>
+     <x>1103</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>741</x>
-     <y>517</y>
+     <x>1091</x>
+     <y>429</y>
     </hint>
    </hints>
   </connection>
@@ -2569,12 +2650,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>121</x>
-     <y>512</y>
+     <x>132</x>
+     <y>425</y>
     </hint>
     <hint type="destinationlabel">
-     <x>398</x>
-     <y>517</y>
+     <x>567</x>
+     <y>429</y>
     </hint>
    </hints>
   </connection>
@@ -2585,12 +2666,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>622</x>
-     <y>517</y>
+     <x>791</x>
+     <y>429</y>
     </hint>
     <hint type="destinationlabel">
-     <x>121</x>
-     <y>512</y>
+     <x>132</x>
+     <y>425</y>
     </hint>
    </hints>
   </connection>
