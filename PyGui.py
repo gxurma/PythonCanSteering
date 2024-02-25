@@ -239,11 +239,11 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonDispensVac1.clicked.connect(lambda: self.SetActuator(self.pushButtonDispensVac1.isChecked(), "M816", "M817" ))
 		self.pushButtonDispensVac2.clicked.connect(lambda: self.SetActuator(self.pushButtonDispensVac2.isChecked(), "M818", "M819" ))
 		self.pushButtonWorkingVac.clicked.connect(lambda: self.SetActuator(self.pushButtonWorkingVac.isChecked(), "M820", "M821" ))
- 
+
 		self.pushButtonReadSwitches.clicked.connect(self.readSwitches)
-        
-        self.pushButtonDispens1Shot.clicked.connect(lambda: self.dispens1Shot(self.spinBoxDispensTime1.value()))
-        self.pushButtonDispens2Shot.clicked.connect(lambda: self.dispens2Shot(self.spinBoxDispensTime2.value()))
+
+		self.pushButtonDispens1Shot.clicked.connect(lambda: self.dispens1Shot(self.spinBoxDispensTime1.value()))
+		self.pushButtonDispens2Shot.clicked.connect(lambda: self.dispens2Shot(self.spinBoxDispensTime2.value()))
 
 		self.sendTcpQ = queue.Queue()  #from middleware to openpnp
 		self.recTcpQ = queue.Queue()	#from openpnp to middleware
@@ -353,19 +353,18 @@ class PyGuiApp(QMainWindow):
 		self.PrgRunning = False
 		self.lastpath = '.'
 		self.PrgPaused = False
-    
-    def dispens1Shot(self, duration):
-        print("dispensshot1 for duration ", duration)
-        self.SetActuator(True, "M812", "M813" )
-        time.sleep(duration)
-        self.SetActuator(False, "M812", "M813" )
 
-    def dispens2Shot(self, duration):
-        print("dispensshot2 for duration ", duration)
-        self.SetActuator(True, "M814", "M815" )
-        time.sleep(duration)
-        self.SetActuator(False, "M814", "M815" )
-        
+	def dispens1Shot(self, duration):
+		print("dispensshot1 for duration ", duration)
+		self.SetActuator(True, "M812", "M813" )
+		time.sleep(duration/1000)
+		self.SetActuator(False, "M812", "M813" )
+
+	def dispens2Shot(self, duration):
+		print("dispensshot2 for duration ", duration)
+		self.SetActuator(True, "M814", "M815" )
+		time.sleep(duration/1000)
+		self.SetActuator(False, "M814", "M815" )
 
 	def readSwitches(self):
 		data = "M119\n"
