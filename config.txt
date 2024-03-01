@@ -126,8 +126,8 @@ temperature_control.hotend.max_temp         200               # Set maximum temp
 temperature_control.hotend.min_temp         -10                # Set minimum temperature - Will prevent heating below if set
 temperature_control.hotend.bang_bang         false             # Set to true to use bang bang control rather than PID
 temperature_control.hotend.hysteresis         2.0              # Set to the temperature in degrees C to use as hysteresis
-#temperature_control.hotend.rt_curve			27, 98500, 85, 6650, 229, 121
-temperature_control.hotend.coefficients			0.000922411041336407 , 0.000196715395918485, 0.000000110036424190310
+#temperature_control.hotend.rt_curve			26.6,92400,86.8,8290,214,283
+temperature_control.hotend.coefficients			0.000922411041336407,0.000196715395918485,0.000000110036424190310
 
 
 
@@ -143,7 +143,7 @@ temperature_control.hotend.p_factor         13.7             # P ( proportional 
 temperature_control.hotend.i_factor         0.097            # I ( integral ) factor
 temperature_control.hotend.d_factor         24               # D ( derivative ) factor
 
-temperature_control.hotend.max_pwm          70               # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
+temperature_control.hotend.max_pwm          80               # Max pwm, 64 is a good value if driving a 12v resistor with 24v.
 
 # Second hotend configuration
 #temperature_control.hotend2.enable            true           # Whether to activate this ( "hotend" ) module at all.
@@ -171,7 +171,8 @@ temperature_control.bed.get_m_code           141              # M-code to get th
 temperature_control.bed.set_and_wait_m_code  190              # M-code to set-and-wait for this module
 temperature_control.bed.designator           B                # Designator letter for this module
 temperature_control.bed.max_temp             200              # max temp
-temperature_control.bed.coefficients		0.00076066403287 , 0.00021547899649, 0.0000000737602334158975
+#temperature_control.bed.rt_curve			25,100000,100,5900,150,1486
+temperature_control.bed.coefficients		0.00076066403287,0.00021547899649,0.0000000737602334158975
 
 
 
