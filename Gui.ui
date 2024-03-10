@@ -344,7 +344,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -1694,6 +1694,35 @@ Changer
           </property>
           <property name="format">
            <string>%v °C</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="9" rowspan="2">
+         <widget class="QPushButton" name="pushButtonReadTemps">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Read
+Temps</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
+          </property>
+          <property name="autoRepeatInterval">
+           <number>100</number>
+          </property>
+          <property name="default">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
