@@ -32,11 +32,13 @@ Jetter up
 vakuum chuck
 vakuum toolchange
 vakuum pick
-zclamp 
+zclamp
 
 
 todo:
 dispenser valve on
 Dispenser vac on
 
-touch in? 
+touch in?
+
+Glas Schutzplatte für Uplooking Camera

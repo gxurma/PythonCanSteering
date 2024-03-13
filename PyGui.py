@@ -242,8 +242,12 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonThermodeAn.clicked.connect(lambda: self.SetActuator(self.pushButtonThermodeAn.isChecked(),"M104 S%3d"%(self.spinBoxThermodeSoll.value()), "M104 S15"))  # Fake Ziel 15°C wenn aus
 		self.pushButtonBettAn.clicked.connect(lambda: self.SetActuator(self.pushButtonBettAn.isChecked(),"M140 S%3d"%(self.spinBoxBettSoll.value()), "M140 S15")) # Fake Ziel 15°C wenn aus
 
+		self.readTemperaturesThread = GenericThread(self.readTemperatures)
+		self.readTemperaturesThread.start()
+		self.pushButtonReadTemps.clicked.connect(self.readTemperaturesThread.start)
+
 		self.pushButtonReadSwitches.clicked.connect(self.readSwitches)
-        
+
 		self.pushButtonDispens1Shot.clicked.connect(lambda: self.dispens1Shot(self.spinBoxDispensTime1.value()))
 		self.pushButtonDispens2Shot.clicked.connect(lambda: self.dispens2Shot(self.spinBoxDispensTime2.value()))
 
@@ -355,7 +359,12 @@ class PyGuiApp(QMainWindow):
 		self.PrgRunning = False
 		self.lastpath = '.'
 		self.PrgPaused = False
-    
+
+		self.thermodeTemp = 0
+		self.bettTemp = 0
+
+
+
 	def dispens1Shot(self, duration):
 		print("dispensshot1 for duration ", duration)
 		self.SetActuator(True, "M812", "M813" )
@@ -367,15 +376,19 @@ class PyGuiApp(QMainWindow):
 		self.SetActuator(True, "M814", "M815" )
 		time.sleep(duration/1000)
 		self.SetActuator(False, "M814", "M815" )
-        
+
 
 	def readSwitches(self):
 		data = "M119\n"
 		self.sendSerQ.put(data.encode("utf-8"))
 
 	def readTemperatures(self):
-		data = "M105  M141\n"
-		self.sendSerQ.put(data.encode("utf-8"))
+		while( not hasattr(self, "sendSerQ") ):
+			time.sleep(1) #warten bis wir ein sendSerQ haben
+		while (self.pushButtonReadTemps.isChecked()):
+			data = "M105  M141\n"
+			self.sendSerQ.put(data.encode("utf-8"))
+			time.sleep(0.25)
 
 
 	def homeAll(self):
@@ -1085,7 +1098,7 @@ class PyGuiApp(QMainWindow):
 		Dies ist ein Programm zum Testen und Benutzen einer PnP Maschine mit Elmo Motion Cello Controllern und Smoothieware.
 		Die Maschine besteht aus X, (X2), Y, Z, und C Achsen und sollte eigentlich mit OpenPnP zusammenarbeiten,um Pick and Place Aufgaben zu lösen.
 		Dieses Programm basiert massiv auf manche Beispiele von Kvaser Canlib, Elmo Cello Motion und auch die Joystick sowie Socket Behandlung wurde nicht nur von mir erdacht.
-		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source. 
+		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source.
 		Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
 		Canlib ist geistiges Eigentum von Kvaser.
 		(C) 2018-2023 Martin Gyurkó
@@ -1327,7 +1340,7 @@ class PyGuiApp(QMainWindow):
 									# else : #(xVal < minimumf[0]) :
 										# self.X1set.setValue(int(minimumf[0]*Xm))
 										# self.X2set.setValue(0)
-									
+
 									self.X1set.setValue(int(xVal*Xm))
 
 								if y:
@@ -1408,6 +1421,20 @@ class PyGuiApp(QMainWindow):
 			m = not int(m[2])
 			print(" Zclamp front:",m)
 			self.checkBoxZClampFront.setChecked(m)
+
+		m = re.search("(T. |T.)([-0-9.]+)", d, re.I)
+		if m :
+			thermodeTemp = float(m[2])
+			print ("thermodeTemp:",thermodeTemp)
+			self.progressBarThermodeTemp.setValue(thermodeTemp)
+			self.thermodeTemp = thermodeTemp
+
+		m = re.search("(B. |B.)([-0-9.]+)", d, re.I)
+		if m :
+			bettTemp = float(m[2])
+			print ("bettTemp:",bettTemp)
+			self.progressBarBettTemp.setValue(bettTemp)
+			self.bettTemp = bettTemp
 
 	def serialSensorReader(self):
 		while True:

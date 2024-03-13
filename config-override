@@ -36,9 +36,9 @@ M204 E500.0000 P39350
 ;E max feed rate mm/sec:
 M203 E50.0000 P39350
 ;PID settings, i_max, max_pwm:
-M301 S0 P34.4690 I2.7686 D107.2849 X80.0000 Y80
+M301 S0 P44.3095 I1.8997 D258.3798 X80.0000 Y80
 ;Max temperature setting:
-M143 S0 P200.0000
+M143 S0 P210.0000
 ;PID settings, i_max, max_pwm:
 M301 S1 P10.0000 I0.3000 D200.0000 X255.0000 Y255
 ;Max temperature setting:
