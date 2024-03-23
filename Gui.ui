@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1114</width>
-    <height>472</height>
+    <width>1391</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1062,9 +1062,6 @@
           <property name="singleStep">
            <number>1</number>
           </property>
-          <property name="stepType">
-           <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
-          </property>
           <property name="value">
            <number>100</number>
           </property>
@@ -1142,16 +1139,13 @@ Enable 2</string>
            <number>0</number>
           </property>
           <property name="maximum">
-           <number>300</number>
+           <number>150</number>
           </property>
           <property name="singleStep">
            <number>1</number>
           </property>
-          <property name="stepType">
-           <enum>QAbstractSpinBox::DefaultStepType</enum>
-          </property>
           <property name="value">
-           <number>150</number>
+           <number>50</number>
           </property>
          </widget>
         </item>
@@ -1178,16 +1172,13 @@ Enable 2</string>
            <number>0</number>
           </property>
           <property name="maximum">
-           <number>300</number>
+           <number>210</number>
           </property>
           <property name="singleStep">
            <number>1</number>
           </property>
-          <property name="stepType">
-           <enum>QAbstractSpinBox::DefaultStepType</enum>
-          </property>
           <property name="value">
-           <number>150</number>
+           <number>50</number>
           </property>
          </widget>
         </item>
@@ -1349,9 +1340,6 @@ Temp</string>
           </property>
           <property name="singleStep">
            <number>1</number>
-          </property>
-          <property name="stepType">
-           <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
           </property>
           <property name="value">
            <number>100</number>
@@ -1637,10 +1625,10 @@ Changer
            <number>0</number>
           </property>
           <property name="maximum">
-           <number>400</number>
+           <number>200</number>
           </property>
           <property name="value">
-           <number>150</number>
+           <number>0</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -1684,16 +1672,45 @@ Changer
            <number>0</number>
           </property>
           <property name="maximum">
-           <number>400</number>
+           <number>200</number>
           </property>
           <property name="value">
-           <number>150</number>
+           <number>0</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
           <property name="format">
            <string>%v °C</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="9" rowspan="2">
+         <widget class="QPushButton" name="pushButtonReadTemps">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Read
+Temps</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>true</bool>
+          </property>
+          <property name="autoRepeatInterval">
+           <number>100</number>
+          </property>
+          <property name="default">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -2208,8 +2225,8 @@ Changer
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1114</width>
-     <height>21</height>
+     <width>1391</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2410,12 +2427,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1091</x>
-     <y>219</y>
+     <x>1370</x>
+     <y>250</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1055</x>
-     <y>324</y>
+     <x>1324</x>
+     <y>356</y>
     </hint>
    </hints>
   </connection>
@@ -2426,12 +2443,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1055</x>
-     <y>324</y>
+     <x>1324</x>
+     <y>356</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1091</x>
-     <y>219</y>
+     <x>1370</x>
+     <y>250</y>
     </hint>
    </hints>
   </connection>
@@ -2442,12 +2459,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1022</x>
-     <y>219</y>
+     <x>1284</x>
+     <y>250</y>
     </hint>
     <hint type="destinationlabel">
-     <x>988</x>
-     <y>324</y>
+     <x>1242</x>
+     <y>356</y>
     </hint>
    </hints>
   </connection>
@@ -2458,12 +2475,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>988</x>
-     <y>324</y>
+     <x>1242</x>
+     <y>356</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1022</x>
-     <y>219</y>
+     <x>1284</x>
+     <y>250</y>
     </hint>
    </hints>
   </connection>
@@ -2474,12 +2491,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>114</x>
-     <y>359</y>
+     <x>134</x>
+     <y>398</y>
     </hint>
     <hint type="destinationlabel">
-     <x>498</x>
-     <y>363</y>
+     <x>595</x>
+     <y>402</y>
     </hint>
    </hints>
   </connection>
@@ -2490,12 +2507,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>498</x>
-     <y>363</y>
+     <x>595</x>
+     <y>402</y>
     </hint>
     <hint type="destinationlabel">
-     <x>114</x>
-     <y>359</y>
+     <x>134</x>
+     <y>398</y>
     </hint>
    </hints>
   </connection>
@@ -2506,12 +2523,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>114</x>
-     <y>392</y>
+     <x>134</x>
+     <y>438</y>
     </hint>
     <hint type="destinationlabel">
-     <x>494</x>
-     <y>396</y>
+     <x>591</x>
+     <y>442</y>
     </hint>
    </hints>
   </connection>
@@ -2522,12 +2539,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>498</x>
-     <y>396</y>
+     <x>595</x>
+     <y>442</y>
     </hint>
     <hint type="destinationlabel">
-     <x>114</x>
-     <y>392</y>
+     <x>134</x>
+     <y>438</y>
     </hint>
    </hints>
   </connection>
@@ -2538,12 +2555,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>114</x>
-     <y>425</y>
+     <x>139</x>
+     <y>478</y>
     </hint>
     <hint type="destinationlabel">
-     <x>517</x>
-     <y>429</y>
+     <x>614</x>
+     <y>482</y>
     </hint>
    </hints>
   </connection>
@@ -2554,12 +2571,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>498</x>
-     <y>429</y>
+     <x>595</x>
+     <y>482</y>
     </hint>
     <hint type="destinationlabel">
-     <x>114</x>
-     <y>425</y>
+     <x>139</x>
+     <y>478</y>
     </hint>
    </hints>
   </connection>
@@ -2570,8 +2587,8 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1103</x>
-     <y>135</y>
+     <x>1380</x>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
      <x>475</x>
@@ -2586,8 +2603,8 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1103</x>
-     <y>135</y>
+     <x>1380</x>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
      <x>629</x>
@@ -2602,12 +2619,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1103</x>
-     <y>135</y>
+     <x>1380</x>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
-     <x>783</x>
-     <y>429</y>
+     <x>982</x>
+     <y>482</y>
     </hint>
    </hints>
   </connection>
@@ -2618,12 +2635,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1103</x>
-     <y>135</y>
+     <x>1380</x>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
-     <x>937</x>
-     <y>429</y>
+     <x>1176</x>
+     <y>482</y>
     </hint>
    </hints>
   </connection>
@@ -2634,12 +2651,12 @@ Changer
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1103</x>
-     <y>135</y>
+     <x>1380</x>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1091</x>
-     <y>429</y>
+     <x>1370</x>
+     <y>482</y>
     </hint>
    </hints>
   </connection>
@@ -2650,12 +2667,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>132</x>
-     <y>425</y>
+     <x>143</x>
+     <y>478</y>
     </hint>
     <hint type="destinationlabel">
-     <x>567</x>
-     <y>429</y>
+     <x>780</x>
+     <y>482</y>
     </hint>
    </hints>
   </connection>
@@ -2666,12 +2683,12 @@ Changer
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>791</x>
-     <y>429</y>
+     <x>1004</x>
+     <y>482</y>
     </hint>
     <hint type="destinationlabel">
-     <x>132</x>
-     <y>425</y>
+     <x>143</x>
+     <y>478</y>
     </hint>
    </hints>
   </connection>
