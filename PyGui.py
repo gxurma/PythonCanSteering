@@ -239,8 +239,8 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonDispensVac1.clicked.connect(lambda: self.SetActuator(self.pushButtonDispensVac1.isChecked(), "M816", "M817" ))
 		self.pushButtonDispensVac2.clicked.connect(lambda: self.SetActuator(self.pushButtonDispensVac2.isChecked(), "M818", "M819" ))
 		self.pushButtonWorkingVac.clicked.connect(lambda: self.SetActuator(self.pushButtonWorkingVac.isChecked(), "M820", "M821" ))
-		self.pushButtonThermodeAn.clicked.connect(lambda: self.SetActuator(self.pushButtonThermodeAn.isChecked(),"M104 S%3d"%(self.spinBoxThermodeSoll.value()), "M104 S15"))  # Fake Ziel 15°C wenn aus
-		self.pushButtonBettAn.clicked.connect(lambda: self.SetActuator(self.pushButtonBettAn.isChecked(),"M140 S%3d"%(self.spinBoxBettSoll.value()), "M140 S15")) # Fake Ziel 15°C wenn aus
+		self.pushButtonThermodeAn.clicked.connect(lambda: self.SetActuator(self.pushButtonThermodeAn.isChecked(),"M104 S%3d"%(self.spinBoxThermodeSoll.value()), "M104 S37"))  # Fake Ziel 15°C wenn aus
+		self.pushButtonBettAn.clicked.connect(lambda: self.SetActuator(self.pushButtonBettAn.isChecked(),"M140 S%3d"%(self.spinBoxBettSoll.value()), "M140 S37")) # Fake Ziel 15°C wenn aus
 
 		self.readTemperaturesThread = GenericThread(self.readTemperatures)
 		self.readTemperaturesThread.start()
