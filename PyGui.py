@@ -460,10 +460,18 @@ class PyGuiApp(QMainWindow):
 		Z = float(self.tableWidget_Positionen.item(row,2).text())
 		Speed = float(self.tableWidget_Positionen.item(row,3).text())
 		Pause = float(self.tableWidget_Positionen.item(row,4).text())
+		Dispenser = float(self.tableWidget_Positionen.item(row,5).text())
+
 		data = "G1 Z%0.3f F%0.3f\nM400\n"%(Z,Speed)   # first move Z to avoid collision
 		print(data)
 		self.analyseSocketData(data.encode("utf-8"))
-		data = "G1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
+
+		if Dispenser == 0 : # no dispensing
+			data = "G1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
+		if Dispenser == 1 : # dispensing 1
+			data = "G1 X%0.3f Y%0.3f F%0.3f\nM812\nM400\n"%(X,Y,Speed)  #then move in XY
+		if Dispenser == 2 : # dispensing 2
+			data = "G1 X%0.3f Y%0.3f F%0.3f\nM814\nM400\n"%(X,Y,Speed)  #then move in XY
 		print(data)
 		self.analyseSocketData(data.encode("utf-8"))
 
@@ -484,6 +492,7 @@ class PyGuiApp(QMainWindow):
 			self.tableWidget_Positionen.setItem(row, 2, QtWidgets.QTableWidgetItem("%1.3f"%(self.currentPos[2]/Zm-50.0)))
 			self.tableWidget_Positionen.setItem(row, 3, QtWidgets.QTableWidgetItem("2000"))
 			self.tableWidget_Positionen.setItem(row, 4, QtWidgets.QTableWidgetItem("-1")) # default is we pause at every movement
+			self.tableWidget_Positionen.setItem(row, 5, QtWidgets.QTableWidgetItem("0")) # default is we do not dispense
 		else :
 			print("wohin? wähle Zeile aus!")
 
@@ -523,11 +532,11 @@ class PyGuiApp(QMainWindow):
 		if saveFileName:
 			self.lastpath = os.path.dirname(saveFileName)
 			with open(saveFileName,'w', newline='') as f:
-				fieldnames = [ "X", "Y", "Z", "Speed","Pause"]
+				fieldnames = [ "X", "Y", "Z", "Speed","Pause","Dispensen"]
 				writer = csv.DictWriter(f,fieldnames=fieldnames, delimiter='\t')
 				writer.writeheader()
 				for row in range(self.tableWidget_Positionen.rowCount()):
-					writer.writerow({"X":self.tableWidget_Positionen.item(row,0).text(), "Y":self.tableWidget_Positionen.item(row,1).text(), "Z": self.tableWidget_Positionen.item(row,2).text(), "Speed": self.tableWidget_Positionen.item(row,3).text(), "Pause": self.tableWidget_Positionen.item(row,4).text()})
+					writer.writerow({"X":self.tableWidget_Positionen.item(row,0).text(), "Y":self.tableWidget_Positionen.item(row,1).text(), "Z": self.tableWidget_Positionen.item(row,2).text(), "Speed": self.tableWidget_Positionen.item(row,3).text(), "Pause": self.tableWidget_Positionen.item(row,4).text(), "Dispensen": self.tableWidget_Positionen.item(row,5).text()})
 				f.close()
 
 	def PrgLaden(self) :
@@ -543,13 +552,14 @@ class PyGuiApp(QMainWindow):
 				self.tableWidget_Positionen.setSortingEnabled(False)
 				for row in programreader :
 					print(row)
-					print(row['X'], row['Y'], row['Z'], row['Speed'], row['Pause'])
+					print(row['X'], row['Y'], row['Z'], row['Speed'], row['Pause'], row['Dispensen'])
 					self.tableWidget_Positionen.insertRow(rowcount)
 					self.tableWidget_Positionen.setItem(rowcount, 0, QtWidgets.QTableWidgetItem(row['X']))
 					self.tableWidget_Positionen.setItem(rowcount, 1, QtWidgets.QTableWidgetItem(row['Y']))
 					self.tableWidget_Positionen.setItem(rowcount, 2, QtWidgets.QTableWidgetItem(row['Z']))
 					self.tableWidget_Positionen.setItem(rowcount, 3, QtWidgets.QTableWidgetItem(row['Speed']))
 					self.tableWidget_Positionen.setItem(rowcount, 4, QtWidgets.QTableWidgetItem(row['Pause']))
+					self.tableWidget_Positionen.setItem(rowcount, 5, QtWidgets.QTableWidgetItem(row['Dispensen']))
 					rowcount = rowcount + 1
 				# self.tableWidget_Positionen.setRowCount(rowcount)
 				self.tableWidget_Positionen.sortByColumn(-1, Qt.AscendingOrder)
@@ -1243,6 +1253,9 @@ class PyGuiApp(QMainWindow):
 											moving = moving + 1
 									print("moving: ", moving)
 									if not moving:
+										self.pushButtonJet.setChecked(False)
+										self.pushButtonDispens1.setChecked(False)
+										self.pushButtonDispens2.setChecked(False)
 										self.sendTcpQ.put("ok\r\n")
 										print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 										break
