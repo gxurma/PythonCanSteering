@@ -475,6 +475,15 @@ class PyGuiApp(QMainWindow):
 		print(data)
 		self.analyseSocketData(data.encode("utf-8"))
 
+#		self.pushButtonJet.setChecked(False)
+#		self.pushButtonDispens1.setChecked(False)
+#		self.pushButtonDispens2.setChecked(False)
+
+		data = "M813\nM815\n"
+		print(data)
+		self.analyseSocketData(data.encode("utf-8"))
+		
+
 		if Pause == -1 :
 			self.PrgPaused = True
 			self.pushButton_Pause.setChecked(True)
@@ -1253,9 +1262,6 @@ class PyGuiApp(QMainWindow):
 											moving = moving + 1
 									print("moving: ", moving)
 									if not moving:
-										self.pushButtonJet.setChecked(False)
-										self.pushButtonDispens1.setChecked(False)
-										self.pushButtonDispens2.setChecked(False)
 										self.sendTcpQ.put("ok\r\n")
 										print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 										break
