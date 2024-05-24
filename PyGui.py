@@ -469,9 +469,9 @@ class PyGuiApp(QMainWindow):
 		if Dispenser == 0 : # no dispensing
 			data = "G1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
 		if Dispenser == 1 : # dispensing 1
-			data = "G1 X%0.3f Y%0.3f F%0.3f\nM812\nM400\n"%(X,Y,Speed)  #then move in XY
+			data = "M812\nG1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
 		if Dispenser == 2 : # dispensing 2
-			data = "G1 X%0.3f Y%0.3f F%0.3f\nM814\nM400\n"%(X,Y,Speed)  #then move in XY
+			data = "M814\nG1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
 		print(data)
 		self.analyseSocketData(data.encode("utf-8"))
 
