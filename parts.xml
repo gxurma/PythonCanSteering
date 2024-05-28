@@ -29,7 +29,7 @@
    <part id="RES0603-51OHM" height-units="Millimeters" height="0.0" package-id="RES0603" speed="1.0" pick-retry-count="0"/>
    <part id="TSOT-23-5-MP3302" height-units="Millimeters" height="0.0" package-id="TSOT-23-5" speed="1.0" pick-retry-count="0"/>
    <part id="52207-0460-52207-0460" height-units="Millimeters" height="0.0" package-id="52207-0460" speed="1.0" pick-retry-count="0"/>
-   <part id="S08-Si4532DY" height-units="Millimeters" height="0.0" package-id="S08" speed="1.0" pick-retry-count="0"/>
+   <part bottom-vision-id="BVS17c3802cac3ac8d7" id="S08-Si4532DY" height-units="Millimeters" height="2.0" package-id="S08" speed="1.0" pick-retry-count="0"/>
    <part id="R0603-ZeroOhm" height-units="Millimeters" height="0.0" package-id="R0603" speed="1.0" pick-retry-count="0"/>
    <part id="TSSOP16_.65P_TI-TSC2046" height-units="Millimeters" height="0.0" package-id="TSSOP16_.65P_TI" speed="1.0" pick-retry-count="0"/>
    <part id="SOT-223-LM1117MPX" height-units="Millimeters" height="0.0" package-id="SOT-223" speed="1.0" pick-retry-count="0"/>
