@@ -239,8 +239,11 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonDispensVac1.clicked.connect(lambda: self.SetActuator(self.pushButtonDispensVac1.isChecked(), "M816", "M817" ))
 		self.pushButtonDispensVac2.clicked.connect(lambda: self.SetActuator(self.pushButtonDispensVac2.isChecked(), "M818", "M819" ))
 		self.pushButtonWorkingVac.clicked.connect(lambda: self.SetActuator(self.pushButtonWorkingVac.isChecked(), "M820", "M821" ))
-		self.pushButtonThermodeAn.clicked.connect(lambda: self.SetActuator(self.pushButtonThermodeAn.isChecked(),"M104 S%3d"%(self.spinBoxThermodeSoll.value()), "M104 S37"))  # Fake Ziel 15°C wenn aus
-		self.pushButtonBettAn.clicked.connect(lambda: self.SetActuator(self.pushButtonBettAn.isChecked(),"M140 S%3d"%(self.spinBoxBettSoll.value()), "M140 S37")) # Fake Ziel 15°C wenn aus
+		self.pushButtonThermodeAn.clicked.connect(lambda: self.SetActuator(self.pushButtonThermodeAn.isChecked(),"M104 S%3d"%(self.spinBoxThermodeSoll.value()), "M104 S40"))  # Fake Ziel 15°C wenn aus
+		self.pushButtonBettAn.clicked.connect(lambda: self.SetActuator(self.pushButtonBettAn.isChecked(),"M140 S%3d"%(self.spinBoxBettSoll.value()), "M140 S40")) # Fake Ziel 15°C wenn aus
+		self.pushButtonSendResetCommand.clicked.connect(self.sendResetCommandToSmoothie)
+		self.pushButtonSendGcode.clicked.connect(self.sendGcodeToServos)
+
 
 		self.readTemperaturesThread = GenericThread(self.readTemperatures)
 		self.readTemperaturesThread.start()
@@ -364,6 +367,16 @@ class PyGuiApp(QMainWindow):
 		self.bettTemp = 0
 
 
+	def sendResetCommandToSmoothie(self):
+		command = self.plainTextEditResetCommand.toPlainText() + "\n"
+		print("sending command to smoothie:\n",command)
+		self.sendSerQ.put(command.encode("utf-8"))
+		
+	def sendGcodeToServos(self):
+		command = self.plainTextEditGcode.toPlainText() + "\n"
+		print("sending command to servos:\n",command)
+		self.analyseSocketData(command.encode("utf-8"))
+
 
 	def dispens1Shot(self, duration):
 		print("dispensshot1 for duration ", duration)
@@ -421,7 +434,7 @@ class PyGuiApp(QMainWindow):
 				waiting = waiting + 1
 				if waiting % 10 == 0 :
 					print("waiting %05d"%(waiting/10), end="\r")
-				time.sleep(0.1)
+				time.sleep(0.05)
 			else :
 				print("Finished waiting")
 			if self.PrgRunning : #Still running?
@@ -469,9 +482,9 @@ class PyGuiApp(QMainWindow):
 		if Dispenser == 0 : # no dispensing
 			data = "G1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
 		if Dispenser == 1 : # dispensing 1
-			data = "M812\nG1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
+			data = "M812\nM802\nG1 X%0.3f Y%0.3f F%0.3f\nM400\nM813\nM803\n"%(X,Y,Speed)  #then move in XY
 		if Dispenser == 2 : # dispensing 2
-			data = "M814\nG1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
+			data = "M814\nM802\nG1 X%0.3f Y%0.3f F%0.3f\nM400\nM815\nM803\n"%(X,Y,Speed)  #then move in XY
 		print(data)
 		self.analyseSocketData(data.encode("utf-8"))
 
@@ -479,9 +492,9 @@ class PyGuiApp(QMainWindow):
 #		self.pushButtonDispens1.setChecked(False)
 #		self.pushButtonDispens2.setChecked(False)
 
-		data = "M813\nM815\n"
-		print(data)
-		self.analyseSocketData(data.encode("utf-8"))
+#		data = "M813\nM815\nM803\n"
+#		print(data)
+#		self.analyseSocketData(data.encode("utf-8"))
 		
 
 		if Pause == -1 :
@@ -1255,7 +1268,7 @@ class PyGuiApp(QMainWindow):
 								while moving and ((time.time()-ts) < 30): # we dont want to wait endlessly
 									for axe in axes :
 										self.sendElmoMsgShort(axe,"MS", 0 ) #ask for the motion status of each axis
-									time.sleep(0.1) # wait for processing of request
+									time.sleep(0.02) # wait for processing of request
 									moving = 0
 									for i in range(0,5) :
 										if self.MotionStatusReg[i] == 2 :

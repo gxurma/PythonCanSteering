@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1114</width>
-    <height>472</height>
+    <width>1391</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -2221,6 +2221,78 @@ Temps</string>
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Special</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButtonSendResetCommand">
+        <property name="geometry">
+         <rect>
+          <x>730</x>
+          <y>20</y>
+          <width>181</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Send Reset Command
+to Smoothieboard</string>
+        </property>
+       </widget>
+       <widget class="QPlainTextEdit" name="plainTextEditResetCommand">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>711</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="plainText">
+         <string>M112
+M999</string>
+        </property>
+       </widget>
+       <widget class="QPlainTextEdit" name="plainTextEditGcode">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>80</y>
+          <width>711</width>
+          <height>221</height>
+         </rect>
+        </property>
+        <property name="plainText">
+         <string>G1 X-10 Y-10 F2000
+M400
+G1 Y10 F2000
+M400
+G1 X10 F2000
+M400
+G1 Y-10 F2000
+M400
+G1 X-10 F2000
+M400
+G1 Z0 F2000
+M400
+</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonSendGcode">
+        <property name="geometry">
+         <rect>
+          <x>730</x>
+          <y>80</y>
+          <width>181</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Send Gcode
+to Servos</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -2230,8 +2302,8 @@ Temps</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1114</width>
-     <height>21</height>
+     <width>1391</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
