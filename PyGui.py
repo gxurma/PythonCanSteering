@@ -241,6 +241,7 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonWorkingVac.clicked.connect(lambda: self.SetActuator(self.pushButtonWorkingVac.isChecked(), "M820", "M821" ))
 		self.pushButtonThermodeAn.clicked.connect(lambda: self.SetActuator(self.pushButtonThermodeAn.isChecked(),"M104 S%3d"%(self.spinBoxThermodeSoll.value()), "M104 S40"))  # Fake Ziel 15°C wenn aus
 		self.pushButtonBettAn.clicked.connect(lambda: self.SetActuator(self.pushButtonBettAn.isChecked(),"M140 S%3d"%(self.spinBoxBettSoll.value()), "M140 S40")) # Fake Ziel 15°C wenn aus
+		
 		self.pushButtonSendResetCommand.clicked.connect(self.sendResetCommandToSmoothie)
 		self.pushButtonSendGcode.clicked.connect(self.sendGcodeToServos)
 
@@ -260,10 +261,14 @@ class PyGuiApp(QMainWindow):
 		self.recSerQ = queue.Queue()	#from Smothie to middleware
 		self.sendSensQ = queue.Queue()  #from middleware to Sensor
 		self.recSensQ = queue.Queue()	#from Sensor to middleware
+		
 
 		self.startSocketListenerThread = GenericThread( self.startSocketListener)
 		self.startSocketListenerThread.start()
 		self.startSocketSenderThread = GenericThread( self.startSocketSender)
+
+		self.motionQueueHandlerThread = GenericThread( self.motionQueueHandler )
+		self.motionQueueHandlerThread.start()
 
 
 		# Eigener Joystic Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
@@ -375,8 +380,8 @@ class PyGuiApp(QMainWindow):
 	def sendGcodeToServos(self):
 		command = self.plainTextEditGcode.toPlainText() + "\n"
 		print("sending command to servos:\n",command)
-		self.analyseSocketData(command.encode("utf-8"))
-
+#		self.analyseSocketData(command.encode("utf-8"))
+		self.recTcpQ.put(command.encode("utf-8"))
 
 	def dispens1Shot(self, duration):
 		print("dispensshot1 for duration ", duration)
@@ -399,7 +404,7 @@ class PyGuiApp(QMainWindow):
 		while( not hasattr(self, "sendSerQ") ):
 			time.sleep(1) #warten bis wir ein sendSerQ haben
 		while (self.pushButtonReadTemps.isChecked()):
-			data = "M105  M141\n"
+			data = "M105\nM141\n"
 			self.sendSerQ.put(data.encode("utf-8"))
 			time.sleep(0.25)
 
@@ -477,8 +482,9 @@ class PyGuiApp(QMainWindow):
 
 		data = "G1 Z%0.3f F%0.3f\nM400\n"%(Z,Speed)   # first move Z to avoid collision
 		print(data)
-		self.analyseSocketData(data.encode("utf-8"))
-
+#		self.analyseSocketData(data.encode("utf-8"))
+		self.recTcpQ.put(data.encode("utf-8"))
+		
 		if Dispenser == 0 : # no dispensing
 			data = "G1 X%0.3f Y%0.3f F%0.3f\nM400\n"%(X,Y,Speed)  #then move in XY
 		if Dispenser == 1 : # dispensing 1
@@ -486,16 +492,17 @@ class PyGuiApp(QMainWindow):
 		if Dispenser == 2 : # dispensing 2
 			data = "M814\nM802\nG1 X%0.3f Y%0.3f F%0.3f\nM400\nM815\nM803\n"%(X,Y,Speed)  #then move in XY
 		print(data)
-		self.analyseSocketData(data.encode("utf-8"))
-
+#		self.analyseSocketData(data.encode("utf-8"))
+		self.recTcpQ.put(data.encode("utf-8"))
+		
 #		self.pushButtonJet.setChecked(False)
 #		self.pushButtonDispens1.setChecked(False)
 #		self.pushButtonDispens2.setChecked(False)
 
 #		data = "M813\nM815\nM803\n"
 #		print(data)
-#		self.analyseSocketData(data.encode("utf-8"))
-		
+##		self.analyseSocketData(data.encode("utf-8"))
+#		self.recTcpQ.put(data.encode("utf-8"))		
 
 		if Pause == -1 :
 			self.PrgPaused = True
@@ -871,7 +878,7 @@ class PyGuiApp(QMainWindow):
 		self.sendElmoMsgShort(idY, "PX",0)# get pos
 		self.sendElmoMsgShort(idZ, "PX",0)# get pos
 		self.sendElmoMsgShort(idC, "PX",0)# get pos
-		time.sleep(0.25)
+		time.sleep(0.01)
 
 	def readPos(self) :
 		while self.pushButtonReadPos.isChecked()	:
@@ -918,7 +925,7 @@ class PyGuiApp(QMainWindow):
 			VelErr = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
 			if (VelErr & 0x80000000) :  # 64 bit negative numbers conversion to 32 bit
 				VelErr = -(0x100000000 - VelErr)  # wir sind negative Zahl!
-			print("velocity error: ", VelErr)
+#			print("velocity error: ", VelErr)
 			if msg.id == idRx+idX :
 				self.VelErr[0] = VelErr
 			if msg.id == idRx+idY :
@@ -931,7 +938,7 @@ class PyGuiApp(QMainWindow):
 				self.VelErr[4] = VelErr
 		if (msg.msg[0] == 0x53) and (msg.msg[1] == 0x52) : # SR = Status register for homing
 			StatusReg = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
-			print("Status Register: " , bin(StatusReg))
+#			print("Status Register: " , bin(StatusReg))
 			if msg.id == idRx+idX :
 				self.StatusReg[0] = StatusReg
 			if msg.id == idRx+idY :
@@ -945,10 +952,12 @@ class PyGuiApp(QMainWindow):
 
 		if (msg.msg[0] == 0x4D) and (msg.msg[1] == 0x53) : # MS = Motion Status
 			motionStatus = msg.msg[4]+(msg.msg[5]<<8)+(msg.msg[6]<<16)+(msg.msg[7]<<24)
-			print("Motion Status: ", motionStatus)
+#			print("Motion Status: ", motionStatus, end="")
 			for axe in axes:
 				if msg.id == idRx+axe :
 					self.MotionStatusReg[self.whichAxe(axe)] = motionStatus
+#					print(axe,":", motionStatus, end="  ")
+#			print(".")
 
 
 	def readMsg(self):
@@ -1018,7 +1027,7 @@ class PyGuiApp(QMainWindow):
 			while (time.time()-ts) < 10 :
 				self.sendElmoMsgShort(axe, "VE",0 ) #VE = ?
 				# self.sendMsg(idTx+axe, (0x56,0x45,0,0 )) #VE = ?
-				print ("velocity error :", abs(self.VelErr[self.whichAxe(axe)]), end="   ")
+				print ("velocity error :", abs(self.VelErr[self.whichAxe(axe)]), end="\r")
 				if abs(self.VelErr[self.whichAxe(axe)]) >= jogSpeed :
 					break
 
@@ -1034,7 +1043,7 @@ class PyGuiApp(QMainWindow):
 		self.StatusReg[self.whichAxe(axe)] = 0xffffffff # muß sein, damit ich auf Antworten warte
 		while (time.time()-ts) < 10 :
 			self.sendElmoMsgShort(axe,"SR", 0 ) #SR = ?
-			print ("status: ", (self.StatusReg[self.whichAxe(axe)] & (1<<11))>>11, end="  ")
+			print ("status: ", (self.StatusReg[self.whichAxe(axe)] & (1<<11))>>11, end="      \r")
 			if not(self.StatusReg[self.whichAxe(axe)] & (1<<11)) : #checking if homing ready
 				break
 
@@ -1137,12 +1146,12 @@ class PyGuiApp(QMainWindow):
 		''')
 
 	def sendMsg(self, msgid, msg):
-		print( "%03x :" %(msgid), end="")
-		for j in range(len(msg)) :
-			print( " %02x" % ( msg[j] ), end="")
-		print( ". ")
+#		print( "%03x :" %(msgid), end="")
+#		for j in range(len(msg)) :
+#			print( " %02x" % ( msg[j] ), end="")
+#		print( ". ")
 		self.handle1.write_raw(msgid, msg)
-		time.sleep(0.01)
+		time.sleep(0.001)
 
 	def sendElmoMsgShort(self, axeId, command, index):
 	    # print ("%x %s %d" % (axeId, command, index))
@@ -1207,7 +1216,8 @@ class PyGuiApp(QMainWindow):
 						print(data)
 						# if self.pushButtonSocketlog.isChecked():
 						# 	self.plainTextEditSocketLog.appendPlainText(str(data))
-						self.analyseSocketData(data)
+#						self.analyseSocketData(data)
+						self.recTcpQ.put(data)
 						# time.sleep(0.25)
 						# conn.sendall(b'ok\r\n')
 						# print(Color.Magenta+'wroteback ok to tcp'+Color.end)
@@ -1268,13 +1278,14 @@ class PyGuiApp(QMainWindow):
 								while moving and ((time.time()-ts) < 30): # we dont want to wait endlessly
 									for axe in axes :
 										self.sendElmoMsgShort(axe,"MS", 0 ) #ask for the motion status of each axis
-									time.sleep(0.02) # wait for processing of request
+									time.sleep(0.005) # wait for processing of request
 									moving = 0
 									for i in range(0,5) :
 										if self.MotionStatusReg[i] == 2 :
 											moving = moving + 1
-									print("moving: ", moving)
+									print("moving: ", moving, end="\r")
 									if not moving:
+										print("")
 										self.sendTcpQ.put("ok\r\n")
 										print(Color.Magenta+'wroteback ok to tcpQueue'+Color.end)
 										break
@@ -1494,6 +1505,14 @@ class PyGuiApp(QMainWindow):
 			self.sbus.flush()
 			self.sbus2.flush()
 			time.sleep(0.05)
+	
+	def motionQueueHandler(self):
+		while True:
+			while not self.recTcpQ.empty() :
+				data = self.recTcpQ.get()
+				print(Color.yellow+repr(data)+Color.end)
+				self.analyseSocketData(data)
+			time.sleep(0.01)
 
 	def requestSensValue(self) :
 		data = "P\n"
@@ -1508,3 +1527,5 @@ def main():
 
 if __name__ == '__main__':  # if we're running file directly and not importing it
 	main()  # run the main function
+	
+	
