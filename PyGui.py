@@ -193,7 +193,12 @@ class PyGuiApp(QMainWindow):
 		self.oldz = 100000
 		self.oldc = 0
 		self.oldx2 = 0
-
+		
+		self.offsetX = 0
+		self.offsetY = 0
+		self.offsetZ = 0
+		self.offsetC = 0
+				
 		# Eigener Lese Thread, um Blockieren des GUIs zum Lesen zu vermeiden.
 
 		self.readThread = GenericThread(self.readMsg)
@@ -241,6 +246,12 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonWorkingVac.clicked.connect(lambda: self.SetActuator(self.pushButtonWorkingVac.isChecked(), "M820", "M821" ))
 		self.pushButtonThermodeAn.clicked.connect(lambda: self.SetActuator(self.pushButtonThermodeAn.isChecked(),"M104 S%3d"%(self.spinBoxThermodeSoll.value()), "M104 S40"))  # Fake Ziel 15°C wenn aus
 		self.pushButtonBettAn.clicked.connect(lambda: self.SetActuator(self.pushButtonBettAn.isChecked(),"M140 S%3d"%(self.spinBoxBettSoll.value()), "M140 S40")) # Fake Ziel 15°C wenn aus
+
+		self.pushButtonCaptureCoordOffset.clicked.connect(self.CaptureOffset)
+		self.pushButtonZeroCoordOffset.clicked.connect(self.ZeroOffset)
+		self.pushButtonSetCoordOffset.clicked.connect(self.SetOffset)
+		
+		
 		
 		self.pushButtonSendResetCommand.clicked.connect(self.sendResetCommandToSmoothie)
 		self.pushButtonSendGcode.clicked.connect(self.sendGcodeToServos)
@@ -371,6 +382,38 @@ class PyGuiApp(QMainWindow):
 		self.thermodeTemp = 0
 		self.bettTemp = 0
 
+	def SetOffset(self):
+
+		self.offsetX = self.spinBoxOffsetX.value()
+		self.offsetY = self.spinBoxOffsetY.value()
+		self.offsetZ = self.spinBoxOffsetZ.value()
+		self.offsetC = self.spinBoxOffsetC.value()
+		print("offsets: ",self.offsetX, self.offsetY, self.offsetZ, self.offsetC)
+					
+
+
+	def ZeroOffset(self):
+		self.offsetX = 0
+		self.offsetY = 0
+		self.offsetZ = 0
+		self.offsetC = 0
+		self.spinBoxOffsetX.setValue(0)
+		self.spinBoxOffsetY.setValue(0)
+		self.spinBoxOffsetZ.setValue(0)
+		self.spinBoxOffsetC.setValue(0)
+
+
+	def CaptureOffset(self):
+		self.readPosOnce()
+		time.sleep(0.2)
+		self.captureOldPos()
+		self.spinBoxOffsetX.setValue(self.oldx)
+		self.spinBoxOffsetY.setValue(self.oldy)
+		self.spinBoxOffsetZ.setValue(self.oldz-100000)
+		self.spinBoxOffsetC.setValue(self.oldc)
+		self.SetOffset()
+	
+		
 
 	def sendResetCommandToSmoothie(self):
 		command = self.plainTextEditResetCommand.toPlainText() + "\n"
@@ -425,7 +468,7 @@ class PyGuiApp(QMainWindow):
 
 	def betterGoTo(self):
 		self.readPosOnce()
-		time.sleep(0.2)
+		time.sleep(0.05) # war 0.2
 		self.captureOldPos()
 		self.goTo()
 
@@ -901,21 +944,29 @@ class PyGuiApp(QMainWindow):
 				self.lcdNumberDROPosX.display(pos)
 				self.lcdNumberDROPosXf.display(pos / Xm)
 				self.currentPos[0] = pos
+				if self.pushButtonUseOffset.isChecked()	:	
+					self.currentPos[0] = self.currentPos[0] -self.offsetX
 			if msg.id == idRx+idY :
 				#print("posY :", pos)
 				self.lcdNumberDROPosY.display(pos)
 				self.lcdNumberDROPosYf.display(pos / Ym)
 				self.currentPos[1] = pos
+				if self.pushButtonUseOffset.isChecked()	:	
+					self.currentPos[1] = self.currentPos[1] -self.offsetY
 			if msg.id == idRx+idZ :
 				#print("posZ :", pos)
 				self.lcdNumberDROPosZ.display(pos)
 				self.lcdNumberDROPosZf.display(-50.0+pos / Zm)
 				self.currentPos[2] = pos
+				if self.pushButtonUseOffset.isChecked()	:	
+					self.currentPos[2] = self.currentPos[2] -self.offsetZ
 			if msg.id == idRx+idC :
 				#print("posC :", pos)
 				self.lcdNumberDROPosC.display(pos)
 				self.lcdNumberDROPosCf.display(pos / Cm)
 				self.currentPos[3] = pos
+				if self.pushButtonUseOffset.isChecked()	:	
+					self.currentPos[3] = self.currentPos[3] -self.offsetC
 			if msg.id == idRx+idX2 :
 				#print("posX :", pos)
 				self.lcdNumberDROPosX2.display(pos)
@@ -1091,48 +1142,88 @@ class PyGuiApp(QMainWindow):
 
 	# go to a defined 5 dimension coordinate with the specified speed
 	def goTo(self):
+		
 		x = self.X1set.value()
 		y = self.Yset.value()
 		z = self.Zset.value()
 		c = self.Cset.value()
-		x2 = self.X2set.value()
+	#	x2 = self.X2set.value()
+
+#		if self.pushButtonUseOffset.isChecked()	:
+#			x = x + self.offsetX
+#			y = y + self.offsetY
+#			z = z + self.offsetZ
+#			c = c + self.offsetC
+
+
+
 		vmax = self.Vmaxset.value()
-		print(" target x: %d, y: %d, z: %d, c: %d, x2: %d, vmax: %d" % (x,y,z,c,x2,vmax))
+#		print(" target x: %d, y: %d, z: %d, c: %d, x2: %d, vmax: %d" % (x,y,z,c,x2,vmax))
+		print(" target x: %d, y: %d, z: %d, c: %d, vmax: %d" % (x,y,z,c,vmax))		
+#		if self.pushButtonUseOffset.isChecked()	:
+#			dx = abs(self.oldx + self.offsetX - x)
+#			dy = abs(self.oldy + self.offsetY - y)
+#			dz = abs(self.oldz + self.offsetZ - z)
+#			dc = abs(self.oldc + self.offsetC - c)
+#			dx2 = abs(self.oldx2 - x2)
+
+#		else:
 		dx = abs(self.oldx - x)
 		dy = abs(self.oldy - y)
 		dz = abs(self.oldz - z)
 		dc = abs(self.oldc - c)
-		dx2 = abs(self.oldx2 - x2)
+#			dx2 = abs(self.oldx2 - x2)
 
-		distance = math.sqrt(dx*dx+dy*dy+dz*dz+dc*dc+dx2*dx2)
-		print("distance: ",distance)
+#		distance = math.sqrt(dx*dx+dy*dy+dz*dz+dc*dc+dx2*dx2)
+		distance = math.sqrt(dx*dx+dy*dy+dz*dz+dc*dc)		
+		print("distance: ",distance, dx, dy, dz, dc)
 		if distance == 0: # division by zero means no good. and we dont move.
 			return
 		vx = int(vmax * dx/distance)
 		vy = int(vmax * dy/distance)
 		vz = int(vmax * dz/distance)
 		vc = int(vmax * dc/distance)
-		vx2 = int(vmax * dx2/distance)
-		if vx2 >= 12500 :
-			vx2 = 12500
-		print("speed: x: %d, y: %d, z: %d, c: %d, x2: %d" % (vx,vy,vz,vc,vx2))
+#		vx2 = int(vmax * dx2/distance)
+#		if vx2 >= 12500 :
+#			vx2 = 12500
+#		print("speed: x: %d, y: %d, z: %d, c: %d, x2: %d" % (vx,vy,vz,vc,vx2))
+		print("speed: x: %d, y: %d, z: %d, c: %d" % (vx,vy,vz,vc))
 		#preparing takes some time to send
-		if dx != 0 : self.goPrepare(idX, x, vx)
-		if dy != 0 : self.goPrepare(idY, y, vy)
-		if dz != 0 : self.goPrepare(idZ, z, vz)
-		if dc != 0 : self.goPrepare(idC, c, vc)
-		if dx2 != 0 : self.goPrepare(idX2, x2, vx2)
+		
+		if self.pushButtonUseOffset.isChecked()	:		
+			if dx != 0 : self.goPrepare(idX, x + self.offsetX, vx)
+			if dy != 0 : self.goPrepare(idY, y + self.offsetY, vy)
+			if dz != 0 : self.goPrepare(idZ, z + self.offsetZ, vz)
+			if dc != 0 : self.goPrepare(idC, c + self.offsetC, vc)
+	#		if dx2 != 0 : self.goPrepare(idX2, x2, vx2)
+		else:
+			if dx != 0 : self.goPrepare(idX, x, vx)
+			if dy != 0 : self.goPrepare(idY, y, vy)
+			if dz != 0 : self.goPrepare(idZ, z, vz)
+			if dc != 0 : self.goPrepare(idC, c, vc)
+		
+
 		# since we do not use synchronous start of movement, we try to start like this as synchronous as possible
 		if dx != 0 : self.goDo(idX)
 		if dy != 0 : self.goDo(idY)
 		if dz != 0 : self.goDo(idZ)
 		if dc != 0 : self.goDo(idC)
-		if dx2 != 0 :self.goDo(idX2)
+#		if dx2 != 0 :self.goDo(idX2)
+
+#		if self.pushButtonUseOffset.isChecked()	:
 		self.oldx	= x
 		self.oldy	= y
 		self.oldz	= z
 		self.oldc	= c
-		self.oldx2	= x2
+#			self.oldx2	= x2
+#		else:
+#			self.oldx	= x - self.offsetX
+#			self.oldy	= y - self.offsetY
+#			self.oldz	= z - self.offsetZ
+#			self.oldc	= c - self.offsetC
+#			self.oldx2	= x2
+
+
 
 	def aboutBox(self):
 		QtWidgets.QMessageBox.about(self,"Über dieses Programm", '''
