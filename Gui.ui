@@ -2530,6 +2530,22 @@ Coord Offset</string>
     <string>Load Presets</string>
    </property>
   </action>
+  <action name="actionNotstop1">
+   <property name="text">
+    <string>actionNotstop1</string>
+   </property>
+   <property name="shortcut">
+    <string>Space</string>
+   </property>
+  </action>
+  <action name="actionNotstop2">
+   <property name="text">
+    <string>actionNotstop2</string>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>pushButtonReadPos</tabstop>
@@ -2940,6 +2956,38 @@ Coord Offset</string>
     <hint type="destinationlabel">
      <x>143</x>
      <y>478</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNotstop1</sender>
+   <signal>triggered()</signal>
+   <receiver>pushButtonNotStop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>695</x>
+     <y>263</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1266</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNotstop2</sender>
+   <signal>triggered()</signal>
+   <receiver>pushButtonNotStop</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1266</x>
+     <y>89</y>
     </hint>
    </hints>
   </connection>

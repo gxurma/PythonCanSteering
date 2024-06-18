@@ -162,6 +162,9 @@ class PyGuiApp(QMainWindow):
 		# self.setupUi(self)  # This is defined in design.py file automatically
 		loadUi("Gui.ui",self)
 
+		for button in self.findChildren(QtWidgets.QAbstractButton):
+			button.setFocusPolicy(QtCore.Qt.NoFocus)
+		
 		self.actionAbout.triggered.connect(self.aboutBox)
 		self.pushButtonGoX0Y0.clicked.connect(self.goX0Y0)
 		self.pushButtonGoZmax.clicked.connect(self.goZmax)
@@ -381,6 +384,15 @@ class PyGuiApp(QMainWindow):
 
 		self.thermodeTemp = 0
 		self.bettTemp = 0
+
+	def keyPressEvent(self, event):
+		if (event.key() == Qt.Key_Escape):
+			print("Notstop!!! Escape")
+			self.NotStop()
+		elif (event.key() == Qt.Key_Space):
+			print("Notstop!!! Space")
+			self.NotStop()
+		 		
 
 	def SetOffset(self):
 
@@ -1233,7 +1245,7 @@ class PyGuiApp(QMainWindow):
 		Da ich nicht mehr genau nachvollziehen kann wer wann was beigetragen hat, ist diese SW open source.
 		Die verwendeten Codeteile sind auch frei im Internet verfügbar, die Rechte gehören dem jeweiligen Rechteinhaber, und sind auch Open Source.
 		Canlib ist geistiges Eigentum von Kvaser.
-		(C) 2018-2023 Martin Gyurkó
+		(C) 2018-2024 enGYneer by Martin Gyurkó
 		''')
 
 	def sendMsg(self, msgid, msg):
