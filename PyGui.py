@@ -933,7 +933,7 @@ class PyGuiApp(QMainWindow):
 		self.sendElmoMsgShort(idY, "PX",0)# get pos
 		self.sendElmoMsgShort(idZ, "PX",0)# get pos
 		self.sendElmoMsgShort(idC, "PX",0)# get pos
-		time.sleep(0.02)
+		time.sleep(0.015)
 
 	def readPos(self) :
 		while self.pushButtonReadPos.isChecked()	:
