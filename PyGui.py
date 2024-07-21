@@ -880,7 +880,7 @@ class PyGuiApp(QMainWindow):
 			self.axisSpeed[1] = -self.axis_states['y'] #/ 32767
 			self.axisSpeed[2] = -self.axis_states['ry'] #/ 32767
 			self.axisSpeed[3] = -self.axis_states['rx'] #/ 32767
-			print(self.axisSpeed, end=" ")
+			print(self.axisSpeed, end='')
 			#for i in range(0,3):
 
 			for i in range(0,4):
@@ -897,7 +897,7 @@ class PyGuiApp(QMainWindow):
 					direction = -1
 
 				Speedset = int(self.Vmaxsetf.value() * abs(Speed) / (32767-threshold))
-				print(Speed, Speedset, direction, end=" ")
+				print(" %d %d %d "%(Speed, Speedset, direction), end='')
 				if Speed == 0 and self.axisOldSpeed[i] != 0 :
 					self.sendElmoMsgShort(axes[i], "ST",0 )
 				else:
@@ -908,10 +908,10 @@ class PyGuiApp(QMainWindow):
 
 				self.axisOldSpeed[i] = Speed
 
-			# print(end="                      \r")
+			print(20*' ', end='\r')
 
 			time.sleep(0.02) # wait 20ms
-
+		print("")
 		self.StopAll() #stop everything.
 		self.readPosOnce()
 		time.sleep(0.3)
@@ -933,7 +933,7 @@ class PyGuiApp(QMainWindow):
 		self.sendElmoMsgShort(idY, "PX",0)# get pos
 		self.sendElmoMsgShort(idZ, "PX",0)# get pos
 		self.sendElmoMsgShort(idC, "PX",0)# get pos
-		time.sleep(0.01)
+		time.sleep(0.015)
 
 	def readPos(self) :
 		while self.pushButtonReadPos.isChecked()	:
