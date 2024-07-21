@@ -1,0 +1,18 @@
+### Footprint positions - created on 2024-07-21T20:55:51+0200 ###
+### Printed by KiCad version 8.0.3
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val             Package                               PosX       PosY       Rot  Side
+D1        LED             LED_PLCC_2835_Handsoldering         7.5500    15.7500    0.0000  top
+D2        LED             LED_PLCC_2835_Handsoldering         6.5000    11.4000  180.0000  top
+D3        LED             LED_PLCC_2835_Handsoldering         7.5500     7.0500    0.0000  top
+D4        LED             LED_PLCC_2835_Handsoldering        23.0500    15.7500  180.0000  top
+D5        LED             LED_PLCC_2835_Handsoldering        24.0500    11.4000    0.0000  top
+D6        LED             LED_PLCC_2835_Handsoldering        23.0500     7.0500  180.0000  top
+FID1      Fiducial        Fiducial_1mm_Mask2mm               28.5000     1.2500    0.0000  top
+FID2      Fiducial        Fiducial_1mm_Mask2mm                2.0000    18.2500    0.0000  top
+FID3      Fiducial        Fiducial_1mm_Mask2mm               28.5000    18.7500    0.0000  top
+J1        Conn_01x02_Pin  PinHeader_1x02_P1.00mm_Vertical     1.0000     1.2500   90.0000  top
+R1        100             R_0805_2012Metric                   7.5875     2.2500    0.0000  top
+R2        100             R_0805_2012Metric                  22.7500     2.3375  180.0000  top
+## End
