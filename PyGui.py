@@ -953,10 +953,24 @@ class PyGuiApp(QMainWindow):
 		self.sendElmoMsgShort(idZ, "PX",0)# get pos
 		self.sendElmoMsgShort(idC, "PX",0)# get pos
 		time.sleep(0.015)
+	
+	def getX2Pos(self) :
+	
+		res = requests.get(f"{PRINTER}/components/TableSlots/TableSlots/TableSlotLeft/Axis")
+		data = res.json()
+		busy = data["busy"]
+		inpos = data["inPosition"]
+		pos = data["position"]
+		print(f"{pos} mm busy: {busy} inpos: {inpos}",end="\r")
+		self.lcdNumberDROPosX2f.display(pos)
 
 	def readPos(self) :
+		readcounter = 0
 		while self.pushButtonReadPos.isChecked()	:
 			self.readPosOnce()
+			readcounter = readcounter + 1
+			if (readcounter % 20) == 0 :  # um nicht so oft zu lesen
+				self.getX2Pos()
 
 	def analyseCANMsg(self,msg):
 #		if self.pushButtonCanlog.isChecked() :
@@ -1181,17 +1195,7 @@ class PyGuiApp(QMainWindow):
 			print(f"Statuscode: {res.status_code}")
 		else:
 		    print("Result", json.dumps(res.json(), indent=4, sort_keys=True))
-		done = False
-		while not done:
-			res = requests.get(f"{PRINTER}/components/TableSlots/TableSlots/TableSlotLeft/Axis")
-			data = res.json()
-			busy = data["busy"]
-			inpos = data["inPosition"]
-			pos = data["position"]
-			print(f"{pos} mm busy: {busy} inpos: {inpos}",end="\r")
-			if not busy:
-				print()
-				break
+
 		
 		
 		
@@ -1475,19 +1479,15 @@ class PyGuiApp(QMainWindow):
 								if m == 812 :
 									self.pushButtonDispens1.setChecked(True)
 								if m == 8121 :
-									self.pushButtonDispens1Shot.click(True)
+									self.pushButtonDispens1Shot.click()
 								if m == 813 :
 									self.pushButtonDispens1.setChecked(False)
 								if m == 814 :
 									self.pushButtonDispens2.setChecked(True)
 								if m == 8141 :
-									self.pushButtonDispens2Shot.click(True)
+									self.pushButtonDispens2Shot.click()
 								if m == 815 :
 									self.pushButtonDispens2.setChecked(False)
-								if m == 820 :
-									self.pushButtonWorkingVac.setChecked(True)
-								if m == 821 :
-									self.pushButtonWorkingVac.setChecked(False)
 								if m == 816 :
 									self.pushButtonDispensVac1.setChecked(True)
 								if m == 817 :
@@ -1496,6 +1496,14 @@ class PyGuiApp(QMainWindow):
 									self.pushButtonDispensVac2.setChecked(True)
 								if m == 819 :
 									self.pushButtonDispensVac2.setChecked(False)
+								if m == 820 :
+									self.pushButtonWorkingVac.setChecked(True)
+								if m == 821 :
+									self.pushButtonWorkingVac.setChecked(False)
+								if m == 822 :
+									self.goX2(	printer_pos2_mm )
+								if m == 823 :
+									self.goX2(	printer_pos1_mm )
 
 							# return
 						if g:
