@@ -37,6 +37,21 @@ import queue
 # to communicate to the Smothieware board via serial
 import serial
 
+import requests
+import json
+
+PRINTER = "http://10.0.111.50:8080/api/v1"
+printer_axis_name = "TableSlots.TableSlots.TableSlotLeft.Axis"
+
+printer_pos3_mm = 735.0
+printer_pos2_mm = 300.0
+printer_pos1_mm = 100.0
+printer_pos0_mm = 0.0
+
+printer_speed_mmps = 200.0
+
+
+
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
@@ -169,7 +184,11 @@ class PyGuiApp(QMainWindow):
 		self.pushButtonGoX0Y0.clicked.connect(self.goX0Y0)
 		self.pushButtonGoZmax.clicked.connect(self.goZmax)
 		self.pushButtonGoC0.clicked.connect(self.goC0)
-		self.pushButtonGoX20.clicked.connect(self.goX20)
+		self.pushButtonGoX20.clicked.connect(lambda: self.goX2( printer_pos0_mm ))
+		self.pushButtonGoX21.clicked.connect(lambda: self.goX2( printer_pos1_mm ))
+		self.pushButtonGoX22.clicked.connect(lambda: self.goX2( printer_pos2_mm ))
+		self.pushButtonGoX23.clicked.connect(lambda: self.goX2( printer_pos3_mm ))
+
 		self.pushButtonGo.clicked.connect(self.betterGoTo)
 
 
@@ -1149,9 +1168,33 @@ class PyGuiApp(QMainWindow):
 	def goC0(self):
 		self.go(idC, 0, 4096) # go to 0 with speed 4096
 
-	def goX20(self):
-		self.go(idX2, 7500, 4096) # go to 7500 with speed 4096
-
+	def goX2(self, X2TargetPosition):
+#		self.go(idX2, 7500, 4096) # go to 7500 with speed 4096
+		data = {
+			"Axis": printer_axis_name,
+			"Position": X2TargetPosition,
+			"Speed": printer_speed_mmps
+		}
+		print("Sending", json.dumps(data, indent=4, sort_keys=True))
+		res = requests.post(f"{PRINTER}/functions/moveAxis", json=data)
+		if res.status_code != 200:
+			print(f"Statuscode: {res.status_code}")
+		else:
+		    print("Result", json.dumps(res.json(), indent=4, sort_keys=True))
+		done = False
+		while not done:
+			res = requests.get(f"{PRINTER}/components/TableSlots/TableSlots/TableSlotLeft/Axis")
+			data = res.json()
+			busy = data["busy"]
+			inpos = data["inPosition"]
+			pos = data["position"]
+			print(f"{pos} mm busy: {busy} inpos: {inpos}",end="\r")
+			if not busy:
+				print()
+				break
+		
+		
+		
 	# go to a defined 5 dimension coordinate with the specified speed
 	def goTo(self):
 		

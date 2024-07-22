@@ -52,7 +52,7 @@
       <item row="2" column="3">
        <widget class="QLCDNumber" name="lcdNumberDROPosX2f">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -266,7 +266,7 @@
       <item row="1" column="3">
        <widget class="QLCDNumber" name="lcdNumberDROPosX2">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -351,8 +351,8 @@
         <string>Homing</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_7">
-        <item row="0" column="0">
-         <widget class="QPushButton" name="pushButtonReadPos">
+        <item row="2" column="8">
+         <widget class="QPushButton" name="pushButtonMotorCAus">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -360,32 +360,10 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Read Positions</string>
+           <string>Motor C an</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="pushButtonHomeAll">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Home All</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
           </property>
           <property name="checked">
            <bool>false</bool>
@@ -395,7 +373,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
+        <item row="0" column="4">
          <widget class="QPushButton" name="pushButtonInitX">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -411,7 +389,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
+        <item row="0" column="5">
          <widget class="QPushButton" name="pushButtonInitX2">
           <property name="enabled">
            <bool>false</bool>
@@ -430,7 +408,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="4">
+        <item row="0" column="6">
          <widget class="QPushButton" name="pushButtonInitY">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -446,7 +424,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="5">
+        <item row="0" column="7">
          <widget class="QPushButton" name="pushButtonInitZ">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -462,7 +440,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="6">
+        <item row="0" column="8">
          <widget class="QPushButton" name="pushButtonInitC">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -478,39 +456,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="pushButtonGoX0Y0">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Go X0 Y0</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="pushButtonGoZmax">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Go Z 100000</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
+        <item row="1" column="4">
          <widget class="QPushButton" name="pushButtonHomeX">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -526,7 +472,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="3">
+        <item row="1" column="5">
          <widget class="QPushButton" name="pushButtonHomeX2">
           <property name="enabled">
            <bool>false</bool>
@@ -545,7 +491,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="4">
+        <item row="1" column="6">
          <widget class="QPushButton" name="pushButtonHomeY">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -561,7 +507,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="5">
+        <item row="1" column="7">
          <widget class="QPushButton" name="pushButtonHomeZ">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -577,7 +523,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="6">
+        <item row="1" column="8">
          <widget class="QPushButton" name="pushButtonHomeC">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -593,42 +539,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="pushButtonGoX20">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Go X2 7500</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="pushButtonGoC0">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Go C 0 </string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
+        <item row="2" column="4">
          <widget class="QPushButton" name="pushButtonMotorXAus">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -650,7 +561,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="3">
+        <item row="2" column="5">
          <widget class="QPushButton" name="pushButtonMotorX2Aus">
           <property name="enabled">
            <bool>false</bool>
@@ -675,7 +586,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="4">
+        <item row="2" column="6">
          <widget class="QPushButton" name="pushButtonMotorYAus">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -697,7 +608,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="5">
+        <item row="2" column="7">
          <widget class="QPushButton" name="pushButtonMotorZAus">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -719,8 +630,11 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="6">
-         <widget class="QPushButton" name="pushButtonMotorCAus">
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButtonGoX21">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -728,10 +642,153 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Motor C an</string>
+           <string>Go X2 100</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButtonReadPos">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Read Positions</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButtonGoX0Y0">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go X0 Y0</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pushButtonGoZmax">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go Z 100000</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButtonGoC0">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go C 0 </string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="pushButtonGoX20">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go X2 0</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="pushButtonGoX22">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go X2 300</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButtonGoX23">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Go X2 735</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButtonHomeAll">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Home All</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
           </property>
           <property name="checked">
            <bool>false</bool>
@@ -857,7 +914,7 @@
         <item row="6" column="1" colspan="2">
          <widget class="QSpinBox" name="spinBoxX2">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimum">
            <number>-4600</number>
@@ -1009,13 +1066,13 @@
         <item row="6" column="3">
          <widget class="QSlider" name="X2set">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimum">
-           <number>-4600</number>
+           <number>0</number>
           </property>
           <property name="maximum">
-           <number>7500</number>
+           <number>880</number>
           </property>
           <property name="pageStep">
            <number>100</number>
@@ -1024,7 +1081,7 @@
            <enum>Qt::Horizontal</enum>
           </property>
           <property name="invertedAppearance">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="tickPosition">
            <enum>QSlider::TicksAbove</enum>
@@ -2549,21 +2606,16 @@ Coord Offset</string>
  </widget>
  <tabstops>
   <tabstop>pushButtonReadPos</tabstop>
-  <tabstop>pushButtonHomeAll</tabstop>
   <tabstop>pushButtonInitX</tabstop>
   <tabstop>pushButtonInitX2</tabstop>
   <tabstop>pushButtonInitY</tabstop>
   <tabstop>pushButtonInitZ</tabstop>
   <tabstop>pushButtonInitC</tabstop>
-  <tabstop>pushButtonGoX0Y0</tabstop>
-  <tabstop>pushButtonGoZmax</tabstop>
   <tabstop>pushButtonHomeX</tabstop>
   <tabstop>pushButtonHomeX2</tabstop>
   <tabstop>pushButtonHomeY</tabstop>
   <tabstop>pushButtonHomeZ</tabstop>
   <tabstop>pushButtonHomeC</tabstop>
-  <tabstop>pushButtonGoX20</tabstop>
-  <tabstop>pushButtonGoC0</tabstop>
   <tabstop>pushButtonMotorXAus</tabstop>
   <tabstop>pushButtonMotorX2Aus</tabstop>
   <tabstop>pushButtonMotorYAus</tabstop>
@@ -2966,8 +3018,8 @@ Coord Offset</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>695</x>
-     <y>263</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>1266</x>
