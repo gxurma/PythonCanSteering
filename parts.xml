@@ -1,10 +1,10 @@
 <openpnp-parts>
-   <part id="FIDUCIAL-1X2-FIDUCIAL1X2" height-units="Millimeters" height="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
+   <part fiducial-vision-id="FVS178569f9a91c6b86" id="FIDUCIAL-1X2-FIDUCIAL1X2" height-units="Millimeters" height="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
    <part id="Fiducial-Plus" height-units="Millimeters" height="0.0" package-id="Fiducialplus" speed="1.0" pick-retry-count="0"/>
-   <part id="virtJetpart" height-units="Millimeters" height="0.5" package-id="virtJet" speed="1.0" pick-retry-count="0"/>
+   <part id="virtJetpart" height-units="Millimeters" height="-5.0" package-id="virtJet" speed="1.0" pick-retry-count="0"/>
    <part id="FiducialPunktPart" height-units="Millimeters" height="0.0" package-id="FiducialPunkt" speed="1.0" pick-retry-count="0"/>
    <part id="bigdiepart" height-units="Millimeters" height="0.8" package-id="bigdie" speed="1.0" pick-retry-count="0"/>
-   <part id="220kOhmR0805" height-units="Millimeters" height="0.0" package-id="R0805" speed="1.0" pick-retry-count="0"/>
+   <part bottom-vision-id="BVS17da779b83bf1395" id="220kOhmR0805" height-units="Millimeters" height="0.5" package-id="R0805" speed="1.0" pick-retry-count="0"/>
    <part id="C_0201_0603Metric" height-units="Millimeters" height="0.0" package-id="virtJet" speed="1.0" pick-retry-count="0"/>
    <part id="C_0201_0603Metric-Conn_01x01_Male" height-units="Millimeters" height="2.0" package-id="C_0201_0603Metric" speed="1.0" pick-retry-count="0"/>
    <part id="FidPadPackagePart" height-units="Millimeters" height="0.0" package-id="FidPadPackage" speed="1.0" pick-retry-count="0"/>
@@ -47,4 +47,5 @@
    <part id="TEX-hype_AccelSensor" height-units="Millimeters" height="0.7" package-id="LGA-16" speed="1.0" pick-retry-count="0"/>
    <part id="TEX-hype_NXP-chip" height-units="Millimeters" height="0.1" package-id="TEX-hype_NXP-chip" speed="1.0" pick-retry-count="0"/>
    <part id="VirtDispenserPart1" height-units="Millimeters" height="0.5" package-id="VirtDispenserPart" speed="1.0" pick-retry-count="0"/>
+   <part id="Fiducial05DarkPart" height-units="Millimeters" height="0.0" package-id="Fiducial05Dark" speed="1.0" pick-retry-count="0"/>
 </openpnp-parts>
