@@ -66,6 +66,9 @@
           <height>46</height>
          </size>
         </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
         <property name="digitCount">
          <number>6</number>
         </property>
