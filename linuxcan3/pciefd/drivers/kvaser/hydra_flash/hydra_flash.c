@@ -72,6 +72,9 @@
 #else
 #include "crc32.h"
 #include <string.h> /* memcpy */
+
+#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
+
 #endif /* __KERNEL__ */
 
 #include "k_assert.h"
@@ -80,6 +83,7 @@
 #include "spi_flash.h"
 #include "kcan_ioctl_flash.h"
 #include "hydra_imgheader.h"
+#include "hydra_param_defs.h"
 #include "hydra_flash.h"
 
 #define SIMULATE_WRITE 0
@@ -91,37 +95,6 @@
 #define MAX_PARAM_NUM 256
 #define PARAM_MAGIC   0xCAFEF00D
 #define PARAM_SYS_VER 1
-
-#define PARAM_SERIAL_NUMBER        124
-#define PARAM_MANUFACTURING_DATE   125
-#define PARAM_HW_REVISION          127
-#define PARAM_HW_TYPE              128
-#define PARAM_EAN_NUMBER           129
-#define PARAM_NUMBER_CHANNELS      130
-#define PARAM_CHANNEL_A_TRANS_TYPE 132
-#define PARAM_CHANNEL_B_TRANS_TYPE 133
-#define PARAM_HW_DESCRIPTION_0     134
-#define PARAM_HW_DESCRIPTION_1     135
-#define PARAM_HW_DESCRIPTION_2     136
-#define PARAM_CHANNEL_C_TRANS_TYPE 137
-#define PARAM_CHANNEL_D_TRANS_TYPE 138
-#define PARAM_EAN_NUMBER_PRODUCT   143
-#define PARAM_MAX_BITRATE          148
-
-// Parameter length, in bytes.
-#define PARAM_SERIAL_NUMBER_LEN       4
-#define PARAM_MANUFACTURING_DATE_LEN  4
-#define PARAM_HW_REVISION_LEN         1
-#define PARAM_HW_TYPE_LEN             1
-#define PARAM_EAN_NUMBER_LEN          8
-#define PARAM_NUMBER_CHANNELS_LEN     1
-#define PARAM_CHANNEL_TRANS_TYPE_LEN  1
-#define PARAM_HW_DESCRIPTION_PART_LEN 8
-#define PARAM_EAN_NUMBER_PRODUCT_LEN  8
-#define PARAM_MAX_BITRATE_LEN         4
-
-#define PARAM_USER_FIRST               (1)
-#define CHANNEL_NAME_NBR_OF_PARAMS     (1)
 #define CHANNEL_NAME_PARAM_INDEX_FIRST (PARAM_USER_FIRST + 1)
 
 #define DISPLAY_UPDATE_ACTIVE(ctx)   ((ctx)->device_ops->display_update_state((ctx)->data, true))
@@ -140,6 +113,20 @@ typedef struct {
     u32 crc;
     kcc_param_t param[MAX_PARAM_NUM];
 } kcc_param_image_t;
+
+/* Helper array to get transducer type parameter id per channel index */
+const int trans_type_index[] = {
+PARAM_CHANNEL_A_TRANS_TYPE,
+PARAM_CHANNEL_B_TRANS_TYPE,
+PARAM_CHANNEL_C_TRANS_TYPE,
+PARAM_CHANNEL_D_TRANS_TYPE,
+PARAM_CHANNEL_E_TRANS_TYPE,
+PARAM_CHANNEL_F_TRANS_TYPE,
+PARAM_CHANNEL_G_TRANS_TYPE,
+PARAM_CHANNEL_H_TRANS_TYPE,
+};
+
+static_assert(ARRAY_SIZE(trans_type_index) == HYDRA_FLASH_MAX_CARD_CHANNELS);
 
 //======================================================================
 //  Verify parameter image
@@ -282,38 +269,31 @@ int HYDRA_FLASH_read_params(struct hydra_flash_ctx *ctx)
         read_param(img, PARAM_NUMBER_CHANNELS, &ctx->params.nr_channels, PARAM_NUMBER_CHANNELS_LEN);
     if (status != HYDRA_FLASH_STAT_OK)
         goto error_exit;
+#endif
+
+    if (ctx->params.nr_channels == 0) {
+        DEBUGPRINT(1, "Error: nr_channels is zero.\n");
+        goto error_exit;
+    }
 
     if (ctx->params.nr_channels > HYDRA_FLASH_MAX_CARD_CHANNELS) {
         DEBUGPRINT(1, "Error: nr_channels > HYDRA_FLASH_MAX_CARD_CHANNELS (%u > %u)\n",
                    ctx->params.nr_channels, HYDRA_FLASH_MAX_CARD_CHANNELS);
         goto error_exit;
     }
-#endif
-    if (ctx->params.nr_channels > 0) {
-        status = read_param(img, PARAM_CHANNEL_A_TRANS_TYPE, &ctx->params.trans_type[0],
-                            PARAM_CHANNEL_TRANS_TYPE_LEN);
-        if (status != HYDRA_FLASH_STAT_OK)
-            goto error_exit;
+
+    if (ctx->params.nr_channels > ARRAY_SIZE(trans_type_index)) {
+        DEBUGPRINT(1, "Error: nr_channels > ARRAY_SIZE(trans_type_index) (%u > %zu)\n",
+                   ctx->params.nr_channels, ARRAY_SIZE(trans_type_index));
+        goto error_exit;
     }
-    if (ctx->params.nr_channels > 1) {
-        status = read_param(img, PARAM_CHANNEL_B_TRANS_TYPE, &ctx->params.trans_type[1],
-                            PARAM_CHANNEL_TRANS_TYPE_LEN);
-        if (status != HYDRA_FLASH_STAT_OK)
-            goto error_exit;
-    }
-    if (ctx->params.nr_channels > 2) {
-        status = read_param(img, PARAM_CHANNEL_C_TRANS_TYPE, &ctx->params.trans_type[2],
-                            PARAM_CHANNEL_TRANS_TYPE_LEN);
-        if (status != HYDRA_FLASH_STAT_OK)
-            goto error_exit;
-    }
-    if (ctx->params.nr_channels > 3) {
-        status = read_param(img, PARAM_CHANNEL_D_TRANS_TYPE, &ctx->params.trans_type[3],
-                            PARAM_CHANNEL_TRANS_TYPE_LEN);
-        if (status != HYDRA_FLASH_STAT_OK)
-            goto error_exit;
-    }
+
     for (i = 0; i < ctx->params.nr_channels; i++) {
+        status = read_param(img, trans_type_index[i], &ctx->params.trans_type[i],
+                            PARAM_CHANNEL_TRANS_TYPE_LEN);
+        if (status != HYDRA_FLASH_STAT_OK)
+            goto error_exit;
+
         // These are optional, hence we don't check the return code
         read_param(img, CHANNEL_NAME_PARAM_INDEX_FIRST + i, ctx->params.cust_channel_name[i],
                    sizeof(ctx->params.cust_channel_name[i]));

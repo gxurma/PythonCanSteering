@@ -67,6 +67,7 @@
 #include "xspi.h"
 #include "debugprint.h"
 #include "kcan_int.h"
+#include "kcan_led.h"
 #include "spi_flash.h"
 #include "pciefd_hwif.h"
 #include "flash_meta_xilinx.h"
@@ -80,6 +81,10 @@
     | KCAN_INT_IRQ_TX(1)    \
     | KCAN_INT_IRQ_TX(2)    \
     | KCAN_INT_IRQ_TX(3)    \
+    | KCAN_INT_IRQ_TX(4)    \
+    | KCAN_INT_IRQ_TX(5)    \
+    | KCAN_INT_IRQ_TX(6)    \
+    | KCAN_INT_IRQ_TX(7)    \
     )
 /* clang-format on */
 
@@ -98,15 +103,26 @@
 #define OFFSET_KCAN_TX1     (OFFSET_KCAN + 0x42000)
 #define OFFSET_KCAN_TX2     (OFFSET_KCAN + 0x44000)
 #define OFFSET_KCAN_TX3     (OFFSET_KCAN + 0x46000)
+#define OFFSET_KCAN_TX4     (OFFSET_KCAN + 0x48000)
+#define OFFSET_KCAN_TX5     (OFFSET_KCAN + 0x4A000)
+#define OFFSET_KCAN_TX6     (OFFSET_KCAN + 0x4C000)
+#define OFFSET_KCAN_TX7     (OFFSET_KCAN + 0x4E000)
 #define CAN_CONTROLLER_SPAN (OFFSET_KCAN_TX1 - OFFSET_KCAN_TX0)
 
 // Xilinx peripherals
 #define OFFSET_SPI (OFFSET_TECH + 0x1000)
 
 const struct pciefd_irq_defines XILINX_IRQ_DEFINES = {
-    .spi0 = KCAN_INT_IRQ_SPI0,
     .rx0 = KCAN_INT_IRQ_RX0,
-    .tx = { KCAN_INT_IRQ_TX(0), KCAN_INT_IRQ_TX(1), KCAN_INT_IRQ_TX(2), KCAN_INT_IRQ_TX(3) },
+    .tx = { \
+    KCAN_INT_IRQ_TX(0), \
+    KCAN_INT_IRQ_TX(1), \
+    KCAN_INT_IRQ_TX(2), \
+    KCAN_INT_IRQ_TX(3), \
+    KCAN_INT_IRQ_TX(4), \
+    KCAN_INT_IRQ_TX(5), \
+    KCAN_INT_IRQ_TX(6), \
+    KCAN_INT_IRQ_TX(7) },
     .all_irq = ALL_KCAN_INTERRUPTS,
 };
 
@@ -188,18 +204,35 @@ static int xilinx_setup_dma_address_translation(PciCanCardData *hCard, int bar,
     return VCAN_STAT_OK;
 }
 
+static void display_update_state_xilinx(void *data, bool on)
+{
+    VCanCardData *vCard = data;
+    int i;
+
+    for (i = 0; i < vCard->nrChannels; i++) {
+        PciCanChanData *hChd = vCard->chanData[i]->hwChanData;
+
+        KCAN_LED_set(hChd->canControllerBase, on);
+    }
+}
+
 const struct pciefd_card_ops XILINX_CARD_OPS = {
     .setup_dma_address_translation = &xilinx_setup_dma_address_translation,
     .pci_irq_get = &xilinx_pci_irq_get,
     .pci_irq_set_mask = &xilinx_pci_irq_set_mask,
     .pci_irq_set_mask_bits = &xilinx_pci_irq_set_mask_bits,
     .pci_irq_clear_mask_bits = &xilinx_pci_irq_clear_mask_bits,
-    .spi_irq_handler = XSpi_InterruptHandler,
+};
+
+const struct hydra_flash_device_ops hydra_flash_device_ops_xilinx = {
+    .firmware_upgrade_trigger_update = NULL,
+    .display_update_state = &display_update_state_xilinx,
 };
 
 const struct pciefd_driver_data PCIEFD_DRIVER_DATA_XILINX = {
     .ops = &XILINX_CARD_OPS,
     .spi_ops = &SPI_FLASH_xilinx_ops,
+    .hydra_flash_ops = &hydra_flash_device_ops_xilinx,
     .irq_def = &XILINX_IRQ_DEFINES,
     .offsets = {
         .tech = {
@@ -215,6 +248,10 @@ const struct pciefd_driver_data PCIEFD_DRIVER_DATA_XILINX = {
             .tx1 = OFFSET_KCAN_TX1,
             .tx2 = OFFSET_KCAN_TX2,
             .tx3 = OFFSET_KCAN_TX3,
+            .tx4 = OFFSET_KCAN_TX4,
+            .tx5 = OFFSET_KCAN_TX5,
+            .tx6 = OFFSET_KCAN_TX6,
+            .tx7 = OFFSET_KCAN_TX7,
             .controller_span = CAN_CONTROLLER_SPAN,
         },
     },
@@ -246,11 +283,15 @@ const struct pciefd_driver_data PCIEFD_DRIVER_DATA_XILINX_NO_SPI = {
             .tx1 = OFFSET_KCAN_TX1,
             .tx2 = OFFSET_KCAN_TX2,
             .tx3 = OFFSET_KCAN_TX3,
+            .tx4 = OFFSET_KCAN_TX4,
+            .tx5 = OFFSET_KCAN_TX5,
+            .tx6 = OFFSET_KCAN_TX6,
+            .tx7 = OFFSET_KCAN_TX7,
             .controller_span = CAN_CONTROLLER_SPAN,
         },
     },
     .hw_const = {
-        .supported_fpga_major = 0,
+        .supported_fpga_major = 1,
         .flash_meta.size = 0U,
         .flash_meta.fpga_image_offset = 0U,
         .flash_meta.param_image_size_max = 0U,

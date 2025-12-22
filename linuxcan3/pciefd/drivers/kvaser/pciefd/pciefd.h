@@ -66,7 +66,6 @@
 
 #include "pciefd_regs.h"
 #include "pciefd_packet_defs.h"
-#include "pciefd_packet.h"
 #include "VCanOsIf.h"
 
 extern char *pciefd_ctrl_reg_names[];
@@ -146,6 +145,6 @@ void fpgaFlushTransmit(void *base);
 void fpgaFlushAll(void *base, int seq_no);
 void resetErrorCount(void *base);
 
-int writeFIFO(VCanChanData *vChd, pciefd_packet_t *packet);
+int writeFIFO(VCanChanData *vChd, unsigned int nwords, uint32_t packet[]);
 
 #endif

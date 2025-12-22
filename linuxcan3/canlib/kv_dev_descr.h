@@ -208,6 +208,9 @@ static struct dev_descr dev_descr_list[] = {
     { "Kvaser Hybrid Pro CAN/LIN", { 0x30012882, 0x00073301 } },
     { "Kvaser M.2 PCIe 4xCAN", { 0x30013339, 0x00073301 } },
     { "Kvaser U100-C", { 0x30013407, 0x00073301 } },
+    { "Kvaser Mini PCIe 1xCAN", { 0x30013681, 0x00073301 } },
+    { "VINING 800", { 0x30014428, 0x00073301 } },
+    { "Kvaser USBcan Pro 5xCAN", { 0x30015241, 0x00073301 } },
     { "Kvaser Leaf Light GI (Medical)", { 0x30005686, 0x00073301 } },
     { "Kvaser Leaf Light HS v2 OEM", { 0x30007352, 0x00073301 } },
     { "ATI Leaf Light HS v2", { 0x30009493, 0x00073301 } },
@@ -223,5 +226,9 @@ static struct dev_descr dev_descr_list[] = {
     { "Kvaser PCIEcan 4xCAN v2", { 0x30014145, 0x00073301 } },
     { "Kvaser Mini PCI Express 2xCAN v3", { 0x30014176, 0x00073301 } },
     { "Kvaser Mini PCI Express 1xCAN v3", { 0x30014206, 0x00073301 } },
+    { "Kvaser PCIe 8xCAN", { 0x30015128, 0x00073301 } },
+    { "Kvaser Edge", { 0x30983977, 0x00073301 } },
+    { "Kvaser Edge 4xCAN", { 0x30016880, 0x00073301 } },
+    { "CAN Logger - Read only", { 0x30017481, 0x00073301 } },
 };
 #endif /* __KV_DEV_DESCR_H_ */

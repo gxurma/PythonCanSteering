@@ -1,1 +1,1 @@
-cmd_/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/virtualcan/modules.order := {   echo /media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/virtualcan/kvvirtualcan.o; :; } > /media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/virtualcan/modules.order
+savedcmd_modules.order := {   echo kvvirtualcan.o; :; } > modules.order

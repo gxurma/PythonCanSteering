@@ -1,1 +1,1 @@
-cmd_/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pcican2/modules.order := {   echo /media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pcican2/kvpcicanII.o; :; } > /media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pcican2/modules.order
+savedcmd_modules.order := {   echo kvpcicanII.o; :; } > modules.order

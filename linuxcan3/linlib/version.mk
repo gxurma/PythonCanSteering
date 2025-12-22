@@ -1,4 +1,4 @@
 LIBNAME = liblinlib.so
 MAJOR = 1
 MINOR = 6
-BUILD = 9
+BUILD = 16

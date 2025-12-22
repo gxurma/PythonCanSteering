@@ -1,1 +1,1 @@
-cmd_/home/profactor/Documents/git/PythonCanSteering/linuxcan3/usbcanII/usbcanII.o := ld -m elf_x86_64 -z max-page-size=0x200000 -z noexecstack    -r -o /home/profactor/Documents/git/PythonCanSteering/linuxcan3/usbcanII/usbcanII.o /home/profactor/Documents/git/PythonCanSteering/linuxcan3/usbcanII/usbcanHWIf.o 
+savedcmd_usbcanII.o := ld -m elf_x86_64 -z noexecstack --no-warn-rwx-segments   -r -o usbcanII.o @usbcanII.mod 

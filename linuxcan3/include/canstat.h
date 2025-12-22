@@ -67,12 +67,11 @@
 /**
  * \file canstat.h
  * \brief Definitions for the CANLIB API.
- * \details
- * \ingroup can_status_codes Status Codes
  *
 */
 
 /**
+ * \addtogroup can_status_codes Status Codes
  * \anchor canERR_xxx
  *
  * @{
@@ -581,6 +580,7 @@ typedef enum {
 #define canTRANSCEIVER_TYPE_KONE       20 ///< KONE
 #define canTRANSCEIVER_TYPE_CANFD      22 ///< CAN-FD
 #define canTRANSCEIVER_TYPE_CANFD_LIN  24 ///< HYBRID CAN-FD/LIN
+#define canTRANSCEIVER_TYPE_CANFD_SIC  26 ///< CAN-FD SIC transceiver
 #define canTRANSCEIVER_TYPE_LINX_LIN   64
 #define canTRANSCEIVER_TYPE_LINX_J1708 66
 #define canTRANSCEIVER_TYPE_LINX_K     68

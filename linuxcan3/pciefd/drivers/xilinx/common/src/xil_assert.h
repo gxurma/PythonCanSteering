@@ -31,11 +31,17 @@
 #ifndef XIL_ASSERT_H	/* prevent circular inclusions */
 #define XIL_ASSERT_H	/* by using protection macros */
 
+#ifndef __KERNEL__
+#define NDEBUG
+#endif
+
+#ifndef NDEBUG
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wtype-limits"
 #include <linux/bug.h>
 #pragma GCC diagnostic pop
 #include "xil_types.h"
+#endif /* NDEBUG */
 
 #ifdef __cplusplus
 extern "C" {

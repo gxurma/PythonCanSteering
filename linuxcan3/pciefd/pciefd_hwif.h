@@ -73,7 +73,6 @@
 #include "VCanOsIf.h"
 #include "hydra_flash.h"
 #include "spi_flash.h"
-#include "pciefd_packet.h"
 
 /*****************************************************************************/
 /* defines */
@@ -85,7 +84,7 @@
 #define PCIEFD_USE_DMA 1
 
 #define DEVICE_NAME_STRING  "pciefd"
-#define MAX_CARD_CHANNELS   4U
+#define MAX_CARD_CHANNELS   8U
 #define MAX_DRIVER_CHANNELS 128
 
 #define MAX_ERROR_COUNT       64 //128
@@ -119,8 +118,6 @@ typedef struct {
 typedef struct {
     dmaCtxBuffer_t bufferCtx[2];
     int active;
-    unsigned int position;
-    unsigned int psize;
     unsigned int enabled;
 } dmaCtx_t;
 
@@ -145,11 +142,9 @@ typedef struct PciCanChanData {
         busOnCompletion; // Used to make sure that multiple bus on commands in a row is not executed.
 
     spinlock_t lock;
-#if !defined(TRY_RT_QUEUE)
-    struct work_struct txTaskQ;
-#else
-    struct workqueue_struct *txTaskQ;
     struct work_struct txWork;
+#ifdef TRY_RT_QUEUE
+    struct workqueue_struct *txTaskQ;
 #endif
 
     // Flags set if an overrun has been detected
@@ -201,8 +196,6 @@ typedef struct PciCanCardData {
 
     struct pci_dev *dev;
 
-    pciefd_packet_t packet;
-
     dmaCtx_t dmaCtx;
     int useDmaAddr64;
     int useDma;
@@ -227,7 +220,6 @@ struct pciefd_card_ops {
     void (*pci_irq_set_mask_bits)(VCanCardData *vCard, u32 bits);
     void (*pci_irq_clear_mask_bits)(VCanCardData *vCard, u32 bits);
     u32 (*pci_irq_get)(PciCanCardData *hCard);
-    void (*spi_irq_handler)(void *InstancePtr);
 };
 
 /**
@@ -237,7 +229,6 @@ struct pciefd_card_ops {
  * @tx[MAX_CARD_CHANNELS];      KCAN Tx buffer bit mask, one per channel
  */
 struct pciefd_irq_defines {
-    u32 spi0;
     u32 rx0;
     u32 tx[MAX_CARD_CHANNELS];
     u32 all_irq;
@@ -264,6 +255,10 @@ struct pciefd_address_offsets {
         u32 tx1;
         u32 tx2;
         u32 tx3;
+        u32 tx4;
+        u32 tx5;
+        u32 tx6;
+        u32 tx7;
         u32 controller_span;
     } kcan;
 };

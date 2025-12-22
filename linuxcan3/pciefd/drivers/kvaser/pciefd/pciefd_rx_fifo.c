@@ -61,8 +61,8 @@
 ** -----------------------------------------------------------------------------
 */
 
+#include "pciefd_rx_fifo.h"
 #include "debugprint.h"
-#include "pciefd_hwif.h"
 #include "pciefd_rx_fifo_regs.h"
 
 unsigned int fifoIrqStatus(void *base)
@@ -204,7 +204,7 @@ int hwSupportDMA(void *base)
     return RXBUF_STAT_DMA_SUPPORT_GET(data);
 }
 
-char *mode_str;
+static char *mode_str;
 
 static int noEOP(void *base, char *str)
 {
@@ -226,7 +226,7 @@ static int expectEop(void *base, char *str)
     return 0;
 }
 
-void dumpPacket(void *base_data, void *base_ctrl)
+static void dumpPacket(void *base_data, void *base_ctrl)
 {
     int i;
 
@@ -249,7 +249,7 @@ void dumpPacket(void *base_data, void *base_ctrl)
 
 typedef enum { NO_EOP, EXPECT_EOP } eop_expect_t;
 
-static int readTimestamp(void *base_data, void *base_ctrl, pciefd_packet_t *packet,
+static int readTimestamp(void *base_data, void *base_ctrl, struct kcan_rx_packet *packet,
                          eop_expect_t eop)
 {
     uint32_t tmp;
@@ -279,12 +279,12 @@ static int readTimestamp(void *base_data, void *base_ctrl, pciefd_packet_t *pack
     return 0;
 }
 
-// Return size
-int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
+int readFIFO(VCanCardData *vCard, struct kcan_rx_packet *packet)
 {
     PciCanCardData *hCard = vCard->hwCardData;
     int nwords;
     unsigned int pos;
+    unsigned int type;
 
     mode_str = "readFifo";
     pos = RXBUF_STAT_FIFO_PTR_GET(IORD_RXBUF_STAT(hCard->io.kcan.rxCtrlBase));
@@ -306,17 +306,20 @@ int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
     }
 
     // Read first two words to determine packet type
-    packet->id = IORD_RXBUF_FIFO(hCard->io.kcan.rxDataBase);
+    packet->hdr.id = IORD_RXBUF_FIFO(hCard->io.kcan.rxDataBase);
     if (noEOP(hCard->io.kcan.rxCtrlBase, "id")) {
         IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
         return -1;
     }
 
     // Read second word to calculate dlc and number of words to be read
-    packet->control = IORD_RXBUF_FIFO(hCard->io.kcan.rxDataBase);
+    packet->hdr.control = IORD_RXBUF_FIFO(hCard->io.kcan.rxDataBase);
 
-    // Data
-    if (isDataPacket(packet)) {
+    type = RPACKET_PTYPE_GET(packet->hdr.control);
+    switch (type) {
+        // Data
+    case RPACKET_PTYPE_DATA:
+    {
         int i;
         int dlc;
         int nbytes;
@@ -328,9 +331,9 @@ int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
             return -1;
         }
 
-        dlc = getDLC(packet);
+        dlc = getDLC(&packet->hdr);
 
-        if (isFlexibleDataRateFormat(packet)) {
+        if (isFlexibleDataRateFormat(&packet->hdr)) {
             DEBUGPRINT(4, "Warning: CAN FD Frame");
 
             nbytes = dlcToBytesFD(dlc);
@@ -338,7 +341,7 @@ int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
             nbytes = dlcToBytes(dlc);
         }
 
-        if (isRemoteRequest(packet)) {
+        if (isRemoteRequest(&packet->hdr)) {
             nbytes = 0;
         }
 
@@ -346,11 +349,10 @@ int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
 
         if (readTimestamp(hCard->io.kcan.rxDataBase, hCard->io.kcan.rxCtrlBase, packet,
                           nwords ? NO_EOP : EXPECT_EOP)) {
-            DEBUGPRINT(3, "id=%u dlc=%u bytes=%u words=%u", getId(packet), dlc, nbytes, nwords);
-            DEBUGPRINT(3, "i:%x", packet->id);
-            DEBUGPRINT(3, "c:%x", packet->control);
-            DEBUGPRINT(3, "0:%x", packet->data[0]);
-            DEBUGPRINT(3, "1:%x", packet->data[1]);
+            DEBUGPRINT(3, "id=%u dlc=%u bytes=%u words=%u", getId(&packet->hdr), dlc, nbytes, nwords);
+            DEBUGPRINT(3, "i:%x", packet->hdr.id);
+            DEBUGPRINT(3, "c:%x", packet->hdr.control);
+            DEBUGPRINT(3, "0:%llx", packet->timestamp);
 
             IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
             return -1;
@@ -369,12 +371,14 @@ int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
             expectEop(hCard->io.kcan.rxCtrlBase, "data");
         }
 
-        return 2 + nwords;
+        return KCAN_NR_OF_RX_HDR_WORDS + nwords;
     }
 
     // Ack or txrq packet
-    else if (isAckPacket(packet) || isTxrqPacket(packet) || isEFlushAckPacket(packet) ||
-             isEFrameAckPacket(packet)) {
+    case RPACKET_PTYPE_ACK:
+    case RPACKET_PTYPE_TXRQ:
+    case RPACKET_PTYPE_EFLUSH_ACK:
+    case RPACKET_PTYPE_EFRAME_ACK:
         mode_str = "ack packet";
         if (noEOP(hCard->io.kcan.rxCtrlBase, "Ack")) {
             IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
@@ -386,10 +390,10 @@ int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
             IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
             return -1;
         }
-    }
+        break;
 
-    // Error packet
-    else if (isErrorPacket(packet)) {
+        // Error packet
+    case RPACKET_PTYPE_ERROR:
         mode_str = "error packet";
         if (noEOP(hCard->io.kcan.rxCtrlBase, "control")) {
             IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
@@ -401,24 +405,10 @@ int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
             IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
             return -1;
         }
-    }
+        break;
 
-    // Offset packet
-    else if (isOffsetPacket(packet)) {
-        DEBUGPRINT(4, "OFFSET PACKET");
-
-        mode_str = "offset";
-
-        if (expectEop(hCard->io.kcan.rxCtrlBase, "offset")) {
-            IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
-            return -1;
-        }
-
-        IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
-    }
-
-    // Bus load packet
-    else if (isBusLoadPacket(packet)) {
+        // Bus load packet
+    case RPACKET_PTYPE_BUS_LOAD:
         mode_str = "bus load";
 
         if (noEOP(hCard->io.kcan.rxCtrlBase, "control")) {
@@ -431,10 +421,10 @@ int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
             IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
             return -1;
         }
-    }
+        break;
 
-    // Status Packet
-    else if (isStatusPacket(packet)) {
+        // Status Packet
+    case RPACKET_PTYPE_STATUS:
         mode_str = "status";
 
         if (noEOP(hCard->io.kcan.rxCtrlBase, "control")) {
@@ -447,32 +437,18 @@ int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet)
             IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
             return -1;
         }
+        break;
 
-    }
-
-    // Delay report packet
-    else if (isDelayPacket(packet)) {
-        DEBUGPRINT(4, "DELAY PACKET");
-
-        mode_str = "delay";
-
-        if (expectEop(hCard->io.kcan.rxCtrlBase, "delay")) {
-            IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
-            return -1;
-        }
-        IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
-    }
-
-    // Unknown packet type
-    else {
+        // Unknown packet type
+    default:
         mode_str = "unknown";
-        DEBUGPRINT(4, "Undefined packet %lu", RPACKET_PTYPE_GET(packet->control));
+        DEBUGPRINT(4, "Undefined packet %lu", RPACKET_PTYPE_GET(packet->hdr.control));
 
         IORD_RXBUF_FIFO_LAST(hCard->io.kcan.rxDataBase);
         return -1;
     }
 
-    return 1;
+    return KCAN_NR_OF_RX_HDR_WORDS;
 }
 
 void enableDMA(void *base)

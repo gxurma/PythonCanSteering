@@ -1,1 +1,1 @@
-cmd_/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pcican/kvpcican.mod := printf '%s\n'   PciCanHwIf.o dallas.o | awk '!x[$$0]++ { print("/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pcican/"$$0) }' > /media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/pcican/kvpcican.mod
+savedcmd_kvpcican.mod := printf '%s\n'   PciCanHwIf.o dallas.o | awk '!x[$$0]++ { print("./"$$0) }' > kvpcican.mod

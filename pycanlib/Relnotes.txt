@@ -9,6 +9,20 @@ Contents
 
 * Release Notes
 
+  * New Features and Fixed Problems in V1.31.107  (22-SEP-2025)
+
+  * New Features and Fixed Problems in V1.30.851  (21-MAY-2025)
+
+  * New Features and Fixed Problems in V1.29.758  (17-FEB-2025)
+
+  * New Features and Fixed Problems in V1.28.675  (26-NOV-2024)
+
+  * New Features and Fixed Problems in V1.27.606  (18-SEP-2024)
+
+  * New Features and Fixed Problems in V1.26.487  (22-MAY-2024)
+
+  * New Features and Fixed Problems in V1.25.393  (18-FEB-2024)
+
   * New Features and Fixed Problems in V1.24.935  (13-SEP-2023)
 
   * New Features and Fixed Problems in V1.23.804  (05-MAY-2023)
@@ -58,6 +72,48 @@ Contents
   * New Features and Fixed Problems in V1.1.23  (28-SEP-2016)
 
   * New Features and Fixed Problems in V1.0.10  (15-SEP-2016)
+
+
+New Features and Fixed Problems in V1.31.107  (22-SEP-2025)
+===========================================================
+
+* Minor changes.
+
+
+New Features and Fixed Problems in V1.30.851  (21-MAY-2025)
+===========================================================
+
+* Minor changes.
+
+
+New Features and Fixed Problems in V1.29.758  (17-FEB-2025)
+===========================================================
+
+* Minor changes.
+
+
+New Features and Fixed Problems in V1.28.675  (26-NOV-2024)
+===========================================================
+
+* Minor changes.
+
+
+New Features and Fixed Problems in V1.27.606  (18-SEP-2024)
+===========================================================
+
+* Minor changes.
+
+
+New Features and Fixed Problems in V1.26.487  (22-MAY-2024)
+===========================================================
+
+* Added new enums to canlib.
+
+
+New Features and Fixed Problems in V1.25.393  (18-FEB-2024)
+===========================================================
+
+* Minor changes.
 
 
 New Features and Fixed Problems in V1.24.935  (13-SEP-2023)

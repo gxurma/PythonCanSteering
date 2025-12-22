@@ -12,19 +12,24 @@
  */
 
 /***************************** Include Files *********************************/
+#ifdef __KERNEL__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wtype-limits"
 #include <linux/wait.h>
 #pragma GCC diagnostic pop
 #include <linux/sched.h>
 #include <linux/delay.h>
-#include <linux/jiffies.h>
 #include <linux/slab.h>
 #include <linux/string.h>
+#else
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h> /* memcpy */
+#endif /* __KERNEL__ */
 #include "k_assert.h"
 #include "util.h"
 #include "debugprint.h"
-#include "xspi.h" /* SPI device driver */
+#include "xspi.h"
 #include "spi_flash.h"
 
 /************************** Constant Definitions *****************************/
@@ -129,39 +134,13 @@ static_assert(SPI_FLASH_STATUS_SUCCESS == XST_SUCCESS);
 /************************** Function Definitions *****************************/
 
 /**
-* This function is the handler which performs processing for the SPI driver.
-* It is called from an interrupt context such that the amount of processing
-* performed should be minimized. It is called when a transfer of SPI data
-* completes or an error occurs.
-*
-* @param callback_ref   The upper layer callback reference passed back
-*                       when the callback function is invoked.
-* @param status_event   The event that just occurred.
-* @param num_bytes      The number of bytes transferred up until the event
-*                       occurred.
-*/
-static void spi_handler(void *callback_ref, u32 status_event, unsigned int num_bytes)
-{
-    struct spi_flash *spif = callback_ref;
-    NOT_USED(num_bytes);
-
-    if (status_event != XST_SPI_TRANSFER_DONE) {
-        atomic_inc(&spif->err_count);
-        DEBUGPRINT(3, "%s: error, event = %u\n", __func__, status_event);
-    }
-
-    atomic_set(&spif->busy, FALSE);
-    wake_up(&spif->wq);
-}
-
-/**
 * Initialize and prepare handle
 *
 * @param spif       Pointer to spi_flash struct
 * @param base_addr  is a pointer to the AXI SPI block
 * @return int       SPI_FLASH_STATUS_SUCCESS or error code != 0
 */
-int SPI_FLASH_xilinx_init(struct spi_flash *spif, void *base_addr)
+static int SPI_FLASH_xilinx_init(struct spi_flash *spif, void *base_addr)
 {
     int status;
     XSpi_Config config = {
@@ -181,19 +160,9 @@ int SPI_FLASH_xilinx_init(struct spi_flash *spif, void *base_addr)
     if (spif->hnd == NULL)
         return SPI_FLASH_STATUS_MALLOC;
 
-    init_waitqueue_head(&spif->wq);
-
     status = XSpi_CfgInitialize(XSPI(spif), &config, (UINTPTR)base_addr);
     if (status != XST_SUCCESS)
         goto error_exit;
-
-    /*
-     * Setup the handler for the SPI that will be called from the interrupt
-     * context when an SPI status occurs, specify a pointer to the SPI
-     * driver instance as the callback reference so the handler is able to
-     * access the instance data.
-     */
-    XSpi_SetStatusHandler(XSPI(spif), spif, (XSpi_StatusHandler)spi_handler);
 
     /*
      * Set the SPI device as a master and in manual slave select mode such
@@ -227,7 +196,7 @@ error_exit:
 *
 * @param spif       Pointer to spi_flash struct
 */
-void SPI_FLASH_xilinx_deinit(struct spi_flash *spif)
+static void SPI_FLASH_xilinx_deinit(struct spi_flash *spif)
 {
     K_ASSERT(spif != NULL);
 
@@ -244,15 +213,19 @@ void SPI_FLASH_xilinx_deinit(struct spi_flash *spif)
 * @return int   XST_SUCCESS if successful or XST_DEVICE_IS_STARTED if the
 *               device was already started.
 */
-int SPI_FLASH_xilinx_start(struct spi_flash *spif)
+static int SPI_FLASH_xilinx_start(struct spi_flash *spif)
 {
+    int status;
+
     K_ASSERT(spif != NULL);
     K_ASSERT(XSPI(spif) != NULL);
 
-    atomic_set(&spif->busy, false);
-    atomic_set(&spif->err_count, 0);
+    status = XSpi_Start(XSPI(spif));
 
-    return XSpi_Start(XSPI(spif));
+    // Disable global interrupt in order to use polled mode
+    XSpi_IntrGlobalDisable((XSpi *)XSPI(spif));
+
+    return status;
 }
 
 /**
@@ -263,29 +236,12 @@ int SPI_FLASH_xilinx_start(struct spi_flash *spif)
 *                XST_DEVICE_BUSY if a transfer is in progress and cannot be
 *                stopped.
 */
-int SPI_FLASH_xilinx_stop(struct spi_flash *spif)
+static int SPI_FLASH_xilinx_stop(struct spi_flash *spif)
 {
     K_ASSERT(spif != NULL);
     K_ASSERT(XSPI(spif) != NULL);
 
     return XSpi_Stop(XSPI(spif));
-}
-
-/**
-* Wait until busy flag is cleared or timeout
-*
-* @param spif       Pointer to spi_flash struct
-* @param timeout_ms Timeout in ms
-* @return int       SPI_FLASH_STATUS_SUCCESS or XST_FLASH_TIMEOUT_ERROR
-*/
-static int wait_busy(struct spi_flash *spif, u32 timeout_ms)
-{
-    if (wait_event_timeout(spif->wq, !atomic_read(&spif->busy), msecs_to_jiffies(timeout_ms)) ==
-        0) {
-        DEBUGPRINT(3, "%s: Timeout after %u ms!\n", __func__, timeout_ms);
-        return XST_FLASH_TIMEOUT_ERROR;
-    }
-    return SPI_FLASH_STATUS_SUCCESS;
 }
 
 /**
@@ -295,9 +251,8 @@ static int wait_busy(struct spi_flash *spif, u32 timeout_ms)
 * @param result Pointer to the read status.
 * @return int   SPI_FLASH_STATUS_SUCCESS or error code != 0
 */
-int SPI_FLASH_xilinx_get_status(struct spi_flash *spif, u8 *result)
+static int SPI_FLASH_xilinx_get_status(struct spi_flash *spif, u8 *result)
 {
-    const u32 timeout_ms = 1000;
     u8 buf[EXTRA_STATUS_READ] = { 0 };
     int status;
 
@@ -307,24 +262,10 @@ int SPI_FLASH_xilinx_get_status(struct spi_flash *spif, u8 *result)
 
     buf[0] = CMD_STATUSREG_READ;
 
-    status = wait_busy(spif, timeout_ms);
-    if (status != XST_SUCCESS)
-        return status;
-
-    atomic_set(&spif->busy, TRUE);
     status = XSpi_Transfer(XSPI(spif), buf, buf, EXTRA_STATUS_READ);
     if (status != XST_SUCCESS) {
         DEBUGPRINT(3, "%s: Transfer failed with %i\n", __func__, status);
         return status;
-    }
-
-    status = wait_busy(spif, timeout_ms);
-    if (status != XST_SUCCESS)
-        return status;
-
-    if (atomic_read(&spif->err_count) != 0) {
-        atomic_set(&spif->err_count, 0);
-        return XST_FAILURE;
     }
 
     *result = buf[1];
@@ -342,14 +283,17 @@ int SPI_FLASH_xilinx_get_status(struct spi_flash *spif, u8 *result)
 * @note This function reads the status register and waits
 *       until the WIP bit of the status register becomes 0.
 */
-int SPI_FLASH_xilinx_wait_ready(struct spi_flash *spif, u32 timeout_ms)
+static int SPI_FLASH_xilinx_wait_ready(struct spi_flash *spif, u32 timeout_ms)
 {
-    ulong timeout_jiffies = jiffies + msecs_to_jiffies(timeout_ms);
+    timespec_t timeout;
     int status;
     u8 status_reg;
 
     K_ASSERT(spif != NULL);
     K_ASSERT(XSPI(spif) != NULL);
+
+    TIMESPEC_GET(timeout);
+    TIMESPEC_ADD_MSEC(timeout, timeout_ms);
 
     do {
         status = SPI_FLASH_xilinx_get_status(spif, &status_reg);
@@ -364,7 +308,7 @@ int SPI_FLASH_xilinx_wait_ready(struct spi_flash *spif, u32 timeout_ms)
 
         MSLEEP_SHORT(5);
 
-    } while (time_before(jiffies, timeout_jiffies));
+    } while (TIMESPEC_IS_BEFORE(timeout));
 
     DEBUGPRINT(3, "%s: Timeout after %u ms!\n", __func__, timeout_ms);
     return XST_FAILURE;
@@ -380,7 +324,6 @@ int SPI_FLASH_xilinx_wait_ready(struct spi_flash *spif, u32 timeout_ms)
 */
 static int send_one_byte_cmd(struct spi_flash *spif, u8 cmd)
 {
-    const u32 timeout_ms = 1000;
     u8 buf[1];
     int status;
 
@@ -393,19 +336,9 @@ static int send_one_byte_cmd(struct spi_flash *spif, u8 cmd)
     if (status != XST_SUCCESS)
         return status;
 
-    atomic_set(&spif->busy, TRUE);
     status = XSpi_Transfer(XSPI(spif), buf, NULL, 1);
     if (status != XST_SUCCESS)
         return status;
-
-    status = wait_busy(spif, timeout_ms);
-    if (status != XST_SUCCESS)
-        return status;
-
-    if (atomic_read(&spif->err_count) != 0) {
-        atomic_set(&spif->err_count, 0);
-        return XST_FAILURE;
-    }
 
     return SPI_FLASH_STATUS_SUCCESS;
 }
@@ -416,7 +349,7 @@ static int send_one_byte_cmd(struct spi_flash *spif, u8 cmd)
 * @param spif   Pointer to spi_flash struct
 * @return int   SPI_FLASH_STATUS_SUCCESS or error code != 0
 */
-int SPI_FLASH_xilinx_write_enable(struct spi_flash *spif)
+static int SPI_FLASH_xilinx_write_enable(struct spi_flash *spif)
 {
     return send_one_byte_cmd(spif, CMD_WRITE_ENABLE);
 }
@@ -427,7 +360,7 @@ int SPI_FLASH_xilinx_write_enable(struct spi_flash *spif)
 * @param spif   Pointer to spi_flash struct
 * @return int   SPI_FLASH_STATUS_SUCCESS or error code != 0
 */
-int SPI_FLASH_xilinx_write_disable(struct spi_flash *spif)
+static int SPI_FLASH_xilinx_write_disable(struct spi_flash *spif)
 {
     return send_one_byte_cmd(spif, CMD_WRITE_DISABLE);
 }
@@ -439,9 +372,8 @@ int SPI_FLASH_xilinx_write_disable(struct spi_flash *spif)
  * @param jedec JEDEC id
  * @return int  SPI_FLASH_STATUS_SUCCESS or error code != 0
  */
-int SPI_FLASH_xilinx_get_jedec(struct spi_flash *spif, u32 *jedec)
+static int SPI_FLASH_xilinx_get_jedec(struct spi_flash *spif, u32 *jedec)
 {
-    const u32 timeout_ms = 1000;
     u8 buf[EXTRA_JEDEC_ID] = { 0 };
     int status;
 
@@ -455,19 +387,9 @@ int SPI_FLASH_xilinx_get_jedec(struct spi_flash *spif, u32 *jedec)
     if (status != XST_SUCCESS)
         return status;
 
-    atomic_set(&spif->busy, TRUE);
     status = XSpi_Transfer(XSPI(spif), buf, buf, EXTRA_JEDEC_ID);
     if (status != XST_SUCCESS)
         return status;
-
-    status = wait_busy(spif, timeout_ms);
-    if (status != XST_SUCCESS)
-        return status;
-
-    if (atomic_read(&spif->err_count) != 0) {
-        atomic_set(&spif->err_count, 0);
-        return XST_FAILURE;
-    }
 
     *jedec = (buf[1] << 16) + (buf[2] << 8) + buf[3];
     return SPI_FLASH_STATUS_SUCCESS;
@@ -479,7 +401,7 @@ int SPI_FLASH_xilinx_get_jedec(struct spi_flash *spif, u32 *jedec)
  * @param spif  Pointer to spi_flash struct
  * @return bool True if expected JEDEC id, false otherwise
  */
-bool SPI_FLASH_xilinx_verify_jedec(struct spi_flash *spif)
+static bool SPI_FLASH_xilinx_verify_jedec(struct spi_flash *spif)
 {
     int status;
     u32 jedec;
@@ -507,7 +429,6 @@ bool SPI_FLASH_xilinx_verify_jedec(struct spi_flash *spif)
 #if !SIMULATE_WRITE
 static int flash_erase_cmd(struct spi_flash *spif, u32 addr, u8 cmd, u32 timeout_ms)
 {
-    const u32 timeout_spi_ms = 1000;
     u8 buf[EXTRA_PARTIAL_ERASE] = { 0 };
     int status;
 
@@ -531,20 +452,10 @@ static int flash_erase_cmd(struct spi_flash *spif, u32 addr, u8 cmd, u32 timeout
     if (status != XST_SUCCESS)
         return status;
 
-    atomic_set(&spif->busy, TRUE);
     status = XSpi_Transfer(XSPI(spif), buf, NULL,
                            (cmd == CMD_ERASE_CHIP) ? EXTRA_BULK_ERASE : EXTRA_PARTIAL_ERASE);
     if (status != XST_SUCCESS)
         return status;
-
-    status = wait_busy(spif, timeout_spi_ms);
-    if (status != XST_SUCCESS)
-        return status;
-
-    if (atomic_read(&spif->err_count) != 0) {
-        atomic_set(&spif->err_count, 0);
-        return XST_FAILURE;
-    }
 
     if (timeout_ms > 0) {
         status = SPI_FLASH_xilinx_wait_ready(spif, timeout_ms);
@@ -568,7 +479,7 @@ static int flash_erase_cmd(struct spi_flash *spif, u32 addr, u8 cmd, u32 timeout
 *
 * @note 64K erase is the smallest working erase command.
 */
-int SPI_FLASH_xilinx_erase_64K(struct spi_flash *spif, u32 addr, u32 timeout_ms)
+static int SPI_FLASH_xilinx_erase_64K(struct spi_flash *spif, u32 addr, u32 timeout_ms)
 {
     K_ASSERT((addr % (64 * 1024U)) == 0);
 
@@ -595,7 +506,7 @@ int SPI_FLASH_xilinx_erase_64K(struct spi_flash *spif, u32 addr, u32 timeout_ms)
  *
  * @return int       SPI_FLASH_STATUS_SUCCESS or error code != 0
  */
-int SPI_FLASH_xilinx_erase_multi_64K(struct spi_flash *spif, u32 addr, u32 num_bytes,
+static int SPI_FLASH_xilinx_erase_multi_64K(struct spi_flash *spif, u32 addr, u32 num_bytes,
                                      u32 timeout_ms)
 {
     const u32 chunk_size = 64 * 1024U;
@@ -645,9 +556,8 @@ int SPI_FLASH_xilinx_erase_multi_64K(struct spi_flash *spif, u32 addr, u32 num_b
 *
 * @return int       SPI_FLASH_STATUS_SUCCESS or error code != 0
 */
-int SPI_FLASH_xilinx_write_page(struct spi_flash *spif, u32 addr, const u8 *buf, u32 num_bytes)
+static int SPI_FLASH_xilinx_write_page(struct spi_flash *spif, u32 addr, const u8 *buf, u32 num_bytes)
 {
-    const u32 timeout_ms = 1000;
     u8 tx_buf[FLASH_PAGE_SIZE + EXTRA_READ_WRITE];
     int status;
 
@@ -675,19 +585,9 @@ int SPI_FLASH_xilinx_write_page(struct spi_flash *spif, u32 addr, const u8 *buf,
     if (status != XST_SUCCESS)
         return status;
 
-    atomic_set(&spif->busy, TRUE);
     status = XSpi_Transfer(XSPI(spif), tx_buf, NULL, (num_bytes + EXTRA_READ_WRITE));
     if (status != XST_SUCCESS)
         return status;
-
-    status = wait_busy(spif, timeout_ms);
-    if (status != XST_SUCCESS)
-        return status;
-
-    if (atomic_read(&spif->err_count) != 0) {
-        atomic_set(&spif->err_count, 0);
-        return XST_FAILURE;
-    }
 
     return SPI_FLASH_STATUS_SUCCESS;
 #else
@@ -711,7 +611,7 @@ int SPI_FLASH_xilinx_write_page(struct spi_flash *spif, u32 addr, const u8 *buf,
  *
  * @return int      SPI_FLASH_STATUS_SUCCESS or error code != 0
  */
-int SPI_FLASH_xilinx_write_multi_page(struct spi_flash *spif, u32 addr, const u8 *buf,
+static int SPI_FLASH_xilinx_write_multi_page(struct spi_flash *spif, u32 addr, const u8 *buf,
                                       u32 num_bytes)
 {
     const u32 loop_sleep_ms = 1;
@@ -759,7 +659,6 @@ int SPI_FLASH_xilinx_write_multi_page(struct spi_flash *spif, u32 addr, const u8
 */
 static int SPI_FLASH_xilinx_read_page(struct spi_flash *spif, u32 addr, u8 *buf, u32 num_bytes)
 {
-    const u32 timeout_ms = 1000;
     const u32 num_extra_bytes = EXTRA_READ_WRITE + (QUAD_MODE ? DUMMY_BYTES_QUAD_IO_READ : 0);
     u8 rw_buf[FLASH_PAGE_SIZE + EXTRA_READ_WRITE + DUMMY_BYTES_QUAD_IO_READ] = { 0 };
     u32 total_num_bytes;
@@ -783,19 +682,9 @@ static int SPI_FLASH_xilinx_read_page(struct spi_flash *spif, u32 addr, u8 *buf,
     if (status != XST_SUCCESS)
         return status;
 
-    atomic_set(&spif->busy, TRUE);
     status = XSpi_Transfer(XSPI(spif), rw_buf, rw_buf, total_num_bytes);
     if (status != XST_SUCCESS)
         return status;
-
-    status = wait_busy(spif, timeout_ms);
-    if (status != XST_SUCCESS)
-        return status;
-
-    if (atomic_read(&spif->err_count) != 0) {
-        atomic_set(&spif->err_count, 0);
-        return XST_FAILURE;
-    }
 
     // return requested data only
     memcpy(buf, rw_buf + num_extra_bytes, num_bytes);
@@ -815,7 +704,7 @@ static int SPI_FLASH_xilinx_read_page(struct spi_flash *spif, u32 addr, u8 *buf,
 *
 * @return int       SPI_FLASH_STATUS_SUCCESS or error code != 0
 */
-int SPI_FLASH_xilinx_read(struct spi_flash *spif, u32 addr, u8 *buf, u32 num_bytes)
+static int SPI_FLASH_xilinx_read(struct spi_flash *spif, u32 addr, u8 *buf, u32 num_bytes)
 {
     const u32 loop_sleep_ms = 1;
     u32 offset;
@@ -860,7 +749,7 @@ int SPI_FLASH_xilinx_read(struct spi_flash *spif, u32 addr, u8 *buf, u32 num_byt
 *                   If buffers are not equal: -1
 *                   If error: error code > 0
 */
-int SPI_FLASH_xilinx_compare(struct spi_flash *spif, u32 addr, const u8 *buf, u32 num_bytes)
+static int SPI_FLASH_xilinx_compare(struct spi_flash *spif, u32 addr, const u8 *buf, u32 num_bytes)
 {
     const u32 loop_sleep_ms = 1;
     u32 offset;

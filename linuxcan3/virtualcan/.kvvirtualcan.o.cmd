@@ -1,1 +1,1 @@
-cmd_/home/profactor/Documents/git/PythonCanSteering/linuxcan3/virtualcan/kvvirtualcan.o := ld -m elf_x86_64 -z max-page-size=0x200000 -z noexecstack    -r -o /home/profactor/Documents/git/PythonCanSteering/linuxcan3/virtualcan/kvvirtualcan.o /home/profactor/Documents/git/PythonCanSteering/linuxcan3/virtualcan/virtualcan.o 
+savedcmd_kvvirtualcan.o := ld -m elf_x86_64 -z noexecstack --no-warn-rwx-segments   -r -o kvvirtualcan.o @kvvirtualcan.mod 

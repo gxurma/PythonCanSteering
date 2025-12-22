@@ -65,6 +65,7 @@
 #define __PCIEFD_RX_FIFO_H__
 
 #include "VCanOsIf.h"
+#include "pciefd_packet.h"
 
 unsigned int fifoIrqStatus(void *base);
 void fifoIrqClear(void *base, unsigned int icl);
@@ -89,7 +90,13 @@ int fifoDataAvailableWords(void *base);
 int hwSupportDMA(void *base);
 
 int isEOP(void *base);
-int readFIFO(VCanCardData *vCard, pciefd_packet_t *packet);
+
+/**
+ * Reads a packet from the receive FIFO buffer.
+ *
+ * @return The packet word size, or -1.
+ */
+int readFIFO(VCanCardData *vCard, struct kcan_rx_packet *packet);
 
 void enableDMA(void *base);
 void disableDMA(void *base);

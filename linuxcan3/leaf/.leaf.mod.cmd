@@ -1,1 +1,1 @@
-cmd_/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/leaf/leaf.mod := printf '%s\n'   leafHWIf.o | awk '!x[$$0]++ { print("/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/leaf/"$$0) }' > /media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/leaf/leaf.mod
+savedcmd_leaf.mod := printf '%s\n'   leafHWIf.o | awk '!x[$$0]++ { print("./"$$0) }' > leaf.mod

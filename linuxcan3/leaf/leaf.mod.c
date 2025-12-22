@@ -1,12 +1,11 @@
 #include <linux/module.h>
-#include <linux/vermagic.h>
+#include <linux/export-internal.h>
 #include <linux/compiler.h>
 
-MODULE_INFO(vermagic, VERMAGIC_STRING);
 MODULE_INFO(name, KBUILD_MODNAME);
 
 __visible struct module __this_module
-__attribute__((section(".gnu.linkonce.this_module"))) = {
+__section(".gnu.linkonce.this_module") = {
 	.name = KBUILD_MODNAME,
 	.init = init_module,
 #ifdef CONFIG_MODULE_UNLOAD
@@ -15,91 +14,248 @@ __attribute__((section(".gnu.linkonce.this_module"))) = {
 	.arch = MODULE_ARCH_INIT,
 };
 
-#ifdef CONFIG_RETPOLINE
-MODULE_INFO(retpoline, "Y");
-#endif
+
 
 static const struct modversion_info ____versions[]
-__used
-__attribute__((section("__versions"))) = {
-	{ 0x7ef2b274, __VMLINUX_SYMBOL_STR(module_layout) },
-	{ 0x2d3385d3, __VMLINUX_SYMBOL_STR(system_wq) },
-	{ 0x5773238, __VMLINUX_SYMBOL_STR(kmalloc_caches) },
-	{ 0xe8e7edd2, __VMLINUX_SYMBOL_STR(queue_init) },
-	{ 0xd2b09ce5, __VMLINUX_SYMBOL_STR(__kmalloc) },
-	{ 0x5c5b963, __VMLINUX_SYMBOL_STR(vCanCleanup) },
-	{ 0x672edad8, __VMLINUX_SYMBOL_STR(pv_lock_ops) },
-	{ 0x43a53735, __VMLINUX_SYMBOL_STR(__alloc_workqueue_key) },
-	{ 0x895680cf, __VMLINUX_SYMBOL_STR(queue_length) },
-	{ 0xddeb9ae8, __VMLINUX_SYMBOL_STR(usb_kill_urb) },
-	{ 0x4add9142, __VMLINUX_SYMBOL_STR(convert_vcan_to_hydra_cmd) },
-	{ 0x132a679, __VMLINUX_SYMBOL_STR(softSyncLoc2Glob) },
-	{ 0xe028aca1, __VMLINUX_SYMBOL_STR(softSyncAddMember) },
-	{ 0x73e8f1a8, __VMLINUX_SYMBOL_STR(kthread_create_on_node) },
-	{ 0xa306008f, __VMLINUX_SYMBOL_STR(vCanRemoveCardChannel) },
-	{ 0xa6682fdd, __VMLINUX_SYMBOL_STR(__init_waitqueue_head) },
-	{ 0xaad8c7d6, __VMLINUX_SYMBOL_STR(default_wake_function) },
-	{ 0xa034bb5c, __VMLINUX_SYMBOL_STR(queue_empty) },
-	{ 0xdc45991b, __VMLINUX_SYMBOL_STR(queue_push) },
-	{ 0xb1904934, __VMLINUX_SYMBOL_STR(wait_for_completion) },
-	{ 0xc2bf1f9f, __VMLINUX_SYMBOL_STR(ticks_init) },
-	{ 0xfb578fc5, __VMLINUX_SYMBOL_STR(memset) },
-	{ 0x50614cee, __VMLINUX_SYMBOL_STR(queue_front) },
-	{ 0xd0bbfdfa, __VMLINUX_SYMBOL_STR(queue_add_wait_for_space) },
-	{ 0x26928130, __VMLINUX_SYMBOL_STR(vCanDispatchEvent) },
-	{ 0xe966901, __VMLINUX_SYMBOL_STR(_raw_spin_unlock_irqrestore) },
-	{ 0x9b65a65f, __VMLINUX_SYMBOL_STR(current_task) },
-	{ 0xbe9c7e41, __VMLINUX_SYMBOL_STR(usb_deregister) },
-	{ 0x27e1a049, __VMLINUX_SYMBOL_STR(printk) },
-	{ 0x7eebc343, __VMLINUX_SYMBOL_STR(ticks_to_64bit_ns) },
-	{ 0x21b32ce, __VMLINUX_SYMBOL_STR(set_capability_value) },
-	{ 0x9166fada, __VMLINUX_SYMBOL_STR(strncpy) },
-	{ 0x8c8822a4, __VMLINUX_SYMBOL_STR(queue_wakeup_on_space) },
-	{ 0x256a9c87, __VMLINUX_SYMBOL_STR(queue_pop) },
-	{ 0x8c03d20c, __VMLINUX_SYMBOL_STR(destroy_workqueue) },
-	{ 0xb13294d9, __VMLINUX_SYMBOL_STR(usb_free_coherent) },
-	{ 0x952664c5, __VMLINUX_SYMBOL_STR(do_exit) },
-	{ 0x42160169, __VMLINUX_SYMBOL_STR(flush_workqueue) },
-	{ 0xd80a7183, __VMLINUX_SYMBOL_STR(softSyncHandleTRef) },
-	{ 0x3aded471, __VMLINUX_SYMBOL_STR(module_put) },
-	{ 0xf6671a94, __VMLINUX_SYMBOL_STR(vCanInitData) },
-	{ 0x47a74c59, __VMLINUX_SYMBOL_STR(usb_submit_urb) },
-	{ 0xdb7305a1, __VMLINUX_SYMBOL_STR(__stack_chk_fail) },
-	{ 0x60232e27, __VMLINUX_SYMBOL_STR(usb_bulk_msg) },
-	{ 0x8ddd8aad, __VMLINUX_SYMBOL_STR(schedule_timeout) },
-	{ 0xa202a8e5, __VMLINUX_SYMBOL_STR(kmalloc_order_trace) },
-	{ 0x803c773f, __VMLINUX_SYMBOL_STR(wake_up_process) },
-	{ 0xbdfb6dbb, __VMLINUX_SYMBOL_STR(__fentry__) },
-	{ 0xbeee391, __VMLINUX_SYMBOL_STR(kmem_cache_alloc_trace) },
-	{ 0x56321ae2, __VMLINUX_SYMBOL_STR(_raw_spin_lock) },
-	{ 0x7e8d43c6, __VMLINUX_SYMBOL_STR(_raw_spin_lock_irqsave) },
-	{ 0x101634e1, __VMLINUX_SYMBOL_STR(set_capability_mask) },
-	{ 0xfe768495, __VMLINUX_SYMBOL_STR(__wake_up) },
-	{ 0x4106551e, __VMLINUX_SYMBOL_STR(softSyncRemoveMember) },
-	{ 0x37a0cba, __VMLINUX_SYMBOL_STR(kfree) },
-	{ 0xd523a284, __VMLINUX_SYMBOL_STR(vCanInit) },
-	{ 0x26ea0946, __VMLINUX_SYMBOL_STR(vCanFlushSendBuffer) },
-	{ 0xe88f698b, __VMLINUX_SYMBOL_STR(usb_register_driver) },
-	{ 0xf3ad4fb2, __VMLINUX_SYMBOL_STR(queue_remove_wait_for_space) },
-	{ 0x6d8c3aa3, __VMLINUX_SYMBOL_STR(queue_back) },
-	{ 0xa8177b09, __VMLINUX_SYMBOL_STR(queue_reinit) },
-	{ 0x7794a5a7, __VMLINUX_SYMBOL_STR(queue_release) },
-	{ 0x2e0d2f7f, __VMLINUX_SYMBOL_STR(queue_work_on) },
-	{ 0x19cf472b, __VMLINUX_SYMBOL_STR(complete) },
-	{ 0x47f6aeec, __VMLINUX_SYMBOL_STR(usb_alloc_coherent) },
-	{ 0x7f02188f, __VMLINUX_SYMBOL_STR(__msecs_to_jiffies) },
-	{ 0xd8d6a34c, __VMLINUX_SYMBOL_STR(vCanAddCardChannel) },
-	{ 0xccb6663c, __VMLINUX_SYMBOL_STR(wait_for_completion_timeout) },
-	{ 0x925ad1ee, __VMLINUX_SYMBOL_STR(get_usb_root_hub_id) },
-	{ 0xf81758cb, __VMLINUX_SYMBOL_STR(usb_free_urb) },
-	{ 0x6d584285, __VMLINUX_SYMBOL_STR(try_module_get) },
-	{ 0xd3941341, __VMLINUX_SYMBOL_STR(usb_alloc_urb) },
+__used __section("__versions") = {
+	{ 0x0dba6eb8, "usb_alloc_urb" },
+	{ 0xe175d7d6, "try_module_get" },
+	{ 0xdf4bee3d, "alloc_workqueue" },
+	{ 0xd6d46b9d, "usb_free_urb" },
+	{ 0x6ad5179b, "get_usb_root_hub_id" },
+	{ 0x57860fb4, "wait_for_completion_timeout" },
+	{ 0x59b87546, "vCanAddCardChannel" },
+	{ 0x534ed5f3, "__msecs_to_jiffies" },
+	{ 0xd710adbf, "__kmalloc_noprof" },
+	{ 0x2a87283a, "usb_alloc_coherent" },
+	{ 0x65026e43, "complete" },
+	{ 0x49733ad6, "queue_work_on" },
+	{ 0x39b5bb15, "queue_release" },
+	{ 0x39b5bb15, "queue_reinit" },
+	{ 0xe7db7ec6, "queue_back" },
+	{ 0x60c9c0b3, "__init_swait_queue_head" },
+	{ 0x4cea2553, "queue_remove_wait_for_space" },
+	{ 0xaba46e12, "usb_register_driver" },
+	{ 0x59b87546, "vCanFlushSendBuffer" },
+	{ 0x645c8a85, "vCanInit" },
+	{ 0xa53f4e29, "memcpy" },
+	{ 0xcb8b6ec6, "kfree" },
+	{ 0x50a79768, "softSyncRemoveMember" },
+	{ 0x16ab4215, "__wake_up" },
+	{ 0xba8e1447, "set_capability_mask" },
+	{ 0xe1e1f979, "_raw_spin_lock_irqsave" },
+	{ 0xde338d9a, "_raw_spin_lock" },
+	{ 0xd272d446, "__fentry__" },
+	{ 0xda80ecf4, "wake_up_process" },
+	{ 0xe8213e80, "_printk" },
+	{ 0x6ac784f4, "schedule_timeout" },
+	{ 0x76a26ca1, "usb_bulk_msg" },
+	{ 0xd272d446, "__stack_chk_fail" },
+	{ 0xd710adbf, "__kmalloc_large_noprof" },
+	{ 0x4d40f3a6, "const_pcpu_hot" },
+	{ 0x0819dba7, "usb_submit_urb" },
+	{ 0xd9d667bd, "vCanInitData" },
+	{ 0x90a48d82, "__ubsan_handle_out_of_bounds" },
+	{ 0x355ac0b5, "softSyncHandleTRef" },
+	{ 0x32cd3258, "usb_free_coherent" },
+	{ 0xc8b861fa, "__module_put_and_kthread_exit" },
+	{ 0xbd03ed67, "random_kmalloc_seed" },
+	{ 0xbeb1d261, "destroy_workqueue" },
+	{ 0x39b5bb15, "queue_pop" },
+	{ 0x39b5bb15, "queue_wakeup_on_space" },
+	{ 0xc609ff70, "strncpy" },
+	{ 0xba8e1447, "set_capability_value" },
+	{ 0xde9f3bec, "ticks_to_64bit_ns" },
+	{ 0xef4e4365, "usb_deregister" },
+	{ 0xe54e0a6b, "__fortify_panic" },
+	{ 0x81a1a811, "_raw_spin_unlock_irqrestore" },
+	{ 0x689ff9d2, "vCanDispatchEvent" },
+	{ 0x4cea2553, "queue_add_wait_for_space" },
+	{ 0xe7db7ec6, "queue_front" },
+	{ 0x27683a56, "memset" },
+	{ 0x278ef35d, "ticks_init" },
+	{ 0x65026e43, "wait_for_completion" },
+	{ 0xd272d446, "__x86_return_thunk" },
+	{ 0x39b5bb15, "queue_push" },
+	{ 0xe7db7ec6, "queue_empty" },
+	{ 0x2247bd2b, "default_wake_function" },
+	{ 0x34e23247, "vCanRemoveCardChannel" },
+	{ 0x8fdc4711, "kthread_create_on_node" },
+	{ 0xaddd9dda, "softSyncAddMember" },
+	{ 0xc5b77680, "softSyncLoc2Glob" },
+	{ 0xacba77f5, "convert_vcan_to_hydra_cmd" },
+	{ 0x70db3fe4, "__kmalloc_cache_noprof" },
+	{ 0xd6d46b9d, "usb_kill_urb" },
+	{ 0x75738bed, "__warn_printk" },
+	{ 0xe7db7ec6, "queue_length" },
+	{ 0xe4de56b4, "__ubsan_handle_load_invalid_value" },
+	{ 0xde338d9a, "_raw_spin_unlock" },
+	{ 0x34583558, "vCanCleanup" },
+	{ 0x8ac3b8f9, "queue_init" },
+	{ 0xfed1e3bc, "kmalloc_caches" },
+	{ 0xba157484, "module_layout" },
 };
 
-static const char __module_depends[]
-__used
-__attribute__((section(".modinfo"))) =
-"depends=kvcommon";
+static const u32 ____version_ext_crcs[]
+__used __section("__version_ext_crcs") = {
+	0x0dba6eb8,
+	0xe175d7d6,
+	0xdf4bee3d,
+	0xd6d46b9d,
+	0x6ad5179b,
+	0x57860fb4,
+	0x59b87546,
+	0x534ed5f3,
+	0xd710adbf,
+	0x2a87283a,
+	0x65026e43,
+	0x49733ad6,
+	0x39b5bb15,
+	0x39b5bb15,
+	0xe7db7ec6,
+	0x60c9c0b3,
+	0x4cea2553,
+	0xaba46e12,
+	0x59b87546,
+	0x645c8a85,
+	0xa53f4e29,
+	0xcb8b6ec6,
+	0x50a79768,
+	0x16ab4215,
+	0xba8e1447,
+	0xe1e1f979,
+	0xde338d9a,
+	0xd272d446,
+	0xda80ecf4,
+	0xe8213e80,
+	0x6ac784f4,
+	0x76a26ca1,
+	0xd272d446,
+	0xd710adbf,
+	0x4d40f3a6,
+	0x0819dba7,
+	0xd9d667bd,
+	0x90a48d82,
+	0x355ac0b5,
+	0x32cd3258,
+	0xc8b861fa,
+	0xbd03ed67,
+	0xbeb1d261,
+	0x39b5bb15,
+	0x39b5bb15,
+	0xc609ff70,
+	0xba8e1447,
+	0xde9f3bec,
+	0xef4e4365,
+	0xe54e0a6b,
+	0x81a1a811,
+	0x689ff9d2,
+	0x4cea2553,
+	0xe7db7ec6,
+	0x27683a56,
+	0x278ef35d,
+	0x65026e43,
+	0xd272d446,
+	0x39b5bb15,
+	0xe7db7ec6,
+	0x2247bd2b,
+	0x34e23247,
+	0x8fdc4711,
+	0xaddd9dda,
+	0xc5b77680,
+	0xacba77f5,
+	0x70db3fe4,
+	0xd6d46b9d,
+	0x75738bed,
+	0xe7db7ec6,
+	0xe4de56b4,
+	0xde338d9a,
+	0x34583558,
+	0x8ac3b8f9,
+	0xfed1e3bc,
+	0xba157484,
+};
+static const char ____version_ext_names[]
+__used __section("__version_ext_names") =
+	"usb_alloc_urb\0"
+	"try_module_get\0"
+	"alloc_workqueue\0"
+	"usb_free_urb\0"
+	"get_usb_root_hub_id\0"
+	"wait_for_completion_timeout\0"
+	"vCanAddCardChannel\0"
+	"__msecs_to_jiffies\0"
+	"__kmalloc_noprof\0"
+	"usb_alloc_coherent\0"
+	"complete\0"
+	"queue_work_on\0"
+	"queue_release\0"
+	"queue_reinit\0"
+	"queue_back\0"
+	"__init_swait_queue_head\0"
+	"queue_remove_wait_for_space\0"
+	"usb_register_driver\0"
+	"vCanFlushSendBuffer\0"
+	"vCanInit\0"
+	"memcpy\0"
+	"kfree\0"
+	"softSyncRemoveMember\0"
+	"__wake_up\0"
+	"set_capability_mask\0"
+	"_raw_spin_lock_irqsave\0"
+	"_raw_spin_lock\0"
+	"__fentry__\0"
+	"wake_up_process\0"
+	"_printk\0"
+	"schedule_timeout\0"
+	"usb_bulk_msg\0"
+	"__stack_chk_fail\0"
+	"__kmalloc_large_noprof\0"
+	"const_pcpu_hot\0"
+	"usb_submit_urb\0"
+	"vCanInitData\0"
+	"__ubsan_handle_out_of_bounds\0"
+	"softSyncHandleTRef\0"
+	"usb_free_coherent\0"
+	"__module_put_and_kthread_exit\0"
+	"random_kmalloc_seed\0"
+	"destroy_workqueue\0"
+	"queue_pop\0"
+	"queue_wakeup_on_space\0"
+	"strncpy\0"
+	"set_capability_value\0"
+	"ticks_to_64bit_ns\0"
+	"usb_deregister\0"
+	"__fortify_panic\0"
+	"_raw_spin_unlock_irqrestore\0"
+	"vCanDispatchEvent\0"
+	"queue_add_wait_for_space\0"
+	"queue_front\0"
+	"memset\0"
+	"ticks_init\0"
+	"wait_for_completion\0"
+	"__x86_return_thunk\0"
+	"queue_push\0"
+	"queue_empty\0"
+	"default_wake_function\0"
+	"vCanRemoveCardChannel\0"
+	"kthread_create_on_node\0"
+	"softSyncAddMember\0"
+	"softSyncLoc2Glob\0"
+	"convert_vcan_to_hydra_cmd\0"
+	"__kmalloc_cache_noprof\0"
+	"usb_kill_urb\0"
+	"__warn_printk\0"
+	"queue_length\0"
+	"__ubsan_handle_load_invalid_value\0"
+	"_raw_spin_unlock\0"
+	"vCanCleanup\0"
+	"queue_init\0"
+	"kmalloc_caches\0"
+	"module_layout\0"
+;
+
+MODULE_INFO(depends, "kvcommon");
 
 MODULE_ALIAS("usb:v0BFDp000Ad*dc*dsc*dp*ic*isc*ip*in*");
 MODULE_ALIAS("usb:v0BFDp000Bd*dc*dsc*dp*ic*isc*ip*in*");
@@ -132,4 +288,4 @@ MODULE_ALIAS("usb:v0BFDp0126d*dc*dsc*dp*ic*isc*ip*in*");
 MODULE_ALIAS("usb:v0BFDp0127d*dc*dsc*dp*ic*isc*ip*in*");
 MODULE_ALIAS("usb:v0BFDp0128d*dc*dsc*dp*ic*isc*ip*in*");
 
-MODULE_INFO(srcversion, "C9DDA238075EB40555EED6C");
+MODULE_INFO(srcversion, "A8352AD18E27E059C356B2A");

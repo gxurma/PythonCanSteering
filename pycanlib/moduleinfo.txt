@@ -1,3 +1,3 @@
 module=pycanlib
-version=1_24_935
-git_id=3e0462505079
+version=1_31_107
+git_id=94c590983e5d

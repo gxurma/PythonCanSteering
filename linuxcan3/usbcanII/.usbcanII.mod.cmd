@@ -1,1 +1,1 @@
-cmd_/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/usbcanII/usbcanII.mod := printf '%s\n'   usbcanHWIf.o | awk '!x[$$0]++ { print("/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/usbcanII/"$$0) }' > /media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/usbcanII/usbcanII.mod
+savedcmd_usbcanII.mod := printf '%s\n'   usbcanHWIf.o | awk '!x[$$0]++ { print("./"$$0) }' > usbcanII.mod

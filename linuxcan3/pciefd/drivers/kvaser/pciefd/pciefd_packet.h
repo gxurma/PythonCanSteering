@@ -70,119 +70,246 @@
 // Packet handling
 #define USE_CAN_FD (1)
 
+#define KCAN_NR_OF_HDR_WORDS 2
+#define KCAN_NR_OF_RX_HDR_WORDS 4
+
 #if USE_CAN_FD
 #define NR_OF_DATA_WORDS 16
 #else
 #define NR_OF_DATA_WORDS 2
 #endif
 
-typedef struct {
-    uint32_t id;
-    uint32_t control;
-    uint32_t data[NR_OF_DATA_WORDS];
-    uint64_t timestamp;
-} pciefd_packet_t;
+static inline unsigned int dlcToBytes(unsigned int dlc)
+{
+    dlc &= 0xf;
+    return dlc > 8 ? 8 : dlc;
+}
 
-int isDataPacket(pciefd_packet_t *packet);
-int isAckPacket(pciefd_packet_t *packet);
-int isTxrqPacket(pciefd_packet_t *packet);
-int isErrorPacket(pciefd_packet_t *packet);
-int isEFlushAckPacket(pciefd_packet_t *packet);
-int isEFrameAckPacket(pciefd_packet_t *packet);
-int isOffsetPacket(pciefd_packet_t *packet);
-int isBusLoadPacket(pciefd_packet_t *packet);
-int isStatusPacket(pciefd_packet_t *packet);
-int isDelayPacket(pciefd_packet_t *packet);
-
-int packetChannelId(pciefd_packet_t *packet);
-
-int statusInResetMode(pciefd_packet_t *packet);
-int statusResetModeChangeDetected(pciefd_packet_t *packet);
-int statusReset(pciefd_packet_t *packet);
-int statusOverflow(pciefd_packet_t *packet);
-int statusErrorWarning(pciefd_packet_t *packet);
-int statusErrorPassive(pciefd_packet_t *packet);
-int statusBusOff(pciefd_packet_t *packet);
-int statusReceiveErrorCount(pciefd_packet_t *packet);
-int statusTransmitErrorCount(pciefd_packet_t *packet);
-int statusCmdSeqNo(pciefd_packet_t *packet);
-
-int getChannelId(pciefd_packet_t *packet);
-
-int dlcToBytes(int dlc);
 int dlcToBytesFD(int dlc);
 int bytesToDlc(int bytes);
 
-#define PACKET_WORDS(length) (2 + (3 + length) / 4)
-#define FD_PACKET_WORDS      (2 + (3 + packet_size[packet_size_index]) / 4)
+static inline unsigned int bytesToWordsCeil(unsigned int bytes)
+{
+    return (bytes + 3) / 4;
+}
 
-int bytesToWordsCeil(int bytes);
+/** KCAN packet header. */
+struct __attribute__ ((packed, aligned (4))) kcan_packet_hdr {
+    uint32_t id;
+    uint32_t control;
+};
+
+/** Receive-, Acknowledge data- or Receive status packet. */
+struct __attribute__ ((packed, aligned (4))) kcan_rx_packet {
+    struct kcan_packet_hdr hdr;
+    uint64_t timestamp;
+    char data[NR_OF_DATA_WORDS];
+};
+
+static inline int packetChannelId(struct kcan_packet_hdr *packet)
+{
+    return RPACKET_CHID_GET(packet->control);
+}
+
+// +----------------------------------------------------------------------------
+// | Status packet
+// | * Can also be used for error packets as packet->id has the same fields
+// +----------------------------------------------------------------------------
+static inline int statusInResetMode(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_IRM_GET(packet->id);
+}
+
+static inline int statusResetModeChangeDetected(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_RMCD_GET(packet->id);
+}
+
+static inline int statusReset(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_RESET_GET(packet->id);
+}
+
+static inline int statusOverflow(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_ROVF_GET(packet->control);
+}
+
+static inline int statusErrorWarning(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_EWLR_GET(packet->control);
+}
+
+static inline int statusErrorPassive(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_EPLR_GET(packet->control);
+}
+
+static inline int statusBusOff(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_BOFF_GET(packet->id);
+}
+
+static inline int statusReceiveErrorCount(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_RXERR_GET(packet->id);
+}
+
+static inline int statusTransmitErrorCount(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_TXERR_GET(packet->id);
+}
+
+static inline unsigned int statusCmdSeqNo(struct kcan_packet_hdr *packet)
+{
+    return SPACKET_CMD_SEQ_GET(packet->control);
+}
 
 // +----------------------------------------------------------------------------
 // Received data packets
 // +----------------------------------------------------------------------------
-int getId(pciefd_packet_t *packet);
-void setId(pciefd_packet_t *packet, int id);
+static inline int getId(struct kcan_packet_hdr *packet)
+{
+    return RTPACKET_ID_GET(packet->id);
+}
 
-int isErrorPassive(pciefd_packet_t *packet);
-int receiverOverflow(pciefd_packet_t *packet);
-int errorWarning(pciefd_packet_t *packet);
+void setId(struct kcan_packet_hdr *packet, int id);
 
-int isFlexibleDataRateFormat(pciefd_packet_t *packet);
-int isAlternateBitRate(pciefd_packet_t *packet);
-int errorStateIndicated(pciefd_packet_t *packet);
-int getSRR(pciefd_packet_t *packet);
-int isExtendedId(pciefd_packet_t *packet);
-int isRemoteRequest(pciefd_packet_t *packet);
-int getDLC(pciefd_packet_t *packet);
-void setDLC(pciefd_packet_t *packet, int dlc);
+static inline int isErrorPassive(struct kcan_packet_hdr *packet)
+{
+    return RPACKET_EPLR_GET(packet->control);
+}
 
-int getSeqNo(pciefd_packet_t *packet);
+static inline int receiverOverflow(struct kcan_packet_hdr *packet)
+{
+    return RPACKET_ROVF_GET(packet->control);
+}
 
-int getOffsetQuantas(pciefd_packet_t *packet);
-int getOffsetNbits(pciefd_packet_t *packet);
+static inline int errorWarning(struct kcan_packet_hdr *packet)
+{
+    return RPACKET_EWLR_GET(packet->control);
+}
 
-int getBusLoad(pciefd_packet_t *packet);
+static inline int isFlexibleDataRateFormat(struct kcan_packet_hdr *packet)
+{
+    return RTPACKET_FDF_GET(packet->control);
+}
+
+static inline int isAlternateBitRate(struct kcan_packet_hdr *packet)
+{
+    return RTPACKET_BRS_GET(packet->control);
+}
+
+static inline int errorStateIndicated(struct kcan_packet_hdr *packet)
+{
+    return RTPACKET_ESI_GET(packet->control);
+}
+
+static inline int getSRR(struct kcan_packet_hdr *packet)
+{
+    return RTPACKET_SRR_GET(packet->id);
+}
+
+static inline int isExtendedId(struct kcan_packet_hdr *packet)
+{
+    return RTPACKET_IDE_GET(packet->id);
+}
+
+static inline int isRemoteRequest(struct kcan_packet_hdr *packet)
+{
+    return RTPACKET_RTR_GET(packet->id);
+}
+
+static inline unsigned int getDLC(struct kcan_packet_hdr *packet)
+{
+    return RTPACKET_DLC_GET(packet->control);
+}
+
+void setDLC(struct kcan_packet_hdr *packet, int dlc);
+
+static inline unsigned int getSeqNo(struct kcan_packet_hdr *packet)
+{
+    return RTPACKET_SEQ_GET(packet->control);
+}
+
+int getOffsetQuantas(struct kcan_packet_hdr *packet);
+
+static inline int getOffsetNbits(struct kcan_packet_hdr *packet)
+{
+    return OPACKET_NBITS_GET(packet->id);
+}
+
+static inline int getBusLoad(struct kcan_packet_hdr *packet)
+{
+    return BPACKET_BUS_LOAD_GET(packet->id);
+}
 
 // +----------------------------------------------------------------------------
 // | Received ack packets
 // +----------------------------------------------------------------------------
-int getAckSeqNo(pciefd_packet_t *packet);
-int isFlushed(pciefd_packet_t *packet);
-int isNack(pciefd_packet_t *packet);
-int isABL(pciefd_packet_t *packet);
-int isControlAck(pciefd_packet_t *packet);
+static inline unsigned int getAckSeqNo(struct kcan_packet_hdr *packet)
+{
+    return APACKET_SEQ_GET(packet->id);
+}
+
+static inline int isFlushed(struct kcan_packet_hdr *packet)
+{
+    return APACKET_FLUSHED_GET(packet->id);
+}
+
+static inline int isNack(struct kcan_packet_hdr *packet)
+{
+    return APACKET_NACK_GET(packet->id);
+}
+
+static inline int isABL(struct kcan_packet_hdr *packet)
+{
+    return APACKET_ABL_GET(packet->id);
+}
+
+static inline int isControlAck(struct kcan_packet_hdr *packet)
+{
+    return APACKET_CONTROL_ACK_GET(packet->id);
+}
 
 // +----------------------------------------------------------------------------
 // | Received txrq packets
 // +----------------------------------------------------------------------------
-int getTxrqSeqNo(pciefd_packet_t *packet);
+static inline unsigned int getTxrqSeqNo(struct kcan_packet_hdr *packet)
+{
+    return APACKET_SEQ_GET(packet->id);
+}
 
 // +----------------------------------------------------------------------------
 // | Received error packets
 // +----------------------------------------------------------------------------
-int getTransmitErrorCount(pciefd_packet_t *packet);
-int getReceiveErrorCount(pciefd_packet_t *packet);
+static inline int getTransmitErrorCount(struct kcan_packet_hdr *packet)
+{
+    return EPACKET_TXE_GET(packet->id);
+}
 
-etype_t getErrorType(pciefd_packet_t *packet);
-int isTransmitError(pciefd_packet_t *packet);
-int getErrorField(pciefd_packet_t *packet);
-int getErrorFieldPos(pciefd_packet_t *packet);
-void printErrorCode(pciefd_packet_t *packet);
+static inline int getReceiveErrorCount(struct kcan_packet_hdr *packet)
+{
+    return EPACKET_RXE_GET(packet->id);
+}
+
+int getErrorField(struct kcan_packet_hdr *packet);
+int getErrorFieldPos(struct kcan_packet_hdr *packet);
+void printErrorCode(struct kcan_packet_hdr *packet);
 
 // +----------------------------------------------------------------------------
 // | Transmit packets
 // +----------------------------------------------------------------------------
-void setRemoteRequest(pciefd_packet_t *packet);
-void setExtendedId(pciefd_packet_t *packet);
-void setBitRateSwitch(pciefd_packet_t *packet);
-void setAckRequest(pciefd_packet_t *packet);
-void setTxRequest(pciefd_packet_t *packet);
-void setSingleShotMode(pciefd_packet_t *packet);
+void setRemoteRequest(struct kcan_packet_hdr *packet);
+void setExtendedId(struct kcan_packet_hdr *packet);
+void setBitRateSwitch(struct kcan_packet_hdr *packet);
+void setAckRequest(struct kcan_packet_hdr *packet);
+void setTxRequest(struct kcan_packet_hdr *packet);
+void setSingleShotMode(struct kcan_packet_hdr *packet);
 
-int setupBaseFormat(pciefd_packet_t *packet, int id, int dlc, int seqno);
-int setupExtendedFormat(pciefd_packet_t *packet, int id, int dlc, int seqno);
-int setupFDBaseFormat(pciefd_packet_t *packet, int id, int dlc, int seqno);
-int setupFDExtendedFormat(pciefd_packet_t *packet, int id, int dlc, int seqno);
+int setupBaseFormat(struct kcan_packet_hdr *packet, int id, int dlc, int seqno);
+int setupExtendedFormat(struct kcan_packet_hdr *packet, int id, int dlc, int seqno);
+int setupFDBaseFormat(struct kcan_packet_hdr *packet, int id, int dlc, int seqno);
+int setupFDExtendedFormat(struct kcan_packet_hdr *packet, int id, int dlc, int seqno);
 
 #endif

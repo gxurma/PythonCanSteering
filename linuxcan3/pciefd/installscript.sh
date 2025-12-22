@@ -119,6 +119,4 @@ fi
 
 if [ "$#" -gt 0 ] && [ $1 = "load" -o "$1" = "dkms-load" ] ; then
   modprobe $MODNAME
-  install -m 755 -d $MODULES_LOAD_DIR
-  echo "$MODNAME"  > $MODULES_LOAD_DIR/kvaser-$MODNAME.conf
 fi

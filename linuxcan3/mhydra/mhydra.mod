@@ -1,3 +1,3 @@
-/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/mhydra/mhydraHWIf.o
-/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/mhydra/mhydraHWIf_TRP.o
-/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/mhydra/ioctl_handler.o
+./mhydraHWIf.o
+./mhydraHWIf_TRP.o
+./ioctl_handler.o

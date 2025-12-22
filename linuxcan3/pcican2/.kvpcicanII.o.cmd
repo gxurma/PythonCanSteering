@@ -1,1 +1,1 @@
-cmd_/home/profactor/Documents/git/PythonCanSteering/linuxcan3/pcican2/kvpcicanII.o := ld -m elf_x86_64 -z max-page-size=0x200000 -z noexecstack    -r -o /home/profactor/Documents/git/PythonCanSteering/linuxcan3/pcican2/kvpcicanII.o /home/profactor/Documents/git/PythonCanSteering/linuxcan3/pcican2/PciCan2HwIf.o /home/profactor/Documents/git/PythonCanSteering/linuxcan3/pcican2/memQ.o 
+savedcmd_kvpcicanII.o := ld -m elf_x86_64 -z noexecstack --no-warn-rwx-segments   -r -o kvpcicanII.o @kvpcicanII.mod 

@@ -1,1 +1,1 @@
-cmd_/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/mhydra/mhydra.mod := printf '%s\n'   mhydraHWIf.o mhydraHWIf_TRP.o ioctl_handler.o | awk '!x[$$0]++ { print("/media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/mhydra/"$$0) }' > /media/gyruma/Daten/Benutzerdaten/gyurma/Documents/git/PythonCanSteering/linuxcan3/mhydra/mhydra.mod
+savedcmd_mhydra.mod := printf '%s\n'   mhydraHWIf.o mhydraHWIf_TRP.o ioctl_handler.o | awk '!x[$$0]++ { print("./"$$0) }' > mhydra.mod

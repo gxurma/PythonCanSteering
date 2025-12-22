@@ -71,7 +71,7 @@
 #include "spi_flash.h"
 
 #define HYDRA_FLASH_PARAM_MAX_SIZE    24
-#define HYDRA_FLASH_MAX_CARD_CHANNELS 4
+#define HYDRA_FLASH_MAX_CARD_CHANNELS 8
 
 #define HYDRA_FLASH_STAT_OK            0
 #define HYDRA_FLASH_STAT_FAIL          -1

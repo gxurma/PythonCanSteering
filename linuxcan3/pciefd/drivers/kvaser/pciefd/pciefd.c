@@ -277,42 +277,6 @@ void irqInit(void *base)
 }
 
 // Register access
-void nominalBitRate(void *base, int seg1, int seg2, int sjw, int brp)
-{
-    uint32_t tmp;
-
-    tmp = PCIEFD_BTR_SEG2(seg2) | PCIEFD_BTR_SEG1(seg1) | PCIEFD_BTR_SJW(sjw) | PCIEFD_BTR_BRP(brp);
-
-    IOWR_PCIEFD_BTRN(base, tmp);
-}
-
-void dataPhaseBitRate(void *base, int seg1, int seg2, int sjw, int brp)
-{
-    uint32_t tmp;
-
-    tmp = PCIEFD_BTR_SEG2(seg2) | PCIEFD_BTR_SEG1(seg1) | PCIEFD_BTR_SJW(sjw) | PCIEFD_BTR_BRP(brp);
-
-    IOWR_PCIEFD_BTRD(base, tmp);
-}
-
-void busLoadPrescaler(void *base, int prescaler, int interval)
-{
-    uint32_t tmp;
-
-    tmp = PCIEFD_BLP_PRESC(prescaler) | PCIEFD_BLP_INTERV(interval);
-
-    IOWR_PCIEFD_BLP(base, tmp);
-}
-
-void init(void *base, int rm, int lom, int een, int sso, int egen, int dwh)
-{
-    uint32_t tmp;
-
-    tmp = PCIEFD_MOD_EWL(96) | PCIEFD_MOD_LOM(lom) | PCIEFD_MOD_EEN(een) | PCIEFD_MOD_SSO(sso) |
-          PCIEFD_MOD_DWH(dwh);
-
-    IOWR_PCIEFD_MOD(base, tmp);
-}
 
 void enableErrorPackets(void *base)
 {
@@ -425,29 +389,13 @@ void resetErrorCount(void *base)
     IOWR_PCIEFD_CCMD(base, PCIEFD_CCMD_REC(1) | PCIEFD_CCMD_TEC(1) | PCIEFD_CCMD_EC_DATA(0));
 }
 
-int writeFIFO(VCanChanData *vChd, pciefd_packet_t *packet)
+int writeFIFO(VCanChanData *vChd, unsigned int nwords, uint32_t packet[])
 {
     PciCanChanData *hChd = vChd->hwChanData;
-    int nbytes;
-    int nwords;
-    int dlc = getDLC(packet);
     void *address = hChd->canControllerBase;
 
-    if (isFlexibleDataRateFormat(packet)) {
-        nbytes = dlcToBytesFD(dlc);
-    } else {
-        nbytes = dlcToBytes(dlc);
-    }
-
-    nwords = bytesToWordsCeil(nbytes);
-
-    if (isRemoteRequest(packet)) {
-        nbytes = 0;
-        nwords = 0;
-    }
-
-    IOWR_REP_PCIEFD_FIFO(address, &packet[0], nwords + 1);
-    IOWR_PCIEFD_FIFO_LAST(address, ((uint32_t *)packet)[nwords + 1]);
+    IOWR_REP_PCIEFD_FIFO(address, packet, nwords - 1);
+    IOWR_PCIEFD_FIFO_LAST(address, packet[nwords - 1]);
 
     return 1;
 }

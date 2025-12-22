@@ -5,7 +5,7 @@ includedir=/usr/include
 
 Name: linlib
 Description: Kvaser Gnu/Linux linlib
-Version: 1.6.9
+Version: 1.6.16
 
 Requires: 
 Libs: -L${libdir} -llinlib

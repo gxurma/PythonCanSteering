@@ -91,11 +91,6 @@ struct spi_flash {
     const struct SPI_FLASH_ops *ops;
     timespec_t time;
     bool dry_run;
-#ifdef __KERNEL__
-    wait_queue_head_t wq;
-    atomic_t busy;
-    atomic_t err_count;
-#endif /* __KERNEL__ */
 };
 
 int SPI_FLASH_init(struct spi_flash *spif,
