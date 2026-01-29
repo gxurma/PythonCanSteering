@@ -1,1 +1,1 @@
-savedcmd_Module.symvers :=  /usr/src/linux-headers-6.14.0-37-generic/scripts/mod/modpost -M -m -b -x -a      -o Module.symvers -T modules.order -i /usr/src/linux-headers-6.14.0-37-generic/Module.symvers -e -i /home/gyurma/Dokumente/PythonCanSteering/linuxcan/leaf/../common/Module.symvers
+savedcmd_Module.symvers :=  /usr/src/linux-headers-6.14.0-37-generic/scripts/mod/modpost -M -m -b -x -a      -o Module.symvers -T modules.order -i /usr/src/linux-headers-6.14.0-37-generic/Module.symvers -e -i /home/gyurma/Dokumente/PythonCanSteering/linuxcan3/leaf/../common/Module.symvers

@@ -338,8 +338,11 @@ class PyGuiApp(QMainWindow):
 			self.sbus2 = serial.Serial('/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7533531343735131C1C1-if00',115200,timeout=0.100)
 		except:
 			print("Na, wen haste denn dein Sensorpanel verliehen?")
-			exit()
-
+			try:
+				self.sbus2 = serial.Serial('/dev/pts/7',115200,timeout=0.100)
+			except:
+				print("Virtueller port geht nicht. lassen wir es sein für heute...")
+				exit()
 		print('sbus=',self.sbus.name)
 		print('sbus2=',self.sbus2.name)
 
