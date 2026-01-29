@@ -5,4 +5,5 @@
    <part id="R0402-1K" height-units="Millimeters" height="0.5" through-board-depth-units="Millimeters" through-board-depth="0.0" package-id="R0402" speed="1.0" pick-retry-count="0"/>
    <part bottom-vision-id="BVS188c1ebd51c1ae46" fiducial-vision-id="FVS188c1012f5d24428" id="R0603-1K" height-units="Millimeters" height="0.3" through-board-depth-units="Millimeters" through-board-depth="0.0" package-id="R0603" speed="1.0" pick-retry-count="0"/>
    <part id="FIDUCIAL-HOME" height-units="Millimeters" height="0.0" through-board-depth-units="Millimeters" through-board-depth="0.0" package-id="FIDUCIAL-1X2" speed="1.0" pick-retry-count="0"/>
+   <part bottom-vision-id="BVS188f2df1fecf2bec" fiducial-vision-id="FVS188f2e1c66fef194" id="Infineon Sample EWO" height-units="Millimeters" height="0.8" through-board-depth-units="Millimeters" through-board-depth="0.0" package-id="QFN56" speed="1.0" pick-retry-count="0"/>
 </openpnp-parts>

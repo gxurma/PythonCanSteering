@@ -2,4 +2,6 @@
    <board>/home/gyurma/Dokumente/OpenPnPJobsNSettings/FTP.board.xml</board>
    <board>/home/gyurma/Dokumente/OpenPnPJobsNSettings/Strip.board.xml</board>
    <board>/home/gyurma/Dokumente/OpenPnPJobsNSettings/Waffle.board.xml</board>
+   <board>/home/gyurma/Dokumente/OpenPnPJobsNSettings/ecopcb.board.xml</board>
+   <board>/home/gyurma/OpenPnP/ICanary_plugin.xml.board.xml</board>
 </openpnp-boards>
